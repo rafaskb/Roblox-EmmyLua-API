@@ -87,9 +87,12 @@ $2:$1$3
 ---@field $1 EnumItem @$2
 ```
 
-#### Remove lowercase fields (Match case must be enabled)
+#### Remove lowercase fields
+
+###### Match case must be enabled
+###### Execute it a few times
 
 ```
-^---@field [a-z]\w+.*\n
+^---@field [a-z]\w+.*$\n
 
 ```
