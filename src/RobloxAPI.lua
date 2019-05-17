@@ -6,7 +6,6 @@
 ---@field Name string
 ---@field Parent Object
 ---@field RobloxLocked bool
----@field archivable bool
 ---@field className string
 ---@field ClearAllChildren fun(self:Instance):void
 ---@field Clone fun(self:Instance):Instance
@@ -20,13 +19,9 @@
 ---@field IsDescendantOf fun(self:Instance, ancestor:Instance):bool
 ---@field Remove fun(self:Instance):void
 ---@field WaitForChild fun(self:Instance, childName:string, timeOut:double):Instance
----@field children fun(self:Instance):Objects
 ---@field clone fun(self:Instance):Instance
----@field destroy fun(self:Instance):void
 ---@field findFirstChild fun(self:Instance, name:string, recursive:bool):Instance
----@field getChildren fun(self:Instance):Objects
 ---@field isA fun(self:Instance, className:string):bool
----@field isDescendantOf fun(self:Instance, ancestor:Instance):bool
 ---@field remove fun(self:Instance):void
 ---@field AncestryChanged fun(child:Instance, parent:Instance):Event
 ---@field Changed fun(property:Property):Event
@@ -34,7 +29,6 @@
 ---@field ChildRemoved fun(child:Instance):Event
 ---@field DescendantAdded fun(descendant:Instance):Event
 ---@field DescendantRemoving fun(descendant:Instance):Event
----@field childAdded fun(child:Instance):Event
 
 ---
 ---@class Accoutrement : Instance
@@ -181,13 +175,11 @@
 ---@field AngularVelocity Vector3
 ---@field MaxTorque Vector3
 ---@field P float
----@field angularvelocity Vector3
 ---@field maxTorque Vector3
 
 ---
 ---@class BodyForce : BodyMover
 ---@field Force Vector3
----@field force Vector3
 
 ---
 ---@class BodyGyro : BodyMover
@@ -195,7 +187,6 @@
 ---@field D float
 ---@field MaxTorque Vector3
 ---@field P float
----@field cframe CoordinateFrame
 ---@field maxTorque Vector3
 
 ---
@@ -204,17 +195,14 @@
 ---@field MaxForce Vector3
 ---@field P float
 ---@field Position Vector3
----@field maxForce Vector3
 ---@field position Vector3
 ---@field GetLastForce fun(self:BodyPosition):Vector3
----@field lastForce fun(self:BodyPosition):Vector3
 ---@field ReachedTarget fun():Event
 
 ---
 ---@class BodyThrust : BodyMover
 ---@field Force Vector3
 ---@field Location Vector3
----@field force Vector3
 ---@field location Vector3
 
 ---
@@ -222,10 +210,8 @@
 ---@field MaxForce Vector3
 ---@field P float
 ---@field Velocity Vector3
----@field maxForce Vector3
 ---@field velocity Vector3
 ---@field GetLastForce fun(self:BodyVelocity):Vector3
----@field lastForce fun(self:BodyVelocity):Vector3
 
 ---
 ---@class RocketPropulsion : BodyMover
@@ -242,20 +228,17 @@
 ---@field TurnP float
 ---@field Abort fun(self:RocketPropulsion):void
 ---@field Fire fun(self:RocketPropulsion):void
----@field fire fun(self:RocketPropulsion):void
 ---@field ReachedTarget fun():Event
 
 ---
 ---@class BoolValue : Instance
 ---@field Value bool
 ---@field Changed fun(value:bool):Event
----@field changed fun(value:bool):Event
 
 ---
 ---@class BrickColorValue : Instance
 ---@field Value BrickColor
 ---@field Changed fun(value:BrickColor):Event
----@field changed fun(value:BrickColor):Event
 
 ---
 ---@class Button : Instance
@@ -266,7 +249,6 @@
 ---@class CFrameValue : Instance
 ---@field Value CoordinateFrame
 ---@field Changed fun(value:CoordinateFrame):Event
----@field changed fun(value:CoordinateFrame):Event
 
 ---
 ---@class CacheableContentProvider : Instance
@@ -291,7 +273,6 @@
 ---@field HeadLocked bool
 ---@field HeadScale float
 ---@field ViewportSize Vector2
----@field focus CoordinateFrame
 ---@field GetPanSpeed fun(self:Camera):float
 ---@field GetRenderCFrame fun(self:Camera):CoordinateFrame
 ---@field GetRoll fun(self:Camera):float
@@ -376,7 +357,6 @@
 ---@field MouseClick fun(playerWhoClicked:Instance):Event
 ---@field MouseHoverEnter fun(playerWhoHovered:Instance):Event
 ---@field MouseHoverLeave fun(playerWhoHovered:Instance):Event
----@field mouseClick fun(playerWhoClicked:Instance):Event
 
 ---
 ---@class ClusterPacketCache : Instance
@@ -391,7 +371,6 @@
 ---@class Color3Value : Instance
 ---@field Value Color3
 ---@field Changed fun(value:Color3):Event
----@field changed fun(value:Color3):Event
 
 ---
 ---@class Configuration : Instance
@@ -522,7 +501,6 @@
 ---@field BindButton fun(self:Controller, button:Button, caption:string):void
 ---@field GetButton fun(self:Controller, button:Button):bool
 ---@field UnbindButton fun(self:Controller, button:Button):void
----@field bindButton fun(self:Controller, button:Button, caption:string):void
 ---@field getButton fun(self:Controller, button:Button):bool
 ---@field ButtonChanged fun(button:Button):Event
 
@@ -598,7 +576,6 @@
 ---@field MaxItems int
 ---@field AddItem fun(self:Debris, item:Instance, lifetime:double):void
 ---@field SetLegacyMaxItems fun(self:Debris, enabled:bool):void
----@field addItem fun(self:Debris, item:Instance, lifetime:double):void
 
 ---
 ---@class DebugSettings : Instance
@@ -707,7 +684,6 @@
 ---@field MinValue double
 ---@field Value double
 ---@field Changed fun(value:double):Event
----@field changed fun(value:double):Event
 
 ---
 ---@class Dragger : Instance
@@ -763,7 +739,6 @@
 ---@field Heat float
 ---@field SecondaryColor Color3
 ---@field Size float
----@field size float
 
 ---
 ---@class FlagStandService : Instance
@@ -1327,7 +1302,6 @@
 ---@field WalkSpeed float
 ---@field WalkToPart Object
 ---@field WalkToPoint Vector3
----@field maxHealth float
 ---@field AddCustomStatus fun(self:Humanoid, status:string):bool
 ---@field AddStatus fun(self:Humanoid, status:Status):bool
 ---@field ChangeState fun(self:Humanoid, state:HumanoidStateType):void
@@ -1347,7 +1321,6 @@
 ---@field SetStateEnabled fun(self:Humanoid, state:HumanoidStateType, enabled:bool):void
 ---@field TakeDamage fun(self:Humanoid, amount:float):void
 ---@field UnequipTools fun(self:Humanoid):void
----@field loadAnimation fun(self:Humanoid, animation:Instance):Instance
 ---@field takeDamage fun(self:Humanoid, amount:float):void
 ---@field AnimationPlayed fun(animationTrack:Instance):Event
 ---@field Climbing fun(speed:float):Event
@@ -1406,7 +1379,6 @@
 ---@field GetUserSets fun(self:InsertService, userId:int):Array
 ---@field LoadAsset fun(self:InsertService, assetId:int):Instance
 ---@field LoadAssetVersion fun(self:InsertService, assetVersionId:int):Instance
----@field loadAsset fun(self:InsertService, assetId:int):Instance
 
 ---
 ---@class InstancePacketCache : Instance
@@ -1418,13 +1390,11 @@
 ---@field MinValue int
 ---@field Value int
 ---@field Changed fun(value:int):Event
----@field changed fun(value:int):Event
 
 ---
 ---@class IntValue : Instance
 ---@field Value int
 ---@field Changed fun(value:int):Event
----@field changed fun(value:int):Event
 
 ---
 ---@class JointInstance : Instance
@@ -1432,7 +1402,6 @@
 ---@field C1 CoordinateFrame
 ---@field Part0 Object
 ---@field Part1 Object
----@field part1 Object
 
 ---
 ---@class DynamicRotate : JointInstance
@@ -1560,7 +1529,6 @@
 ---@field GetMoonPhase fun(self:Lighting):float
 ---@field GetSunDirection fun(self:Lighting):Vector3
 ---@field SetMinutesAfterMidnight fun(self:Lighting, minutes:double):void
----@field getMinutesAfterMidnight fun(self:Lighting):double
 ---@field setMinutesAfterMidnight fun(self:Lighting, minutes:double):void
 ---@field LightingChanged fun(skyboxChanged:bool):Event
 
@@ -1668,7 +1636,6 @@
 ---@field ViewSizeY int
 ---@field X int
 ---@field Y int
----@field hit CoordinateFrame
 ---@field target Object
 ---@field Button1Down fun():Event
 ---@field Button1Up fun():Event
@@ -1680,7 +1647,6 @@
 ---@field Move fun():Event
 ---@field WheelBackward fun():Event
 ---@field WheelForward fun():Event
----@field keyDown fun(key:string):Event
 
 ---
 ---@class PlayerMouse : Mouse
@@ -1809,13 +1775,11 @@
 ---@class NumberValue : Instance
 ---@field Value double
 ---@field Changed fun(value:double):Event
----@field changed fun(value:double):Event
 
 ---
 ---@class ObjectValue : Instance
 ---@field Value Object
 ---@field Changed fun(value:Instance):Event
----@field changed fun(value:Instance):Event
 
 ---
 ---@class OneQuarterClusterPacketCacheBase : Instance
@@ -1872,7 +1836,6 @@
 ---@field TopSurfaceInput InputType
 ---@field Transparency float
 ---@field Velocity Vector3
----@field brickColor BrickColor
 ---@field BreakJoints fun(self:BasePart):void
 ---@field CanSetNetworkOwnership fun(self:BasePart):Tuple
 ---@field GetConnectedParts fun(self:BasePart, recursive:bool):Objects
@@ -1887,16 +1850,13 @@
 ---@field Resize fun(self:BasePart, normalId:NormalId, deltaAmount:int):bool
 ---@field SetNetworkOwner fun(self:BasePart, playerInstance:Instance):void
 ---@field SetNetworkOwnershipAuto fun(self:BasePart):void
----@field breakJoints fun(self:BasePart):void
 ---@field getMass fun(self:BasePart):float
----@field makeJoints fun(self:BasePart):void
 ---@field resize fun(self:BasePart, normalId:NormalId, deltaAmount:int):bool
 ---@field LocalSimulationTouched fun(part:Instance):Event
 ---@field OutfitChanged fun():Event
 ---@field StoppedTouching fun(otherPart:Instance):Event
 ---@field TouchEnded fun(otherPart:Instance):Event
 ---@field Touched fun(otherPart:Instance):Event
----@field touched fun(otherPart:Instance):Event
 
 ---
 ---@class CornerWedgePart : BasePart
@@ -1904,7 +1864,6 @@
 ---
 ---@class FormFactorPart : BasePart
 ---@field FormFactor FormFactor
----@field formFactor FormFactor
 
 ---
 ---@class Part : FormFactorPart
@@ -1934,7 +1893,6 @@
 ---@field Equipped fun(humanoid:Instance, skateboardController:Instance):Event
 ---@field MoveStateChanged fun(newState:MoveState, oldState:MoveState):Event
 ---@field Unequipped fun(humanoid:Instance):Event
----@field equipped fun(humanoid:Instance, skateboardController:Instance):Event
 ---@field unequipped fun(humanoid:Instance):Event
 
 ---
@@ -2038,9 +1996,7 @@
 ---@field SetIdentityOrientation fun(self:Model):void
 ---@field SetPrimaryPartCFrame fun(self:Model, cframe:CoordinateFrame):void
 ---@field TranslateBy fun(self:Model, delta:Vector3):void
----@field breakJoints fun(self:Model):void
 ---@field makeJoints fun(self:Model):void
----@field move fun(self:Model, location:Vector3):void
 ---@field moveTo fun(self:Model, location:Vector3):void
 
 ---
@@ -2075,7 +2031,6 @@
 ---@field SetPhysicsThrottleEnabled fun(self:Workspace, value:bool):void
 ---@field UnjoinFromOutsiders fun(self:Workspace, objects:Objects):void
 ---@field ZoomToExtents fun(self:Workspace):void
----@field findPartOnRay fun(self:Workspace, ray:Ray, ignoreDescendentsInstance:Instance, terrainCellsAreCubes:bool, ignoreWater:bool):Tuple
 ---@field findPartsInRegion3 fun(self:Workspace, region:Region3, ignoreDescendentsInstance:Instance, maxParts:int):Objects
 ---@field PhysicsAnalyzerIssuesFound fun(count:int):Event
 
@@ -2215,7 +2170,6 @@
 ---@field TeleportedIn bool
 ---@field UserId int
 ---@field VRDevice string
----@field userId int
 ---@field ClearCharacterAppearance fun(self:Player):void
 ---@field DistanceFromCharacter fun(self:Player, point:Vector3):float
 ---@field GetFriendStatus fun(self:Player, player:Instance):FriendStatus
@@ -2246,13 +2200,9 @@
 ---@field SetMembershipType fun(self:Player, membershipType:MembershipType):void
 ---@field SetSuperSafeChat fun(self:Player, value:bool):void
 ---@field SetUnder13 fun(self:Player, value:bool):void
----@field loadBoolean fun(self:Player, key:string):bool
 ---@field loadInstance fun(self:Player, key:string):Instance
----@field loadNumber fun(self:Player, key:string):double
 ---@field loadString fun(self:Player, key:string):string
----@field saveBoolean fun(self:Player, key:string, value:bool):void
 ---@field saveInstance fun(self:Player, key:string, value:Instance):void
----@field saveNumber fun(self:Player, key:string, value:double):void
 ---@field saveString fun(self:Player, key:string, value:string):void
 ---@field GetFriendsOnline fun(self:Player, maxFriends:int):Array
 ---@field GetRankInGroup fun(self:Player, groupId:int):int
@@ -2264,7 +2214,6 @@
 ---@field LoadCharacter fun(self:Player, inGame:bool):void
 ---@field SetWebPersonalServerRank fun(self:Player, rank:int):bool
 ---@field WaitForDataReady fun(self:Player):bool
----@field isFriendsWith fun(self:Player, userId:int):bool
 ---@field waitForDataReady fun(self:Player):bool
 ---@field CharacterAdded fun(character:Instance):Event
 ---@field CharacterAppearanceLoaded fun(character:Instance):Event
@@ -2289,7 +2238,6 @@
 ---@field NumPlayers int
 ---@field PreferredPlayers int
 ---@field PreferredPlayersInternal int
----@field localPlayer Object
 ---@field numPlayers int
 ---@field AddLeaderboardKey fun(self:Players, key:string):void
 ---@field Chat fun(self:Players, message:string):void
@@ -2312,9 +2260,7 @@
 ---@field SetSysStatsUrlId fun(self:Players, urlId:string):void
 ---@field TeamChat fun(self:Players, message:string):void
 ---@field WhisperChat fun(self:Players, message:string, player:Instance):void
----@field getPlayerFromCharacter fun(self:Players, character:Instance):Instance
 ---@field getPlayers fun(self:Players):Objects
----@field playerFromCharacter fun(self:Players, character:Instance):Instance
 ---@field players fun(self:Players):Objects
 ---@field BlockUser fun(self:Players, blockerUserId:int, blockeeUserId:int):string
 ---@field GetCharacterAppearanceAsync fun(self:Players, userId:int):Instance
@@ -2405,7 +2351,6 @@
 ---@class RayValue : Instance
 ---@field Value Ray
 ---@field Changed fun(value:Ray):Event
----@field changed fun(value:Ray):Event
 
 ---
 ---@class ReflectionMetadata : Instance
@@ -2433,7 +2378,6 @@
 ---@field UIMaximum double
 ---@field UIMinimum double
 ---@field UINumTicks double
----@field summary string
 
 ---
 ---@class ReflectionMetadataClass : ReflectionMetadataItem
@@ -2614,7 +2558,6 @@
 ---@class ServiceProvider : Instance
 ---@field FindService fun(self:ServiceProvider, className:string):Instance
 ---@field GetService fun(self:ServiceProvider, className:string):Instance
----@field getService fun(self:ServiceProvider, className:string):Instance
 ---@field service fun(self:ServiceProvider, className:string):Instance
 ---@field Close fun():Event
 ---@field CloseLate fun():Event
@@ -2635,7 +2578,6 @@
 ---@field VIPServerId string
 ---@field VIPServerOwnerId int
 ---@field Workspace Object
----@field lighting Object
 ---@field workspace Object
 ---@field AddStat fun(self:DataModel, displayName:string, stat:string):void
 ---@field ClearMessage fun(self:DataModel):void
@@ -2748,14 +2690,11 @@
 ---@field TimeLength double
 ---@field TimePosition double
 ---@field Volume float
----@field isPlaying bool
 ---@field Pause fun(self:Sound):void
 ---@field Play fun(self:Sound):void
 ---@field Resume fun(self:Sound):void
 ---@field Stop fun(self:Sound):void
----@field pause fun(self:Sound):void
 ---@field play fun(self:Sound):void
----@field stop fun(self:Sound):void
 ---@field DidLoop fun(soundId:string, numOfTimesLooped:int):Event
 ---@field Ended fun(soundId:string):Event
 ---@field Loaded fun(soundId:string):Event
@@ -2847,7 +2786,6 @@
 ---@class StringValue : Instance
 ---@field Value string
 ---@field Changed fun(value:string):Event
----@field changed fun(value:string):Event
 
 ---
 ---@class TaskScheduler : Instance
@@ -3039,7 +2977,6 @@
 ---@class Vector3Value : Instance
 ---@field Value Vector3
 ---@field Changed fun(value:Vector3):Event
----@field changed fun(value:Vector3):Event
 
 ---
 ---@class VirtualUser : Instance

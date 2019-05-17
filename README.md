@@ -86,3 +86,10 @@ $2:$1$3
 `^\s+EnumItem (?:\w+\.)(\w+) : (.*)
 ---@field $1 EnumItem @$2
 ```
+
+#### Remove lowercase fields (Match case must be enabled)
+
+```
+^---@field [a-z]\w+.*\n
+
+```
