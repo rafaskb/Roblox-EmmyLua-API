@@ -503,7 +503,7 @@
 ---@field AxisChanged fun(axis:string):Event
 
 ---
----@class VehicleController : Controller
+---@class RobloxVehicleController : Controller
 
 ---
 ---@class ControllerService : Instance
