@@ -1,0 +1,31 @@
+---
+---@class RBXScriptSignal
+---@field Connect fun(self:RBXScriptSignal)
+---
+
+---
+---@class RobloxDebug
+---@field traceback fun():string
+---@field profilebegin fun(label:string):void
+---@field profileend fun():void
+---
+
+---
+---@class RobloxOs
+---@field time fun():number
+---@field difftime fun(t2:number, t2:number):number
+---@field date fun(formatString:string, time:number):table<string, any>
+---
+
+---
+---@class RobloxUtf8
+---@field char fun(codepoints:tuple):string
+---@field codes fun(str:string):function,string,number
+---@field codepoint fun(str:string, i:number, j:number):tuple
+---@field len fun(str:string, i:number, j:number):number
+---@field offset fun(str:string, n:number, i:number):number
+---@field graphmes fun(str:string, i:number, j:number):function
+---@field nfcnormalize fun(str:string):string
+---@field nfdnormalize fun(str:string):string
+---@field charpattern string @"[%z-\x7F\xC2-\xF4][\x80-\xBF]"
+---
