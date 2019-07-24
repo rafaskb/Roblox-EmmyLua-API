@@ -29,3 +29,139 @@
 ---@field nfdnormalize fun(str:string):string
 ---@field charpattern string @"[%z-\x7F\xC2-\xF4][\x80-\xBF]"
 ---
+
+---
+---@class Color3
+---@field new fun():Color3 Creates a Color3 whose values are (0,0,0) [black]
+---@field new fun(r:number,g:number,b:number):Color3 Returns a Color3 with the given red, green, and blue values. The numbers can range from 0 to 1.
+---@field fromRGB fun(r:number,g:number,b:number):Color3 Creates a Color3 with the given red, green, and blue. The numbers can range from 0 to 255.
+---@field fromHSV fun(h:number,s:number,v:number):Color3 Creates a Color3 with the given hue, saturation, and value. The numbers can range from 0 to 1.
+---@field r number The red value of the color
+---@field g number The green value of the color
+---@field b number The blue value of the color
+---@field lerp fun(self:Color3, color:Color3, alpha:number):Color3 Returns a Color3 interpolated between two Color3 objects. Alpha is a number from 0 to 1.
+---@field toHSV fun(color:Color3):number,number,number Returns the hue, saturation, and value of a Color3.
+---
+
+---
+---@class Vector2
+---@field new fun(x:number, y:number):Vector2 Creates a new Vector2 using ordinates x and y
+---@field X number The x-coordinate
+---@field Y number The y-coordinate
+---@field Magnitude number The length of the vector
+---@field Unit Vector2 A normalized copy of the vector
+---@field Lerp fun(self:Vector2, v:Vector2, alpha:number):Vector2 Returns a Vector2 linearly interpolated between this Vector2 and v by the fraction alpha
+---@field Dot fun(self:Vector2, v:Vector2):number Returns a scalar dot product of the two vectors
+---@field Cross fun(self:Vector2, other:Vector2):Vector2 Returns the cross product of the two vectors
+---
+
+---
+---@class Vector3
+---@field new fun(x:number, y:number, z:number):Vector3 Creates a new Vector3 using ordinates x and y
+---@field FromNormalId fun(normal:Enums.NormalId):Vector3 Constructs a new Vector3 in a particular direction.
+---@field FromAxis fun(axis:Enums.Axis):Vector3 Constructs a new Vector3 for a particular axis.
+---@field X number The x-coordinate
+---@field Y number The y-coordinate
+---@field Z number The z-coordinate
+---@field Magnitude number The length of the vector
+---@field Unit Vector3 A normalized copy of the vector
+---@field Lerp fun(self:Vector3, v:Vector3, alpha:number):Vector3 Returns a Vector3 linearly interpolated between this Vector3 and v by the fraction alpha
+---@field Dot fun(self:Vector3, v:Vector3):number Returns a scalar dot product of the two vectors
+---@field Cross fun(self:Vector3, other:Vector3):Vector3 Returns the cross product of the two vectors
+---@field IsClose fun(self:Vector3, other:Vector3, epsilon:number):boolean Returns true if the other Vector3 falls within the epsilon radius of this Vector3.
+---
+
+---
+---@class Vector2int16
+---@field new fun(x:number, y:number):Vector2int16 Creates a new Vector2int16 using ordinates x and y. Similar to Vector2, but uses integral coordinates
+---@field X number The x-coordinate
+---@field Y number The y-coordinate
+---
+
+---
+---@class Vector3int16
+---@field new fun(x:number, y:number, z:number):Vector3int16 Creates a new Vector3int16 using coordinate x, y, z.
+---@field X number The x-coordinate
+---@field Y number The y-coordinate
+---@field Z number The z-coordinate
+---
+
+---
+---@class UDim
+---@field new fun(Scale:number, Offset:number):UDim Creates a new UDim from components
+---@field Scale number The scale component of the UDim. The value this represents is scaled relative to the axis that this UDim is representing in a UDim2.
+---@field Offset number The pixel unit component of the UDim.
+---
+
+---
+---@class UDim2
+---@field new fun(xScale:number, xOffset:number, yScale:number, yOffset:number):UDim2
+---@field new fun(x:UDim, y:UDim):UDim2
+---@field FromNormalId fun(normal:Enums.NormalId):UDim2 Constructs a new UDim2 in a particular direction.
+---@field FromAxis fun(axis:Enums.Axis):UDim2 Constructs a new UDim2 for a particular axis.
+---@field X UDim The x dimension scale and offset
+---@field Y UDim The y dimension scale and offset
+---@field Width UDim The x dimension scale and offset
+---@field Height UDim The x dimension scale and offset
+---@field Lerp fun(self:UDim2, goal:UDim2, alpha:number):UDim2 Returns a UDim2 interpolated between this UDim2 and the provided goal. The alpha should be a number between 0 and 1.
+---
+
+---
+---@class CFrame
+---
+---@field new fun():CFrame Creates a blank identity CFrame.
+---@field new fun(pos:Vector3):CFrame Creates a CFrame from a Vector3
+---@field new fun(pos:Vector3, lookAt:Vector3):CFrame This constructor has been deprecated in favor of using `CFrame.fromMatrix(), to create a lookVector. Itt creates a CFrame located at pos with it’s lookVector pointing towards the lookAt position.
+---@field new fun(x:number, y:number, z:number):CFrame Creates a CFrame from position (x, y, z).
+---@field new fun(x:number, y:number, z:number, qX:number, qY:number, qZ:number, qW:number):CFrame Creates a CFrame from position (x, y, z) and quaternion (qX, qY, qZ, qW)
+---@field new fun(x:number, y:number, z:number, R00:number, R01:number, R02:number, R10:number, R11:number, R12:number, R20:number, R21:number, R22:number):CFrame Creates a CFrame from position (x, y, z) with an orientation specified by the rotation matrix [[R00 R01 R02] [R10 R11 R12] [R20 R21 R22]]
+---@field fromEulerAnglesXYZ fun(rx:number, ry:number, rz:number):CFrame Creates a rotated CFrame using angles (rx, ry, rz) in radians. Rotations are applied in Z, Y, X order.
+---@field fromEulerAnglesYXZ fun(rx:number, ry:number, rz:number):CFrame Creates a rotated CFrame using angles (rx, ry, rz) in radians. Rotations are applied in Z, X, Y order.
+---@field Angles fun(rx:number, ry:number, rz:number):CFrame Equivalent to fromEulerAnglesXYZ
+---@field fromOrientation fun(rx:number, ry:number, rz:number):CFrame Equivalent to fromEulerAnglesYXZ
+---@field fromAxisAngle fun(v:Vector3, r:number):CFrame Creates a rotated CFrame from a Unit Vector3 and a rotation in radians
+---@field fromMatrix fun(pos:Vector3, vX:Vector3, vY:Vector3, vZ:Vector3):CFrame Creates a CFrame from a translation and the columns of a rotation matrix. If vz is excluded, the third column is calculated as [vx:Cross(vy).Unit].
+---
+---@field X number The x-coordinate of the position
+---@field Y number The y-coordinate of the position
+---@field Z number The z-coordinate of the position
+---@field LookVector Vector3 The forward-direction component of the CFrame’s orientation.
+---@field RightVector Vector3 The right-direction component of the CFrame’s orientation.
+---@field UpVector Vector3 The up-direction component of the CFrame’s orientation.
+---@field Position Vector3 The 3D position of the CFrame
+---
+---@field Inverse fun(self:CFrame):CFrame Returns the inverse of this CFrame
+---@field Lerp fun(self:CFrame, goal:CFrame, alpha:number):CFrame Returns a CFrame interpolated between this CFrame and the goal by the fraction alpha
+---@field ToWorldSpace fun(self:CFrame, cf:CFrame):CFrame Returns a CFrame transformed from Object to World space. Equivalent to [CFrame * cf]
+---@field ToObjectSpace fun(self:CFrame, cf:CFrame):CFrame Returns a CFrame transformed from World to Object space. Equivalent to [CFrame:inverse() * cf]
+---@field PointToWorldSpace fun(self:CFrame, v3:Vector3):Vector3 Returns a Vector3 transformed from Object to World space. Equivalent to [CFrame * v3]
+---@field PointToObjectSpace fun(self:CFrame, v3:Vector3):Vector3 Returns a Vector3 transformed from World to Object space. Equivalent to [CFrame:inverse() * v3]
+---@field VectorToWorldSpace fun(self:CFrame, v3:Vector3):Vector3 Returns a Vector3 rotated from Object to World space. Equivalent to [(CFrame - CFrame.p) *v3]
+---@field VectorToObjectSpace fun(self:CFrame, v3:Vector3):Vector3 Returns a Vector3 rotated from World to Object space. Equivalent to [(CFrame:inverse() - CFrame:inverse().p) * v3]
+---@field GetComponents fun(self:CFrame):Tuple Returns the values: x, y, z, R00, R01, R02, R10, R11, R12, R20, R21, R22, where R00-R22 represent the 3x3 rotation matrix of the CFrame, and xyz represent the position of the CFrame.
+---@field ToEulerAnglesXYZ fun(self:CFrame):number,number,number Returns approximate angles that could be used to generate CFrame, if angles were applied in Z, Y, X order
+---@field ToEulerAnglesYXZ fun(self:CFrame):number,number,number Returns approximate angles that could be used to generate CFrame, if angles were applied in Z, X, Y order
+---@field ToOrientation fun(self:CFrame):number,number,number Returns approximate angles that could be used to generate CFrame, if angles were applied in Z, X, Y order (Equivalent to toEulerAnglesYXZ)
+---@field ToAxisAngle fun(self:CFrame):Vector3,number Returns a tuple of a Vector3 and a number which represent the rotation of the CFrame in the axis-angle representation
+---
+
+---
+---@class TweenInfo
+---@field new fun(time:number, easingStyle:Enums.EasingStyle, easingDirection:Enums.EasingDirection, repeatCount:number, reverses:boolean, delayTime:number):TweenInfo Creates a new Tweeninfo.
+---@field EasingDirection Enums.EasingDirection The direction in which the EasingStyle executes.
+---@field Time number The amount of time the tween takes in seconds.
+---@field DelayTime number The amount of time that elapses before tween starts in seconds.
+---@field RepeatCount number The number of times the tween repeats after tweening once.
+---@field EasingStyle Enums.EasingStyle The style in which the tween executes.
+---@field Reverses boolean Whether or not the tween does the reverse tween once the inital tween completes.
+---
+
+---
+---@class Ray
+---@field new fun(Origin:Vector3, Direction:Vector3):Ray Creates a new Ray with given Origin and Direction.
+---@field Unit Ray The Ray with a normalized direction
+---@field Origin Vector3 The position of the origin
+---@field Direction Vector3 The direction vector of the ray
+---@field ClosestPoint fun(self:Ray, point:Vector3):Vector3 Returns a Vector3 projected onto the ray so that it is within the Ray’s line of sight.
+---@field Distance fun(self:Ray, point:Vector3):number Returns the distance between the Ray’s origin and Ray:ClosestPoint(point)
+---
