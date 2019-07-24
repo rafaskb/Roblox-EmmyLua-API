@@ -273,12 +273,6 @@ Enum = nil
 EnumItem = nil
 
 ---
----A reference to the Enums datatype, which stores all of the available enums that can be used on Roblox.
----@type Enums
----
-Enums = nil
-
----
 ---Enum that represents the faces of a part. Values can be Top, Bottom, Left, Right, Back, and Front.
 ---@type Faces
 ---
