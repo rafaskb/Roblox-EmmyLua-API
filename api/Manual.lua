@@ -165,3 +165,11 @@
 ---@field ClosestPoint fun(self:Ray, point:Vector3):Vector3 Returns a Vector3 projected onto the ray so that it is within the Ray’s line of sight.
 ---@field Distance fun(self:Ray, point:Vector3):number Returns the distance between the Ray’s origin and Ray:ClosestPoint(point)
 ---
+
+---
+---@class Region3
+---@field new fun(min:Vector3, max:Vector3):Region3 Creates a new Region3 out of two Vector3 values.
+---@field CFrame CFrame The center location and rotation of the Region3
+---@field Size Vector3 The 3D size of the Region3
+---@field ExpandToGrid fun(self:Ray, Region:number):Region3 Expands the Region3 so that it is aligned with a voxel grid based on the provided resolution and returns the expanded Region3.
+---
