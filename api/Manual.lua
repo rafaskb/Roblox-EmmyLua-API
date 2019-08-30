@@ -272,3 +272,115 @@ local axes = Axes.new("")
 ---@field Time number The relative time at which the keypoint is located.
 ---@field Value number The Color3 value at the keypoint.
 ---
+
+---
+---@class BrickColor BrickColor is a datatype that provides a predefined list of colors, although any color imaginable is supported through a part’s BasePart.Color property. To view a full list of available brick colors, see the BrickColor Codes reference.
+---@alias self BrickColor
+---
+---@field new fun(val:number):self Constructs a BrickColor from its numerical index.
+---@field new fun(r:number, g:number, b:number):self Constructs the closest BrickColor that can be matched to the specified RGB components.
+---@field new fun(val:string):self Constructs a BrickColor from its name.
+---@field new fun(color:Color3):self Constructs the closest BrickColor that can be matched to the specified Color3.
+---@field palette fun(paletteValue:number):self Constructs a BrickColor from its palette index.
+---@field random fun():self Returns a random BrickColor.
+---@field White fun():self Returns the BrickColor White
+---@field Gray fun():self Returns the BrickColor Medium stone grey
+---@field DarkGray fun():self Returns the BrickColor Dark stone grey
+---@field Black fun():self Returns the BrickColor Black
+---@field Red fun():self Returns the BrickColor Bright Red
+---@field Yellow fun():self Returns the BrickColor Bright Yellow
+---@field Green fun():self Returns the BrickColor Dark Green
+---@field Blue fun():self Returns the BrickColor Bright Blue
+---
+---@field Number number The unique number that identifies the BrickColor
+---@field r number The red component (between 0 and 1)
+---@field g number The green component (between 0 and 1)
+---@field b number The blue component (between 0 and 1)
+---@field Name string The name associated with the BrickColor
+---@field Color Color3 The Color3 associated with the BrickColor
+---
+
+---
+---@class DockWidgetPluginGuiInfo DockWidgetPluginGuiInfo is a datatype used to describe details for a DockWidgetPluginGui. This datatype is used when constructing a PluginGui via the plugin’s CreateDockWidgetPluginGui() method.
+---@alias self DockWidgetPluginGuiInfo
+---@field new fun(initDockState:Enum.InitialDockState, initEnabled:boolean, overrideEnabledRestore:boolean, floatXSize:number, floatYSize:number, minWidth:number, minHeight:number):self The main constructor function for the DockWidgetPluginGuiInfo.
+---@field InitialEnabled boolean The initial enabled state of a PluginGui created using this DockWidgetPluginGuiInfo. If a PluginGui with the same ‘‘pluginGuiId’’ has previously been created in an earlier session of Roblox Studio, then it will reload that saved enabled state (unless InitialEnabledShouldOverrideRestore is true).
+---@field InitialEnabledShouldOverrideRestore boolean If true, the value of InitialEnabled will override the previously saved enabled state of a PluginGui being created with this DockWidgetPluginGuiInfo. The previously saved enabled state is loaded based on the pluginGuiId argument of Plugin:CreateDockWidgetPluginGui.
+---@field FloatingXSize number The initial pixel width of a PluginGui created using this DockWidgetPluginGuiInfo, when the InitialDockState is set to Float.
+---@field FloatingYSize number The initial pixel height of a PluginGui created using this DockWidgetPluginGuiInfo, when the InitialDockState is set to Float.
+---@field MinWidth number The minimum width of a PluginGui created using this DockWidgetPluginGuiInfo, in pixels.
+---@field MinHeight number The minimum height of a PluginGui created using this DockWidgetPluginGuiInfo, in pixels.
+---
+
+---
+---@class PathWaypoint A datatype constructed by a PathWaypointAction action and Vector3 position which is used by the PathService to create points along a generated path.
+---@alias self PathWaypoint
+---@field new fun(position:Vector3, action:Enum.PathWaypointAction):self Creates a new PathWaypoint object
+---@field Action Enum.PathWaypointAction The action to be performed at this waypoint.
+---@field Position Vector3 The 3D position of the waypoint
+---
+
+---
+---@class PhysicalProperties PhysicalProperties is an object that describes several physical properties of a part: Density, Elasticity and Friction. It is used in the similarly-named BasePart.CustomPhysicalProperties property.
+---@alias self PhysicalProperties
+---@field new fun(material:Enum.Material):self Creates a PhysicalProperties container, with the density, friction, and elasticity specified for this Material.
+---@field new fun(density:number, friction:number, elasticity:number):self Creates a PhysicalProperties container, with the specified density, friction, and elasticity.
+---@field new fun(density:number, friction:number, elasticity:number, frictionWeight:number, elasticityWeight:number):self Creates a PhysicalProperties container, with the specified density, friction, and elasticity, as well as the weight of the friction and elasticity.
+---
+---@field Density number The density set for the custom physical properties. Density is defined as the amount of mass per unit volume. The more dense a part is, the more force it takes to accelerate it.
+---@field Friction number The friction set for the custom physical properties. Friction is defined as the force that opposes the relative lateral motion of two solid surfaces in contact. The greater the friction on a part, the quicker it will decelerate when it rubs against another part with friction.
+---@field Elasticity number The elasticity set for the custom physical properties. On Roblox, Elasticity refers to a part’s tendency to retain energy when colliding with another part. An Elasticity of 1 indicates that the part bounces with the same energy it had before a collision.
+---@field FrictionWeight number The friction weight set for the custom physical properties. The FrictionWeight of two parts rubbing together creates a ratio used to calculate the actual friction between the two parts: the higher a part’s FrictionWeight is, the more its Friction will be used.
+---@field ElasticityWeight number The elasticity weight set for the custom physical properties. The ElasticityWeight of two parts colliding creates a ratio used to calculate the actual elasticity between the two parts: the higher a part’s ElasticityWeight is, the more its Elasticity will be used.
+---
+
+---
+---@class Random
+---@alias self Random
+---@field new fun(seed:number):self Creates a new Random object. If the seed parameter is not specified, it will use a seed pulled from an internal entropy source.
+---@field NextInteger fun(min:number, max:number):number Returns a pseudorandom integer uniformly distributed over [min, max].
+---@field NextNumber fun():number Returns a pseudorandom number uniformly distributed over [0, 1).
+---@field NextNumber fun(min:number, max:number):number Returns a pseudorandom number uniformly distributed over [min, max).
+---@field Clone fun():self Returns a new Random object with the same state as the original.
+---
+
+---
+---@class RBXScriptConnection RBXScriptConnection, also known as a Connection, is a special object returned by the Connect method of an Event (RBXScriptSignal). This is used primarily to disconnect a listener from an Event.
+---@alias self RBXScriptConnection
+---@field Connected boolean Describes whether or not the connection is still alive. This will become false if connection:Disconnect() is called.
+---@field Disconnect fun():void Disconnects the connection from the event.
+---
+
+---
+---@class Rect
+---@alias self Rect
+---@field new fun(min:Vector2, max:Vector2):self Constructs a new Rect with min as top left corner and max as bottom right corner.
+---@field new fun(minX:number, minY:number, maxX:number, maxY:number):self Constructs a new Rect using minX and minY as coordinates for the top left corner, and maxX and maxY as coordinates for the bottom right corner.
+---@field Width number The width of the Rect in pixels.
+---@field Height number The height of the Rect in pixels.
+---@field Min number The top-left corner.
+---@field Max number The bottom-right corner.
+---
+
+---
+---@class Region3int16
+---@alias self Region3int16
+---@field new fun(min:Vector3int16, max:Vector3int16):self Creates a new Region3int16 out of two Vector3int16 structs
+---
+
+---
+---@class RbxLibrary
+---@deprecated
+---
+
+---
+---@class Content:string Content ID representing an animation, texture, sound, or asset in general.
+---
+
+---
+---@class ProtectedString:string
+---
+
+---
+---@class BinaryString:string
+---
