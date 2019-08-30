@@ -212,9 +212,6 @@
 ---@field Front boolean Whether the front face is included
 ---
 
-local Axes ---@type Axes
-local axes = Axes.new("")
-
 ---
 ---@class Faces
 ---@alias self Faces
