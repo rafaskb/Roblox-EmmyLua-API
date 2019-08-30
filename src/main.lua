@@ -119,9 +119,9 @@ local function main()
 
     -- Inject Enum class manually
     utils:write("---")
-    utils:write("---@class Enums")
+    utils:write("---@class RobloxEnum")
     for _, enumName in pairs(enumNames) do
-        utils:write("---@field %s Enums.%s", enumName, enumName)
+        utils:write("---@field %s Enum.%s", enumName, enumName)
     end
     utils:write("---")
     utils:write()

@@ -16,7 +16,7 @@ local function readType(baseData)
 
     -- Parse enum types
     if category == "Enum" then
-        return "Enums." .. name
+        return "Enum." .. name
     end
 
     -- Parse group types
@@ -133,16 +133,17 @@ end
 ---
 function parser:parseEnum(baseData)
     -- Write class
-    local class = "Enums." .. baseData.Name
+    local class = "Enum." .. baseData.Name
     utils:write("---")
-    utils:write("---@class %s", class)
+    utils:write("---@class %s:EnumItem", class)
+    utils:write("---@alias self %s", class)
 
     -- Write items
     if baseData.Items then
         for _, item in pairs(baseData.Items) do
             local itemName = item.Name
             local itemValue = item.Value
-            utils:write("---@field %s EnumItem @%s", itemName, itemValue)
+            utils:write("---@field %s self @%s", itemName, itemValue)
         end
     end
 

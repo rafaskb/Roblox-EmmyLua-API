@@ -4,6 +4,13 @@
 ---
 
 ---
+---@class EnumItem
+---@field Name string The name of this EnumItem.
+---@field Value number The integral value assigned to this enum.
+---@field EnumType EnumItem A reference to the parent Enum of this EnumItem.
+---
+
+---
 ---@class RobloxDebug
 ---@field traceback fun():string
 ---@field profilebegin fun(label:string):void
@@ -58,8 +65,8 @@
 ---
 ---@class Vector3
 ---@field new fun(x:number, y:number, z:number):Vector3 Creates a new Vector3 using ordinates x and y
----@field FromNormalId fun(normal:Enums.NormalId):Vector3 Constructs a new Vector3 in a particular direction.
----@field FromAxis fun(axis:Enums.Axis):Vector3 Constructs a new Vector3 for a particular axis.
+---@field FromNormalId fun(normal:Enum.NormalId):Vector3 Constructs a new Vector3 in a particular direction.
+---@field FromAxis fun(axis:Enum.Axis):Vector3 Constructs a new Vector3 for a particular axis.
 ---@field X number The x-coordinate
 ---@field Y number The y-coordinate
 ---@field Z number The z-coordinate
@@ -97,8 +104,8 @@
 ---@class UDim2
 ---@field new fun(xScale:number, xOffset:number, yScale:number, yOffset:number):UDim2
 ---@field new fun(x:UDim, y:UDim):UDim2
----@field FromNormalId fun(normal:Enums.NormalId):UDim2 Constructs a new UDim2 in a particular direction.
----@field FromAxis fun(axis:Enums.Axis):UDim2 Constructs a new UDim2 for a particular axis.
+---@field FromNormalId fun(normal:Enum.NormalId):UDim2 Constructs a new UDim2 in a particular direction.
+---@field FromAxis fun(axis:Enum.Axis):UDim2 Constructs a new UDim2 for a particular axis.
 ---@field X UDim The x dimension scale and offset
 ---@field Y UDim The y dimension scale and offset
 ---@field Width UDim The x dimension scale and offset
@@ -147,12 +154,12 @@
 
 ---
 ---@class TweenInfo
----@field new fun(time:number, easingStyle:Enums.EasingStyle, easingDirection:Enums.EasingDirection, repeatCount:number, reverses:boolean, delayTime:number):TweenInfo Creates a new Tweeninfo.
----@field EasingDirection Enums.EasingDirection The direction in which the EasingStyle executes.
+---@field new fun(time:number, easingStyle:Enum.EasingStyle, easingDirection:Enum.EasingDirection, repeatCount:number, reverses:boolean, delayTime:number):TweenInfo Creates a new Tweeninfo.
+---@field EasingDirection Enum.EasingDirection The direction in which the EasingStyle executes.
 ---@field Time number The amount of time the tween takes in seconds.
 ---@field DelayTime number The amount of time that elapses before tween starts in seconds.
 ---@field RepeatCount number The number of times the tween repeats after tweening once.
----@field EasingStyle Enums.EasingStyle The style in which the tween executes.
+---@field EasingStyle Enum.EasingStyle The style in which the tween executes.
 ---@field Reverses boolean Whether or not the tween does the reverse tween once the inital tween completes.
 ---
 
