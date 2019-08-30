@@ -64,7 +64,7 @@ end
 ---Runs the supplied ModuleScript if it has not been run already, and returns what the ModuleScript returned (in both cases).
 ---If the ModuleScript the user wants to use has been uploaded to Roblox (with the instance’s name being ‘MainModule’), it can be loaded by using the require function on the asset ID of the ModuleScript, though only on the server.
 ---@param module ModuleScript
----@return Variant
+---@return any
 ---
 function require (module)
 end
@@ -111,7 +111,7 @@ end
 ---
 ---Returns the type of the object specified, as a string.
 ---This function is more accurate than Lua’s native type function, as it does not denote Roblox-specific types as userdata.
----@param object Variant
+---@param object any
 ---@return string
 ---
 function typeof (object)
@@ -149,18 +149,18 @@ end
 ---
 ---Behaves identically to Lua’s print function, except the output is styled as a warning, with yellow text and a timestamp.
 ---This function accepts any number of arguments, and will attempt to convert them into strings which will then be joined together with spaces between them.
----@param params Tuple|string
+---@param params vararg|string
 function warn (params)
 end
 
 ---
 ---Returns the elements from the given table. By default, i is 1 and j is the length of list, as defined by the length operator.
----@overload fun(list:int):Variant
----@overload fun(list:int, i:int):Variant
+---@overload fun(list:number):any
+---@overload fun(list:number, i:number):any
 ---@param list table
----@param i int
----@param j int
----@return Variant
+---@param i number
+---@param j number
+---@return any
 ---
 function unpack (list, i, j)
 end
@@ -194,7 +194,7 @@ plugin = nil
 ---
 ---A table that is shared across all scripts that share the same execution context level.
 ---This serves the exact same purpose as _G.
----@type array
+---@type any[]
 ---
 shared = nil
 
@@ -262,7 +262,7 @@ DockWidgetPluginGuiInfo = nil
 
 ---
 ---A reference to the Enums datatype, which stores all of the available enums that can be used on Roblox.
----@type Enums
+---@type RobloxEnum
 ---
 Enum = nil
 
