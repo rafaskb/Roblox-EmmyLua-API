@@ -1,10 +1,12 @@
 ---
 ---@class RBXScriptSignal
+---@alias self RBXScriptSignal
 ---@field Connect fun(self:RBXScriptSignal)
 ---
 
 ---
 ---@class EnumItem
+---@alias self EnumItem
 ---@field Name string The name of this EnumItem.
 ---@field Value number The integral value assigned to this enum.
 ---@field EnumType EnumItem A reference to the parent Enum of this EnumItem.
@@ -12,6 +14,7 @@
 
 ---
 ---@class RobloxDebug
+---@alias self RobloxDebug
 ---@field traceback fun():string
 ---@field profilebegin fun(label:string):void
 ---@field profileend fun():void
@@ -19,6 +22,7 @@
 
 ---
 ---@class RobloxOs
+---@alias self RobloxOs
 ---@field time fun():number
 ---@field difftime fun(t2:number, t2:number):number
 ---@field date fun(formatString:string, time:number):table<string, any>
@@ -26,9 +30,10 @@
 
 ---
 ---@class RobloxUtf8
----@field char fun(codepoints:tuple):string
+---@alias self RobloxUtf8
+---@field char fun(codepoints:vararg):string
 ---@field codes fun(str:string):function,string,number
----@field codepoint fun(str:string, i:number, j:number):tuple
+---@field codepoint fun(str:string, i:number, j:number):vararg
 ---@field len fun(str:string, i:number, j:number):number
 ---@field offset fun(str:string, n:number, i:number):number
 ---@field graphmes fun(str:string, i:number, j:number):function
@@ -39,8 +44,9 @@
 
 ---
 ---@class Color3
----@field new fun():Color3 Creates a Color3 whose values are (0,0,0) [black]
----@field new fun(r:number,g:number,b:number):Color3 Returns a Color3 with the given red, green, and blue values. The numbers can range from 0 to 1.
+---@alias self Color3
+---@field new fun():self Creates a Color3 whose values are (0,0,0) [black]
+---@field new fun(r:number,g:number,b:number):self Returns a Color3 with the given red, green, and blue values. The numbers can range from 0 to 1.
 ---@field fromRGB fun(r:number,g:number,b:number):Color3 Creates a Color3 with the given red, green, and blue. The numbers can range from 0 to 255.
 ---@field fromHSV fun(h:number,s:number,v:number):Color3 Creates a Color3 with the given hue, saturation, and value. The numbers can range from 0 to 1.
 ---@field r number The red value of the color
@@ -52,7 +58,8 @@
 
 ---
 ---@class Vector2
----@field new fun(x:number, y:number):Vector2 Creates a new Vector2 using ordinates x and y
+---@alias self Vector2
+---@field new fun(x:number, y:number):self Creates a new Vector2 using ordinates x and y
 ---@field X number The x-coordinate
 ---@field Y number The y-coordinate
 ---@field Magnitude number The length of the vector
@@ -64,7 +71,8 @@
 
 ---
 ---@class Vector3
----@field new fun(x:number, y:number, z:number):Vector3 Creates a new Vector3 using ordinates x and y
+---@alias self Vector3
+---@field new fun(x:number, y:number, z:number):self Creates a new Vector3 using ordinates x and y
 ---@field FromNormalId fun(normal:Enum.NormalId):Vector3 Constructs a new Vector3 in a particular direction.
 ---@field FromAxis fun(axis:Enum.Axis):Vector3 Constructs a new Vector3 for a particular axis.
 ---@field X number The x-coordinate
@@ -80,14 +88,16 @@
 
 ---
 ---@class Vector2int16
----@field new fun(x:number, y:number):Vector2int16 Creates a new Vector2int16 using ordinates x and y. Similar to Vector2, but uses integral coordinates
+---@alias self Vector2int16
+---@field new fun(x:number, y:number):self Creates a new Vector2int16 using ordinates x and y. Similar to Vector2, but uses integral coordinates
 ---@field X number The x-coordinate
 ---@field Y number The y-coordinate
 ---
 
 ---
 ---@class Vector3int16
----@field new fun(x:number, y:number, z:number):Vector3int16 Creates a new Vector3int16 using coordinate x, y, z.
+---@alias self Vector3int16
+---@field new fun(x:number, y:number, z:number):self Creates a new Vector3int16 using coordinate x, y, z.
 ---@field X number The x-coordinate
 ---@field Y number The y-coordinate
 ---@field Z number The z-coordinate
@@ -95,15 +105,17 @@
 
 ---
 ---@class UDim
----@field new fun(Scale:number, Offset:number):UDim Creates a new UDim from components
+---@alias self UDim
+---@field new fun(Scale:number, Offset:number):self Creates a new UDim from components
 ---@field Scale number The scale component of the UDim. The value this represents is scaled relative to the axis that this UDim is representing in a UDim2.
 ---@field Offset number The pixel unit component of the UDim.
 ---
 
 ---
 ---@class UDim2
----@field new fun(xScale:number, xOffset:number, yScale:number, yOffset:number):UDim2
----@field new fun(x:UDim, y:UDim):UDim2
+---@alias self UDim2
+---@field new fun(xScale:number, xOffset:number, yScale:number, yOffset:number):self
+---@field new fun(x:UDim, y:UDim):self
 ---@field FromNormalId fun(normal:Enum.NormalId):UDim2 Constructs a new UDim2 in a particular direction.
 ---@field FromAxis fun(axis:Enum.Axis):UDim2 Constructs a new UDim2 for a particular axis.
 ---@field X UDim The x dimension scale and offset
@@ -115,13 +127,14 @@
 
 ---
 ---@class CFrame
+---@alias self CFrame
 ---
----@field new fun():CFrame Creates a blank identity CFrame.
----@field new fun(pos:Vector3):CFrame Creates a CFrame from a Vector3
----@field new fun(pos:Vector3, lookAt:Vector3):CFrame This constructor has been deprecated in favor of using `CFrame.fromMatrix(), to create a lookVector. Itt creates a CFrame located at pos with it’s lookVector pointing towards the lookAt position.
----@field new fun(x:number, y:number, z:number):CFrame Creates a CFrame from position (x, y, z).
----@field new fun(x:number, y:number, z:number, qX:number, qY:number, qZ:number, qW:number):CFrame Creates a CFrame from position (x, y, z) and quaternion (qX, qY, qZ, qW)
----@field new fun(x:number, y:number, z:number, R00:number, R01:number, R02:number, R10:number, R11:number, R12:number, R20:number, R21:number, R22:number):CFrame Creates a CFrame from position (x, y, z) with an orientation specified by the rotation matrix [[R00 R01 R02] [R10 R11 R12] [R20 R21 R22]]
+---@field new fun():self Creates a blank identity CFrame.
+---@field new fun(pos:Vector3):self Creates a CFrame from a Vector3
+---@field new fun(pos:Vector3, lookAt:Vector3):self This constructor has been deprecated in favor of using `CFrame.fromMatrix(), to create a lookVector. Itt creates a CFrame located at pos with it’s lookVector pointing towards the lookAt position.
+---@field new fun(x:number, y:number, z:number):self Creates a CFrame from position (x, y, z).
+---@field new fun(x:number, y:number, z:number, qX:number, qY:number, qZ:number, qW:number):self Creates a CFrame from position (x, y, z) and quaternion (qX, qY, qZ, qW)
+---@field new fun(x:number, y:number, z:number, R00:number, R01:number, R02:number, R10:number, R11:number, R12:number, R20:number, R21:number, R22:number):self Creates a CFrame from position (x, y, z) with an orientation specified by the rotation matrix [[R00 R01 R02] [R10 R11 R12] [R20 R21 R22]]
 ---@field fromEulerAnglesXYZ fun(rx:number, ry:number, rz:number):CFrame Creates a rotated CFrame using angles (rx, ry, rz) in radians. Rotations are applied in Z, Y, X order.
 ---@field fromEulerAnglesYXZ fun(rx:number, ry:number, rz:number):CFrame Creates a rotated CFrame using angles (rx, ry, rz) in radians. Rotations are applied in Z, X, Y order.
 ---@field Angles fun(rx:number, ry:number, rz:number):CFrame Equivalent to fromEulerAnglesXYZ
@@ -145,7 +158,7 @@
 ---@field PointToObjectSpace fun(self:CFrame, v3:Vector3):Vector3 Returns a Vector3 transformed from World to Object space. Equivalent to [CFrame:inverse() * v3]
 ---@field VectorToWorldSpace fun(self:CFrame, v3:Vector3):Vector3 Returns a Vector3 rotated from Object to World space. Equivalent to [(CFrame - CFrame.p) *v3]
 ---@field VectorToObjectSpace fun(self:CFrame, v3:Vector3):Vector3 Returns a Vector3 rotated from World to Object space. Equivalent to [(CFrame:inverse() - CFrame:inverse().p) * v3]
----@field GetComponents fun(self:CFrame):Tuple Returns the values: x, y, z, R00, R01, R02, R10, R11, R12, R20, R21, R22, where R00-R22 represent the 3x3 rotation matrix of the CFrame, and xyz represent the position of the CFrame.
+---@field GetComponents fun(self:CFrame):vararg Returns the values: x, y, z, R00, R01, R02, R10, R11, R12, R20, R21, R22, where R00-R22 represent the 3x3 rotation matrix of the CFrame, and xyz represent the position of the CFrame.
 ---@field ToEulerAnglesXYZ fun(self:CFrame):number,number,number Returns approximate angles that could be used to generate CFrame, if angles were applied in Z, Y, X order
 ---@field ToEulerAnglesYXZ fun(self:CFrame):number,number,number Returns approximate angles that could be used to generate CFrame, if angles were applied in Z, X, Y order
 ---@field ToOrientation fun(self:CFrame):number,number,number Returns approximate angles that could be used to generate CFrame, if angles were applied in Z, X, Y order (Equivalent to toEulerAnglesYXZ)
@@ -154,7 +167,8 @@
 
 ---
 ---@class TweenInfo
----@field new fun(time:number, easingStyle:Enum.EasingStyle, easingDirection:Enum.EasingDirection, repeatCount:number, reverses:boolean, delayTime:number):TweenInfo Creates a new Tweeninfo.
+---@alias self TweenInfo
+---@field new fun(time:number, easingStyle:Enum.EasingStyle, easingDirection:Enum.EasingDirection, repeatCount:number, reverses:boolean, delayTime:number):self Creates a new Tweeninfo.
 ---@field EasingDirection Enum.EasingDirection The direction in which the EasingStyle executes.
 ---@field Time number The amount of time the tween takes in seconds.
 ---@field DelayTime number The amount of time that elapses before tween starts in seconds.
@@ -165,7 +179,8 @@
 
 ---
 ---@class Ray
----@field new fun(Origin:Vector3, Direction:Vector3):Ray Creates a new Ray with given Origin and Direction.
+---@alias self Ray
+---@field new fun(Origin:Vector3, Direction:Vector3):self Creates a new Ray with given Origin and Direction.
 ---@field Unit Ray The Ray with a normalized direction
 ---@field Origin Vector3 The position of the origin
 ---@field Direction Vector3 The direction vector of the ray
@@ -175,7 +190,8 @@
 
 ---
 ---@class Region3
----@field new fun(min:Vector3, max:Vector3):Region3 Creates a new Region3 out of two Vector3 values.
+---@alias self Region3
+---@field new fun(min:Vector3, max:Vector3):self Creates a new Region3 out of two Vector3 values.
 ---@field CFrame CFrame The center location and rotation of the Region3
 ---@field Size Vector3 The 3D size of the Region3
 ---@field ExpandToGrid fun(self:Ray, Region:number):Region3 Expands the Region3 so that it is aligned with a voxel grid based on the provided resolution and returns the expanded Region3.
@@ -183,7 +199,8 @@
 
 ---
 ---@class Axes Axes is a datatype used for the ArcHandles class to control what rotation axes are currently enabled.
----@field new fun(axes:vararg) Creates a new Axes using list of axes and/or faces. NormalIds (faces) are converted to the corresponding axes.
+---@alias self Axes
+---@field new fun(axes:vararg):self Creates a new Axes using list of axes and/or faces. NormalIds (faces) are converted to the corresponding axes.
 ---@field X boolean Whether the X axis is enabled
 ---@field Y boolean Whether the Y axis is enabled
 ---@field Z boolean Whether the Z axis is enabled
@@ -195,9 +212,13 @@
 ---@field Front boolean Whether the front face is included
 ---
 
+local Axes ---@type Axes
+local axes = Axes.new("")
+
 ---
 ---@class Faces
----@field new fun(normalIds:vararg) Creates a new Faces using list of faces
+---@alias self Faces
+---@field new fun(normalIds:vararg):self Creates a new Faces using list of faces
 ---@field Top boolean Whether the top face is included
 ---@field Bottom boolean Whether the bottom face is included
 ---@field Left boolean Whether the left face is included
@@ -208,7 +229,8 @@
 
 ---
 ---@class NumberRange
----@field new fun(value:number) Creates a new NumberRange with the minimum and maximum set to value.
+---@alias self NumberRange
+---@field new fun(value:number):self Creates a new NumberRange with the minimum and maximum set to value.
 ---@field new fun(minimum:number, maximum:number) Creates a new NumberRange with the provided minimum and maximum. minimum must be less than or equal to maximum.
 ---@field Min number Minimum value. Will always be less than or equal to the maximum.
 ---@field Max number Maximum value. Will always be greater than or equal to the minimum.
@@ -216,17 +238,19 @@
 
 ---
 ---@class NumberSequence
----@field new fun(n:number) Creates a sequence of two keypoints with n for each value
+---@alias self NumberSequence
+---@field new fun(n:number):self Creates a sequence of two keypoints with n for each value
 ---@field new fun(n0:number, n1:number) Creates a sequence of two keypoints with n0 and n1 as the value
----@field new fun(Keypoints:NumberSequenceKeypoint[]) Creates a new Vector2int16 using ordinates x and y. Similar to Vector2, but uses integral coordinates
+---@field new fun(Keypoints:NumberSequenceKeypoint[]):self Creates a new Vector2int16 using ordinates x and y. Similar to Vector2, but uses integral coordinates
 ---@field Keypoints NumberSequenceKeypoint[] An array containing keypoint values for the NumberSequence.
 ---
 
 ---
 ---@class NumberSequenceKeypoint
+---@alias self NumberSequenceKeypoint
 ---@field new fun(time:number, value:number) Creates a keypoint with a specified time and value.
 ---@field new fun(time:number, value:number, envelop:number) Creates a keypoint with a specified time, value, and envelope.
----@field new fun(Keypoints:NumberSequenceKeypoint[]) Creates a new Vector2int16 using ordinates x and y. Similar to Vector2, but uses integral coordinates
+---@field new fun(Keypoints:NumberSequenceKeypoint[]):self Creates a new Vector2int16 using ordinates x and y. Similar to Vector2, but uses integral coordinates
 ---@field Envelope number Indicates the amount of variance allowed from the Value. A computed value.
 ---@field Time number The relative time at which the keypoint is positioned.
 ---@field Value number The base value of this keypoint.
@@ -234,16 +258,17 @@
 
 ---
 ---@class ColorSequence
----@field new fun(c:Color3) Creates a sequence of two keypoints with c for each value
+---@alias self ColorSequence
+---@field new fun(c:Color3):self Creates a sequence of two keypoints with c for each value
 ---@field new fun(c0:Color3, c1:Color3) Creates a sequence of two keypoints with c0 and c1 as the value
----@field new fun(keypoints:ColorSequenceKeypoint[]) Creates a sequence of ColorSequenceKeypoints.
+---@field new fun(keypoints:ColorSequenceKeypoint[]):self Creates a sequence of ColorSequenceKeypoints.
 ---@field Keypoints ColorSequenceKeypoint[] An array containing ColorSequenceKeypoint values for the ColorSequence.
 ---
 
 ---
 ---@class ColorSequenceKeypoint
+---@alias self ColorSequenceKeypoint
 ---@field new fun(time:number, color:Color3) Creates a keypoint with a specified time and color.
 ---@field Time number The relative time at which the keypoint is located.
 ---@field Value number The Color3 value at the keypoint.
 ---
-
