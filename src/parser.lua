@@ -7,17 +7,19 @@ local utils = require("utils")
 
 ---
 ---Reads a value type from a data table and returns it in a formatted string.
----@param baseData table
+---@param baseData table<string, string>
 ---@return string
 ---
 local function readType(baseData)
-    local name = baseData.Name
-    local category = baseData.Category
+    local name = baseData["Name"]
+    local category = baseData["Category"]
 
+    -- Parse enum types
     if category == "Enum" then
         return "Enums." .. name
     end
 
+    -- Parse group types
     if category == "Group" then
         if name == "Dictionary" then
             return "table<string,any>"
@@ -32,6 +34,7 @@ local function readType(baseData)
         end
     end
 
+    -- Parse primitive types
     if category == "Primitive" then
         if name == "bool" then
             return "boolean"
@@ -47,7 +50,7 @@ end
 
 ---
 ---Reads parameters from a data table and returns them in a formatted string.
----@param baseData table
+---@param baseData table<string, string>
 ---@param selfType string
 ---@return string
 ---
@@ -73,7 +76,7 @@ end
 
 ---
 ---Parses an entire class data table, including all its fields, functions, events, and callbacks.
----@param baseData table
+---@param baseData table<string, string>
 ---
 function parser:parseClass(baseData)
     -- Write class
@@ -121,7 +124,7 @@ end
 
 ---
 ---Parses an entire enum data table, including all its values.
----@param baseData table
+---@param baseData table<string, string>
 ---
 function parser:parseEnum(baseData)
     -- Write class
