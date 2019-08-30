@@ -58,6 +58,10 @@ local function readType(baseData)
         if name == "Tuple" then
             return "vararg"
         end
+
+        if name == "Function" then
+            return "fun"
+        end
     end
 
     return name
