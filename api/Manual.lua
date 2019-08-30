@@ -180,3 +180,70 @@
 ---@field Size Vector3 The 3D size of the Region3
 ---@field ExpandToGrid fun(self:Ray, Region:number):Region3 Expands the Region3 so that it is aligned with a voxel grid based on the provided resolution and returns the expanded Region3.
 ---
+
+---
+---@class Axes Axes is a datatype used for the ArcHandles class to control what rotation axes are currently enabled.
+---@field new fun(axes:vararg) Creates a new Axes using list of axes and/or faces. NormalIds (faces) are converted to the corresponding axes.
+---@field X boolean Whether the X axis is enabled
+---@field Y boolean Whether the Y axis is enabled
+---@field Z boolean Whether the Z axis is enabled
+---@field Top boolean Whether the top face is included
+---@field Bottom boolean Whether the bottom face is included
+---@field Left boolean Whether the left face is included
+---@field Right boolean Whether the right face is included
+---@field Back boolean Whether the back face is included
+---@field Front boolean Whether the front face is included
+---
+
+---
+---@class Faces
+---@field new fun(normalIds:vararg) Creates a new Faces using list of faces
+---@field Top boolean Whether the top face is included
+---@field Bottom boolean Whether the bottom face is included
+---@field Left boolean Whether the left face is included
+---@field Right boolean Whether the right face is included
+---@field Back boolean Whether the back face is included
+---@field Front boolean Whether the front face is included
+---
+
+---
+---@class NumberRange
+---@field new fun(value:number) Creates a new NumberRange with the minimum and maximum set to value.
+---@field new fun(minimum:number, maximum:number) Creates a new NumberRange with the provided minimum and maximum. minimum must be less than or equal to maximum.
+---@field Min number Minimum value. Will always be less than or equal to the maximum.
+---@field Max number Maximum value. Will always be greater than or equal to the minimum.
+---
+
+---
+---@class NumberSequence
+---@field new fun(n:number) Creates a sequence of two keypoints with n for each value
+---@field new fun(n0:number, n1:number) Creates a sequence of two keypoints with n0 and n1 as the value
+---@field new fun(Keypoints:NumberSequenceKeypoint[]) Creates a new Vector2int16 using ordinates x and y. Similar to Vector2, but uses integral coordinates
+---@field Keypoints NumberSequenceKeypoint[] An array containing keypoint values for the NumberSequence.
+---
+
+---
+---@class NumberSequenceKeypoint
+---@field new fun(time:number, value:number) Creates a keypoint with a specified time and value.
+---@field new fun(time:number, value:number, envelop:number) Creates a keypoint with a specified time, value, and envelope.
+---@field new fun(Keypoints:NumberSequenceKeypoint[]) Creates a new Vector2int16 using ordinates x and y. Similar to Vector2, but uses integral coordinates
+---@field Envelope number Indicates the amount of variance allowed from the Value. A computed value.
+---@field Time number The relative time at which the keypoint is positioned.
+---@field Value number The base value of this keypoint.
+---
+
+---
+---@class ColorSequence
+---@field new fun(c:Color3) Creates a sequence of two keypoints with c for each value
+---@field new fun(c0:Color3, c1:Color3) Creates a sequence of two keypoints with c0 and c1 as the value
+---@field new fun(keypoints:ColorSequenceKeypoint[]) Creates a sequence of ColorSequenceKeypoints.
+---@field Keypoints ColorSequenceKeypoint[] An array containing ColorSequenceKeypoint values for the ColorSequence.
+---
+
+---
+---@class ColorSequenceKeypoint
+---@field new fun(time:number, color:Color3) Creates a keypoint with a specified time and color.
+---@field Time number The relative time at which the keypoint is located.
+---@field Value number The Color3 value at the keypoint.
+---
+
