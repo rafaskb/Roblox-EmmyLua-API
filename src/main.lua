@@ -41,8 +41,9 @@ end
 ---@return string
 ---
 local function fetchApiDump(robloxVersion)
-    utils:info("Getting API Dump...")
-    local success, response = request("http://setup.roblox.com/" .. tostring(robloxVersion) .. "-API-Dump.json")
+    local url = "http://setup.roblox.com/" .. tostring(robloxVersion) .. "-API-Dump.json"
+    utils:info("Getting API Dump from " .. url)
+    local success, response = request(url)
     if not success then
         utils:error("Failed to obtain API Dump. (" .. tostring(response) .. ")")
         return
