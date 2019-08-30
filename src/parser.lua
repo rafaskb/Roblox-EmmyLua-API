@@ -45,6 +45,11 @@ local function readType(baseData)
         end
     end
 
+    -- Translate poorly named types
+    if name == "Objects" then
+        return "Instance[]"
+    end
+
     return name
 end
 
