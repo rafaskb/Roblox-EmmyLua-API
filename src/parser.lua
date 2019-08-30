@@ -98,6 +98,11 @@ end
 ---@param baseData table<string, string>
 ---
 function parser:parseClass(baseData)
+    -- Ignore Studio class due to poor formatting
+    if baseData.Name == "Studio" then
+        return
+    end
+
     -- Write class
     local class = baseData.Name
     local super = baseData.Superclass
