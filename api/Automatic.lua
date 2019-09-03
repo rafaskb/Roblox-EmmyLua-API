@@ -1,6 +1,6 @@
 --
---File generated in Aug/30/2019 at 00:44:18
---Roblox version: version-02aff87b548c4cd7
+--File generated in Sep/03/2019 at 14:18:04
+--Roblox version: version-7dae73f2829d4f33
 --API Dump version: 1
 --
 
@@ -845,10 +845,10 @@
 ---@class DataModelSession : Instance
 ---@field CurrentGameStateType Enum.StudioDataModelType
 ---@field SessionId string
----@field CurrentGameStateTypeAboutToChange RBXScriptSignal @function(gameStateType:number)
+---@field CurrentGameStateTypeAboutToChange RBXScriptSignal @function(gameStateType:Enum.StudioDataModelType)
 ---@field CurrentGameStateTypeChanged RBXScriptSignal @function()
----@field DataModelCreated RBXScriptSignal @function(gameStateType:number)
----@field DataModelWillBeDestroyed RBXScriptSignal @function(gameStateType:number)
+---@field DataModelCreated RBXScriptSignal @function(gameStateType:Enum.StudioDataModelType)
+---@field DataModelWillBeDestroyed RBXScriptSignal @function(gameStateType:Enum.StudioDataModelType)
 ---
 
 ---
@@ -2629,6 +2629,7 @@
 ---@field ImportHeightMap fun(self:Terrain, heightMapBinary:string, colorMapBinary:string, region:Region3):void
 ---@field PasteRegion fun(self:Terrain, region:Instance, corner:Vector3int16, pasteEmptyCells:boolean):void
 ---@field ReadVoxels fun(self:Terrain, region:Region3, resolution:number):vararg
+---@field ReplaceMaterial fun(self:Terrain, region:Region3, resolution:number, sourceMaterial:Enum.Material, targetMaterial:Enum.Material):void
 ---@field SetCell fun(self:Terrain, x:number, y:number, z:number, material:Enum.CellMaterial, block:Enum.CellBlock, orientation:Enum.CellOrientation):void
 ---@field SetCells fun(self:Terrain, region:Region3int16, material:Enum.CellMaterial, block:Enum.CellBlock, orientation:Enum.CellOrientation):void
 ---@field SetMaterialColor fun(self:Terrain, material:Enum.Material, value:Color3):void
@@ -3411,7 +3412,6 @@
 ---@field AddCoreScriptLocal fun(self:ScriptContext, name:string, parent:Instance):void
 ---@field GetCoverageStats fun(self:ScriptContext):any[]
 ---@field ResetCoverageCollection fun(self:ScriptContext):void
----@field SetCoverageFilter fun(self:ScriptContext, callback:fun):void
 ---@field SetTimeout fun(self:ScriptContext, seconds:number):void
 ---@field StartCoverageCollection fun(self:ScriptContext):void
 ---@field StopCoverageCollection fun(self:ScriptContext):void
@@ -3732,6 +3732,10 @@
 ---
 
 ---
+---@class StandalonePluginScripts : Instance
+---
+
+---
 ---@class StarterGear : Instance
 ---
 
@@ -3845,7 +3849,10 @@
 ---
 ---@class StudioService : Instance
 ---@field ActiveScript Instance
+---@field GridSize number
+---@field RotateIncrement number
 ---@field StudioLocaleId string
+---@field UseLocalSpace boolean
 ---@field CopyToClipboard fun(self:StudioService, stringToCopy:string):void
 ---@field GetClassIcon fun(self:StudioService, className:string):table<string,any>
 ---@field GetResourceByCategory fun(self:StudioService, category:string):table<string,any>
@@ -3873,6 +3880,7 @@
 ---@field OnPluginInstalledFromToolbox RBXScriptSignal @function()
 ---@field OnPublishPlaceToRoblox RBXScriptSignal @function()
 ---@field OnSaveToRoblox RBXScriptSignal @function(instances:Instance[])
+---@field PlacePublishedToRoblox RBXScriptSignal @function()
 ---
 
 ---
@@ -4467,2416 +4475,2218 @@
 
 ---
 ---@class Enum.ActionType:EnumItem
----@alias self Enum.ActionType
----@field Nothing self @0
----@field Pause self @1
----@field Lose self @2
----@field Draw self @3
----@field Win self @4
+---@field Nothing Enum.ActionType @0
+---@field Pause Enum.ActionType @1
+---@field Lose Enum.ActionType @2
+---@field Draw Enum.ActionType @3
+---@field Win Enum.ActionType @4
 ---
 
 ---
 ---@class Enum.ActuatorRelativeTo:EnumItem
----@alias self Enum.ActuatorRelativeTo
----@field Attachment0 self @0
----@field Attachment1 self @1
----@field World self @2
+---@field Attachment0 Enum.ActuatorRelativeTo @0
+---@field Attachment1 Enum.ActuatorRelativeTo @1
+---@field World Enum.ActuatorRelativeTo @2
 ---
 
 ---
 ---@class Enum.ActuatorType:EnumItem
----@alias self Enum.ActuatorType
----@field None self @0
----@field Motor self @1
----@field Servo self @2
+---@field None Enum.ActuatorType @0
+---@field Motor Enum.ActuatorType @1
+---@field Servo Enum.ActuatorType @2
 ---
 
 ---
 ---@class Enum.AlignType:EnumItem
----@alias self Enum.AlignType
----@field Parallel self @0
----@field Perpendicular self @1
+---@field Parallel Enum.AlignType @0
+---@field Perpendicular Enum.AlignType @1
 ---
 
 ---
 ---@class Enum.AnimationPriority:EnumItem
----@alias self Enum.AnimationPriority
----@field Idle self @0
----@field Movement self @1
----@field Action self @2
----@field Core self @1000
+---@field Idle Enum.AnimationPriority @0
+---@field Movement Enum.AnimationPriority @1
+---@field Action Enum.AnimationPriority @2
+---@field Core Enum.AnimationPriority @1000
 ---
 
 ---
 ---@class Enum.AppShellActionType:EnumItem
----@alias self Enum.AppShellActionType
----@field None self @0
----@field OpenApp self @1
----@field TapChatTab self @2
----@field TapConversationEntry self @3
----@field TapAvatarTab self @4
----@field ReadConversation self @5
----@field TapGamePageTab self @6
----@field TapHomePageTab self @7
----@field GamePageLoaded self @8
----@field HomePageLoaded self @9
----@field AvatarEditorPageLoaded self @10
+---@field None Enum.AppShellActionType @0
+---@field OpenApp Enum.AppShellActionType @1
+---@field TapChatTab Enum.AppShellActionType @2
+---@field TapConversationEntry Enum.AppShellActionType @3
+---@field TapAvatarTab Enum.AppShellActionType @4
+---@field ReadConversation Enum.AppShellActionType @5
+---@field TapGamePageTab Enum.AppShellActionType @6
+---@field TapHomePageTab Enum.AppShellActionType @7
+---@field GamePageLoaded Enum.AppShellActionType @8
+---@field HomePageLoaded Enum.AppShellActionType @9
+---@field AvatarEditorPageLoaded Enum.AppShellActionType @10
 ---
 
 ---
 ---@class Enum.AspectType:EnumItem
----@alias self Enum.AspectType
----@field FitWithinMaxSize self @0
----@field ScaleWithParentSize self @1
+---@field FitWithinMaxSize Enum.AspectType @0
+---@field ScaleWithParentSize Enum.AspectType @1
 ---
 
 ---
 ---@class Enum.AssetFetchStatus:EnumItem
----@alias self Enum.AssetFetchStatus
----@field Success self @0
----@field Failure self @1
+---@field Success Enum.AssetFetchStatus @0
+---@field Failure Enum.AssetFetchStatus @1
 ---
 
 ---
 ---@class Enum.AssetType:EnumItem
----@alias self Enum.AssetType
----@field Image self @1
----@field TeeShirt self @2
----@field Audio self @3
----@field Mesh self @4
----@field Lua self @5
----@field Hat self @8
----@field Place self @9
----@field Model self @10
----@field Shirt self @11
----@field Pants self @12
----@field Decal self @13
----@field Head self @17
----@field Face self @18
----@field Gear self @19
----@field Badge self @21
----@field Animation self @24
----@field Torso self @27
----@field RightArm self @28
----@field LeftArm self @29
----@field LeftLeg self @30
----@field RightLeg self @31
----@field Package self @32
----@field GamePass self @34
----@field Plugin self @38
----@field MeshPart self @40
----@field HairAccessory self @41
----@field FaceAccessory self @42
----@field NeckAccessory self @43
----@field ShoulderAccessory self @44
----@field FrontAccessory self @45
----@field BackAccessory self @46
----@field WaistAccessory self @47
----@field ClimbAnimation self @48
----@field DeathAnimation self @49
----@field FallAnimation self @50
----@field IdleAnimation self @51
----@field JumpAnimation self @52
----@field RunAnimation self @53
----@field SwimAnimation self @54
----@field WalkAnimation self @55
----@field PoseAnimation self @56
----@field EarAccessory self @57
----@field EyeAccessory self @58
----@field EmoteAnimation self @61
+---@field Image Enum.AssetType @1
+---@field TeeShirt Enum.AssetType @2
+---@field Audio Enum.AssetType @3
+---@field Mesh Enum.AssetType @4
+---@field Lua Enum.AssetType @5
+---@field Hat Enum.AssetType @8
+---@field Place Enum.AssetType @9
+---@field Model Enum.AssetType @10
+---@field Shirt Enum.AssetType @11
+---@field Pants Enum.AssetType @12
+---@field Decal Enum.AssetType @13
+---@field Head Enum.AssetType @17
+---@field Face Enum.AssetType @18
+---@field Gear Enum.AssetType @19
+---@field Badge Enum.AssetType @21
+---@field Animation Enum.AssetType @24
+---@field Torso Enum.AssetType @27
+---@field RightArm Enum.AssetType @28
+---@field LeftArm Enum.AssetType @29
+---@field LeftLeg Enum.AssetType @30
+---@field RightLeg Enum.AssetType @31
+---@field Package Enum.AssetType @32
+---@field GamePass Enum.AssetType @34
+---@field Plugin Enum.AssetType @38
+---@field MeshPart Enum.AssetType @40
+---@field HairAccessory Enum.AssetType @41
+---@field FaceAccessory Enum.AssetType @42
+---@field NeckAccessory Enum.AssetType @43
+---@field ShoulderAccessory Enum.AssetType @44
+---@field FrontAccessory Enum.AssetType @45
+---@field BackAccessory Enum.AssetType @46
+---@field WaistAccessory Enum.AssetType @47
+---@field ClimbAnimation Enum.AssetType @48
+---@field DeathAnimation Enum.AssetType @49
+---@field FallAnimation Enum.AssetType @50
+---@field IdleAnimation Enum.AssetType @51
+---@field JumpAnimation Enum.AssetType @52
+---@field RunAnimation Enum.AssetType @53
+---@field SwimAnimation Enum.AssetType @54
+---@field WalkAnimation Enum.AssetType @55
+---@field PoseAnimation Enum.AssetType @56
+---@field EarAccessory Enum.AssetType @57
+---@field EyeAccessory Enum.AssetType @58
+---@field EmoteAnimation Enum.AssetType @61
 ---
 
 ---
 ---@class Enum.AvatarContextMenuOption:EnumItem
----@alias self Enum.AvatarContextMenuOption
----@field Friend self @0
----@field Chat self @1
----@field Emote self @2
----@field InspectMenu self @3
+---@field Friend Enum.AvatarContextMenuOption @0
+---@field Chat Enum.AvatarContextMenuOption @1
+---@field Emote Enum.AvatarContextMenuOption @2
+---@field InspectMenu Enum.AvatarContextMenuOption @3
 ---
 
 ---
 ---@class Enum.AvatarJointPositionType:EnumItem
----@alias self Enum.AvatarJointPositionType
----@field Fixed self @0
----@field ArtistIntent self @1
+---@field Fixed Enum.AvatarJointPositionType @0
+---@field ArtistIntent Enum.AvatarJointPositionType @1
 ---
 
 ---
 ---@class Enum.Axis:EnumItem
----@alias self Enum.Axis
----@field X self @0
----@field Y self @1
----@field Z self @2
+---@field X Enum.Axis @0
+---@field Y Enum.Axis @1
+---@field Z Enum.Axis @2
 ---
 
 ---
 ---@class Enum.BinType:EnumItem
----@alias self Enum.BinType
----@field Script self @0
----@field GameTool self @1
----@field Grab self @2
----@field Clone self @3
----@field Hammer self @4
+---@field Script Enum.BinType @0
+---@field GameTool Enum.BinType @1
+---@field Grab Enum.BinType @2
+---@field Clone Enum.BinType @3
+---@field Hammer Enum.BinType @4
 ---
 
 ---
 ---@class Enum.BodyPart:EnumItem
----@alias self Enum.BodyPart
----@field Head self @0
----@field Torso self @1
----@field LeftArm self @2
----@field RightArm self @3
----@field LeftLeg self @4
----@field RightLeg self @5
+---@field Head Enum.BodyPart @0
+---@field Torso Enum.BodyPart @1
+---@field LeftArm Enum.BodyPart @2
+---@field RightArm Enum.BodyPart @3
+---@field LeftLeg Enum.BodyPart @4
+---@field RightLeg Enum.BodyPart @5
 ---
 
 ---
 ---@class Enum.BodyPartR15:EnumItem
----@alias self Enum.BodyPartR15
----@field Head self @0
----@field UpperTorso self @1
----@field LowerTorso self @2
----@field LeftFoot self @3
----@field LeftLowerLeg self @4
----@field LeftUpperLeg self @5
----@field RightFoot self @6
----@field RightLowerLeg self @7
----@field RightUpperLeg self @8
----@field LeftHand self @9
----@field LeftLowerArm self @10
----@field LeftUpperArm self @11
----@field RightHand self @12
----@field RightLowerArm self @13
----@field RightUpperArm self @14
----@field RootPart self @15
----@field Unknown self @17
+---@field Head Enum.BodyPartR15 @0
+---@field UpperTorso Enum.BodyPartR15 @1
+---@field LowerTorso Enum.BodyPartR15 @2
+---@field LeftFoot Enum.BodyPartR15 @3
+---@field LeftLowerLeg Enum.BodyPartR15 @4
+---@field LeftUpperLeg Enum.BodyPartR15 @5
+---@field RightFoot Enum.BodyPartR15 @6
+---@field RightLowerLeg Enum.BodyPartR15 @7
+---@field RightUpperLeg Enum.BodyPartR15 @8
+---@field LeftHand Enum.BodyPartR15 @9
+---@field LeftLowerArm Enum.BodyPartR15 @10
+---@field LeftUpperArm Enum.BodyPartR15 @11
+---@field RightHand Enum.BodyPartR15 @12
+---@field RightLowerArm Enum.BodyPartR15 @13
+---@field RightUpperArm Enum.BodyPartR15 @14
+---@field RootPart Enum.BodyPartR15 @15
+---@field Unknown Enum.BodyPartR15 @17
 ---
 
 ---
 ---@class Enum.BorderMode:EnumItem
----@alias self Enum.BorderMode
----@field Outline self @0
----@field Middle self @1
----@field Inset self @2
+---@field Outline Enum.BorderMode @0
+---@field Middle Enum.BorderMode @1
+---@field Inset Enum.BorderMode @2
 ---
 
 ---
 ---@class Enum.BreakReason:EnumItem
----@alias self Enum.BreakReason
----@field Other self @0
----@field Error self @1
----@field UserBreakpoint self @3
----@field SpecialBreakpoint self @2
+---@field Other Enum.BreakReason @0
+---@field Error Enum.BreakReason @1
+---@field UserBreakpoint Enum.BreakReason @3
+---@field SpecialBreakpoint Enum.BreakReason @2
 ---
 
 ---
 ---@class Enum.Button:EnumItem
----@alias self Enum.Button
----@field Jump self @32
----@field Dismount self @8
+---@field Jump Enum.Button @32
+---@field Dismount Enum.Button @8
 ---
 
 ---
 ---@class Enum.ButtonStyle:EnumItem
----@alias self Enum.ButtonStyle
----@field Custom self @0
----@field RobloxButtonDefault self @1
----@field RobloxButton self @2
----@field RobloxRoundButton self @3
----@field RobloxRoundDefaultButton self @4
----@field RobloxRoundDropdownButton self @5
+---@field Custom Enum.ButtonStyle @0
+---@field RobloxButtonDefault Enum.ButtonStyle @1
+---@field RobloxButton Enum.ButtonStyle @2
+---@field RobloxRoundButton Enum.ButtonStyle @3
+---@field RobloxRoundDefaultButton Enum.ButtonStyle @4
+---@field RobloxRoundDropdownButton Enum.ButtonStyle @5
 ---
 
 ---
 ---@class Enum.CameraMode:EnumItem
----@alias self Enum.CameraMode
----@field Classic self @0
----@field LockFirstPerson self @1
+---@field Classic Enum.CameraMode @0
+---@field LockFirstPerson Enum.CameraMode @1
 ---
 
 ---
 ---@class Enum.CameraPanMode:EnumItem
----@alias self Enum.CameraPanMode
----@field Classic self @0
----@field EdgeBump self @1
+---@field Classic Enum.CameraPanMode @0
+---@field EdgeBump Enum.CameraPanMode @1
 ---
 
 ---
 ---@class Enum.CameraType:EnumItem
----@alias self Enum.CameraType
----@field Fixed self @0
----@field Watch self @2
----@field Attach self @1
----@field Track self @3
----@field Follow self @4
----@field Custom self @5
----@field Scriptable self @6
----@field Orbital self @7
+---@field Fixed Enum.CameraType @0
+---@field Watch Enum.CameraType @2
+---@field Attach Enum.CameraType @1
+---@field Track Enum.CameraType @3
+---@field Follow Enum.CameraType @4
+---@field Custom Enum.CameraType @5
+---@field Scriptable Enum.CameraType @6
+---@field Orbital Enum.CameraType @7
 ---
 
 ---
 ---@class Enum.CellBlock:EnumItem
----@alias self Enum.CellBlock
----@field Solid self @0
----@field VerticalWedge self @1
----@field CornerWedge self @2
----@field InverseCornerWedge self @3
----@field HorizontalWedge self @4
+---@field Solid Enum.CellBlock @0
+---@field VerticalWedge Enum.CellBlock @1
+---@field CornerWedge Enum.CellBlock @2
+---@field InverseCornerWedge Enum.CellBlock @3
+---@field HorizontalWedge Enum.CellBlock @4
 ---
 
 ---
 ---@class Enum.CellMaterial:EnumItem
----@alias self Enum.CellMaterial
----@field Empty self @0
----@field Grass self @1
----@field Sand self @2
----@field Brick self @3
----@field Granite self @4
----@field Asphalt self @5
----@field Iron self @6
----@field Aluminum self @7
----@field Gold self @8
----@field WoodPlank self @9
----@field WoodLog self @10
----@field Gravel self @11
----@field CinderBlock self @12
----@field MossyStone self @13
----@field Cement self @14
----@field RedPlastic self @15
----@field BluePlastic self @16
----@field Water self @17
+---@field Empty Enum.CellMaterial @0
+---@field Grass Enum.CellMaterial @1
+---@field Sand Enum.CellMaterial @2
+---@field Brick Enum.CellMaterial @3
+---@field Granite Enum.CellMaterial @4
+---@field Asphalt Enum.CellMaterial @5
+---@field Iron Enum.CellMaterial @6
+---@field Aluminum Enum.CellMaterial @7
+---@field Gold Enum.CellMaterial @8
+---@field WoodPlank Enum.CellMaterial @9
+---@field WoodLog Enum.CellMaterial @10
+---@field Gravel Enum.CellMaterial @11
+---@field CinderBlock Enum.CellMaterial @12
+---@field MossyStone Enum.CellMaterial @13
+---@field Cement Enum.CellMaterial @14
+---@field RedPlastic Enum.CellMaterial @15
+---@field BluePlastic Enum.CellMaterial @16
+---@field Water Enum.CellMaterial @17
 ---
 
 ---
 ---@class Enum.CellOrientation:EnumItem
----@alias self Enum.CellOrientation
----@field NegZ self @0
----@field X self @1
----@field Z self @2
----@field NegX self @3
+---@field NegZ Enum.CellOrientation @0
+---@field X Enum.CellOrientation @1
+---@field Z Enum.CellOrientation @2
+---@field NegX Enum.CellOrientation @3
 ---
 
 ---
 ---@class Enum.CenterDialogType:EnumItem
----@alias self Enum.CenterDialogType
----@field UnsolicitedDialog self @1
----@field PlayerInitiatedDialog self @2
----@field ModalDialog self @3
----@field QuitDialog self @4
+---@field UnsolicitedDialog Enum.CenterDialogType @1
+---@field PlayerInitiatedDialog Enum.CenterDialogType @2
+---@field ModalDialog Enum.CenterDialogType @3
+---@field QuitDialog Enum.CenterDialogType @4
 ---
 
 ---
 ---@class Enum.ChatCallbackType:EnumItem
----@alias self Enum.ChatCallbackType
----@field OnCreatingChatWindow self @1
----@field OnClientSendingMessage self @2
----@field OnClientFormattingMessage self @3
----@field OnServerReceivingMessage self @17
+---@field OnCreatingChatWindow Enum.ChatCallbackType @1
+---@field OnClientSendingMessage Enum.ChatCallbackType @2
+---@field OnClientFormattingMessage Enum.ChatCallbackType @3
+---@field OnServerReceivingMessage Enum.ChatCallbackType @17
 ---
 
 ---
 ---@class Enum.ChatColor:EnumItem
----@alias self Enum.ChatColor
----@field Blue self @0
----@field Green self @1
----@field Red self @2
----@field White self @3
+---@field Blue Enum.ChatColor @0
+---@field Green Enum.ChatColor @1
+---@field Red Enum.ChatColor @2
+---@field White Enum.ChatColor @3
 ---
 
 ---
 ---@class Enum.ChatMode:EnumItem
----@alias self Enum.ChatMode
----@field Menu self @0
----@field TextAndMenu self @1
+---@field Menu Enum.ChatMode @0
+---@field TextAndMenu Enum.ChatMode @1
 ---
 
 ---
 ---@class Enum.ChatPrivacyMode:EnumItem
----@alias self Enum.ChatPrivacyMode
----@field AllUsers self @0
----@field NoOne self @1
----@field Friends self @2
+---@field AllUsers Enum.ChatPrivacyMode @0
+---@field NoOne Enum.ChatPrivacyMode @1
+---@field Friends Enum.ChatPrivacyMode @2
 ---
 
 ---
 ---@class Enum.ChatStyle:EnumItem
----@alias self Enum.ChatStyle
----@field Classic self @0
----@field Bubble self @1
----@field ClassicAndBubble self @2
+---@field Classic Enum.ChatStyle @0
+---@field Bubble Enum.ChatStyle @1
+---@field ClassicAndBubble Enum.ChatStyle @2
 ---
 
 ---
 ---@class Enum.CollisionFidelity:EnumItem
----@alias self Enum.CollisionFidelity
----@field Default self @0
----@field Hull self @1
----@field Box self @2
+---@field Default Enum.CollisionFidelity @0
+---@field Hull Enum.CollisionFidelity @1
+---@field Box Enum.CollisionFidelity @2
 ---
 
 ---
 ---@class Enum.ComputerCameraMovementMode:EnumItem
----@alias self Enum.ComputerCameraMovementMode
----@field Default self @0
----@field Follow self @2
----@field Classic self @1
----@field Orbital self @3
+---@field Default Enum.ComputerCameraMovementMode @0
+---@field Follow Enum.ComputerCameraMovementMode @2
+---@field Classic Enum.ComputerCameraMovementMode @1
+---@field Orbital Enum.ComputerCameraMovementMode @3
 ---
 
 ---
 ---@class Enum.ComputerMovementMode:EnumItem
----@alias self Enum.ComputerMovementMode
----@field Default self @0
----@field KeyboardMouse self @1
----@field ClickToMove self @2
+---@field Default Enum.ComputerMovementMode @0
+---@field KeyboardMouse Enum.ComputerMovementMode @1
+---@field ClickToMove Enum.ComputerMovementMode @2
 ---
 
 ---
 ---@class Enum.ConnectionError:EnumItem
----@alias self Enum.ConnectionError
----@field OK self @0
----@field DisconnectErrors self @256
----@field DisconnectBadhash self @257
----@field DisconnectSecurityKeyMismatch self @258
----@field DisconnectNewSecurityKeyMismatch self @272
----@field DisconnectProtocolMismatch self @259
----@field DisconnectReceivePacketError self @260
----@field DisconnectReceivePacketStreamError self @261
----@field DisconnectSendPacketError self @262
----@field DisconnectIllegalTeleport self @263
----@field DisconnectDuplicatePlayer self @264
----@field DisconnectDuplicateTicket self @265
----@field DisconnectTimeout self @266
----@field DisconnectLuaKick self @267
----@field DisconnectOnRemoteSysStats self @268
----@field DisconnectHashTimeout self @269
----@field DisconnectCloudEditKick self @270
----@field DisconnectPlayerless self @271
----@field DisconnectEvicted self @273
----@field DisconnectDevMaintenance self @274
----@field DisconnectRobloxMaintenance self @275
----@field DisconnectRejoin self @276
----@field DisconnectConnectionLost self @277
----@field DisconnectIdle self @278
----@field DisconnectRaknetErrors self @279
----@field DisconnectWrongVersion self @280
----@field DisconnectBySecurityPolicy self @281
----@field DisconnectBlockedIP self @282
----@field PlacelaunchErrors self @512
----@field PlacelaunchDisabled self @515
----@field PlacelaunchError self @516
----@field PlacelaunchGameEnded self @517
----@field PlacelaunchGameFull self @518
----@field PlacelaunchUserLeft self @522
----@field PlacelaunchRestricted self @523
----@field PlacelaunchUnauthorized self @524
----@field PlacelaunchFlooded self @525
----@field PlacelaunchHashExpired self @526
----@field PlacelaunchHashException self @527
----@field PlacelaunchPartyCannotFit self @528
----@field PlacelaunchHttpError self @529
----@field PlacelaunchCustomMessage self @610
----@field PlacelaunchOtherError self @611
----@field TeleportErrors self @768
----@field TeleportFailure self @769
----@field TeleportGameNotFound self @770
----@field TeleportGameEnded self @771
----@field TeleportGameFull self @772
----@field TeleportUnauthorized self @773
----@field TeleportFlooded self @774
----@field TeleportIsTeleporting self @775
+---@field OK Enum.ConnectionError @0
+---@field DisconnectErrors Enum.ConnectionError @256
+---@field DisconnectBadhash Enum.ConnectionError @257
+---@field DisconnectSecurityKeyMismatch Enum.ConnectionError @258
+---@field DisconnectNewSecurityKeyMismatch Enum.ConnectionError @272
+---@field DisconnectProtocolMismatch Enum.ConnectionError @259
+---@field DisconnectReceivePacketError Enum.ConnectionError @260
+---@field DisconnectReceivePacketStreamError Enum.ConnectionError @261
+---@field DisconnectSendPacketError Enum.ConnectionError @262
+---@field DisconnectIllegalTeleport Enum.ConnectionError @263
+---@field DisconnectDuplicatePlayer Enum.ConnectionError @264
+---@field DisconnectDuplicateTicket Enum.ConnectionError @265
+---@field DisconnectTimeout Enum.ConnectionError @266
+---@field DisconnectLuaKick Enum.ConnectionError @267
+---@field DisconnectOnRemoteSysStats Enum.ConnectionError @268
+---@field DisconnectHashTimeout Enum.ConnectionError @269
+---@field DisconnectCloudEditKick Enum.ConnectionError @270
+---@field DisconnectPlayerless Enum.ConnectionError @271
+---@field DisconnectEvicted Enum.ConnectionError @273
+---@field DisconnectDevMaintenance Enum.ConnectionError @274
+---@field DisconnectRobloxMaintenance Enum.ConnectionError @275
+---@field DisconnectRejoin Enum.ConnectionError @276
+---@field DisconnectConnectionLost Enum.ConnectionError @277
+---@field DisconnectIdle Enum.ConnectionError @278
+---@field DisconnectRaknetErrors Enum.ConnectionError @279
+---@field DisconnectWrongVersion Enum.ConnectionError @280
+---@field DisconnectBySecurityPolicy Enum.ConnectionError @281
+---@field DisconnectBlockedIP Enum.ConnectionError @282
+---@field PlacelaunchErrors Enum.ConnectionError @512
+---@field PlacelaunchDisabled Enum.ConnectionError @515
+---@field PlacelaunchError Enum.ConnectionError @516
+---@field PlacelaunchGameEnded Enum.ConnectionError @517
+---@field PlacelaunchGameFull Enum.ConnectionError @518
+---@field PlacelaunchUserLeft Enum.ConnectionError @522
+---@field PlacelaunchRestricted Enum.ConnectionError @523
+---@field PlacelaunchUnauthorized Enum.ConnectionError @524
+---@field PlacelaunchFlooded Enum.ConnectionError @525
+---@field PlacelaunchHashExpired Enum.ConnectionError @526
+---@field PlacelaunchHashException Enum.ConnectionError @527
+---@field PlacelaunchPartyCannotFit Enum.ConnectionError @528
+---@field PlacelaunchHttpError Enum.ConnectionError @529
+---@field PlacelaunchCustomMessage Enum.ConnectionError @610
+---@field PlacelaunchOtherError Enum.ConnectionError @611
+---@field TeleportErrors Enum.ConnectionError @768
+---@field TeleportFailure Enum.ConnectionError @769
+---@field TeleportGameNotFound Enum.ConnectionError @770
+---@field TeleportGameEnded Enum.ConnectionError @771
+---@field TeleportGameFull Enum.ConnectionError @772
+---@field TeleportUnauthorized Enum.ConnectionError @773
+---@field TeleportFlooded Enum.ConnectionError @774
+---@field TeleportIsTeleporting Enum.ConnectionError @775
 ---
 
 ---
 ---@class Enum.ConnectionState:EnumItem
----@alias self Enum.ConnectionState
----@field Connected self @0
----@field Disconnected self @1
+---@field Connected Enum.ConnectionState @0
+---@field Disconnected Enum.ConnectionState @1
 ---
 
 ---
 ---@class Enum.ContextActionPriority:EnumItem
----@alias self Enum.ContextActionPriority
----@field Low self @1000
----@field Medium self @2000
----@field Default self @2000
----@field High self @3000
+---@field Low Enum.ContextActionPriority @1000
+---@field Medium Enum.ContextActionPriority @2000
+---@field Default Enum.ContextActionPriority @2000
+---@field High Enum.ContextActionPriority @3000
 ---
 
 ---
 ---@class Enum.ContextActionResult:EnumItem
----@alias self Enum.ContextActionResult
----@field Pass self @1
----@field Sink self @0
+---@field Pass Enum.ContextActionResult @1
+---@field Sink Enum.ContextActionResult @0
 ---
 
 ---
 ---@class Enum.ControlMode:EnumItem
----@alias self Enum.ControlMode
----@field MouseLockSwitch self @1
----@field Classic self @0
+---@field MouseLockSwitch Enum.ControlMode @1
+---@field Classic Enum.ControlMode @0
 ---
 
 ---
 ---@class Enum.CoreGuiType:EnumItem
----@alias self Enum.CoreGuiType
----@field PlayerList self @0
----@field Health self @1
----@field Backpack self @2
----@field Chat self @3
----@field All self @4
----@field EmotesMenu self @5
+---@field PlayerList Enum.CoreGuiType @0
+---@field Health Enum.CoreGuiType @1
+---@field Backpack Enum.CoreGuiType @2
+---@field Chat Enum.CoreGuiType @3
+---@field All Enum.CoreGuiType @4
+---@field EmotesMenu Enum.CoreGuiType @5
 ---
 
 ---
 ---@class Enum.CreatorType:EnumItem
----@alias self Enum.CreatorType
----@field User self @0
----@field Group self @1
+---@field User Enum.CreatorType @0
+---@field Group Enum.CreatorType @1
 ---
 
 ---
 ---@class Enum.CurrencyType:EnumItem
----@alias self Enum.CurrencyType
----@field Default self @0
----@field Robux self @1
----@field Tix self @2
+---@field Default Enum.CurrencyType @0
+---@field Robux Enum.CurrencyType @1
+---@field Tix Enum.CurrencyType @2
 ---
 
 ---
 ---@class Enum.CustomCameraMode:EnumItem
----@alias self Enum.CustomCameraMode
----@field Default self @0
----@field Follow self @2
----@field Classic self @1
+---@field Default Enum.CustomCameraMode @0
+---@field Follow Enum.CustomCameraMode @2
+---@field Classic Enum.CustomCameraMode @1
 ---
 
 ---
 ---@class Enum.DataStoreRequestType:EnumItem
----@alias self Enum.DataStoreRequestType
----@field GetAsync self @0
----@field SetIncrementAsync self @1
----@field UpdateAsync self @2
----@field GetSortedAsync self @3
----@field SetIncrementSortedAsync self @4
----@field OnUpdate self @5
+---@field GetAsync Enum.DataStoreRequestType @0
+---@field SetIncrementAsync Enum.DataStoreRequestType @1
+---@field UpdateAsync Enum.DataStoreRequestType @2
+---@field GetSortedAsync Enum.DataStoreRequestType @3
+---@field SetIncrementSortedAsync Enum.DataStoreRequestType @4
+---@field OnUpdate Enum.DataStoreRequestType @5
 ---
 
 ---
 ---@class Enum.DevCameraOcclusionMode:EnumItem
----@alias self Enum.DevCameraOcclusionMode
----@field Zoom self @0
----@field Invisicam self @1
+---@field Zoom Enum.DevCameraOcclusionMode @0
+---@field Invisicam Enum.DevCameraOcclusionMode @1
 ---
 
 ---
 ---@class Enum.DevComputerCameraMovementMode:EnumItem
----@alias self Enum.DevComputerCameraMovementMode
----@field UserChoice self @0
----@field Classic self @1
----@field Follow self @2
----@field Orbital self @3
+---@field UserChoice Enum.DevComputerCameraMovementMode @0
+---@field Classic Enum.DevComputerCameraMovementMode @1
+---@field Follow Enum.DevComputerCameraMovementMode @2
+---@field Orbital Enum.DevComputerCameraMovementMode @3
 ---
 
 ---
 ---@class Enum.DevComputerMovementMode:EnumItem
----@alias self Enum.DevComputerMovementMode
----@field UserChoice self @0
----@field KeyboardMouse self @1
----@field ClickToMove self @2
----@field Scriptable self @3
+---@field UserChoice Enum.DevComputerMovementMode @0
+---@field KeyboardMouse Enum.DevComputerMovementMode @1
+---@field ClickToMove Enum.DevComputerMovementMode @2
+---@field Scriptable Enum.DevComputerMovementMode @3
 ---
 
 ---
 ---@class Enum.DevTouchCameraMovementMode:EnumItem
----@alias self Enum.DevTouchCameraMovementMode
----@field UserChoice self @0
----@field Classic self @1
----@field Follow self @2
----@field Orbital self @3
+---@field UserChoice Enum.DevTouchCameraMovementMode @0
+---@field Classic Enum.DevTouchCameraMovementMode @1
+---@field Follow Enum.DevTouchCameraMovementMode @2
+---@field Orbital Enum.DevTouchCameraMovementMode @3
 ---
 
 ---
 ---@class Enum.DevTouchMovementMode:EnumItem
----@alias self Enum.DevTouchMovementMode
----@field UserChoice self @0
----@field Thumbstick self @1
----@field DPad self @2
----@field Thumbpad self @3
----@field ClickToMove self @4
----@field Scriptable self @5
----@field DynamicThumbstick self @6
+---@field UserChoice Enum.DevTouchMovementMode @0
+---@field Thumbstick Enum.DevTouchMovementMode @1
+---@field DPad Enum.DevTouchMovementMode @2
+---@field Thumbpad Enum.DevTouchMovementMode @3
+---@field ClickToMove Enum.DevTouchMovementMode @4
+---@field Scriptable Enum.DevTouchMovementMode @5
+---@field DynamicThumbstick Enum.DevTouchMovementMode @6
 ---
 
 ---
 ---@class Enum.DeveloperMemoryTag:EnumItem
----@alias self Enum.DeveloperMemoryTag
----@field Internal self @0
----@field HttpCache self @1
----@field Instances self @2
----@field Signals self @3
----@field LuaHeap self @4
----@field Script self @5
----@field PhysicsCollision self @6
----@field PhysicsParts self @7
----@field GraphicsSolidModels self @8
----@field GraphicsMeshParts self @9
----@field GraphicsParticles self @10
----@field GraphicsParts self @11
----@field GraphicsSpatialHash self @12
----@field GraphicsTerrain self @13
----@field GraphicsTexture self @14
----@field GraphicsTextureCharacter self @15
----@field Sounds self @16
----@field StreamingSounds self @17
----@field TerrainVoxels self @18
----@field Gui self @20
----@field Animation self @21
----@field Navigation self @22
+---@field Internal Enum.DeveloperMemoryTag @0
+---@field HttpCache Enum.DeveloperMemoryTag @1
+---@field Instances Enum.DeveloperMemoryTag @2
+---@field Signals Enum.DeveloperMemoryTag @3
+---@field LuaHeap Enum.DeveloperMemoryTag @4
+---@field Script Enum.DeveloperMemoryTag @5
+---@field PhysicsCollision Enum.DeveloperMemoryTag @6
+---@field PhysicsParts Enum.DeveloperMemoryTag @7
+---@field GraphicsSolidModels Enum.DeveloperMemoryTag @8
+---@field GraphicsMeshParts Enum.DeveloperMemoryTag @9
+---@field GraphicsParticles Enum.DeveloperMemoryTag @10
+---@field GraphicsParts Enum.DeveloperMemoryTag @11
+---@field GraphicsSpatialHash Enum.DeveloperMemoryTag @12
+---@field GraphicsTerrain Enum.DeveloperMemoryTag @13
+---@field GraphicsTexture Enum.DeveloperMemoryTag @14
+---@field GraphicsTextureCharacter Enum.DeveloperMemoryTag @15
+---@field Sounds Enum.DeveloperMemoryTag @16
+---@field StreamingSounds Enum.DeveloperMemoryTag @17
+---@field TerrainVoxels Enum.DeveloperMemoryTag @18
+---@field Gui Enum.DeveloperMemoryTag @20
+---@field Animation Enum.DeveloperMemoryTag @21
+---@field Navigation Enum.DeveloperMemoryTag @22
 ---
 
 ---
 ---@class Enum.DeviceType:EnumItem
----@alias self Enum.DeviceType
----@field Unknown self @0
----@field Desktop self @1
----@field Tablet self @2
----@field Phone self @3
+---@field Unknown Enum.DeviceType @0
+---@field Desktop Enum.DeviceType @1
+---@field Tablet Enum.DeviceType @2
+---@field Phone Enum.DeviceType @3
 ---
 
 ---
 ---@class Enum.DialogBehaviorType:EnumItem
----@alias self Enum.DialogBehaviorType
----@field SinglePlayer self @0
----@field MultiplePlayers self @1
+---@field SinglePlayer Enum.DialogBehaviorType @0
+---@field MultiplePlayers Enum.DialogBehaviorType @1
 ---
 
 ---
 ---@class Enum.DialogPurpose:EnumItem
----@alias self Enum.DialogPurpose
----@field Quest self @0
----@field Help self @1
----@field Shop self @2
+---@field Quest Enum.DialogPurpose @0
+---@field Help Enum.DialogPurpose @1
+---@field Shop Enum.DialogPurpose @2
 ---
 
 ---
 ---@class Enum.DialogTone:EnumItem
----@alias self Enum.DialogTone
----@field Neutral self @0
----@field Friendly self @1
----@field Enemy self @2
+---@field Neutral Enum.DialogTone @0
+---@field Friendly Enum.DialogTone @1
+---@field Enemy Enum.DialogTone @2
 ---
 
 ---
 ---@class Enum.DominantAxis:EnumItem
----@alias self Enum.DominantAxis
----@field Width self @0
----@field Height self @1
+---@field Width Enum.DominantAxis @0
+---@field Height Enum.DominantAxis @1
 ---
 
 ---
 ---@class Enum.DraftStatusCode:EnumItem
----@alias self Enum.DraftStatusCode
----@field OK self @0
----@field DraftOutdated self @1
----@field ScriptRemoved self @2
+---@field OK Enum.DraftStatusCode @0
+---@field DraftOutdated Enum.DraftStatusCode @1
+---@field ScriptRemoved Enum.DraftStatusCode @2
 ---
 
 ---
 ---@class Enum.EasingDirection:EnumItem
----@alias self Enum.EasingDirection
----@field In self @0
----@field Out self @1
----@field InOut self @2
+---@field In Enum.EasingDirection @0
+---@field Out Enum.EasingDirection @1
+---@field InOut Enum.EasingDirection @2
 ---
 
 ---
 ---@class Enum.EasingStyle:EnumItem
----@alias self Enum.EasingStyle
----@field Linear self @0
----@field Sine self @1
----@field Back self @2
----@field Quad self @3
----@field Quart self @4
----@field Quint self @5
----@field Bounce self @6
----@field Elastic self @7
----@field Exponential self @8
----@field Circular self @9
----@field Cubic self @10
+---@field Linear Enum.EasingStyle @0
+---@field Sine Enum.EasingStyle @1
+---@field Back Enum.EasingStyle @2
+---@field Quad Enum.EasingStyle @3
+---@field Quart Enum.EasingStyle @4
+---@field Quint Enum.EasingStyle @5
+---@field Bounce Enum.EasingStyle @6
+---@field Elastic Enum.EasingStyle @7
+---@field Exponential Enum.EasingStyle @8
+---@field Circular Enum.EasingStyle @9
+---@field Cubic Enum.EasingStyle @10
 ---
 
 ---
 ---@class Enum.ElasticBehavior:EnumItem
----@alias self Enum.ElasticBehavior
----@field WhenScrollable self @0
----@field Always self @1
----@field Never self @2
+---@field WhenScrollable Enum.ElasticBehavior @0
+---@field Always Enum.ElasticBehavior @1
+---@field Never Enum.ElasticBehavior @2
 ---
 
 ---
 ---@class Enum.EnviromentalPhysicsThrottle:EnumItem
----@alias self Enum.EnviromentalPhysicsThrottle
----@field DefaultAuto self @0
----@field Disabled self @1
----@field Always self @2
----@field Skip2 self @3
----@field Skip4 self @4
----@field Skip8 self @5
----@field Skip16 self @6
+---@field DefaultAuto Enum.EnviromentalPhysicsThrottle @0
+---@field Disabled Enum.EnviromentalPhysicsThrottle @1
+---@field Always Enum.EnviromentalPhysicsThrottle @2
+---@field Skip2 Enum.EnviromentalPhysicsThrottle @3
+---@field Skip4 Enum.EnviromentalPhysicsThrottle @4
+---@field Skip8 Enum.EnviromentalPhysicsThrottle @5
+---@field Skip16 Enum.EnviromentalPhysicsThrottle @6
 ---
 
 ---
 ---@class Enum.ErrorReporting:EnumItem
----@alias self Enum.ErrorReporting
----@field DontReport self @0
----@field Prompt self @1
----@field Report self @2
+---@field DontReport Enum.ErrorReporting @0
+---@field Prompt Enum.ErrorReporting @1
+---@field Report Enum.ErrorReporting @2
 ---
 
 ---
 ---@class Enum.ExplosionType:EnumItem
----@alias self Enum.ExplosionType
----@field NoCraters self @0
----@field Craters self @1
----@field CratersAndDebris self @2
+---@field NoCraters Enum.ExplosionType @0
+---@field Craters Enum.ExplosionType @1
+---@field CratersAndDebris Enum.ExplosionType @2
 ---
 
 ---
 ---@class Enum.FillDirection:EnumItem
----@alias self Enum.FillDirection
----@field Horizontal self @0
----@field Vertical self @1
+---@field Horizontal Enum.FillDirection @0
+---@field Vertical Enum.FillDirection @1
 ---
 
 ---
 ---@class Enum.FilterResult:EnumItem
----@alias self Enum.FilterResult
----@field Rejected self @1
----@field Accepted self @0
+---@field Rejected Enum.FilterResult @1
+---@field Accepted Enum.FilterResult @0
 ---
 
 ---
 ---@class Enum.Font:EnumItem
----@alias self Enum.Font
----@field Legacy self @0
----@field Arial self @1
----@field ArialBold self @2
----@field SourceSans self @3
----@field SourceSansBold self @4
----@field SourceSansSemibold self @16
----@field SourceSansLight self @5
----@field SourceSansItalic self @6
----@field Bodoni self @7
----@field Garamond self @8
----@field Cartoon self @9
----@field Code self @10
----@field Highway self @11
----@field SciFi self @12
----@field Arcade self @13
----@field Fantasy self @14
----@field Antique self @15
----@field Gotham self @17
----@field GothamSemibold self @18
----@field GothamBold self @19
----@field GothamBlack self @20
+---@field Legacy Enum.Font @0
+---@field Arial Enum.Font @1
+---@field ArialBold Enum.Font @2
+---@field SourceSans Enum.Font @3
+---@field SourceSansBold Enum.Font @4
+---@field SourceSansSemibold Enum.Font @16
+---@field SourceSansLight Enum.Font @5
+---@field SourceSansItalic Enum.Font @6
+---@field Bodoni Enum.Font @7
+---@field Garamond Enum.Font @8
+---@field Cartoon Enum.Font @9
+---@field Code Enum.Font @10
+---@field Highway Enum.Font @11
+---@field SciFi Enum.Font @12
+---@field Arcade Enum.Font @13
+---@field Fantasy Enum.Font @14
+---@field Antique Enum.Font @15
+---@field Gotham Enum.Font @17
+---@field GothamSemibold Enum.Font @18
+---@field GothamBold Enum.Font @19
+---@field GothamBlack Enum.Font @20
 ---
 
 ---
 ---@class Enum.FontSize:EnumItem
----@alias self Enum.FontSize
----@field Size8 self @0
----@field Size9 self @1
----@field Size10 self @2
----@field Size11 self @3
----@field Size12 self @4
----@field Size14 self @5
----@field Size18 self @6
----@field Size24 self @7
----@field Size36 self @8
----@field Size48 self @9
----@field Size28 self @10
----@field Size32 self @11
----@field Size42 self @12
----@field Size60 self @13
----@field Size96 self @14
+---@field Size8 Enum.FontSize @0
+---@field Size9 Enum.FontSize @1
+---@field Size10 Enum.FontSize @2
+---@field Size11 Enum.FontSize @3
+---@field Size12 Enum.FontSize @4
+---@field Size14 Enum.FontSize @5
+---@field Size18 Enum.FontSize @6
+---@field Size24 Enum.FontSize @7
+---@field Size36 Enum.FontSize @8
+---@field Size48 Enum.FontSize @9
+---@field Size28 Enum.FontSize @10
+---@field Size32 Enum.FontSize @11
+---@field Size42 Enum.FontSize @12
+---@field Size60 Enum.FontSize @13
+---@field Size96 Enum.FontSize @14
 ---
 
 ---
 ---@class Enum.FormFactor:EnumItem
----@alias self Enum.FormFactor
----@field Symmetric self @0
----@field Brick self @1
----@field Plate self @2
----@field Custom self @3
+---@field Symmetric Enum.FormFactor @0
+---@field Brick Enum.FormFactor @1
+---@field Plate Enum.FormFactor @2
+---@field Custom Enum.FormFactor @3
 ---
 
 ---
 ---@class Enum.FrameStyle:EnumItem
----@alias self Enum.FrameStyle
----@field Custom self @0
----@field ChatBlue self @1
----@field RobloxSquare self @2
----@field RobloxRound self @3
----@field ChatGreen self @4
----@field ChatRed self @5
----@field DropShadow self @6
+---@field Custom Enum.FrameStyle @0
+---@field ChatBlue Enum.FrameStyle @1
+---@field RobloxSquare Enum.FrameStyle @2
+---@field RobloxRound Enum.FrameStyle @3
+---@field ChatGreen Enum.FrameStyle @4
+---@field ChatRed Enum.FrameStyle @5
+---@field DropShadow Enum.FrameStyle @6
 ---
 
 ---
 ---@class Enum.FramerateManagerMode:EnumItem
----@alias self Enum.FramerateManagerMode
----@field Automatic self @0
----@field On self @1
----@field Off self @2
+---@field Automatic Enum.FramerateManagerMode @0
+---@field On Enum.FramerateManagerMode @1
+---@field Off Enum.FramerateManagerMode @2
 ---
 
 ---
 ---@class Enum.FriendRequestEvent:EnumItem
----@alias self Enum.FriendRequestEvent
----@field Issue self @0
----@field Revoke self @1
----@field Accept self @2
----@field Deny self @3
+---@field Issue Enum.FriendRequestEvent @0
+---@field Revoke Enum.FriendRequestEvent @1
+---@field Accept Enum.FriendRequestEvent @2
+---@field Deny Enum.FriendRequestEvent @3
 ---
 
 ---
 ---@class Enum.FriendStatus:EnumItem
----@alias self Enum.FriendStatus
----@field Unknown self @0
----@field NotFriend self @1
----@field Friend self @2
----@field FriendRequestSent self @3
----@field FriendRequestReceived self @4
+---@field Unknown Enum.FriendStatus @0
+---@field NotFriend Enum.FriendStatus @1
+---@field Friend Enum.FriendStatus @2
+---@field FriendRequestSent Enum.FriendStatus @3
+---@field FriendRequestReceived Enum.FriendStatus @4
 ---
 
 ---
 ---@class Enum.FunctionalTestResult:EnumItem
----@alias self Enum.FunctionalTestResult
----@field Passed self @0
----@field Warning self @1
----@field Error self @2
+---@field Passed Enum.FunctionalTestResult @0
+---@field Warning Enum.FunctionalTestResult @1
+---@field Error Enum.FunctionalTestResult @2
 ---
 
 ---
 ---@class Enum.GameAvatarType:EnumItem
----@alias self Enum.GameAvatarType
----@field R6 self @0
----@field R15 self @1
----@field PlayerChoice self @2
+---@field R6 Enum.GameAvatarType @0
+---@field R15 Enum.GameAvatarType @1
+---@field PlayerChoice Enum.GameAvatarType @2
 ---
 
 ---
 ---@class Enum.GearGenreSetting:EnumItem
----@alias self Enum.GearGenreSetting
----@field AllGenres self @0
----@field MatchingGenreOnly self @1
+---@field AllGenres Enum.GearGenreSetting @0
+---@field MatchingGenreOnly Enum.GearGenreSetting @1
 ---
 
 ---
 ---@class Enum.GearType:EnumItem
----@alias self Enum.GearType
----@field MeleeWeapons self @0
----@field RangedWeapons self @1
----@field Explosives self @2
----@field PowerUps self @3
----@field NavigationEnhancers self @4
----@field MusicalInstruments self @5
----@field SocialItems self @6
----@field BuildingTools self @7
----@field Transport self @8
+---@field MeleeWeapons Enum.GearType @0
+---@field RangedWeapons Enum.GearType @1
+---@field Explosives Enum.GearType @2
+---@field PowerUps Enum.GearType @3
+---@field NavigationEnhancers Enum.GearType @4
+---@field MusicalInstruments Enum.GearType @5
+---@field SocialItems Enum.GearType @6
+---@field BuildingTools Enum.GearType @7
+---@field Transport Enum.GearType @8
 ---
 
 ---
 ---@class Enum.Genre:EnumItem
----@alias self Enum.Genre
----@field All self @0
----@field TownAndCity self @1
----@field Fantasy self @2
----@field SciFi self @3
----@field Ninja self @4
----@field Scary self @5
----@field Pirate self @6
----@field Adventure self @7
----@field Sports self @8
----@field Funny self @9
----@field WildWest self @10
----@field War self @11
----@field SkatePark self @12
----@field Tutorial self @13
+---@field All Enum.Genre @0
+---@field TownAndCity Enum.Genre @1
+---@field Fantasy Enum.Genre @2
+---@field SciFi Enum.Genre @3
+---@field Ninja Enum.Genre @4
+---@field Scary Enum.Genre @5
+---@field Pirate Enum.Genre @6
+---@field Adventure Enum.Genre @7
+---@field Sports Enum.Genre @8
+---@field Funny Enum.Genre @9
+---@field WildWest Enum.Genre @10
+---@field War Enum.Genre @11
+---@field SkatePark Enum.Genre @12
+---@field Tutorial Enum.Genre @13
 ---
 
 ---
 ---@class Enum.GraphicsMode:EnumItem
----@alias self Enum.GraphicsMode
----@field Automatic self @1
----@field Direct3D9 self @3
----@field Direct3D11 self @2
----@field OpenGL self @4
----@field Metal self @5
----@field Vulkan self @6
----@field NoGraphics self @7
+---@field Automatic Enum.GraphicsMode @1
+---@field Direct3D9 Enum.GraphicsMode @3
+---@field Direct3D11 Enum.GraphicsMode @2
+---@field OpenGL Enum.GraphicsMode @4
+---@field Metal Enum.GraphicsMode @5
+---@field Vulkan Enum.GraphicsMode @6
+---@field NoGraphics Enum.GraphicsMode @7
 ---
 
 ---
 ---@class Enum.HandlesStyle:EnumItem
----@alias self Enum.HandlesStyle
----@field Resize self @0
----@field Movement self @1
+---@field Resize Enum.HandlesStyle @0
+---@field Movement Enum.HandlesStyle @1
 ---
 
 ---
 ---@class Enum.HorizontalAlignment:EnumItem
----@alias self Enum.HorizontalAlignment
----@field Center self @0
----@field Left self @1
----@field Right self @2
+---@field Center Enum.HorizontalAlignment @0
+---@field Left Enum.HorizontalAlignment @1
+---@field Right Enum.HorizontalAlignment @2
 ---
 
 ---
 ---@class Enum.HoverAnimateSpeed:EnumItem
----@alias self Enum.HoverAnimateSpeed
----@field VerySlow self @0
----@field Slow self @1
----@field Medium self @2
----@field Fast self @3
----@field VeryFast self @4
+---@field VerySlow Enum.HoverAnimateSpeed @0
+---@field Slow Enum.HoverAnimateSpeed @1
+---@field Medium Enum.HoverAnimateSpeed @2
+---@field Fast Enum.HoverAnimateSpeed @3
+---@field VeryFast Enum.HoverAnimateSpeed @4
 ---
 
 ---
 ---@class Enum.HttpCachePolicy:EnumItem
----@alias self Enum.HttpCachePolicy
----@field None self @0
----@field Full self @1
----@field DataOnly self @2
----@field Default self @3
----@field InternalRedirectRefresh self @4
+---@field None Enum.HttpCachePolicy @0
+---@field Full Enum.HttpCachePolicy @1
+---@field DataOnly Enum.HttpCachePolicy @2
+---@field Default Enum.HttpCachePolicy @3
+---@field InternalRedirectRefresh Enum.HttpCachePolicy @4
 ---
 
 ---
 ---@class Enum.HttpContentType:EnumItem
----@alias self Enum.HttpContentType
----@field ApplicationJson self @0
----@field ApplicationXml self @1
----@field ApplicationUrlEncoded self @2
----@field TextPlain self @3
----@field TextXml self @4
+---@field ApplicationJson Enum.HttpContentType @0
+---@field ApplicationXml Enum.HttpContentType @1
+---@field ApplicationUrlEncoded Enum.HttpContentType @2
+---@field TextPlain Enum.HttpContentType @3
+---@field TextXml Enum.HttpContentType @4
 ---
 
 ---
 ---@class Enum.HttpError:EnumItem
----@alias self Enum.HttpError
----@field OK self @0
----@field InvalidUrl self @1
----@field DnsResolve self @2
----@field ConnectFail self @3
----@field OutOfMemory self @4
----@field TimedOut self @5
----@field TooManyRedirects self @6
----@field InvalidRedirect self @7
----@field NetFail self @8
----@field Aborted self @9
----@field SslConnectFail self @10
----@field Unknown self @11
+---@field OK Enum.HttpError @0
+---@field InvalidUrl Enum.HttpError @1
+---@field DnsResolve Enum.HttpError @2
+---@field ConnectFail Enum.HttpError @3
+---@field OutOfMemory Enum.HttpError @4
+---@field TimedOut Enum.HttpError @5
+---@field TooManyRedirects Enum.HttpError @6
+---@field InvalidRedirect Enum.HttpError @7
+---@field NetFail Enum.HttpError @8
+---@field Aborted Enum.HttpError @9
+---@field SslConnectFail Enum.HttpError @10
+---@field Unknown Enum.HttpError @11
 ---
 
 ---
 ---@class Enum.HttpRequestType:EnumItem
----@alias self Enum.HttpRequestType
----@field Default self @0
----@field MarketplaceService self @2
----@field Players self @7
----@field Chat self @15
----@field Avatar self @16
----@field Analytics self @22
----@field Localization self @24
+---@field Default Enum.HttpRequestType @0
+---@field MarketplaceService Enum.HttpRequestType @2
+---@field Players Enum.HttpRequestType @7
+---@field Chat Enum.HttpRequestType @15
+---@field Avatar Enum.HttpRequestType @16
+---@field Analytics Enum.HttpRequestType @22
+---@field Localization Enum.HttpRequestType @24
 ---
 
 ---
 ---@class Enum.HumanoidCollisionType:EnumItem
----@alias self Enum.HumanoidCollisionType
----@field OuterBox self @0
----@field InnerBox self @1
+---@field OuterBox Enum.HumanoidCollisionType @0
+---@field InnerBox Enum.HumanoidCollisionType @1
 ---
 
 ---
 ---@class Enum.HumanoidDisplayDistanceType:EnumItem
----@alias self Enum.HumanoidDisplayDistanceType
----@field Viewer self @0
----@field Subject self @1
----@field None self @2
+---@field Viewer Enum.HumanoidDisplayDistanceType @0
+---@field Subject Enum.HumanoidDisplayDistanceType @1
+---@field None Enum.HumanoidDisplayDistanceType @2
 ---
 
 ---
 ---@class Enum.HumanoidHealthDisplayType:EnumItem
----@alias self Enum.HumanoidHealthDisplayType
----@field DisplayWhenDamaged self @0
----@field AlwaysOn self @1
----@field AlwaysOff self @2
+---@field DisplayWhenDamaged Enum.HumanoidHealthDisplayType @0
+---@field AlwaysOn Enum.HumanoidHealthDisplayType @1
+---@field AlwaysOff Enum.HumanoidHealthDisplayType @2
 ---
 
 ---
 ---@class Enum.HumanoidRigType:EnumItem
----@alias self Enum.HumanoidRigType
----@field R6 self @0
----@field R15 self @1
+---@field R6 Enum.HumanoidRigType @0
+---@field R15 Enum.HumanoidRigType @1
 ---
 
 ---
 ---@class Enum.HumanoidStateType:EnumItem
----@alias self Enum.HumanoidStateType
----@field FallingDown self @0
----@field Running self @8
----@field RunningNoPhysics self @10
----@field Climbing self @12
----@field StrafingNoPhysics self @11
----@field Ragdoll self @1
----@field GettingUp self @2
----@field Jumping self @3
----@field Landed self @7
----@field Flying self @6
----@field Freefall self @5
----@field Seated self @13
----@field PlatformStanding self @14
----@field Dead self @15
----@field Swimming self @4
----@field Physics self @16
----@field None self @18
+---@field FallingDown Enum.HumanoidStateType @0
+---@field Running Enum.HumanoidStateType @8
+---@field RunningNoPhysics Enum.HumanoidStateType @10
+---@field Climbing Enum.HumanoidStateType @12
+---@field StrafingNoPhysics Enum.HumanoidStateType @11
+---@field Ragdoll Enum.HumanoidStateType @1
+---@field GettingUp Enum.HumanoidStateType @2
+---@field Jumping Enum.HumanoidStateType @3
+---@field Landed Enum.HumanoidStateType @7
+---@field Flying Enum.HumanoidStateType @6
+---@field Freefall Enum.HumanoidStateType @5
+---@field Seated Enum.HumanoidStateType @13
+---@field PlatformStanding Enum.HumanoidStateType @14
+---@field Dead Enum.HumanoidStateType @15
+---@field Swimming Enum.HumanoidStateType @4
+---@field Physics Enum.HumanoidStateType @16
+---@field None Enum.HumanoidStateType @18
 ---
 
 ---
 ---@class Enum.InOut:EnumItem
----@alias self Enum.InOut
----@field Edge self @0
----@field Inset self @1
----@field Center self @2
+---@field Edge Enum.InOut @0
+---@field Inset Enum.InOut @1
+---@field Center Enum.InOut @2
 ---
 
 ---
 ---@class Enum.InfoType:EnumItem
----@alias self Enum.InfoType
----@field Asset self @0
----@field Product self @1
----@field GamePass self @2
----@field Subscription self @3
----@field Bundle self @4
+---@field Asset Enum.InfoType @0
+---@field Product Enum.InfoType @1
+---@field GamePass Enum.InfoType @2
+---@field Subscription Enum.InfoType @3
+---@field Bundle Enum.InfoType @4
 ---
 
 ---
 ---@class Enum.InitialDockState:EnumItem
----@alias self Enum.InitialDockState
----@field Top self @0
----@field Bottom self @1
----@field Left self @2
----@field Right self @3
----@field Float self @4
+---@field Top Enum.InitialDockState @0
+---@field Bottom Enum.InitialDockState @1
+---@field Left Enum.InitialDockState @2
+---@field Right Enum.InitialDockState @3
+---@field Float Enum.InitialDockState @4
 ---
 
 ---
 ---@class Enum.InlineAlignment:EnumItem
----@alias self Enum.InlineAlignment
----@field Bottom self @0
----@field Center self @1
----@field Top self @2
+---@field Bottom Enum.InlineAlignment @0
+---@field Center Enum.InlineAlignment @1
+---@field Top Enum.InlineAlignment @2
 ---
 
 ---
 ---@class Enum.InputType:EnumItem
----@alias self Enum.InputType
----@field NoInput self @0
----@field Constant self @12
----@field Sin self @13
+---@field NoInput Enum.InputType @0
+---@field Constant Enum.InputType @12
+---@field Sin Enum.InputType @13
 ---
 
 ---
 ---@class Enum.JointCreationMode:EnumItem
----@alias self Enum.JointCreationMode
----@field All self @0
----@field Surface self @1
----@field None self @2
+---@field All Enum.JointCreationMode @0
+---@field Surface Enum.JointCreationMode @1
+---@field None Enum.JointCreationMode @2
 ---
 
 ---
 ---@class Enum.JointType:EnumItem
----@alias self Enum.JointType
----@field None self @28
----@field Rotate self @7
----@field RotateP self @8
----@field RotateV self @9
----@field Glue self @10
----@field Weld self @1
----@field Snap self @3
+---@field None Enum.JointType @28
+---@field Rotate Enum.JointType @7
+---@field RotateP Enum.JointType @8
+---@field RotateV Enum.JointType @9
+---@field Glue Enum.JointType @10
+---@field Weld Enum.JointType @1
+---@field Snap Enum.JointType @3
 ---
 
 ---
 ---@class Enum.KeyCode:EnumItem
----@alias self Enum.KeyCode
----@field Unknown self @0
----@field Backspace self @8
----@field Tab self @9
----@field Clear self @12
----@field Return self @13
----@field Pause self @19
----@field Escape self @27
----@field Space self @32
----@field QuotedDouble self @34
----@field Hash self @35
----@field Dollar self @36
----@field Percent self @37
----@field Ampersand self @38
----@field Quote self @39
----@field LeftParenthesis self @40
----@field RightParenthesis self @41
----@field Asterisk self @42
----@field Plus self @43
----@field Comma self @44
----@field Minus self @45
----@field Period self @46
----@field Slash self @47
----@field Zero self @48
----@field One self @49
----@field Two self @50
----@field Three self @51
----@field Four self @52
----@field Five self @53
----@field Six self @54
----@field Seven self @55
----@field Eight self @56
----@field Nine self @57
----@field Colon self @58
----@field Semicolon self @59
----@field LessThan self @60
----@field Equals self @61
----@field GreaterThan self @62
----@field Question self @63
----@field At self @64
----@field LeftBracket self @91
----@field BackSlash self @92
----@field RightBracket self @93
----@field Caret self @94
----@field Underscore self @95
----@field Backquote self @96
----@field A self @97
----@field B self @98
----@field C self @99
----@field D self @100
----@field E self @101
----@field F self @102
----@field G self @103
----@field H self @104
----@field I self @105
----@field J self @106
----@field K self @107
----@field L self @108
----@field M self @109
----@field N self @110
----@field O self @111
----@field P self @112
----@field Q self @113
----@field R self @114
----@field S self @115
----@field T self @116
----@field U self @117
----@field V self @118
----@field W self @119
----@field X self @120
----@field Y self @121
----@field Z self @122
----@field LeftCurly self @123
----@field Pipe self @124
----@field RightCurly self @125
----@field Tilde self @126
----@field Delete self @127
----@field KeypadZero self @256
----@field KeypadOne self @257
----@field KeypadTwo self @258
----@field KeypadThree self @259
----@field KeypadFour self @260
----@field KeypadFive self @261
----@field KeypadSix self @262
----@field KeypadSeven self @263
----@field KeypadEight self @264
----@field KeypadNine self @265
----@field KeypadPeriod self @266
----@field KeypadDivide self @267
----@field KeypadMultiply self @268
----@field KeypadMinus self @269
----@field KeypadPlus self @270
----@field KeypadEnter self @271
----@field KeypadEquals self @272
----@field Up self @273
----@field Down self @274
----@field Right self @275
----@field Left self @276
----@field Insert self @277
----@field Home self @278
----@field End self @279
----@field PageUp self @280
----@field PageDown self @281
----@field LeftShift self @304
----@field RightShift self @303
----@field LeftMeta self @310
----@field RightMeta self @309
----@field LeftAlt self @308
----@field RightAlt self @307
----@field LeftControl self @306
----@field RightControl self @305
----@field CapsLock self @301
----@field NumLock self @300
----@field ScrollLock self @302
----@field LeftSuper self @311
----@field RightSuper self @312
----@field Mode self @313
----@field Compose self @314
----@field Help self @315
----@field Print self @316
----@field SysReq self @317
----@field Break self @318
----@field Menu self @319
----@field Power self @320
----@field Euro self @321
----@field Undo self @322
----@field F1 self @282
----@field F2 self @283
----@field F3 self @284
----@field F4 self @285
----@field F5 self @286
----@field F6 self @287
----@field F7 self @288
----@field F8 self @289
----@field F9 self @290
----@field F10 self @291
----@field F11 self @292
----@field F12 self @293
----@field F13 self @294
----@field F14 self @295
----@field F15 self @296
----@field World0 self @160
----@field World1 self @161
----@field World2 self @162
----@field World3 self @163
----@field World4 self @164
----@field World5 self @165
----@field World6 self @166
----@field World7 self @167
----@field World8 self @168
----@field World9 self @169
----@field World10 self @170
----@field World11 self @171
----@field World12 self @172
----@field World13 self @173
----@field World14 self @174
----@field World15 self @175
----@field World16 self @176
----@field World17 self @177
----@field World18 self @178
----@field World19 self @179
----@field World20 self @180
----@field World21 self @181
----@field World22 self @182
----@field World23 self @183
----@field World24 self @184
----@field World25 self @185
----@field World26 self @186
----@field World27 self @187
----@field World28 self @188
----@field World29 self @189
----@field World30 self @190
----@field World31 self @191
----@field World32 self @192
----@field World33 self @193
----@field World34 self @194
----@field World35 self @195
----@field World36 self @196
----@field World37 self @197
----@field World38 self @198
----@field World39 self @199
----@field World40 self @200
----@field World41 self @201
----@field World42 self @202
----@field World43 self @203
----@field World44 self @204
----@field World45 self @205
----@field World46 self @206
----@field World47 self @207
----@field World48 self @208
----@field World49 self @209
----@field World50 self @210
----@field World51 self @211
----@field World52 self @212
----@field World53 self @213
----@field World54 self @214
----@field World55 self @215
----@field World56 self @216
----@field World57 self @217
----@field World58 self @218
----@field World59 self @219
----@field World60 self @220
----@field World61 self @221
----@field World62 self @222
----@field World63 self @223
----@field World64 self @224
----@field World65 self @225
----@field World66 self @226
----@field World67 self @227
----@field World68 self @228
----@field World69 self @229
----@field World70 self @230
----@field World71 self @231
----@field World72 self @232
----@field World73 self @233
----@field World74 self @234
----@field World75 self @235
----@field World76 self @236
----@field World77 self @237
----@field World78 self @238
----@field World79 self @239
----@field World80 self @240
----@field World81 self @241
----@field World82 self @242
----@field World83 self @243
----@field World84 self @244
----@field World85 self @245
----@field World86 self @246
----@field World87 self @247
----@field World88 self @248
----@field World89 self @249
----@field World90 self @250
----@field World91 self @251
----@field World92 self @252
----@field World93 self @253
----@field World94 self @254
----@field World95 self @255
----@field ButtonX self @1000
----@field ButtonY self @1001
----@field ButtonA self @1002
----@field ButtonB self @1003
----@field ButtonR1 self @1004
----@field ButtonL1 self @1005
----@field ButtonR2 self @1006
----@field ButtonL2 self @1007
----@field ButtonR3 self @1008
----@field ButtonL3 self @1009
----@field ButtonStart self @1010
----@field ButtonSelect self @1011
----@field DPadLeft self @1012
----@field DPadRight self @1013
----@field DPadUp self @1014
----@field DPadDown self @1015
----@field Thumbstick1 self @1016
----@field Thumbstick2 self @1017
+---@field Unknown Enum.KeyCode @0
+---@field Backspace Enum.KeyCode @8
+---@field Tab Enum.KeyCode @9
+---@field Clear Enum.KeyCode @12
+---@field Return Enum.KeyCode @13
+---@field Pause Enum.KeyCode @19
+---@field Escape Enum.KeyCode @27
+---@field Space Enum.KeyCode @32
+---@field QuotedDouble Enum.KeyCode @34
+---@field Hash Enum.KeyCode @35
+---@field Dollar Enum.KeyCode @36
+---@field Percent Enum.KeyCode @37
+---@field Ampersand Enum.KeyCode @38
+---@field Quote Enum.KeyCode @39
+---@field LeftParenthesis Enum.KeyCode @40
+---@field RightParenthesis Enum.KeyCode @41
+---@field Asterisk Enum.KeyCode @42
+---@field Plus Enum.KeyCode @43
+---@field Comma Enum.KeyCode @44
+---@field Minus Enum.KeyCode @45
+---@field Period Enum.KeyCode @46
+---@field Slash Enum.KeyCode @47
+---@field Zero Enum.KeyCode @48
+---@field One Enum.KeyCode @49
+---@field Two Enum.KeyCode @50
+---@field Three Enum.KeyCode @51
+---@field Four Enum.KeyCode @52
+---@field Five Enum.KeyCode @53
+---@field Six Enum.KeyCode @54
+---@field Seven Enum.KeyCode @55
+---@field Eight Enum.KeyCode @56
+---@field Nine Enum.KeyCode @57
+---@field Colon Enum.KeyCode @58
+---@field Semicolon Enum.KeyCode @59
+---@field LessThan Enum.KeyCode @60
+---@field Equals Enum.KeyCode @61
+---@field GreaterThan Enum.KeyCode @62
+---@field Question Enum.KeyCode @63
+---@field At Enum.KeyCode @64
+---@field LeftBracket Enum.KeyCode @91
+---@field BackSlash Enum.KeyCode @92
+---@field RightBracket Enum.KeyCode @93
+---@field Caret Enum.KeyCode @94
+---@field Underscore Enum.KeyCode @95
+---@field Backquote Enum.KeyCode @96
+---@field A Enum.KeyCode @97
+---@field B Enum.KeyCode @98
+---@field C Enum.KeyCode @99
+---@field D Enum.KeyCode @100
+---@field E Enum.KeyCode @101
+---@field F Enum.KeyCode @102
+---@field G Enum.KeyCode @103
+---@field H Enum.KeyCode @104
+---@field I Enum.KeyCode @105
+---@field J Enum.KeyCode @106
+---@field K Enum.KeyCode @107
+---@field L Enum.KeyCode @108
+---@field M Enum.KeyCode @109
+---@field N Enum.KeyCode @110
+---@field O Enum.KeyCode @111
+---@field P Enum.KeyCode @112
+---@field Q Enum.KeyCode @113
+---@field R Enum.KeyCode @114
+---@field S Enum.KeyCode @115
+---@field T Enum.KeyCode @116
+---@field U Enum.KeyCode @117
+---@field V Enum.KeyCode @118
+---@field W Enum.KeyCode @119
+---@field X Enum.KeyCode @120
+---@field Y Enum.KeyCode @121
+---@field Z Enum.KeyCode @122
+---@field LeftCurly Enum.KeyCode @123
+---@field Pipe Enum.KeyCode @124
+---@field RightCurly Enum.KeyCode @125
+---@field Tilde Enum.KeyCode @126
+---@field Delete Enum.KeyCode @127
+---@field KeypadZero Enum.KeyCode @256
+---@field KeypadOne Enum.KeyCode @257
+---@field KeypadTwo Enum.KeyCode @258
+---@field KeypadThree Enum.KeyCode @259
+---@field KeypadFour Enum.KeyCode @260
+---@field KeypadFive Enum.KeyCode @261
+---@field KeypadSix Enum.KeyCode @262
+---@field KeypadSeven Enum.KeyCode @263
+---@field KeypadEight Enum.KeyCode @264
+---@field KeypadNine Enum.KeyCode @265
+---@field KeypadPeriod Enum.KeyCode @266
+---@field KeypadDivide Enum.KeyCode @267
+---@field KeypadMultiply Enum.KeyCode @268
+---@field KeypadMinus Enum.KeyCode @269
+---@field KeypadPlus Enum.KeyCode @270
+---@field KeypadEnter Enum.KeyCode @271
+---@field KeypadEquals Enum.KeyCode @272
+---@field Up Enum.KeyCode @273
+---@field Down Enum.KeyCode @274
+---@field Right Enum.KeyCode @275
+---@field Left Enum.KeyCode @276
+---@field Insert Enum.KeyCode @277
+---@field Home Enum.KeyCode @278
+---@field End Enum.KeyCode @279
+---@field PageUp Enum.KeyCode @280
+---@field PageDown Enum.KeyCode @281
+---@field LeftShift Enum.KeyCode @304
+---@field RightShift Enum.KeyCode @303
+---@field LeftMeta Enum.KeyCode @310
+---@field RightMeta Enum.KeyCode @309
+---@field LeftAlt Enum.KeyCode @308
+---@field RightAlt Enum.KeyCode @307
+---@field LeftControl Enum.KeyCode @306
+---@field RightControl Enum.KeyCode @305
+---@field CapsLock Enum.KeyCode @301
+---@field NumLock Enum.KeyCode @300
+---@field ScrollLock Enum.KeyCode @302
+---@field LeftSuper Enum.KeyCode @311
+---@field RightSuper Enum.KeyCode @312
+---@field Mode Enum.KeyCode @313
+---@field Compose Enum.KeyCode @314
+---@field Help Enum.KeyCode @315
+---@field Print Enum.KeyCode @316
+---@field SysReq Enum.KeyCode @317
+---@field Break Enum.KeyCode @318
+---@field Menu Enum.KeyCode @319
+---@field Power Enum.KeyCode @320
+---@field Euro Enum.KeyCode @321
+---@field Undo Enum.KeyCode @322
+---@field F1 Enum.KeyCode @282
+---@field F2 Enum.KeyCode @283
+---@field F3 Enum.KeyCode @284
+---@field F4 Enum.KeyCode @285
+---@field F5 Enum.KeyCode @286
+---@field F6 Enum.KeyCode @287
+---@field F7 Enum.KeyCode @288
+---@field F8 Enum.KeyCode @289
+---@field F9 Enum.KeyCode @290
+---@field F10 Enum.KeyCode @291
+---@field F11 Enum.KeyCode @292
+---@field F12 Enum.KeyCode @293
+---@field F13 Enum.KeyCode @294
+---@field F14 Enum.KeyCode @295
+---@field F15 Enum.KeyCode @296
+---@field World0 Enum.KeyCode @160
+---@field World1 Enum.KeyCode @161
+---@field World2 Enum.KeyCode @162
+---@field World3 Enum.KeyCode @163
+---@field World4 Enum.KeyCode @164
+---@field World5 Enum.KeyCode @165
+---@field World6 Enum.KeyCode @166
+---@field World7 Enum.KeyCode @167
+---@field World8 Enum.KeyCode @168
+---@field World9 Enum.KeyCode @169
+---@field World10 Enum.KeyCode @170
+---@field World11 Enum.KeyCode @171
+---@field World12 Enum.KeyCode @172
+---@field World13 Enum.KeyCode @173
+---@field World14 Enum.KeyCode @174
+---@field World15 Enum.KeyCode @175
+---@field World16 Enum.KeyCode @176
+---@field World17 Enum.KeyCode @177
+---@field World18 Enum.KeyCode @178
+---@field World19 Enum.KeyCode @179
+---@field World20 Enum.KeyCode @180
+---@field World21 Enum.KeyCode @181
+---@field World22 Enum.KeyCode @182
+---@field World23 Enum.KeyCode @183
+---@field World24 Enum.KeyCode @184
+---@field World25 Enum.KeyCode @185
+---@field World26 Enum.KeyCode @186
+---@field World27 Enum.KeyCode @187
+---@field World28 Enum.KeyCode @188
+---@field World29 Enum.KeyCode @189
+---@field World30 Enum.KeyCode @190
+---@field World31 Enum.KeyCode @191
+---@field World32 Enum.KeyCode @192
+---@field World33 Enum.KeyCode @193
+---@field World34 Enum.KeyCode @194
+---@field World35 Enum.KeyCode @195
+---@field World36 Enum.KeyCode @196
+---@field World37 Enum.KeyCode @197
+---@field World38 Enum.KeyCode @198
+---@field World39 Enum.KeyCode @199
+---@field World40 Enum.KeyCode @200
+---@field World41 Enum.KeyCode @201
+---@field World42 Enum.KeyCode @202
+---@field World43 Enum.KeyCode @203
+---@field World44 Enum.KeyCode @204
+---@field World45 Enum.KeyCode @205
+---@field World46 Enum.KeyCode @206
+---@field World47 Enum.KeyCode @207
+---@field World48 Enum.KeyCode @208
+---@field World49 Enum.KeyCode @209
+---@field World50 Enum.KeyCode @210
+---@field World51 Enum.KeyCode @211
+---@field World52 Enum.KeyCode @212
+---@field World53 Enum.KeyCode @213
+---@field World54 Enum.KeyCode @214
+---@field World55 Enum.KeyCode @215
+---@field World56 Enum.KeyCode @216
+---@field World57 Enum.KeyCode @217
+---@field World58 Enum.KeyCode @218
+---@field World59 Enum.KeyCode @219
+---@field World60 Enum.KeyCode @220
+---@field World61 Enum.KeyCode @221
+---@field World62 Enum.KeyCode @222
+---@field World63 Enum.KeyCode @223
+---@field World64 Enum.KeyCode @224
+---@field World65 Enum.KeyCode @225
+---@field World66 Enum.KeyCode @226
+---@field World67 Enum.KeyCode @227
+---@field World68 Enum.KeyCode @228
+---@field World69 Enum.KeyCode @229
+---@field World70 Enum.KeyCode @230
+---@field World71 Enum.KeyCode @231
+---@field World72 Enum.KeyCode @232
+---@field World73 Enum.KeyCode @233
+---@field World74 Enum.KeyCode @234
+---@field World75 Enum.KeyCode @235
+---@field World76 Enum.KeyCode @236
+---@field World77 Enum.KeyCode @237
+---@field World78 Enum.KeyCode @238
+---@field World79 Enum.KeyCode @239
+---@field World80 Enum.KeyCode @240
+---@field World81 Enum.KeyCode @241
+---@field World82 Enum.KeyCode @242
+---@field World83 Enum.KeyCode @243
+---@field World84 Enum.KeyCode @244
+---@field World85 Enum.KeyCode @245
+---@field World86 Enum.KeyCode @246
+---@field World87 Enum.KeyCode @247
+---@field World88 Enum.KeyCode @248
+---@field World89 Enum.KeyCode @249
+---@field World90 Enum.KeyCode @250
+---@field World91 Enum.KeyCode @251
+---@field World92 Enum.KeyCode @252
+---@field World93 Enum.KeyCode @253
+---@field World94 Enum.KeyCode @254
+---@field World95 Enum.KeyCode @255
+---@field ButtonX Enum.KeyCode @1000
+---@field ButtonY Enum.KeyCode @1001
+---@field ButtonA Enum.KeyCode @1002
+---@field ButtonB Enum.KeyCode @1003
+---@field ButtonR1 Enum.KeyCode @1004
+---@field ButtonL1 Enum.KeyCode @1005
+---@field ButtonR2 Enum.KeyCode @1006
+---@field ButtonL2 Enum.KeyCode @1007
+---@field ButtonR3 Enum.KeyCode @1008
+---@field ButtonL3 Enum.KeyCode @1009
+---@field ButtonStart Enum.KeyCode @1010
+---@field ButtonSelect Enum.KeyCode @1011
+---@field DPadLeft Enum.KeyCode @1012
+---@field DPadRight Enum.KeyCode @1013
+---@field DPadUp Enum.KeyCode @1014
+---@field DPadDown Enum.KeyCode @1015
+---@field Thumbstick1 Enum.KeyCode @1016
+---@field Thumbstick2 Enum.KeyCode @1017
 ---
 
 ---
 ---@class Enum.KeywordFilterType:EnumItem
----@alias self Enum.KeywordFilterType
----@field Include self @0
----@field Exclude self @1
+---@field Include Enum.KeywordFilterType @0
+---@field Exclude Enum.KeywordFilterType @1
 ---
 
 ---
 ---@class Enum.Language:EnumItem
----@alias self Enum.Language
----@field Default self @0
+---@field Default Enum.Language @0
 ---
 
 ---
 ---@class Enum.LanguagePreference:EnumItem
----@alias self Enum.LanguagePreference
----@field SystemDefault self @0
----@field English self @1
----@field SimplifiedChinese self @2
+---@field SystemDefault Enum.LanguagePreference @0
+---@field English Enum.LanguagePreference @1
+---@field SimplifiedChinese Enum.LanguagePreference @2
 ---
 
 ---
 ---@class Enum.LeftRight:EnumItem
----@alias self Enum.LeftRight
----@field Left self @0
----@field Center self @1
----@field Right self @2
+---@field Left Enum.LeftRight @0
+---@field Center Enum.LeftRight @1
+---@field Right Enum.LeftRight @2
 ---
 
 ---
 ---@class Enum.LevelOfDetailSetting:EnumItem
----@alias self Enum.LevelOfDetailSetting
----@field High self @2
----@field Medium self @1
----@field Low self @0
+---@field High Enum.LevelOfDetailSetting @2
+---@field Medium Enum.LevelOfDetailSetting @1
+---@field Low Enum.LevelOfDetailSetting @0
 ---
 
 ---
 ---@class Enum.Limb:EnumItem
----@alias self Enum.Limb
----@field Head self @0
----@field Torso self @1
----@field LeftArm self @2
----@field RightArm self @3
----@field LeftLeg self @4
----@field RightLeg self @5
----@field Unknown self @6
+---@field Head Enum.Limb @0
+---@field Torso Enum.Limb @1
+---@field LeftArm Enum.Limb @2
+---@field RightArm Enum.Limb @3
+---@field LeftLeg Enum.Limb @4
+---@field RightLeg Enum.Limb @5
+---@field Unknown Enum.Limb @6
 ---
 
 ---
 ---@class Enum.ListDisplayMode:EnumItem
----@alias self Enum.ListDisplayMode
----@field Horizontal self @0
----@field Vertical self @1
+---@field Horizontal Enum.ListDisplayMode @0
+---@field Vertical Enum.ListDisplayMode @1
 ---
 
 ---
 ---@class Enum.ListenerType:EnumItem
----@alias self Enum.ListenerType
----@field Camera self @0
----@field CFrame self @1
----@field ObjectPosition self @2
----@field ObjectCFrame self @3
+---@field Camera Enum.ListenerType @0
+---@field CFrame Enum.ListenerType @1
+---@field ObjectPosition Enum.ListenerType @2
+---@field ObjectCFrame Enum.ListenerType @3
 ---
 
 ---
 ---@class Enum.Material:EnumItem
----@alias self Enum.Material
----@field Plastic self @256
----@field Wood self @512
----@field Slate self @800
----@field Concrete self @816
----@field CorrodedMetal self @1040
----@field DiamondPlate self @1056
----@field Foil self @1072
----@field Grass self @1280
----@field Ice self @1536
----@field Marble self @784
----@field Granite self @832
----@field Brick self @848
----@field Pebble self @864
----@field Sand self @1296
----@field Fabric self @1312
----@field SmoothPlastic self @272
----@field Metal self @1088
----@field WoodPlanks self @528
----@field Cobblestone self @880
----@field Air self @1792
----@field Water self @2048
----@field Rock self @896
----@field Glacier self @1552
----@field Snow self @1328
----@field Sandstone self @912
----@field Mud self @1344
----@field Basalt self @788
----@field Ground self @1360
----@field CrackedLava self @804
----@field Neon self @288
----@field Glass self @1568
----@field Asphalt self @1376
----@field LeafyGrass self @1284
----@field Salt self @1392
----@field Limestone self @820
----@field Pavement self @836
----@field ForceField self @1584
+---@field Plastic Enum.Material @256
+---@field Wood Enum.Material @512
+---@field Slate Enum.Material @800
+---@field Concrete Enum.Material @816
+---@field CorrodedMetal Enum.Material @1040
+---@field DiamondPlate Enum.Material @1056
+---@field Foil Enum.Material @1072
+---@field Grass Enum.Material @1280
+---@field Ice Enum.Material @1536
+---@field Marble Enum.Material @784
+---@field Granite Enum.Material @832
+---@field Brick Enum.Material @848
+---@field Pebble Enum.Material @864
+---@field Sand Enum.Material @1296
+---@field Fabric Enum.Material @1312
+---@field SmoothPlastic Enum.Material @272
+---@field Metal Enum.Material @1088
+---@field WoodPlanks Enum.Material @528
+---@field Cobblestone Enum.Material @880
+---@field Air Enum.Material @1792
+---@field Water Enum.Material @2048
+---@field Rock Enum.Material @896
+---@field Glacier Enum.Material @1552
+---@field Snow Enum.Material @1328
+---@field Sandstone Enum.Material @912
+---@field Mud Enum.Material @1344
+---@field Basalt Enum.Material @788
+---@field Ground Enum.Material @1360
+---@field CrackedLava Enum.Material @804
+---@field Neon Enum.Material @288
+---@field Glass Enum.Material @1568
+---@field Asphalt Enum.Material @1376
+---@field LeafyGrass Enum.Material @1284
+---@field Salt Enum.Material @1392
+---@field Limestone Enum.Material @820
+---@field Pavement Enum.Material @836
+---@field ForceField Enum.Material @1584
 ---
 
 ---
 ---@class Enum.MembershipType:EnumItem
----@alias self Enum.MembershipType
----@field None self @0
----@field BuildersClub self @1
----@field TurboBuildersClub self @2
----@field OutrageousBuildersClub self @3
----@field Premium self @4
+---@field None Enum.MembershipType @0
+---@field BuildersClub Enum.MembershipType @1
+---@field TurboBuildersClub Enum.MembershipType @2
+---@field OutrageousBuildersClub Enum.MembershipType @3
+---@field Premium Enum.MembershipType @4
 ---
 
 ---
 ---@class Enum.MeshType:EnumItem
----@alias self Enum.MeshType
----@field Head self @0
----@field Torso self @1
----@field Wedge self @2
----@field Prism self @7
----@field Pyramid self @8
----@field ParallelRamp self @9
----@field RightAngleRamp self @10
----@field CornerWedge self @11
----@field Brick self @6
----@field Sphere self @3
----@field Cylinder self @4
----@field FileMesh self @5
+---@field Head Enum.MeshType @0
+---@field Torso Enum.MeshType @1
+---@field Wedge Enum.MeshType @2
+---@field Prism Enum.MeshType @7
+---@field Pyramid Enum.MeshType @8
+---@field ParallelRamp Enum.MeshType @9
+---@field RightAngleRamp Enum.MeshType @10
+---@field CornerWedge Enum.MeshType @11
+---@field Brick Enum.MeshType @6
+---@field Sphere Enum.MeshType @3
+---@field Cylinder Enum.MeshType @4
+---@field FileMesh Enum.MeshType @5
 ---
 
 ---
 ---@class Enum.MessageType:EnumItem
----@alias self Enum.MessageType
----@field MessageOutput self @0
----@field MessageInfo self @1
----@field MessageWarning self @2
----@field MessageError self @3
+---@field MessageOutput Enum.MessageType @0
+---@field MessageInfo Enum.MessageType @1
+---@field MessageWarning Enum.MessageType @2
+---@field MessageError Enum.MessageType @3
 ---
 
 ---
 ---@class Enum.MouseBehavior:EnumItem
----@alias self Enum.MouseBehavior
----@field Default self @0
----@field LockCenter self @1
----@field LockCurrentPosition self @2
+---@field Default Enum.MouseBehavior @0
+---@field LockCenter Enum.MouseBehavior @1
+---@field LockCurrentPosition Enum.MouseBehavior @2
 ---
 
 ---
 ---@class Enum.MoveState:EnumItem
----@alias self Enum.MoveState
----@field Stopped self @0
----@field Coasting self @1
----@field Pushing self @2
----@field Stopping self @3
----@field AirFree self @4
+---@field Stopped Enum.MoveState @0
+---@field Coasting Enum.MoveState @1
+---@field Pushing Enum.MoveState @2
+---@field Stopping Enum.MoveState @3
+---@field AirFree Enum.MoveState @4
 ---
 
 ---
 ---@class Enum.NameOcclusion:EnumItem
----@alias self Enum.NameOcclusion
----@field OccludeAll self @2
----@field EnemyOcclusion self @1
----@field NoOcclusion self @0
+---@field OccludeAll Enum.NameOcclusion @2
+---@field EnemyOcclusion Enum.NameOcclusion @1
+---@field NoOcclusion Enum.NameOcclusion @0
 ---
 
 ---
 ---@class Enum.NetworkOwnership:EnumItem
----@alias self Enum.NetworkOwnership
----@field Automatic self @0
----@field Manual self @1
----@field OnContact self @2
+---@field Automatic Enum.NetworkOwnership @0
+---@field Manual Enum.NetworkOwnership @1
+---@field OnContact Enum.NetworkOwnership @2
 ---
 
 ---
 ---@class Enum.NormalId:EnumItem
----@alias self Enum.NormalId
----@field Top self @1
----@field Bottom self @4
----@field Back self @2
----@field Front self @5
----@field Right self @0
----@field Left self @3
+---@field Top Enum.NormalId @1
+---@field Bottom Enum.NormalId @4
+---@field Back Enum.NormalId @2
+---@field Front Enum.NormalId @5
+---@field Right Enum.NormalId @0
+---@field Left Enum.NormalId @3
 ---
 
 ---
 ---@class Enum.OutputLayoutMode:EnumItem
----@alias self Enum.OutputLayoutMode
----@field Horizontal self @0
----@field Vertical self @1
+---@field Horizontal Enum.OutputLayoutMode @0
+---@field Vertical Enum.OutputLayoutMode @1
 ---
 
 ---
 ---@class Enum.OverrideMouseIconBehavior:EnumItem
----@alias self Enum.OverrideMouseIconBehavior
----@field None self @0
----@field ForceShow self @1
----@field ForceHide self @2
+---@field None Enum.OverrideMouseIconBehavior @0
+---@field ForceShow Enum.OverrideMouseIconBehavior @1
+---@field ForceHide Enum.OverrideMouseIconBehavior @2
 ---
 
 ---
 ---@class Enum.PacketPriority:EnumItem
----@alias self Enum.PacketPriority
----@field IMMEDIATE_PRIORITY self @0
----@field HIGH_PRIORITY self @1
----@field MEDIUM_PRIORITY self @2
----@field LOW_PRIORITY self @3
+---@field IMMEDIATE_PRIORITY Enum.PacketPriority @0
+---@field HIGH_PRIORITY Enum.PacketPriority @1
+---@field MEDIUM_PRIORITY Enum.PacketPriority @2
+---@field LOW_PRIORITY Enum.PacketPriority @3
 ---
 
 ---
 ---@class Enum.PartType:EnumItem
----@alias self Enum.PartType
----@field Ball self @0
----@field Block self @1
----@field Cylinder self @2
+---@field Ball Enum.PartType @0
+---@field Block Enum.PartType @1
+---@field Cylinder Enum.PartType @2
 ---
 
 ---
 ---@class Enum.PathStatus:EnumItem
----@alias self Enum.PathStatus
----@field Success self @0
----@field ClosestNoPath self @1
----@field ClosestOutOfRange self @2
----@field FailStartNotEmpty self @3
----@field FailFinishNotEmpty self @4
----@field NoPath self @5
+---@field Success Enum.PathStatus @0
+---@field ClosestNoPath Enum.PathStatus @1
+---@field ClosestOutOfRange Enum.PathStatus @2
+---@field FailStartNotEmpty Enum.PathStatus @3
+---@field FailFinishNotEmpty Enum.PathStatus @4
+---@field NoPath Enum.PathStatus @5
 ---
 
 ---
 ---@class Enum.PathWaypointAction:EnumItem
----@alias self Enum.PathWaypointAction
----@field Walk self @0
----@field Jump self @1
+---@field Walk Enum.PathWaypointAction @0
+---@field Jump Enum.PathWaypointAction @1
 ---
 
 ---
 ---@class Enum.PermissionLevelShown:EnumItem
----@alias self Enum.PermissionLevelShown
----@field Game self @0
----@field RobloxGame self @1
----@field RobloxScript self @2
----@field Studio self @3
----@field Roblox self @4
+---@field Game Enum.PermissionLevelShown @0
+---@field RobloxGame Enum.PermissionLevelShown @1
+---@field RobloxScript Enum.PermissionLevelShown @2
+---@field Studio Enum.PermissionLevelShown @3
+---@field Roblox Enum.PermissionLevelShown @4
 ---
 
 ---
 ---@class Enum.Platform:EnumItem
----@alias self Enum.Platform
----@field Windows self @0
----@field OSX self @1
----@field IOS self @2
----@field Android self @3
----@field XBoxOne self @4
----@field PS4 self @5
----@field PS3 self @6
----@field XBox360 self @7
----@field WiiU self @8
----@field NX self @9
----@field Ouya self @10
----@field AndroidTV self @11
----@field Chromecast self @12
----@field Linux self @13
----@field SteamOS self @14
----@field WebOS self @15
----@field DOS self @16
----@field BeOS self @17
----@field UWP self @18
----@field None self @19
+---@field Windows Enum.Platform @0
+---@field OSX Enum.Platform @1
+---@field IOS Enum.Platform @2
+---@field Android Enum.Platform @3
+---@field XBoxOne Enum.Platform @4
+---@field PS4 Enum.Platform @5
+---@field PS3 Enum.Platform @6
+---@field XBox360 Enum.Platform @7
+---@field WiiU Enum.Platform @8
+---@field NX Enum.Platform @9
+---@field Ouya Enum.Platform @10
+---@field AndroidTV Enum.Platform @11
+---@field Chromecast Enum.Platform @12
+---@field Linux Enum.Platform @13
+---@field SteamOS Enum.Platform @14
+---@field WebOS Enum.Platform @15
+---@field DOS Enum.Platform @16
+---@field BeOS Enum.Platform @17
+---@field UWP Enum.Platform @18
+---@field None Enum.Platform @19
 ---
 
 ---
 ---@class Enum.PlaybackState:EnumItem
----@alias self Enum.PlaybackState
----@field Begin self @0
----@field Delayed self @1
----@field Playing self @2
----@field Paused self @3
----@field Completed self @4
----@field Cancelled self @5
+---@field Begin Enum.PlaybackState @0
+---@field Delayed Enum.PlaybackState @1
+---@field Playing Enum.PlaybackState @2
+---@field Paused Enum.PlaybackState @3
+---@field Completed Enum.PlaybackState @4
+---@field Cancelled Enum.PlaybackState @5
 ---
 
 ---
 ---@class Enum.PlayerActions:EnumItem
----@alias self Enum.PlayerActions
----@field CharacterForward self @0
----@field CharacterBackward self @1
----@field CharacterLeft self @2
----@field CharacterRight self @3
----@field CharacterJump self @4
+---@field CharacterForward Enum.PlayerActions @0
+---@field CharacterBackward Enum.PlayerActions @1
+---@field CharacterLeft Enum.PlayerActions @2
+---@field CharacterRight Enum.PlayerActions @3
+---@field CharacterJump Enum.PlayerActions @4
 ---
 
 ---
 ---@class Enum.PlayerChatType:EnumItem
----@alias self Enum.PlayerChatType
----@field All self @0
----@field Team self @1
----@field Whisper self @2
+---@field All Enum.PlayerChatType @0
+---@field Team Enum.PlayerChatType @1
+---@field Whisper Enum.PlayerChatType @2
 ---
 
 ---
 ---@class Enum.PoseEasingDirection:EnumItem
----@alias self Enum.PoseEasingDirection
----@field Out self @1
----@field InOut self @2
----@field In self @0
+---@field Out Enum.PoseEasingDirection @1
+---@field InOut Enum.PoseEasingDirection @2
+---@field In Enum.PoseEasingDirection @0
 ---
 
 ---
 ---@class Enum.PoseEasingStyle:EnumItem
----@alias self Enum.PoseEasingStyle
----@field Linear self @0
----@field Constant self @1
----@field Elastic self @2
----@field Cubic self @3
----@field Bounce self @4
+---@field Linear Enum.PoseEasingStyle @0
+---@field Constant Enum.PoseEasingStyle @1
+---@field Elastic Enum.PoseEasingStyle @2
+---@field Cubic Enum.PoseEasingStyle @3
+---@field Bounce Enum.PoseEasingStyle @4
 ---
 
 ---
 ---@class Enum.PrivilegeType:EnumItem
----@alias self Enum.PrivilegeType
----@field Owner self @255
----@field Admin self @240
----@field Member self @128
----@field Visitor self @10
----@field Banned self @0
+---@field Owner Enum.PrivilegeType @255
+---@field Admin Enum.PrivilegeType @240
+---@field Member Enum.PrivilegeType @128
+---@field Visitor Enum.PrivilegeType @10
+---@field Banned Enum.PrivilegeType @0
 ---
 
 ---
 ---@class Enum.ProductPurchaseDecision:EnumItem
----@alias self Enum.ProductPurchaseDecision
----@field NotProcessedYet self @0
----@field PurchaseGranted self @1
+---@field NotProcessedYet Enum.ProductPurchaseDecision @0
+---@field PurchaseGranted Enum.ProductPurchaseDecision @1
 ---
 
 ---
 ---@class Enum.QualityLevel:EnumItem
----@alias self Enum.QualityLevel
----@field Automatic self @0
----@field Level01 self @1
----@field Level02 self @2
----@field Level03 self @3
----@field Level04 self @4
----@field Level05 self @5
----@field Level06 self @6
----@field Level07 self @7
----@field Level08 self @8
----@field Level09 self @9
----@field Level10 self @10
----@field Level11 self @11
----@field Level12 self @12
----@field Level13 self @13
----@field Level14 self @14
----@field Level15 self @15
----@field Level16 self @16
----@field Level17 self @17
----@field Level18 self @18
----@field Level19 self @19
----@field Level20 self @20
----@field Level21 self @21
+---@field Automatic Enum.QualityLevel @0
+---@field Level01 Enum.QualityLevel @1
+---@field Level02 Enum.QualityLevel @2
+---@field Level03 Enum.QualityLevel @3
+---@field Level04 Enum.QualityLevel @4
+---@field Level05 Enum.QualityLevel @5
+---@field Level06 Enum.QualityLevel @6
+---@field Level07 Enum.QualityLevel @7
+---@field Level08 Enum.QualityLevel @8
+---@field Level09 Enum.QualityLevel @9
+---@field Level10 Enum.QualityLevel @10
+---@field Level11 Enum.QualityLevel @11
+---@field Level12 Enum.QualityLevel @12
+---@field Level13 Enum.QualityLevel @13
+---@field Level14 Enum.QualityLevel @14
+---@field Level15 Enum.QualityLevel @15
+---@field Level16 Enum.QualityLevel @16
+---@field Level17 Enum.QualityLevel @17
+---@field Level18 Enum.QualityLevel @18
+---@field Level19 Enum.QualityLevel @19
+---@field Level20 Enum.QualityLevel @20
+---@field Level21 Enum.QualityLevel @21
 ---
 
 ---
 ---@class Enum.R15CollisionType:EnumItem
----@alias self Enum.R15CollisionType
----@field OuterBox self @0
----@field InnerBox self @1
+---@field OuterBox Enum.R15CollisionType @0
+---@field InnerBox Enum.R15CollisionType @1
 ---
 
 ---
 ---@class Enum.RenderFidelity:EnumItem
----@alias self Enum.RenderFidelity
----@field Automatic self @0
----@field Precise self @1
+---@field Automatic Enum.RenderFidelity @0
+---@field Precise Enum.RenderFidelity @1
 ---
 
 ---
 ---@class Enum.RenderPriority:EnumItem
----@alias self Enum.RenderPriority
----@field First self @0
----@field Input self @100
----@field Camera self @200
----@field Character self @300
----@field Last self @2000
+---@field First Enum.RenderPriority @0
+---@field Input Enum.RenderPriority @100
+---@field Camera Enum.RenderPriority @200
+---@field Character Enum.RenderPriority @300
+---@field Last Enum.RenderPriority @2000
 ---
 
 ---
 ---@class Enum.RenderingTestComparisonMethod:EnumItem
----@alias self Enum.RenderingTestComparisonMethod
----@field psnr self @0
----@field diff self @1
+---@field psnr Enum.RenderingTestComparisonMethod @0
+---@field diff Enum.RenderingTestComparisonMethod @1
 ---
 
 ---
 ---@class Enum.ReverbType:EnumItem
----@alias self Enum.ReverbType
----@field NoReverb self @0
----@field GenericReverb self @1
----@field PaddedCell self @2
----@field Room self @3
----@field Bathroom self @4
----@field LivingRoom self @5
----@field StoneRoom self @6
----@field Auditorium self @7
----@field ConcertHall self @8
----@field Cave self @9
----@field Arena self @10
----@field Hangar self @11
----@field CarpettedHallway self @12
----@field Hallway self @13
----@field StoneCorridor self @14
----@field Alley self @15
----@field Forest self @16
----@field City self @17
----@field Mountains self @18
----@field Quarry self @19
----@field Plain self @20
----@field ParkingLot self @21
----@field SewerPipe self @22
----@field UnderWater self @23
+---@field NoReverb Enum.ReverbType @0
+---@field GenericReverb Enum.ReverbType @1
+---@field PaddedCell Enum.ReverbType @2
+---@field Room Enum.ReverbType @3
+---@field Bathroom Enum.ReverbType @4
+---@field LivingRoom Enum.ReverbType @5
+---@field StoneRoom Enum.ReverbType @6
+---@field Auditorium Enum.ReverbType @7
+---@field ConcertHall Enum.ReverbType @8
+---@field Cave Enum.ReverbType @9
+---@field Arena Enum.ReverbType @10
+---@field Hangar Enum.ReverbType @11
+---@field CarpettedHallway Enum.ReverbType @12
+---@field Hallway Enum.ReverbType @13
+---@field StoneCorridor Enum.ReverbType @14
+---@field Alley Enum.ReverbType @15
+---@field Forest Enum.ReverbType @16
+---@field City Enum.ReverbType @17
+---@field Mountains Enum.ReverbType @18
+---@field Quarry Enum.ReverbType @19
+---@field Plain Enum.ReverbType @20
+---@field ParkingLot Enum.ReverbType @21
+---@field SewerPipe Enum.ReverbType @22
+---@field UnderWater Enum.ReverbType @23
 ---
 
 ---
 ---@class Enum.RibbonTool:EnumItem
----@alias self Enum.RibbonTool
----@field Select self @0
----@field Scale self @1
----@field Rotate self @2
----@field Move self @3
----@field Transform self @4
----@field ColorPicker self @5
----@field MaterialPicker self @6
----@field Group self @7
----@field Ungroup self @8
----@field None self @9
+---@field Select Enum.RibbonTool @0
+---@field Scale Enum.RibbonTool @1
+---@field Rotate Enum.RibbonTool @2
+---@field Move Enum.RibbonTool @3
+---@field Transform Enum.RibbonTool @4
+---@field ColorPicker Enum.RibbonTool @5
+---@field MaterialPicker Enum.RibbonTool @6
+---@field Group Enum.RibbonTool @7
+---@field Ungroup Enum.RibbonTool @8
+---@field None Enum.RibbonTool @9
 ---
 
 ---
 ---@class Enum.RollOffMode:EnumItem
----@alias self Enum.RollOffMode
----@field Inverse self @0
----@field Linear self @1
----@field InverseTapered self @3
----@field LinearSquare self @2
+---@field Inverse Enum.RollOffMode @0
+---@field Linear Enum.RollOffMode @1
+---@field InverseTapered Enum.RollOffMode @3
+---@field LinearSquare Enum.RollOffMode @2
 ---
 
 ---
 ---@class Enum.RotationType:EnumItem
----@alias self Enum.RotationType
----@field MovementRelative self @0
----@field CameraRelative self @1
+---@field MovementRelative Enum.RotationType @0
+---@field CameraRelative Enum.RotationType @1
 ---
 
 ---
 ---@class Enum.RuntimeUndoBehavior:EnumItem
----@alias self Enum.RuntimeUndoBehavior
----@field Aggregate self @0
----@field Snapshot self @1
----@field Hybrid self @2
+---@field Aggregate Enum.RuntimeUndoBehavior @0
+---@field Snapshot Enum.RuntimeUndoBehavior @1
+---@field Hybrid Enum.RuntimeUndoBehavior @2
 ---
 
 ---
 ---@class Enum.SaveFilter:EnumItem
----@alias self Enum.SaveFilter
----@field SaveAll self @2
----@field SaveWorld self @0
----@field SaveGame self @1
+---@field SaveAll Enum.SaveFilter @2
+---@field SaveWorld Enum.SaveFilter @0
+---@field SaveGame Enum.SaveFilter @1
 ---
 
 ---
 ---@class Enum.SavedQualitySetting:EnumItem
----@alias self Enum.SavedQualitySetting
----@field Automatic self @0
----@field QualityLevel1 self @1
----@field QualityLevel2 self @2
----@field QualityLevel3 self @3
----@field QualityLevel4 self @4
----@field QualityLevel5 self @5
----@field QualityLevel6 self @6
----@field QualityLevel7 self @7
----@field QualityLevel8 self @8
----@field QualityLevel9 self @9
----@field QualityLevel10 self @10
+---@field Automatic Enum.SavedQualitySetting @0
+---@field QualityLevel1 Enum.SavedQualitySetting @1
+---@field QualityLevel2 Enum.SavedQualitySetting @2
+---@field QualityLevel3 Enum.SavedQualitySetting @3
+---@field QualityLevel4 Enum.SavedQualitySetting @4
+---@field QualityLevel5 Enum.SavedQualitySetting @5
+---@field QualityLevel6 Enum.SavedQualitySetting @6
+---@field QualityLevel7 Enum.SavedQualitySetting @7
+---@field QualityLevel8 Enum.SavedQualitySetting @8
+---@field QualityLevel9 Enum.SavedQualitySetting @9
+---@field QualityLevel10 Enum.SavedQualitySetting @10
 ---
 
 ---
 ---@class Enum.ScaleType:EnumItem
----@alias self Enum.ScaleType
----@field Stretch self @0
----@field Slice self @1
----@field Tile self @2
----@field Fit self @3
----@field Crop self @4
+---@field Stretch Enum.ScaleType @0
+---@field Slice Enum.ScaleType @1
+---@field Tile Enum.ScaleType @2
+---@field Fit Enum.ScaleType @3
+---@field Crop Enum.ScaleType @4
 ---
 
 ---
 ---@class Enum.ScreenOrientation:EnumItem
----@alias self Enum.ScreenOrientation
----@field LandscapeLeft self @0
----@field LandscapeRight self @1
----@field LandscapeSensor self @2
----@field Portrait self @3
----@field Sensor self @4
+---@field LandscapeLeft Enum.ScreenOrientation @0
+---@field LandscapeRight Enum.ScreenOrientation @1
+---@field LandscapeSensor Enum.ScreenOrientation @2
+---@field Portrait Enum.ScreenOrientation @3
+---@field Sensor Enum.ScreenOrientation @4
 ---
 
 ---
 ---@class Enum.ScrollBarInset:EnumItem
----@alias self Enum.ScrollBarInset
----@field None self @0
----@field ScrollBar self @1
----@field Always self @2
+---@field None Enum.ScrollBarInset @0
+---@field ScrollBar Enum.ScrollBarInset @1
+---@field Always Enum.ScrollBarInset @2
 ---
 
 ---
 ---@class Enum.ScrollingDirection:EnumItem
----@alias self Enum.ScrollingDirection
----@field X self @1
----@field Y self @2
----@field XY self @4
+---@field X Enum.ScrollingDirection @1
+---@field Y Enum.ScrollingDirection @2
+---@field XY Enum.ScrollingDirection @4
 ---
 
 ---
 ---@class Enum.ServerAudioBehavior:EnumItem
----@alias self Enum.ServerAudioBehavior
----@field Enabled self @0
----@field Muted self @1
----@field OnlineGame self @2
+---@field Enabled Enum.ServerAudioBehavior @0
+---@field Muted Enum.ServerAudioBehavior @1
+---@field OnlineGame Enum.ServerAudioBehavior @2
 ---
 
 ---
 ---@class Enum.SizeConstraint:EnumItem
----@alias self Enum.SizeConstraint
----@field RelativeXY self @0
----@field RelativeXX self @1
----@field RelativeYY self @2
+---@field RelativeXY Enum.SizeConstraint @0
+---@field RelativeXX Enum.SizeConstraint @1
+---@field RelativeYY Enum.SizeConstraint @2
 ---
 
 ---
 ---@class Enum.SortOrder:EnumItem
----@alias self Enum.SortOrder
----@field LayoutOrder self @2
----@field Name self @0
----@field Custom self @1
+---@field LayoutOrder Enum.SortOrder @2
+---@field Name Enum.SortOrder @0
+---@field Custom Enum.SortOrder @1
 ---
 
 ---
 ---@class Enum.SoundType:EnumItem
----@alias self Enum.SoundType
----@field NoSound self @0
----@field Boing self @1
----@field Bomb self @2
----@field Break self @3
----@field Click self @4
----@field Clock self @5
----@field Slingshot self @6
----@field Page self @7
----@field Ping self @8
----@field Snap self @9
----@field Splat self @10
----@field Step self @11
----@field StepOn self @12
----@field Swoosh self @13
----@field Victory self @14
+---@field NoSound Enum.SoundType @0
+---@field Boing Enum.SoundType @1
+---@field Bomb Enum.SoundType @2
+---@field Break Enum.SoundType @3
+---@field Click Enum.SoundType @4
+---@field Clock Enum.SoundType @5
+---@field Slingshot Enum.SoundType @6
+---@field Page Enum.SoundType @7
+---@field Ping Enum.SoundType @8
+---@field Snap Enum.SoundType @9
+---@field Splat Enum.SoundType @10
+---@field Step Enum.SoundType @11
+---@field StepOn Enum.SoundType @12
+---@field Swoosh Enum.SoundType @13
+---@field Victory Enum.SoundType @14
 ---
 
 ---
 ---@class Enum.SpecialKey:EnumItem
----@alias self Enum.SpecialKey
----@field Insert self @0
----@field Home self @1
----@field End self @2
----@field PageUp self @3
----@field PageDown self @4
----@field ChatHotkey self @5
+---@field Insert Enum.SpecialKey @0
+---@field Home Enum.SpecialKey @1
+---@field End Enum.SpecialKey @2
+---@field PageUp Enum.SpecialKey @3
+---@field PageDown Enum.SpecialKey @4
+---@field ChatHotkey Enum.SpecialKey @5
 ---
 
 ---
 ---@class Enum.StartCorner:EnumItem
----@alias self Enum.StartCorner
----@field TopLeft self @0
----@field TopRight self @1
----@field BottomLeft self @2
----@field BottomRight self @3
+---@field TopLeft Enum.StartCorner @0
+---@field TopRight Enum.StartCorner @1
+---@field BottomLeft Enum.StartCorner @2
+---@field BottomRight Enum.StartCorner @3
 ---
 
 ---
 ---@class Enum.Status:EnumItem
----@alias self Enum.Status
----@field Poison self @0
----@field Confusion self @1
+---@field Poison Enum.Status @0
+---@field Confusion Enum.Status @1
 ---
 
 ---
 ---@class Enum.StreamingPauseMode:EnumItem
----@alias self Enum.StreamingPauseMode
----@field Default self @0
----@field Disabled self @1
----@field ClientPhysicsPause self @2
+---@field Default Enum.StreamingPauseMode @0
+---@field Disabled Enum.StreamingPauseMode @1
+---@field ClientPhysicsPause Enum.StreamingPauseMode @2
 ---
 
 ---
 ---@class Enum.StudioDataModelType:EnumItem
----@alias self Enum.StudioDataModelType
----@field Edit self @0
----@field PlayClient self @2
----@field PlayServer self @3
----@field RobloxPlugin self @4
----@field UserPlugin self @5
----@field Null self @6
+---@field Edit Enum.StudioDataModelType @0
+---@field PlayClient Enum.StudioDataModelType @2
+---@field PlayServer Enum.StudioDataModelType @3
+---@field RobloxPlugin Enum.StudioDataModelType @4
+---@field UserPlugin Enum.StudioDataModelType @5
+---@field Null Enum.StudioDataModelType @6
 ---
 
 ---
 ---@class Enum.StudioStyleGuideColor:EnumItem
----@alias self Enum.StudioStyleGuideColor
----@field MainBackground self @0
----@field Titlebar self @1
----@field Dropdown self @2
----@field Tooltip self @3
----@field Notification self @4
----@field ScrollBar self @5
----@field ScrollBarBackground self @6
----@field TabBar self @7
----@field Tab self @8
----@field RibbonTab self @9
----@field RibbonTabTopBar self @10
----@field Button self @11
----@field MainButton self @12
----@field RibbonButton self @13
----@field ViewPortBackground self @14
----@field InputFieldBackground self @15
----@field Item self @16
----@field TableItem self @17
----@field CategoryItem self @18
----@field GameSettingsTableItem self @19
----@field GameSettingsTooltip self @20
----@field EmulatorBar self @21
----@field EmulatorDropDown self @22
----@field ColorPickerFrame self @23
----@field CurrentMarker self @24
----@field Border self @25
----@field Shadow self @26
----@field Light self @27
----@field Dark self @28
----@field Mid self @29
----@field MainText self @30
----@field SubText self @31
----@field TitlebarText self @32
----@field BrightText self @33
----@field DimmedText self @34
----@field LinkText self @35
----@field WarningText self @36
----@field ErrorText self @37
----@field InfoText self @38
----@field SensitiveText self @39
----@field ScriptSideWidget self @40
----@field ScriptBackground self @41
----@field ScriptText self @42
----@field ScriptSelectionText self @43
----@field ScriptSelectionBackground self @44
----@field ScriptFindSelectionBackground self @45
----@field ScriptMatchingWordSelectionBackground self @46
----@field ScriptOperator self @47
----@field ScriptNumber self @48
----@field ScriptString self @49
----@field ScriptComment self @50
----@field ScriptPreprocessor self @51
----@field ScriptKeyword self @52
----@field ScriptBuiltInFunction self @53
----@field ScriptWarning self @54
----@field ScriptError self @55
----@field DebuggerCurrentLine self @56
----@field DebuggerErrorLine self @57
----@field DiffFilePathText self @58
----@field DiffTextHunkInfo self @59
----@field DiffTextNoChange self @60
----@field DiffTextAddition self @61
----@field DiffTextDeletion self @62
----@field DiffTextSeparatorBackground self @63
----@field DiffTextNoChangeBackground self @64
----@field DiffTextAdditionBackground self @65
----@field DiffTextDeletionBackground self @66
----@field DiffLineNum self @67
----@field DiffLineNumSeparatorBackground self @68
----@field DiffLineNumNoChangeBackground self @69
----@field DiffLineNumAdditionBackground self @70
----@field DiffLineNumDeletionBackground self @71
----@field DiffFilePathBackground self @72
----@field DiffFilePathBorder self @73
----@field Separator self @74
----@field ButtonBorder self @75
----@field ButtonText self @76
----@field InputFieldBorder self @77
----@field CheckedFieldBackground self @78
----@field CheckedFieldBorder self @79
----@field CheckedFieldIndicator self @80
----@field HeaderSection self @81
----@field Midlight self @82
----@field StatusBar self @83
----@field DialogButton self @84
----@field DialogButtonText self @85
----@field DialogButtonBorder self @86
----@field DialogMainButton self @87
----@field DialogMainButtonText self @88
----@field Merge3HighlightOriginal self @89
----@field Merge3HighlightMine self @90
----@field Merge3HighlightTheirs self @91
+---@field MainBackground Enum.StudioStyleGuideColor @0
+---@field Titlebar Enum.StudioStyleGuideColor @1
+---@field Dropdown Enum.StudioStyleGuideColor @2
+---@field Tooltip Enum.StudioStyleGuideColor @3
+---@field Notification Enum.StudioStyleGuideColor @4
+---@field ScrollBar Enum.StudioStyleGuideColor @5
+---@field ScrollBarBackground Enum.StudioStyleGuideColor @6
+---@field TabBar Enum.StudioStyleGuideColor @7
+---@field Tab Enum.StudioStyleGuideColor @8
+---@field RibbonTab Enum.StudioStyleGuideColor @9
+---@field RibbonTabTopBar Enum.StudioStyleGuideColor @10
+---@field Button Enum.StudioStyleGuideColor @11
+---@field MainButton Enum.StudioStyleGuideColor @12
+---@field RibbonButton Enum.StudioStyleGuideColor @13
+---@field ViewPortBackground Enum.StudioStyleGuideColor @14
+---@field InputFieldBackground Enum.StudioStyleGuideColor @15
+---@field Item Enum.StudioStyleGuideColor @16
+---@field TableItem Enum.StudioStyleGuideColor @17
+---@field CategoryItem Enum.StudioStyleGuideColor @18
+---@field GameSettingsTableItem Enum.StudioStyleGuideColor @19
+---@field GameSettingsTooltip Enum.StudioStyleGuideColor @20
+---@field EmulatorBar Enum.StudioStyleGuideColor @21
+---@field EmulatorDropDown Enum.StudioStyleGuideColor @22
+---@field ColorPickerFrame Enum.StudioStyleGuideColor @23
+---@field CurrentMarker Enum.StudioStyleGuideColor @24
+---@field Border Enum.StudioStyleGuideColor @25
+---@field Shadow Enum.StudioStyleGuideColor @26
+---@field Light Enum.StudioStyleGuideColor @27
+---@field Dark Enum.StudioStyleGuideColor @28
+---@field Mid Enum.StudioStyleGuideColor @29
+---@field MainText Enum.StudioStyleGuideColor @30
+---@field SubText Enum.StudioStyleGuideColor @31
+---@field TitlebarText Enum.StudioStyleGuideColor @32
+---@field BrightText Enum.StudioStyleGuideColor @33
+---@field DimmedText Enum.StudioStyleGuideColor @34
+---@field LinkText Enum.StudioStyleGuideColor @35
+---@field WarningText Enum.StudioStyleGuideColor @36
+---@field ErrorText Enum.StudioStyleGuideColor @37
+---@field InfoText Enum.StudioStyleGuideColor @38
+---@field SensitiveText Enum.StudioStyleGuideColor @39
+---@field ScriptSideWidget Enum.StudioStyleGuideColor @40
+---@field ScriptBackground Enum.StudioStyleGuideColor @41
+---@field ScriptText Enum.StudioStyleGuideColor @42
+---@field ScriptSelectionText Enum.StudioStyleGuideColor @43
+---@field ScriptSelectionBackground Enum.StudioStyleGuideColor @44
+---@field ScriptFindSelectionBackground Enum.StudioStyleGuideColor @45
+---@field ScriptMatchingWordSelectionBackground Enum.StudioStyleGuideColor @46
+---@field ScriptOperator Enum.StudioStyleGuideColor @47
+---@field ScriptNumber Enum.StudioStyleGuideColor @48
+---@field ScriptString Enum.StudioStyleGuideColor @49
+---@field ScriptComment Enum.StudioStyleGuideColor @50
+---@field ScriptPreprocessor Enum.StudioStyleGuideColor @51
+---@field ScriptKeyword Enum.StudioStyleGuideColor @52
+---@field ScriptBuiltInFunction Enum.StudioStyleGuideColor @53
+---@field ScriptWarning Enum.StudioStyleGuideColor @54
+---@field ScriptError Enum.StudioStyleGuideColor @55
+---@field DebuggerCurrentLine Enum.StudioStyleGuideColor @56
+---@field DebuggerErrorLine Enum.StudioStyleGuideColor @57
+---@field DiffFilePathText Enum.StudioStyleGuideColor @58
+---@field DiffTextHunkInfo Enum.StudioStyleGuideColor @59
+---@field DiffTextNoChange Enum.StudioStyleGuideColor @60
+---@field DiffTextAddition Enum.StudioStyleGuideColor @61
+---@field DiffTextDeletion Enum.StudioStyleGuideColor @62
+---@field DiffTextSeparatorBackground Enum.StudioStyleGuideColor @63
+---@field DiffTextNoChangeBackground Enum.StudioStyleGuideColor @64
+---@field DiffTextAdditionBackground Enum.StudioStyleGuideColor @65
+---@field DiffTextDeletionBackground Enum.StudioStyleGuideColor @66
+---@field DiffLineNum Enum.StudioStyleGuideColor @67
+---@field DiffLineNumSeparatorBackground Enum.StudioStyleGuideColor @68
+---@field DiffLineNumNoChangeBackground Enum.StudioStyleGuideColor @69
+---@field DiffLineNumAdditionBackground Enum.StudioStyleGuideColor @70
+---@field DiffLineNumDeletionBackground Enum.StudioStyleGuideColor @71
+---@field DiffFilePathBackground Enum.StudioStyleGuideColor @72
+---@field DiffFilePathBorder Enum.StudioStyleGuideColor @73
+---@field Separator Enum.StudioStyleGuideColor @74
+---@field ButtonBorder Enum.StudioStyleGuideColor @75
+---@field ButtonText Enum.StudioStyleGuideColor @76
+---@field InputFieldBorder Enum.StudioStyleGuideColor @77
+---@field CheckedFieldBackground Enum.StudioStyleGuideColor @78
+---@field CheckedFieldBorder Enum.StudioStyleGuideColor @79
+---@field CheckedFieldIndicator Enum.StudioStyleGuideColor @80
+---@field HeaderSection Enum.StudioStyleGuideColor @81
+---@field Midlight Enum.StudioStyleGuideColor @82
+---@field StatusBar Enum.StudioStyleGuideColor @83
+---@field DialogButton Enum.StudioStyleGuideColor @84
+---@field DialogButtonText Enum.StudioStyleGuideColor @85
+---@field DialogButtonBorder Enum.StudioStyleGuideColor @86
+---@field DialogMainButton Enum.StudioStyleGuideColor @87
+---@field DialogMainButtonText Enum.StudioStyleGuideColor @88
+---@field Merge3HighlightOriginal Enum.StudioStyleGuideColor @89
+---@field Merge3HighlightMine Enum.StudioStyleGuideColor @90
+---@field Merge3HighlightTheirs Enum.StudioStyleGuideColor @91
 ---
 
 ---
 ---@class Enum.StudioStyleGuideModifier:EnumItem
----@alias self Enum.StudioStyleGuideModifier
----@field Default self @0
----@field Selected self @1
----@field Pressed self @2
----@field Disabled self @3
----@field Hover self @4
+---@field Default Enum.StudioStyleGuideModifier @0
+---@field Selected Enum.StudioStyleGuideModifier @1
+---@field Pressed Enum.StudioStyleGuideModifier @2
+---@field Disabled Enum.StudioStyleGuideModifier @3
+---@field Hover Enum.StudioStyleGuideModifier @4
 ---
 
 ---
 ---@class Enum.Style:EnumItem
----@alias self Enum.Style
----@field AlternatingSupports self @0
----@field BridgeStyleSupports self @1
----@field NoSupports self @2
+---@field AlternatingSupports Enum.Style @0
+---@field BridgeStyleSupports Enum.Style @1
+---@field NoSupports Enum.Style @2
 ---
 
 ---
 ---@class Enum.SurfaceConstraint:EnumItem
----@alias self Enum.SurfaceConstraint
----@field None self @0
----@field Hinge self @1
----@field SteppingMotor self @2
----@field Motor self @3
+---@field None Enum.SurfaceConstraint @0
+---@field Hinge Enum.SurfaceConstraint @1
+---@field SteppingMotor Enum.SurfaceConstraint @2
+---@field Motor Enum.SurfaceConstraint @3
 ---
 
 ---
 ---@class Enum.SurfaceGuiSizingMode:EnumItem
----@alias self Enum.SurfaceGuiSizingMode
----@field FixedSize self @0
----@field PixelsPerStud self @1
+---@field FixedSize Enum.SurfaceGuiSizingMode @0
+---@field PixelsPerStud Enum.SurfaceGuiSizingMode @1
 ---
 
 ---
 ---@class Enum.SurfaceType:EnumItem
----@alias self Enum.SurfaceType
----@field Smooth self @0
----@field Glue self @1
----@field Weld self @2
----@field Studs self @3
----@field Inlet self @4
----@field Universal self @5
----@field Hinge self @6
----@field Motor self @7
----@field SteppingMotor self @8
----@field SmoothNoOutlines self @10
+---@field Smooth Enum.SurfaceType @0
+---@field Glue Enum.SurfaceType @1
+---@field Weld Enum.SurfaceType @2
+---@field Studs Enum.SurfaceType @3
+---@field Inlet Enum.SurfaceType @4
+---@field Universal Enum.SurfaceType @5
+---@field Hinge Enum.SurfaceType @6
+---@field Motor Enum.SurfaceType @7
+---@field SteppingMotor Enum.SurfaceType @8
+---@field SmoothNoOutlines Enum.SurfaceType @10
 ---
 
 ---
 ---@class Enum.SwipeDirection:EnumItem
----@alias self Enum.SwipeDirection
----@field Right self @0
----@field Left self @1
----@field Up self @2
----@field Down self @3
----@field None self @4
+---@field Right Enum.SwipeDirection @0
+---@field Left Enum.SwipeDirection @1
+---@field Up Enum.SwipeDirection @2
+---@field Down Enum.SwipeDirection @3
+---@field None Enum.SwipeDirection @4
 ---
 
 ---
 ---@class Enum.TableMajorAxis:EnumItem
----@alias self Enum.TableMajorAxis
----@field RowMajor self @0
----@field ColumnMajor self @1
+---@field RowMajor Enum.TableMajorAxis @0
+---@field ColumnMajor Enum.TableMajorAxis @1
 ---
 
 ---
 ---@class Enum.Technology:EnumItem
----@alias self Enum.Technology
----@field Legacy self @0
----@field Voxel self @1
----@field Compatibility self @2
----@field ShadowMap self @3
+---@field Legacy Enum.Technology @0
+---@field Voxel Enum.Technology @1
+---@field Compatibility Enum.Technology @2
+---@field ShadowMap Enum.Technology @3
 ---
 
 ---
 ---@class Enum.TeleportResult:EnumItem
----@alias self Enum.TeleportResult
----@field Success self @0
----@field Failure self @1
----@field GameNotFound self @2
----@field GameEnded self @3
----@field GameFull self @4
----@field Unauthorized self @5
----@field Flooded self @6
----@field IsTeleporting self @7
+---@field Success Enum.TeleportResult @0
+---@field Failure Enum.TeleportResult @1
+---@field GameNotFound Enum.TeleportResult @2
+---@field GameEnded Enum.TeleportResult @3
+---@field GameFull Enum.TeleportResult @4
+---@field Unauthorized Enum.TeleportResult @5
+---@field Flooded Enum.TeleportResult @6
+---@field IsTeleporting Enum.TeleportResult @7
 ---
 
 ---
 ---@class Enum.TeleportState:EnumItem
----@alias self Enum.TeleportState
----@field RequestedFromServer self @0
----@field Started self @1
----@field WaitingForServer self @2
----@field Failed self @3
----@field InProgress self @4
+---@field RequestedFromServer Enum.TeleportState @0
+---@field Started Enum.TeleportState @1
+---@field WaitingForServer Enum.TeleportState @2
+---@field Failed Enum.TeleportState @3
+---@field InProgress Enum.TeleportState @4
 ---
 
 ---
 ---@class Enum.TeleportType:EnumItem
----@alias self Enum.TeleportType
----@field ToPlace self @0
----@field ToInstance self @1
----@field ToReservedServer self @2
+---@field ToPlace Enum.TeleportType @0
+---@field ToInstance Enum.TeleportType @1
+---@field ToReservedServer Enum.TeleportType @2
 ---
 
 ---
 ---@class Enum.TextFilterContext:EnumItem
----@alias self Enum.TextFilterContext
----@field PublicChat self @1
----@field PrivateChat self @2
+---@field PublicChat Enum.TextFilterContext @1
+---@field PrivateChat Enum.TextFilterContext @2
 ---
 
 ---
 ---@class Enum.TextInputType:EnumItem
----@alias self Enum.TextInputType
----@field Default self @0
----@field NoSuggestions self @1
----@field Number self @2
----@field Email self @3
----@field Phone self @4
+---@field Default Enum.TextInputType @0
+---@field NoSuggestions Enum.TextInputType @1
+---@field Number Enum.TextInputType @2
+---@field Email Enum.TextInputType @3
+---@field Phone Enum.TextInputType @4
 ---
 
 ---
 ---@class Enum.TextTruncate:EnumItem
----@alias self Enum.TextTruncate
----@field None self @0
----@field AtEnd self @1
+---@field None Enum.TextTruncate @0
+---@field AtEnd Enum.TextTruncate @1
 ---
 
 ---
 ---@class Enum.TextXAlignment:EnumItem
----@alias self Enum.TextXAlignment
----@field Left self @0
----@field Center self @2
----@field Right self @1
+---@field Left Enum.TextXAlignment @0
+---@field Center Enum.TextXAlignment @2
+---@field Right Enum.TextXAlignment @1
 ---
 
 ---
 ---@class Enum.TextYAlignment:EnumItem
----@alias self Enum.TextYAlignment
----@field Top self @0
----@field Center self @1
----@field Bottom self @2
+---@field Top Enum.TextYAlignment @0
+---@field Center Enum.TextYAlignment @1
+---@field Bottom Enum.TextYAlignment @2
 ---
 
 ---
 ---@class Enum.TextureMode:EnumItem
----@alias self Enum.TextureMode
----@field Stretch self @0
----@field Wrap self @1
----@field Static self @2
+---@field Stretch Enum.TextureMode @0
+---@field Wrap Enum.TextureMode @1
+---@field Static Enum.TextureMode @2
 ---
 
 ---
 ---@class Enum.TextureQueryType:EnumItem
----@alias self Enum.TextureQueryType
----@field NonHumanoid self @0
----@field NonHumanoidOrphaned self @1
----@field Humanoid self @2
----@field HumanoidOrphaned self @3
+---@field NonHumanoid Enum.TextureQueryType @0
+---@field NonHumanoidOrphaned Enum.TextureQueryType @1
+---@field Humanoid Enum.TextureQueryType @2
+---@field HumanoidOrphaned Enum.TextureQueryType @3
 ---
 
 ---
 ---@class Enum.ThreadPoolConfig:EnumItem
----@alias self Enum.ThreadPoolConfig
----@field Auto self @0
----@field PerCore1 self @101
----@field PerCore2 self @102
----@field PerCore3 self @103
----@field PerCore4 self @104
----@field Threads1 self @1
----@field Threads2 self @2
----@field Threads3 self @3
----@field Threads4 self @4
----@field Threads8 self @8
----@field Threads16 self @16
+---@field Auto Enum.ThreadPoolConfig @0
+---@field PerCore1 Enum.ThreadPoolConfig @101
+---@field PerCore2 Enum.ThreadPoolConfig @102
+---@field PerCore3 Enum.ThreadPoolConfig @103
+---@field PerCore4 Enum.ThreadPoolConfig @104
+---@field Threads1 Enum.ThreadPoolConfig @1
+---@field Threads2 Enum.ThreadPoolConfig @2
+---@field Threads3 Enum.ThreadPoolConfig @3
+---@field Threads4 Enum.ThreadPoolConfig @4
+---@field Threads8 Enum.ThreadPoolConfig @8
+---@field Threads16 Enum.ThreadPoolConfig @16
 ---
 
 ---
 ---@class Enum.ThrottlingPriority:EnumItem
----@alias self Enum.ThrottlingPriority
----@field Extreme self @2
----@field ElevatedOnServer self @1
----@field Default self @0
+---@field Extreme Enum.ThrottlingPriority @2
+---@field ElevatedOnServer Enum.ThrottlingPriority @1
+---@field Default Enum.ThrottlingPriority @0
 ---
 
 ---
 ---@class Enum.ThumbnailSize:EnumItem
----@alias self Enum.ThumbnailSize
----@field Size48x48 self @0
----@field Size180x180 self @1
----@field Size420x420 self @2
----@field Size60x60 self @3
----@field Size100x100 self @4
----@field Size150x150 self @5
----@field Size352x352 self @6
+---@field Size48x48 Enum.ThumbnailSize @0
+---@field Size180x180 Enum.ThumbnailSize @1
+---@field Size420x420 Enum.ThumbnailSize @2
+---@field Size60x60 Enum.ThumbnailSize @3
+---@field Size100x100 Enum.ThumbnailSize @4
+---@field Size150x150 Enum.ThumbnailSize @5
+---@field Size352x352 Enum.ThumbnailSize @6
 ---
 
 ---
 ---@class Enum.ThumbnailType:EnumItem
----@alias self Enum.ThumbnailType
----@field HeadShot self @0
----@field AvatarBust self @1
----@field AvatarThumbnail self @2
+---@field HeadShot Enum.ThumbnailType @0
+---@field AvatarBust Enum.ThumbnailType @1
+---@field AvatarThumbnail Enum.ThumbnailType @2
 ---
 
 ---
 ---@class Enum.TickCountSampleMethod:EnumItem
----@alias self Enum.TickCountSampleMethod
----@field Fast self @0
----@field Benchmark self @1
----@field Precise self @2
+---@field Fast Enum.TickCountSampleMethod @0
+---@field Benchmark Enum.TickCountSampleMethod @1
+---@field Precise Enum.TickCountSampleMethod @2
 ---
 
 ---
 ---@class Enum.TopBottom:EnumItem
----@alias self Enum.TopBottom
----@field Top self @0
----@field Center self @1
----@field Bottom self @2
+---@field Top Enum.TopBottom @0
+---@field Center Enum.TopBottom @1
+---@field Bottom Enum.TopBottom @2
 ---
 
 ---
 ---@class Enum.TouchCameraMovementMode:EnumItem
----@alias self Enum.TouchCameraMovementMode
----@field Default self @0
----@field Follow self @2
----@field Classic self @1
----@field Orbital self @3
+---@field Default Enum.TouchCameraMovementMode @0
+---@field Follow Enum.TouchCameraMovementMode @2
+---@field Classic Enum.TouchCameraMovementMode @1
+---@field Orbital Enum.TouchCameraMovementMode @3
 ---
 
 ---
 ---@class Enum.TouchMovementMode:EnumItem
----@alias self Enum.TouchMovementMode
----@field Default self @0
----@field Thumbstick self @1
----@field DPad self @2
----@field Thumbpad self @3
----@field ClickToMove self @4
----@field DynamicThumbstick self @5
+---@field Default Enum.TouchMovementMode @0
+---@field Thumbstick Enum.TouchMovementMode @1
+---@field DPad Enum.TouchMovementMode @2
+---@field Thumbpad Enum.TouchMovementMode @3
+---@field ClickToMove Enum.TouchMovementMode @4
+---@field DynamicThumbstick Enum.TouchMovementMode @5
 ---
 
 ---
 ---@class Enum.TweenStatus:EnumItem
----@alias self Enum.TweenStatus
----@field Canceled self @0
----@field Completed self @1
+---@field Canceled Enum.TweenStatus @0
+---@field Completed Enum.TweenStatus @1
 ---
 
 ---
 ---@class Enum.UITheme:EnumItem
----@alias self Enum.UITheme
----@field Light self @0
----@field Dark self @1
+---@field Light Enum.UITheme @0
+---@field Dark Enum.UITheme @1
 ---
 
 ---
 ---@class Enum.UiMessageType:EnumItem
----@alias self Enum.UiMessageType
----@field UiMessageError self @0
----@field UiMessageInfo self @1
+---@field UiMessageError Enum.UiMessageType @0
+---@field UiMessageInfo Enum.UiMessageType @1
 ---
 
 ---
 ---@class Enum.UploadSetting:EnumItem
----@alias self Enum.UploadSetting
----@field Never self @0
----@field Ask self @1
----@field Always self @2
+---@field Never Enum.UploadSetting @0
+---@field Ask Enum.UploadSetting @1
+---@field Always Enum.UploadSetting @2
 ---
 
 ---
 ---@class Enum.UserCFrame:EnumItem
----@alias self Enum.UserCFrame
----@field Head self @0
----@field LeftHand self @1
----@field RightHand self @2
+---@field Head Enum.UserCFrame @0
+---@field LeftHand Enum.UserCFrame @1
+---@field RightHand Enum.UserCFrame @2
 ---
 
 ---
 ---@class Enum.UserInputState:EnumItem
----@alias self Enum.UserInputState
----@field Begin self @0
----@field Change self @1
----@field End self @2
----@field Cancel self @3
----@field None self @4
+---@field Begin Enum.UserInputState @0
+---@field Change Enum.UserInputState @1
+---@field End Enum.UserInputState @2
+---@field Cancel Enum.UserInputState @3
+---@field None Enum.UserInputState @4
 ---
 
 ---
 ---@class Enum.UserInputType:EnumItem
----@alias self Enum.UserInputType
----@field MouseButton1 self @0
----@field MouseButton2 self @1
----@field MouseButton3 self @2
----@field MouseWheel self @3
----@field MouseMovement self @4
----@field Touch self @7
----@field Keyboard self @8
----@field Focus self @9
----@field Accelerometer self @10
----@field Gyro self @11
----@field Gamepad1 self @12
----@field Gamepad2 self @13
----@field Gamepad3 self @14
----@field Gamepad4 self @15
----@field Gamepad5 self @16
----@field Gamepad6 self @17
----@field Gamepad7 self @18
----@field Gamepad8 self @19
----@field TextInput self @20
----@field InputMethod self @21
----@field None self @22
+---@field MouseButton1 Enum.UserInputType @0
+---@field MouseButton2 Enum.UserInputType @1
+---@field MouseButton3 Enum.UserInputType @2
+---@field MouseWheel Enum.UserInputType @3
+---@field MouseMovement Enum.UserInputType @4
+---@field Touch Enum.UserInputType @7
+---@field Keyboard Enum.UserInputType @8
+---@field Focus Enum.UserInputType @9
+---@field Accelerometer Enum.UserInputType @10
+---@field Gyro Enum.UserInputType @11
+---@field Gamepad1 Enum.UserInputType @12
+---@field Gamepad2 Enum.UserInputType @13
+---@field Gamepad3 Enum.UserInputType @14
+---@field Gamepad4 Enum.UserInputType @15
+---@field Gamepad5 Enum.UserInputType @16
+---@field Gamepad6 Enum.UserInputType @17
+---@field Gamepad7 Enum.UserInputType @18
+---@field Gamepad8 Enum.UserInputType @19
+---@field TextInput Enum.UserInputType @20
+---@field InputMethod Enum.UserInputType @21
+---@field None Enum.UserInputType @22
 ---
 
 ---
 ---@class Enum.VRTouchpad:EnumItem
----@alias self Enum.VRTouchpad
----@field Left self @0
----@field Right self @1
+---@field Left Enum.VRTouchpad @0
+---@field Right Enum.VRTouchpad @1
 ---
 
 ---
 ---@class Enum.VRTouchpadMode:EnumItem
----@alias self Enum.VRTouchpadMode
----@field Touch self @0
----@field VirtualThumbstick self @1
----@field ABXY self @2
+---@field Touch Enum.VRTouchpadMode @0
+---@field VirtualThumbstick Enum.VRTouchpadMode @1
+---@field ABXY Enum.VRTouchpadMode @2
 ---
 
 ---
 ---@class Enum.VerticalAlignment:EnumItem
----@alias self Enum.VerticalAlignment
----@field Center self @0
----@field Top self @1
----@field Bottom self @2
+---@field Center Enum.VerticalAlignment @0
+---@field Top Enum.VerticalAlignment @1
+---@field Bottom Enum.VerticalAlignment @2
 ---
 
 ---
 ---@class Enum.VerticalScrollBarPosition:EnumItem
----@alias self Enum.VerticalScrollBarPosition
----@field Left self @1
----@field Right self @0
+---@field Left Enum.VerticalScrollBarPosition @1
+---@field Right Enum.VerticalScrollBarPosition @0
 ---
 
 ---
 ---@class Enum.VibrationMotor:EnumItem
----@alias self Enum.VibrationMotor
----@field Large self @0
----@field Small self @1
----@field LeftTrigger self @2
----@field RightTrigger self @3
----@field LeftHand self @4
----@field RightHand self @5
+---@field Large Enum.VibrationMotor @0
+---@field Small Enum.VibrationMotor @1
+---@field LeftTrigger Enum.VibrationMotor @2
+---@field RightTrigger Enum.VibrationMotor @3
+---@field LeftHand Enum.VibrationMotor @4
+---@field RightHand Enum.VibrationMotor @5
 ---
 
 ---
 ---@class Enum.VideoQualitySettings:EnumItem
----@alias self Enum.VideoQualitySettings
----@field LowResolution self @0
----@field MediumResolution self @1
----@field HighResolution self @2
+---@field LowResolution Enum.VideoQualitySettings @0
+---@field MediumResolution Enum.VideoQualitySettings @1
+---@field HighResolution Enum.VideoQualitySettings @2
 ---
 
 ---
 ---@class Enum.VirtualInputMode:EnumItem
----@alias self Enum.VirtualInputMode
----@field Recording self @1
----@field Playing self @2
----@field None self @0
+---@field Recording Enum.VirtualInputMode @1
+---@field Playing Enum.VirtualInputMode @2
+---@field None Enum.VirtualInputMode @0
 ---
 
 ---
 ---@class Enum.WaterDirection:EnumItem
----@alias self Enum.WaterDirection
----@field NegX self @0
----@field X self @1
----@field NegY self @2
----@field Y self @3
----@field NegZ self @4
----@field Z self @5
+---@field NegX Enum.WaterDirection @0
+---@field X Enum.WaterDirection @1
+---@field NegY Enum.WaterDirection @2
+---@field Y Enum.WaterDirection @3
+---@field NegZ Enum.WaterDirection @4
+---@field Z Enum.WaterDirection @5
 ---
 
 ---
 ---@class Enum.WaterForce:EnumItem
----@alias self Enum.WaterForce
----@field None self @0
----@field Small self @1
----@field Medium self @2
----@field Strong self @3
----@field Max self @4
+---@field None Enum.WaterForce @0
+---@field Small Enum.WaterForce @1
+---@field Medium Enum.WaterForce @2
+---@field Strong Enum.WaterForce @3
+---@field Max Enum.WaterForce @4
 ---
 
 ---
 ---@class Enum.ZIndexBehavior:EnumItem
----@alias self Enum.ZIndexBehavior
----@field Global self @0
----@field Sibling self @1
+---@field Global Enum.ZIndexBehavior @0
+---@field Sibling Enum.ZIndexBehavior @1
 ---
 
 ---
