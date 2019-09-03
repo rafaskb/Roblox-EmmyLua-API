@@ -155,14 +155,13 @@ function parser:parseEnum(baseData)
     local class = "Enum." .. baseData.Name
     utils:write("---")
     utils:write("---@class %s:EnumItem", class)
-    utils:write("---@alias self %s", class)
 
     -- Write items
     if baseData.Items then
         for _, item in pairs(baseData.Items) do
             local itemName = item.Name
             local itemValue = item.Value
-            utils:write("---@field %s self @%s", itemName, itemValue)
+            utils:write("---@field %s %s @%s", itemName, class, itemValue)
         end
     end
 

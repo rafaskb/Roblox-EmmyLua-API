@@ -1,12 +1,10 @@
 ---
 ---@class RBXScriptSignal
----@alias self RBXScriptSignal
 ---@field Connect fun(self:RBXScriptSignal)
 ---
 
 ---
 ---@class EnumItem
----@alias self EnumItem
 ---@field Name string The name of this EnumItem.
 ---@field Value number The integral value assigned to this enum.
 ---@field EnumType EnumItem A reference to the parent Enum of this EnumItem.
@@ -14,7 +12,6 @@
 
 ---
 ---@class RobloxDebug
----@alias self RobloxDebug
 ---@field traceback fun():string
 ---@field profilebegin fun(label:string):void
 ---@field profileend fun():void
@@ -22,7 +19,6 @@
 
 ---
 ---@class RobloxOs
----@alias self RobloxOs
 ---@field time fun():number
 ---@field difftime fun(t2:number, t2:number):number
 ---@field date fun(formatString:string, time:number):table<string, any>
@@ -30,7 +26,6 @@
 
 ---
 ---@class RobloxUtf8
----@alias self RobloxUtf8
 ---@field char fun(codepoints:vararg):string
 ---@field codes fun(str:string):function,string,number
 ---@field codepoint fun(str:string, i:number, j:number):vararg
@@ -44,9 +39,8 @@
 
 ---
 ---@class Color3
----@alias self Color3
----@field new fun():self Creates a Color3 whose values are (0,0,0) [black]
----@field new fun(r:number,g:number,b:number):self Returns a Color3 with the given red, green, and blue values. The numbers can range from 0 to 1.
+---@field new fun():Color3 Creates a Color3 whose values are (0,0,0) [black]
+---@field new fun(r:number,g:number,b:number):Color3 Returns a Color3 with the given red, green, and blue values. The numbers can range from 0 to 1.
 ---@field fromRGB fun(r:number,g:number,b:number):Color3 Creates a Color3 with the given red, green, and blue. The numbers can range from 0 to 255.
 ---@field fromHSV fun(h:number,s:number,v:number):Color3 Creates a Color3 with the given hue, saturation, and value. The numbers can range from 0 to 1.
 ---@field r number The red value of the color
@@ -58,8 +52,7 @@
 
 ---
 ---@class Vector2
----@alias self Vector2
----@field new fun(x:number, y:number):self Creates a new Vector2 using ordinates x and y
+---@field new fun(x:number, y:number):Vector2 Creates a new Vector2 using ordinates x and y
 ---@field X number The x-coordinate
 ---@field Y number The y-coordinate
 ---@field Magnitude number The length of the vector
@@ -71,8 +64,7 @@
 
 ---
 ---@class Vector3
----@alias self Vector3
----@field new fun(x:number, y:number, z:number):self Creates a new Vector3 using ordinates x and y
+---@field new fun(x:number, y:number, z:number):Vector3 Creates a new Vector3 using ordinates x and y
 ---@field FromNormalId fun(normal:Enum.NormalId):Vector3 Constructs a new Vector3 in a particular direction.
 ---@field FromAxis fun(axis:Enum.Axis):Vector3 Constructs a new Vector3 for a particular axis.
 ---@field X number The x-coordinate
@@ -88,16 +80,14 @@
 
 ---
 ---@class Vector2int16
----@alias self Vector2int16
----@field new fun(x:number, y:number):self Creates a new Vector2int16 using ordinates x and y. Similar to Vector2, but uses integral coordinates
+---@field new fun(x:number, y:number):Vector2int16 Creates a new Vector2int16 using ordinates x and y. Similar to Vector2, but uses integral coordinates
 ---@field X number The x-coordinate
 ---@field Y number The y-coordinate
 ---
 
 ---
 ---@class Vector3int16
----@alias self Vector3int16
----@field new fun(x:number, y:number, z:number):self Creates a new Vector3int16 using coordinate x, y, z.
+---@field new fun(x:number, y:number, z:number):Vector3int16 Creates a new Vector3int16 using coordinate x, y, z.
 ---@field X number The x-coordinate
 ---@field Y number The y-coordinate
 ---@field Z number The z-coordinate
@@ -105,17 +95,15 @@
 
 ---
 ---@class UDim
----@alias self UDim
----@field new fun(Scale:number, Offset:number):self Creates a new UDim from components
+---@field new fun(Scale:number, Offset:number):UDim Creates a new UDim from components
 ---@field Scale number The scale component of the UDim. The value this represents is scaled relative to the axis that this UDim is representing in a UDim2.
 ---@field Offset number The pixel unit component of the UDim.
 ---
 
 ---
 ---@class UDim2
----@alias self UDim2
----@field new fun(xScale:number, xOffset:number, yScale:number, yOffset:number):self
----@field new fun(x:UDim, y:UDim):self
+---@field new fun(xScale:number, xOffset:number, yScale:number, yOffset:number):UDim2
+---@field new fun(x:UDim, y:UDim):UDim2
 ---@field FromNormalId fun(normal:Enum.NormalId):UDim2 Constructs a new UDim2 in a particular direction.
 ---@field FromAxis fun(axis:Enum.Axis):UDim2 Constructs a new UDim2 for a particular axis.
 ---@field X UDim The x dimension scale and offset
@@ -127,14 +115,13 @@
 
 ---
 ---@class CFrame
----@alias self CFrame
 ---
----@field new fun():self Creates a blank identity CFrame.
----@field new fun(pos:Vector3):self Creates a CFrame from a Vector3
----@field new fun(pos:Vector3, lookAt:Vector3):self This constructor has been deprecated in favor of using `CFrame.fromMatrix(), to create a lookVector. Itt creates a CFrame located at pos with it’s lookVector pointing towards the lookAt position.
----@field new fun(x:number, y:number, z:number):self Creates a CFrame from position (x, y, z).
----@field new fun(x:number, y:number, z:number, qX:number, qY:number, qZ:number, qW:number):self Creates a CFrame from position (x, y, z) and quaternion (qX, qY, qZ, qW)
----@field new fun(x:number, y:number, z:number, R00:number, R01:number, R02:number, R10:number, R11:number, R12:number, R20:number, R21:number, R22:number):self Creates a CFrame from position (x, y, z) with an orientation specified by the rotation matrix [[R00 R01 R02] [R10 R11 R12] [R20 R21 R22]]
+---@field new fun():CFrame Creates a blank identity CFrame.
+---@field new fun(pos:Vector3):CFrame Creates a CFrame from a Vector3
+---@field new fun(pos:Vector3, lookAt:Vector3):CFrame This constructor has been deprecated in favor of using `CFrame.fromMatrix(), to create a lookVector. Itt creates a CFrame located at pos with it’s lookVector pointing towards the lookAt position.
+---@field new fun(x:number, y:number, z:number):CFrame Creates a CFrame from position (x, y, z).
+---@field new fun(x:number, y:number, z:number, qX:number, qY:number, qZ:number, qW:number):CFrame Creates a CFrame from position (x, y, z) and quaternion (qX, qY, qZ, qW)
+---@field new fun(x:number, y:number, z:number, R00:number, R01:number, R02:number, R10:number, R11:number, R12:number, R20:number, R21:number, R22:number):CFrame Creates a CFrame from position (x, y, z) with an orientation specified by the rotation matrix [[R00 R01 R02] [R10 R11 R12] [R20 R21 R22]]
 ---@field fromEulerAnglesXYZ fun(rx:number, ry:number, rz:number):CFrame Creates a rotated CFrame using angles (rx, ry, rz) in radians. Rotations are applied in Z, Y, X order.
 ---@field fromEulerAnglesYXZ fun(rx:number, ry:number, rz:number):CFrame Creates a rotated CFrame using angles (rx, ry, rz) in radians. Rotations are applied in Z, X, Y order.
 ---@field Angles fun(rx:number, ry:number, rz:number):CFrame Equivalent to fromEulerAnglesXYZ
@@ -167,8 +154,7 @@
 
 ---
 ---@class TweenInfo
----@alias self TweenInfo
----@field new fun(time:number, easingStyle:Enum.EasingStyle, easingDirection:Enum.EasingDirection, repeatCount:number, reverses:boolean, delayTime:number):self Creates a new Tweeninfo.
+---@field new fun(time:number, easingStyle:Enum.EasingStyle, easingDirection:Enum.EasingDirection, repeatCount:number, reverses:boolean, delayTime:number):TweenInfo Creates a new Tweeninfo.
 ---@field EasingDirection Enum.EasingDirection The direction in which the EasingStyle executes.
 ---@field Time number The amount of time the tween takes in seconds.
 ---@field DelayTime number The amount of time that elapses before tween starts in seconds.
@@ -179,8 +165,7 @@
 
 ---
 ---@class Ray
----@alias self Ray
----@field new fun(Origin:Vector3, Direction:Vector3):self Creates a new Ray with given Origin and Direction.
+---@field new fun(Origin:Vector3, Direction:Vector3):Ray Creates a new Ray with given Origin and Direction.
 ---@field Unit Ray The Ray with a normalized direction
 ---@field Origin Vector3 The position of the origin
 ---@field Direction Vector3 The direction vector of the ray
@@ -190,8 +175,7 @@
 
 ---
 ---@class Region3
----@alias self Region3
----@field new fun(min:Vector3, max:Vector3):self Creates a new Region3 out of two Vector3 values.
+---@field new fun(min:Vector3, max:Vector3):Region3 Creates a new Region3 out of two Vector3 values.
 ---@field CFrame CFrame The center location and rotation of the Region3
 ---@field Size Vector3 The 3D size of the Region3
 ---@field ExpandToGrid fun(self:Ray, Region:number):Region3 Expands the Region3 so that it is aligned with a voxel grid based on the provided resolution and returns the expanded Region3.
@@ -199,8 +183,7 @@
 
 ---
 ---@class Axes Axes is a datatype used for the ArcHandles class to control what rotation axes are currently enabled.
----@alias self Axes
----@field new fun(axes:vararg):self Creates a new Axes using list of axes and/or faces. NormalIds (faces) are converted to the corresponding axes.
+---@field new fun(axes:vararg):Axes Creates a new Axes using list of axes and/or faces. NormalIds (faces) are converted to the corresponding axes.
 ---@field X boolean Whether the X axis is enabled
 ---@field Y boolean Whether the Y axis is enabled
 ---@field Z boolean Whether the Z axis is enabled
@@ -214,8 +197,7 @@
 
 ---
 ---@class Faces
----@alias self Faces
----@field new fun(normalIds:vararg):self Creates a new Faces using list of faces
+---@field new fun(normalIds:vararg):Faces Creates a new Faces using list of faces
 ---@field Top boolean Whether the top face is included
 ---@field Bottom boolean Whether the bottom face is included
 ---@field Left boolean Whether the left face is included
@@ -226,8 +208,7 @@
 
 ---
 ---@class NumberRange
----@alias self NumberRange
----@field new fun(value:number):self Creates a new NumberRange with the minimum and maximum set to value.
+---@field new fun(value:number):NumberRange Creates a new NumberRange with the minimum and maximum set to value.
 ---@field new fun(minimum:number, maximum:number) Creates a new NumberRange with the provided minimum and maximum. minimum must be less than or equal to maximum.
 ---@field Min number Minimum value. Will always be less than or equal to the maximum.
 ---@field Max number Maximum value. Will always be greater than or equal to the minimum.
@@ -235,19 +216,17 @@
 
 ---
 ---@class NumberSequence
----@alias self NumberSequence
----@field new fun(n:number):self Creates a sequence of two keypoints with n for each value
+---@field new fun(n:number):NumberSequence Creates a sequence of two keypoints with n for each value
 ---@field new fun(n0:number, n1:number) Creates a sequence of two keypoints with n0 and n1 as the value
----@field new fun(Keypoints:NumberSequenceKeypoint[]):self Creates a new Vector2int16 using ordinates x and y. Similar to Vector2, but uses integral coordinates
+---@field new fun(Keypoints:NumberSequenceKeypoint[]):NumberSequence Creates a new Vector2int16 using ordinates x and y. Similar to Vector2, but uses integral coordinates
 ---@field Keypoints NumberSequenceKeypoint[] An array containing keypoint values for the NumberSequence.
 ---
 
 ---
 ---@class NumberSequenceKeypoint
----@alias self NumberSequenceKeypoint
 ---@field new fun(time:number, value:number) Creates a keypoint with a specified time and value.
 ---@field new fun(time:number, value:number, envelop:number) Creates a keypoint with a specified time, value, and envelope.
----@field new fun(Keypoints:NumberSequenceKeypoint[]):self Creates a new Vector2int16 using ordinates x and y. Similar to Vector2, but uses integral coordinates
+---@field new fun(Keypoints:NumberSequenceKeypoint[]):NumberSequenceKeypoint Creates a new Vector2int16 using ordinates x and y. Similar to Vector2, but uses integral coordinates
 ---@field Envelope number Indicates the amount of variance allowed from the Value. A computed value.
 ---@field Time number The relative time at which the keypoint is positioned.
 ---@field Value number The base value of this keypoint.
@@ -255,16 +234,14 @@
 
 ---
 ---@class ColorSequence
----@alias self ColorSequence
----@field new fun(c:Color3):self Creates a sequence of two keypoints with c for each value
+---@field new fun(c:Color3):ColorSequence Creates a sequence of two keypoints with c for each value
 ---@field new fun(c0:Color3, c1:Color3) Creates a sequence of two keypoints with c0 and c1 as the value
----@field new fun(keypoints:ColorSequenceKeypoint[]):self Creates a sequence of ColorSequenceKeypoints.
+---@field new fun(keypoints:ColorSequenceKeypoint[]):ColorSequence Creates a sequence of ColorSequenceKeypoints.
 ---@field Keypoints ColorSequenceKeypoint[] An array containing ColorSequenceKeypoint values for the ColorSequence.
 ---
 
 ---
 ---@class ColorSequenceKeypoint
----@alias self ColorSequenceKeypoint
 ---@field new fun(time:number, color:Color3) Creates a keypoint with a specified time and color.
 ---@field Time number The relative time at which the keypoint is located.
 ---@field Value number The Color3 value at the keypoint.
@@ -272,22 +249,21 @@
 
 ---
 ---@class BrickColor BrickColor is a datatype that provides a predefined list of colors, although any color imaginable is supported through a part’s BasePart.Color property. To view a full list of available brick colors, see the BrickColor Codes reference.
----@alias self BrickColor
 ---
----@field new fun(val:number):self Constructs a BrickColor from its numerical index.
----@field new fun(r:number, g:number, b:number):self Constructs the closest BrickColor that can be matched to the specified RGB components.
----@field new fun(val:string):self Constructs a BrickColor from its name.
----@field new fun(color:Color3):self Constructs the closest BrickColor that can be matched to the specified Color3.
----@field palette fun(paletteValue:number):self Constructs a BrickColor from its palette index.
----@field random fun():self Returns a random BrickColor.
----@field White fun():self Returns the BrickColor White
----@field Gray fun():self Returns the BrickColor Medium stone grey
----@field DarkGray fun():self Returns the BrickColor Dark stone grey
----@field Black fun():self Returns the BrickColor Black
----@field Red fun():self Returns the BrickColor Bright Red
----@field Yellow fun():self Returns the BrickColor Bright Yellow
----@field Green fun():self Returns the BrickColor Dark Green
----@field Blue fun():self Returns the BrickColor Bright Blue
+---@field new fun(val:number):BrickColor Constructs a BrickColor from its numerical index.
+---@field new fun(r:number, g:number, b:number):BrickColor Constructs the closest BrickColor that can be matched to the specified RGB components.
+---@field new fun(val:string):BrickColor Constructs a BrickColor from its name.
+---@field new fun(color:Color3):BrickColor Constructs the closest BrickColor that can be matched to the specified Color3.
+---@field palette fun(paletteValue:number):BrickColor Constructs a BrickColor from its palette index.
+---@field random fun():BrickColor Returns a random BrickColor.
+---@field White fun():BrickColor Returns the BrickColor White
+---@field Gray fun():BrickColor Returns the BrickColor Medium stone grey
+---@field DarkGray fun():BrickColor Returns the BrickColor Dark stone grey
+---@field Black fun():BrickColor Returns the BrickColor Black
+---@field Red fun():BrickColor Returns the BrickColor Bright Red
+---@field Yellow fun():BrickColor Returns the BrickColor Bright Yellow
+---@field Green fun():BrickColor Returns the BrickColor Dark Green
+---@field Blue fun():BrickColor Returns the BrickColor Bright Blue
 ---
 ---@field Number number The unique number that identifies the BrickColor
 ---@field r number The red component (between 0 and 1)
@@ -299,8 +275,7 @@
 
 ---
 ---@class DockWidgetPluginGuiInfo DockWidgetPluginGuiInfo is a datatype used to describe details for a DockWidgetPluginGui. This datatype is used when constructing a PluginGui via the plugin’s CreateDockWidgetPluginGui() method.
----@alias self DockWidgetPluginGuiInfo
----@field new fun(initDockState:Enum.InitialDockState, initEnabled:boolean, overrideEnabledRestore:boolean, floatXSize:number, floatYSize:number, minWidth:number, minHeight:number):self The main constructor function for the DockWidgetPluginGuiInfo.
+---@field new fun(initDockState:Enum.InitialDockState, initEnabled:boolean, overrideEnabledRestore:boolean, floatXSize:number, floatYSize:number, minWidth:number, minHeight:number):DockWidgetPluginGuiInfo The main constructor function for the DockWidgetPluginGuiInfo.
 ---@field InitialEnabled boolean The initial enabled state of a PluginGui created using this DockWidgetPluginGuiInfo. If a PluginGui with the same ‘‘pluginGuiId’’ has previously been created in an earlier session of Roblox Studio, then it will reload that saved enabled state (unless InitialEnabledShouldOverrideRestore is true).
 ---@field InitialEnabledShouldOverrideRestore boolean If true, the value of InitialEnabled will override the previously saved enabled state of a PluginGui being created with this DockWidgetPluginGuiInfo. The previously saved enabled state is loaded based on the pluginGuiId argument of Plugin:CreateDockWidgetPluginGui.
 ---@field FloatingXSize number The initial pixel width of a PluginGui created using this DockWidgetPluginGuiInfo, when the InitialDockState is set to Float.
@@ -311,18 +286,16 @@
 
 ---
 ---@class PathWaypoint A datatype constructed by a PathWaypointAction action and Vector3 position which is used by the PathService to create points along a generated path.
----@alias self PathWaypoint
----@field new fun(position:Vector3, action:Enum.PathWaypointAction):self Creates a new PathWaypoint object
+---@field new fun(position:Vector3, action:Enum.PathWaypointAction):PathWaypoint Creates a new PathWaypoint object
 ---@field Action Enum.PathWaypointAction The action to be performed at this waypoint.
 ---@field Position Vector3 The 3D position of the waypoint
 ---
 
 ---
 ---@class PhysicalProperties PhysicalProperties is an object that describes several physical properties of a part: Density, Elasticity and Friction. It is used in the similarly-named BasePart.CustomPhysicalProperties property.
----@alias self PhysicalProperties
----@field new fun(material:Enum.Material):self Creates a PhysicalProperties container, with the density, friction, and elasticity specified for this Material.
----@field new fun(density:number, friction:number, elasticity:number):self Creates a PhysicalProperties container, with the specified density, friction, and elasticity.
----@field new fun(density:number, friction:number, elasticity:number, frictionWeight:number, elasticityWeight:number):self Creates a PhysicalProperties container, with the specified density, friction, and elasticity, as well as the weight of the friction and elasticity.
+---@field new fun(material:Enum.Material):PhysicalProperties Creates a PhysicalProperties container, with the density, friction, and elasticity specified for this Material.
+---@field new fun(density:number, friction:number, elasticity:number):PhysicalProperties Creates a PhysicalProperties container, with the specified density, friction, and elasticity.
+---@field new fun(density:number, friction:number, elasticity:number, frictionWeight:number, elasticityWeight:number):PhysicalProperties Creates a PhysicalProperties container, with the specified density, friction, and elasticity, as well as the weight of the friction and elasticity.
 ---
 ---@field Density number The density set for the custom physical properties. Density is defined as the amount of mass per unit volume. The more dense a part is, the more force it takes to accelerate it.
 ---@field Friction number The friction set for the custom physical properties. Friction is defined as the force that opposes the relative lateral motion of two solid surfaces in contact. The greater the friction on a part, the quicker it will decelerate when it rubs against another part with friction.
@@ -333,26 +306,23 @@
 
 ---
 ---@class Random
----@alias self Random
----@field new fun(seed:number):self Creates a new Random object. If the seed parameter is not specified, it will use a seed pulled from an internal entropy source.
+---@field new fun(seed:number):Random Creates a new Random object. If the seed parameter is not specified, it will use a seed pulled from an internal entropy source.
 ---@field NextInteger fun(min:number, max:number):number Returns a pseudorandom integer uniformly distributed over [min, max].
 ---@field NextNumber fun():number Returns a pseudorandom number uniformly distributed over [0, 1).
 ---@field NextNumber fun(min:number, max:number):number Returns a pseudorandom number uniformly distributed over [min, max).
----@field Clone fun():self Returns a new Random object with the same state as the original.
+---@field Clone fun():Random Returns a new Random object with the same state as the original.
 ---
 
 ---
 ---@class RBXScriptConnection RBXScriptConnection, also known as a Connection, is a special object returned by the Connect method of an Event (RBXScriptSignal). This is used primarily to disconnect a listener from an Event.
----@alias self RBXScriptConnection
 ---@field Connected boolean Describes whether or not the connection is still alive. This will become false if connection:Disconnect() is called.
 ---@field Disconnect fun():void Disconnects the connection from the event.
 ---
 
 ---
 ---@class Rect
----@alias self Rect
----@field new fun(min:Vector2, max:Vector2):self Constructs a new Rect with min as top left corner and max as bottom right corner.
----@field new fun(minX:number, minY:number, maxX:number, maxY:number):self Constructs a new Rect using minX and minY as coordinates for the top left corner, and maxX and maxY as coordinates for the bottom right corner.
+---@field new fun(min:Vector2, max:Vector2):Rect Constructs a new Rect with min as top left corner and max as bottom right corner.
+---@field new fun(minX:number, minY:number, maxX:number, maxY:number):Rect Constructs a new Rect using minX and minY as coordinates for the top left corner, and maxX and maxY as coordinates for the bottom right corner.
 ---@field Width number The width of the Rect in pixels.
 ---@field Height number The height of the Rect in pixels.
 ---@field Min number The top-left corner.
@@ -361,8 +331,7 @@
 
 ---
 ---@class Region3int16
----@alias self Region3int16
----@field new fun(min:Vector3int16, max:Vector3int16):self Creates a new Region3int16 out of two Vector3int16 structs
+---@field new fun(min:Vector3int16, max:Vector3int16):Region3int16 Creates a new Region3int16 out of two Vector3int16 structs
 ---
 
 ---
