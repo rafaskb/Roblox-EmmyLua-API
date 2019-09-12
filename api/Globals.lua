@@ -411,29 +411,25 @@ debug = nil
 
 ---
 ---Returns a number between min and max, inclusive.
----@type fun(x:number, min:number, max:number)
----@return number
+---@type fun(x:number, min:number, max:number):number
 ---
 math.clamp = nil
 
 ---
 ---Returns m*2^e (e should be an integer).
----@type fun(x:number, e:number)
----@return number
+---@type fun(x:number, e:number):number
 ---
 math.ldexp = nil
 
 ---
 ---Returns a perlin noise value between -0.5 and 0.5.
----@type fun(x:number, y:number, z:number)
----@return number
+---@type fun(x:number, y:number, z:number):number
 ---
 math.noise = nil
 
 ---
 ---Returns -1 if x < 0, 0 if x == 0, or 1 if x > 0.
----@type fun(x:number)
----@return number
+---@type fun(x:number):number
 ---
 math.sign = nil
 
@@ -452,13 +448,13 @@ string.split = nil
 
 ---
 ---Iterates over the provided table, passing the key and value of each iteration over to the provided function.
----@type fun(t:any[], f:function):void
+---@type fun(t:any[], f:fun(key:any, value:any):void
 ---
 table.foreach = nil
 
 ---
 ---This is similar to table.foreach() except that index-value pairs are passed, not key-value pairs.
----@type fun(t:any[], f:function):void
+---@type fun(t:any[], f:fun(index:number, element:any):void
 ---
 table.foreachi = nil
 
