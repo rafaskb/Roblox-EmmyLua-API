@@ -1,6 +1,7 @@
 ---
 ---@class RBXScriptSignal
----@field Connect fun(self:RBXScriptSignal)
+---@field Connect fun(self:RBXScriptSignal, func:function):RBXScriptConnection Establishes a function to be called whenever the event is raised.
+---@field Wait fun(self:RBXScriptSignal):any Yields the current thread until this signal is fired. Returns what was fired to the signal.
 ---
 
 ---
