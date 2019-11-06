@@ -1,6 +1,6 @@
 --
---File generated in Sep/03/2019 at 14:18:04
---Roblox version: version-7dae73f2829d4f33
+--File generated in Nov/06/2019 at 16:25:23
+--Roblox version: version-87aa94f4aa584f0e
 --API Dump version: 1
 --
 
@@ -23,6 +23,9 @@
 ---@field FindFirstChild fun(self:Instance, name:string, recursive:boolean):Instance
 ---@field FindFirstChildOfClass fun(self:Instance, className:string):Instance
 ---@field FindFirstChildWhichIsA fun(self:Instance, className:string, recursive:boolean):Instance
+---@field GetAttribute fun(self:Instance, attribute:string):table
+---@field GetAttributeChangedSignal fun(self:Instance, attribute:string):RBXScriptSignal
+---@field GetAttributes fun(self:Instance):table<string,any>
 ---@field GetChildren fun(self:Instance):Instance[]
 ---@field GetDebugId fun(self:Instance, scopeLength:number):string
 ---@field GetDescendants fun(self:Instance):any[]
@@ -32,6 +35,7 @@
 ---@field IsAncestorOf fun(self:Instance, descendant:Instance):boolean
 ---@field IsDescendantOf fun(self:Instance, ancestor:Instance):boolean
 ---@field Remove fun(self:Instance):void
+---@field SetAttribute fun(self:Instance, attribute:string, value:table):void
 ---@field WaitForChild fun(self:Instance, childName:string, timeOut:number):Instance
 ---@field children fun(self:Instance):Instance[]
 ---@field clone fun(self:Instance):Instance
@@ -42,6 +46,7 @@
 ---@field isDescendantOf fun(self:Instance, ancestor:Instance):boolean
 ---@field remove fun(self:Instance):void
 ---@field AncestryChanged RBXScriptSignal @function(child:Instance, parent:Instance)
+---@field AttributeChanged RBXScriptSignal @function(attribute:string)
 ---@field Changed RBXScriptSignal @function(property:string)
 ---@field ChildAdded RBXScriptSignal @function(child:Instance)
 ---@field ChildRemoved RBXScriptSignal @function(child:Instance)
@@ -52,8 +57,11 @@
 
 ---
 ---@class ABTestService : Instance
+---@field ClearUserVariations fun(self:ABTestService):void
 ---@field GetVariant fun(self:ABTestService, name:string):string
 ---@field InitializeForUserId fun(self:ABTestService, userId:number):void
+---@field WaitUntilBrowserTrackerABTestsInitialized fun(self:ABTestService):void
+---@field WaitUntilUserABTestsInitialized fun(self:ABTestService):void
 ---
 
 ---
@@ -125,8 +133,10 @@
 
 ---
 ---@class Animator : Instance
+---@field GetPlayingAnimationTracks fun(self:Animator):any[]
 ---@field LoadAnimation fun(self:Animator, animation:Instance):Instance
 ---@field StepAnimations fun(self:Animator, deltaTime:number):void
+---@field AnimationPlayed RBXScriptSignal @function(animationTrack:Instance)
 ---
 
 ---
@@ -216,6 +226,7 @@
 ---@field UserHasBadge fun(self:BadgeService, userId:number, badgeId:number):boolean
 ---@field UserHasBadgeAsync fun(self:BadgeService, userId:number, badgeId:number):boolean
 ---@field BadgeAwarded RBXScriptSignal @function(message:string, userId:number, badgeId:number)
+---@field OnBadgeAwarded RBXScriptSignal @function(userId:number, creatorId:number, badgeId:number)
 ---
 
 ---
@@ -377,10 +388,12 @@
 ---@field CloseBrowserWindow fun(self:BrowserService):void
 ---@field CopyAuthCookieFromBrowserToEngine fun(self:BrowserService):void
 ---@field EmitHybridEvent fun(self:BrowserService, moduleName:string, eventName:string, params:string):void
+---@field ExecuteJavaScript fun(self:BrowserService, javascript:string):void
 ---@field OpenBrowserWindow fun(self:BrowserService, url:string):void
 ---@field OpenNativeOverlay fun(self:BrowserService, title:string, url:string):void
 ---@field OpenWeChatAuthWindow fun(self:BrowserService):void
 ---@field ReturnToJavaScript fun(self:BrowserService, callbackId:string, success:boolean, params:string):void
+---@field SendCommand fun(self:BrowserService, command:string):void
 ---@field AuthCookieCopiedToEngine RBXScriptSignal @function()
 ---@field BrowserWindowClosed RBXScriptSignal @function()
 ---@field BrowserWindowWillNavigate RBXScriptSignal @function(url:string)
@@ -713,6 +726,7 @@
 ---@class ContentProvider : Instance
 ---@field BaseUrl string
 ---@field RequestQueueSize number
+---@field CalculateNumTrianglesInMeshSync fun(self:ContentProvider, meshId:string):number
 ---@field GetFailedRequests fun(self:ContentProvider):any[]
 ---@field Preload fun(self:ContentProvider, contentId:Content):void
 ---@field SetBaseUrl fun(self:ContentProvider, url:string):void
@@ -843,10 +857,10 @@
 
 ---
 ---@class DataModelSession : Instance
----@field CurrentGameStateType Enum.StudioDataModelType
+---@field CurrentDataModelType Enum.StudioDataModelType
 ---@field SessionId string
----@field CurrentGameStateTypeAboutToChange RBXScriptSignal @function(gameStateType:Enum.StudioDataModelType)
----@field CurrentGameStateTypeChanged RBXScriptSignal @function()
+---@field CurrentDataModelTypeAboutToChange RBXScriptSignal @function(dataModelType:Enum.StudioDataModelType)
+---@field CurrentDataModelTypeChanged RBXScriptSignal @function()
 ---@field DataModelCreated RBXScriptSignal @function(gameStateType:Enum.StudioDataModelType)
 ---@field DataModelWillBeDestroyed RBXScriptSignal @function(gameStateType:Enum.StudioDataModelType)
 ---
@@ -872,25 +886,14 @@
 ---
 ---@class DebugSettings : Instance
 ---@field DataModel number
----@field ErrorReporting Enum.ErrorReporting
----@field GfxCard string
 ---@field InstanceCount number
 ---@field IsFmodProfilingEnabled boolean
 ---@field IsScriptStackTracingEnabled boolean
 ---@field JobCount number
----@field LuaRamLimit number
----@field OsIs64Bit boolean
----@field OsPlatform string
----@field OsPlatformId number
----@field OsVer string
 ---@field PlayerCount number
 ---@field ReportSoundWarnings boolean
----@field RobloxProductName string
 ---@field RobloxVersion string
----@field SIMD string
----@field SystemProductName string
 ---@field TickCountPreciseOverride Enum.TickCountSampleMethod
----@field VideoMemory number
 ---
 
 ---
@@ -917,7 +920,6 @@
 ---
 ---@class DebuggerWatch : Instance
 ---@field Expression string
----@field CheckSyntax fun(self:DebuggerWatch):void
 ---
 
 ---
@@ -951,6 +953,7 @@
 ---@field DiscardEdits fun(self:DraftsService, scripts:Instance[]):void
 ---@field GetDraftStatus fun(self:DraftsService, script:Instance):Enum.DraftStatusCode
 ---@field GetEditors fun(self:DraftsService, script:Instance):Instance[]
+---@field RestoreScripts fun(self:DraftsService, scripts:Instance[]):void
 ---@field ShowDiffsAgainstBase fun(self:DraftsService, scripts:Instance[]):void
 ---@field ShowDiffsAgainstServer fun(self:DraftsService, scripts:Instance[]):void
 ---@field CommitEdits fun(self:DraftsService, scripts:Instance[]):void
@@ -1217,7 +1220,6 @@
 ---@field Modal boolean
 ---@field Selected boolean
 ---@field Style Enum.ButtonStyle
----@field SetVerb fun(self:GuiButton, verb:string):void
 ---@field Activated RBXScriptSignal @function(inputObject:Instance)
 ---@field MouseButton1Click RBXScriptSignal @function()
 ---@field MouseButton1Down RBXScriptSignal @function(x:number, y:number)
@@ -1335,15 +1337,16 @@
 ---@class TextBox : GuiObject
 ---@field ClearTextOnFocus boolean
 ---@field CursorPosition number
+---@field EnableRealtimeFilteringHints boolean
 ---@field Font Enum.Font
 ---@field FontSize Enum.FontSize
----@field IsPassword boolean
 ---@field LineHeight number
 ---@field ManualFocusRelease boolean
 ---@field MultiLine boolean
 ---@field OverlayNativeInput boolean
 ---@field PlaceholderColor3 Color3
 ---@field PlaceholderText string
+---@field ReturnKeyType Enum.ReturnKeyType
 ---@field SelectionStart number
 ---@field ShowNativeInput boolean
 ---@field Text string
@@ -1370,6 +1373,7 @@
 ---@field SetTextFromInput fun(self:TextBox, text:string):void
 ---@field FocusLost RBXScriptSignal @function(enterPressed:boolean, inputThatCausedFocusLoss:Instance)
 ---@field Focused RBXScriptSignal @function()
+---@field ReturnPressedFromOnScreenKeyboard RBXScriptSignal @function()
 ---
 
 ---
@@ -1875,6 +1879,7 @@
 ---@field Position Vector3
 ---@field UserInputState Enum.UserInputState
 ---@field UserInputType Enum.UserInputType
+---@field IsModifierKeyDown fun(self:InputObject, modifierKey:Enum.ModifierKey):boolean
 ---
 
 ---
@@ -1904,6 +1909,7 @@
 ---@field Active boolean
 ---@field C0 CFrame
 ---@field C1 CFrame
+---@field Enabled boolean
 ---@field Part0 BasePart
 ---@field Part1 BasePart
 ---@field part1 BasePart
@@ -2059,6 +2065,8 @@
 ---@field ClockTime number
 ---@field ColorShift_Bottom Color3
 ---@field ColorShift_Top Color3
+---@field EnvironmentDiffuseScale number
+---@field EnvironmentSpecularScale number
 ---@field ExposureCompensation number
 ---@field FogColor Color3
 ---@field FogEnd number
@@ -2115,6 +2123,7 @@
 ---@field SetRobloxLocaleId fun(self:LocalizationService, locale:string):void
 ---@field StartTextScraper fun(self:LocalizationService):void
 ---@field StopTextScraper fun(self:LocalizationService):void
+---@field GetCountryRegionForPlayerAsync fun(self:LocalizationService, player:Instance):string
 ---@field GetTranslatorForLocaleAsync fun(self:LocalizationService, locale:string):Instance
 ---@field GetTranslatorForPlayerAsync fun(self:LocalizationService, player:Instance):Instance
 ---@field PromptDownloadGameTableToCSV fun(self:LocalizationService, table:Instance):void
@@ -2215,14 +2224,6 @@
 
 ---
 ---@class LuaWebService : Instance
----
-
----
----@class MDIInstance : Instance
----@field FocusedDataModelSession Instance
----@field FocusedDataModelSessionId string
----@field DataModelSessionEnded RBXScriptSignal @function(sessionId:string)
----@field DataModelSessionStarted RBXScriptSignal @function(sessionId:string)
 ---
 
 ---
@@ -2347,6 +2348,13 @@
 ---
 
 ---
+---@class MultipleDocumentInterfaceInstance : Instance
+---@field FocusedDataModelSession Instance
+---@field DataModelSessionEnded RBXScriptSignal @function(dataModelSession:Instance)
+---@field DataModelSessionStarted RBXScriptSignal @function(dataModelSession:Instance)
+---
+
+---
 ---@class NetworkMarker : Instance
 ---@field Received RBXScriptSignal @function()
 ---
@@ -2436,8 +2444,6 @@
 
 ---
 ---@class NotificationService : Instance
----@field IsLuaBottomBarEnabled boolean
----@field IsLuaBottomBarWithText boolean
 ---@field IsLuaChatEnabled boolean
 ---@field IsLuaGameDetailsEnabled boolean
 ---@field IsLuaHomeWithAvatarEnabled boolean
@@ -3065,36 +3071,35 @@
 ---@field CollisionEnabled boolean
 ---@field GridSize number
 ---@field HostDataModelType Enum.StudioDataModelType
----@field MDIInstance MDIInstance
+---@field HostDataModelTypeIsCurrent boolean
+---@field MultipleDocumentInterfaceInstance MultipleDocumentInterfaceInstance
 ---@field UsesAssetInsertionDrag boolean
 ---@field Activate fun(self:Plugin, exclusiveMouse:boolean):void
----@field Bind fun(self:Plugin, key:string, callback:fun):Instance
----@field BindAndFire fun(self:Plugin, key:string, callback:fun):Instance
 ---@field CreatePluginAction fun(self:Plugin, actionId:string, text:string, statusTip:string, iconName:string, allowBinding:boolean):Instance
 ---@field CreatePluginMenu fun(self:Plugin, id:string, title:string, icon:string):Instance
 ---@field CreateToolbar fun(self:Plugin, name:string):Instance
 ---@field Deactivate fun(self:Plugin):void
----@field Fire fun(self:Plugin, key:string, value:string):void
----@field GetItem fun(self:Plugin, key:string, defaultValue:string):string
+---@field GetItem fun(self:Plugin, key:string, defaultValue:table):table
 ---@field GetJoinMode fun(self:Plugin):Enum.JointCreationMode
 ---@field GetMouse fun(self:Plugin):Instance
 ---@field GetSelectedRibbonTool fun(self:Plugin):Enum.RibbonTool
 ---@field GetSetting fun(self:Plugin, key:string):table
 ---@field GetStudioUserId fun(self:Plugin):number
----@field HasItem fun(self:Plugin, key:string):boolean
+---@field Invoke fun(self:Plugin, key:string, arguments:vararg):void
 ---@field IsActivated fun(self:Plugin):boolean
 ---@field IsActivatedWithExclusiveMouse fun(self:Plugin):boolean
 ---@field Negate fun(self:Plugin, objects:Instance[]):Instance[]
+---@field OnInvoke fun(self:Plugin, key:string, callback:fun):Instance
+---@field OnSetItem fun(self:Plugin, key:string, callback:fun):Instance
 ---@field OpenScript fun(self:Plugin, script:Instance, lineNumber:number):void
 ---@field OpenWikiPage fun(self:Plugin, url:string):void
 ---@field PauseSound fun(self:Plugin, soundChannel:Instance):void
 ---@field PlaySound fun(self:Plugin, soundChannel:Instance):void
----@field RemoveItem fun(self:Plugin, key:string):boolean
 ---@field ResumeSound fun(self:Plugin, soundChannel:Instance):void
 ---@field SaveSelectedToRoblox fun(self:Plugin):void
 ---@field SelectRibbonTool fun(self:Plugin, tool:Enum.RibbonTool, position:UDim2):void
 ---@field Separate fun(self:Plugin, objects:Instance[]):Instance[]
----@field SetItem fun(self:Plugin, key:string, value:string):void
+---@field SetItem fun(self:Plugin, key:string, value:table):void
 ---@field SetSetting fun(self:Plugin, key:string, value:table):void
 ---@field StartDecalDrag fun(self:Plugin, decal:Instance):void
 ---@field StartDrag fun(self:Plugin, dragData:table<string,any>):void
@@ -3174,6 +3179,11 @@
 ---@field GetGamePointBalance fun(self:PointsService, userId:number):number
 ---@field GetPointBalance fun(self:PointsService, userId:number):number
 ---@field PointsAwarded RBXScriptSignal @function(userId:number, pointsAwarded:number, userBalanceInGame:number, userTotalBalance:number)
+---
+
+---
+---@class PolicyService : Instance
+---@field GetPolicyInfoForPlayerAsync fun(self:PolicyService, player:Instance):table<string,any>
 ---
 
 ---
@@ -3411,10 +3421,7 @@
 ---@field ScriptsDisabled boolean
 ---@field AddCoreScriptLocal fun(self:ScriptContext, name:string, parent:Instance):void
 ---@field GetCoverageStats fun(self:ScriptContext):any[]
----@field ResetCoverageCollection fun(self:ScriptContext):void
 ---@field SetTimeout fun(self:ScriptContext, seconds:number):void
----@field StartCoverageCollection fun(self:ScriptContext):void
----@field StopCoverageCollection fun(self:ScriptContext):void
 ---@field Error RBXScriptSignal @function(message:string, stackTrace:string, script:Instance)
 ---
 
@@ -3842,6 +3849,7 @@
 
 ---
 ---@class StudioData : Instance
+---@field EnableScriptCollabOnLoad boolean
 ---@field SrcPlaceId number
 ---@field SrcUniverseId number
 ---
@@ -3850,15 +3858,20 @@
 ---@class StudioService : Instance
 ---@field ActiveScript Instance
 ---@field GridSize number
+---@field InstalledPluginData string
 ---@field RotateIncrement number
 ---@field StudioLocaleId string
 ---@field UseLocalSpace boolean
+---@field ConvertToPackageUpload fun(self:StudioService, uploadUrl:string):void
 ---@field CopyToClipboard fun(self:StudioService, stringToCopy:string):void
+---@field EmitPlacePublishedSignal fun(self:StudioService):void
 ---@field GetClassIcon fun(self:StudioService, className:string):table<string,any>
 ---@field GetResourceByCategory fun(self:StudioService, category:string):table<string,any>
+---@field GetStartupPluginId fun(self:StudioService):string
 ---@field GetUserId fun(self:StudioService):number
 ---@field IsPluginInstalled fun(self:StudioService, assetId:number):boolean
 ---@field IsPluginUpToDate fun(self:StudioService, assetId:number, currentAssetVersion:number):boolean
+---@field OpenInBrowser_DONOTUSE fun(self:StudioService, url:string):void
 ---@field OpenPluginInsertPage fun(self:StudioService, assetId:number):void
 ---@field PublishAs fun(self:StudioService, universeId:number, placeId:number):void
 ---@field SerializeInstances fun(self:StudioService, instances:Instance[]):string
@@ -3867,20 +3880,20 @@
 ---@field ShowPublishToRoblox fun(self:StudioService):void
 ---@field UninstallPlugin fun(self:StudioService, assetId:number):void
 ---@field UpdatePluginManagement fun(self:StudioService):void
----@field emitPlacePublishedSignal fun(self:StudioService):void
----@field GetInstalledPluginData fun(self:StudioService):string
 ---@field PromptImportFile fun(self:StudioService, fileTypeFilter:any[]):Instance
 ---@field PromptImportFiles fun(self:StudioService, fileTypeFilter:any[]):Instance[]
 ---@field PromptImportLocalAsset fun(self:StudioService, prompt:string, fileTypeFilter:any[]):Instance
 ---@field PromptImportLocalAssets fun(self:StudioService, prompt:string, fileTypeFilter:any[]):Instance[]
 ---@field TryInstallPlugin fun(self:StudioService, assetId:number, assetVersionId:number):void
----@field GamePublishedToRoblox RBXScriptSignal @function()
----@field OnOpenConvertToPackagePlugin RBXScriptSignal @function()
+---@field GamePublishFinished RBXScriptSignal @function(success:boolean)
+---@field OnConvertToPackageResult RBXScriptSignal @function(isSuccessful:boolean, errorMessage:string)
+---@field OnOpenConvertToPackagePlugin RBXScriptSignal @function(instances:Instance[], name:string)
 ---@field OnOpenManagePackagePlugin RBXScriptSignal @function(userId:number, assetId:number)
 ---@field OnPluginInstalledFromToolbox RBXScriptSignal @function()
+---@field OnPluginInstalledFromWeb RBXScriptSignal @function(pluginId:string)
+---@field OnPublishAsPlugin RBXScriptSignal @function(instances:Instance[])
 ---@field OnPublishPlaceToRoblox RBXScriptSignal @function()
 ---@field OnSaveToRoblox RBXScriptSignal @function(instances:Instance[])
----@field PlacePublishedToRoblox RBXScriptSignal @function()
 ---
 
 ---
@@ -4054,6 +4067,16 @@
 ---@class TweenService : Instance
 ---@field Create fun(self:TweenService, instance:Instance, tweenInfo:TweenInfo, propertyTable:table<string,any>):Instance
 ---@field GetValue fun(self:TweenService, alpha:number, easingStyle:Enum.EasingStyle, easingDirection:Enum.EasingDirection):number
+---
+
+---
+---@class UGCValidationService : Instance
+---@field GetMeshTriCountSync fun(self:UGCValidationService, meshId:string):number
+---@field GetMeshVertsSync fun(self:UGCValidationService, meshId:string):any[]
+---@field GetTextureSizeSync fun(self:UGCValidationService, textureId:string):Vector2
+---@field GetMeshTriCount fun(self:UGCValidationService, meshId:string):number
+---@field GetMeshVerts fun(self:UGCValidationService, meshId:string):any[]
+---@field GetTextureSize fun(self:UGCValidationService, textureId:string):Vector2
 ---
 
 ---
@@ -4928,6 +4951,12 @@
 ---
 
 ---
+---@class Enum.DateTimeKind:EnumItem
+---@field Utc Enum.DateTimeKind @0
+---@field Local Enum.DateTimeKind @1
+---
+
+---
 ---@class Enum.DevCameraOcclusionMode:EnumItem
 ---@field Zoom Enum.DevCameraOcclusionMode @0
 ---@field Invisicam Enum.DevCameraOcclusionMode @1
@@ -5076,17 +5105,9 @@
 ---
 
 ---
----@class Enum.ErrorReporting:EnumItem
----@field DontReport Enum.ErrorReporting @0
----@field Prompt Enum.ErrorReporting @1
----@field Report Enum.ErrorReporting @2
----
-
----
 ---@class Enum.ExplosionType:EnumItem
 ---@field NoCraters Enum.ExplosionType @0
 ---@field Craters Enum.ExplosionType @1
----@field CratersAndDebris Enum.ExplosionType @2
 ---
 
 ---
@@ -5408,17 +5429,6 @@
 ---@field All Enum.JointCreationMode @0
 ---@field Surface Enum.JointCreationMode @1
 ---@field None Enum.JointCreationMode @2
----
-
----
----@class Enum.JointType:EnumItem
----@field None Enum.JointType @28
----@field Rotate Enum.JointType @7
----@field RotateP Enum.JointType @8
----@field RotateV Enum.JointType @9
----@field Glue Enum.JointType @10
----@field Weld Enum.JointType @1
----@field Snap Enum.JointType @3
 ---
 
 ---
@@ -5811,6 +5821,14 @@
 ---
 
 ---
+---@class Enum.ModifierKey:EnumItem
+---@field Alt Enum.ModifierKey @2
+---@field Ctrl Enum.ModifierKey @1
+---@field Meta Enum.ModifierKey @3
+---@field Shift Enum.ModifierKey @0
+---
+
+---
 ---@class Enum.MouseBehavior:EnumItem
 ---@field Default Enum.MouseBehavior @0
 ---@field LockCenter Enum.MouseBehavior @1
@@ -6038,6 +6056,16 @@
 ---
 
 ---
+---@class Enum.ReturnKeyType:EnumItem
+---@field Default Enum.ReturnKeyType @0
+---@field Done Enum.ReturnKeyType @1
+---@field Go Enum.ReturnKeyType @2
+---@field Next Enum.ReturnKeyType @3
+---@field Search Enum.ReturnKeyType @4
+---@field Send Enum.ReturnKeyType @5
+---
+
+---
 ---@class Enum.ReverbType:EnumItem
 ---@field NoReverb Enum.ReverbType @0
 ---@field GenericReverb Enum.ReverbType @1
@@ -6232,7 +6260,7 @@
 ---@field PlayServer Enum.StudioDataModelType @3
 ---@field RobloxPlugin Enum.StudioDataModelType @4
 ---@field UserPlugin Enum.StudioDataModelType @5
----@field Null Enum.StudioDataModelType @6
+---@field None Enum.StudioDataModelType @6
 ---
 
 ---
@@ -6392,10 +6420,10 @@
 
 ---
 ---@class Enum.Technology:EnumItem
----@field Legacy Enum.Technology @0
----@field Voxel Enum.Technology @1
 ---@field Compatibility Enum.Technology @2
+---@field Voxel Enum.Technology @1
 ---@field ShadowMap Enum.Technology @3
+---@field Legacy Enum.Technology @0
 ---
 
 ---
@@ -6439,6 +6467,7 @@
 ---@field Number Enum.TextInputType @2
 ---@field Email Enum.TextInputType @3
 ---@field Phone Enum.TextInputType @4
+---@field Password Enum.TextInputType @5
 ---
 
 ---
@@ -6735,6 +6764,7 @@
 ---@field CurrencyType Enum.CurrencyType
 ---@field CustomCameraMode Enum.CustomCameraMode
 ---@field DataStoreRequestType Enum.DataStoreRequestType
+---@field DateTimeKind Enum.DateTimeKind
 ---@field DevCameraOcclusionMode Enum.DevCameraOcclusionMode
 ---@field DevComputerCameraMovementMode Enum.DevComputerCameraMovementMode
 ---@field DevComputerMovementMode Enum.DevComputerMovementMode
@@ -6751,7 +6781,6 @@
 ---@field EasingStyle Enum.EasingStyle
 ---@field ElasticBehavior Enum.ElasticBehavior
 ---@field EnviromentalPhysicsThrottle Enum.EnviromentalPhysicsThrottle
----@field ErrorReporting Enum.ErrorReporting
 ---@field ExplosionType Enum.ExplosionType
 ---@field FillDirection Enum.FillDirection
 ---@field FilterResult Enum.FilterResult
@@ -6786,7 +6815,6 @@
 ---@field InlineAlignment Enum.InlineAlignment
 ---@field InputType Enum.InputType
 ---@field JointCreationMode Enum.JointCreationMode
----@field JointType Enum.JointType
 ---@field KeyCode Enum.KeyCode
 ---@field KeywordFilterType Enum.KeywordFilterType
 ---@field Language Enum.Language
@@ -6800,6 +6828,7 @@
 ---@field MembershipType Enum.MembershipType
 ---@field MeshType Enum.MeshType
 ---@field MessageType Enum.MessageType
+---@field ModifierKey Enum.ModifierKey
 ---@field MouseBehavior Enum.MouseBehavior
 ---@field MoveState Enum.MoveState
 ---@field NameOcclusion Enum.NameOcclusion
@@ -6825,6 +6854,7 @@
 ---@field RenderFidelity Enum.RenderFidelity
 ---@field RenderPriority Enum.RenderPriority
 ---@field RenderingTestComparisonMethod Enum.RenderingTestComparisonMethod
+---@field ReturnKeyType Enum.ReturnKeyType
 ---@field ReverbType Enum.ReverbType
 ---@field RibbonTool Enum.RibbonTool
 ---@field RollOffMode Enum.RollOffMode
