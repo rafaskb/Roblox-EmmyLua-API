@@ -317,7 +317,7 @@
 ---
 ---@class RBXScriptConnection RBXScriptConnection, also known as a Connection, is a special object returned by the Connect method of an Event (RBXScriptSignal). This is used primarily to disconnect a listener from an Event.
 ---@field Connected boolean Describes whether or not the connection is still alive. This will become false if connection:Disconnect() is called.
----@field Disconnect fun():void Disconnects the connection from the event.
+---@field Disconnect fun(self:RBXScriptConnection):void Disconnects the connection from the event.
 ---
 
 ---
