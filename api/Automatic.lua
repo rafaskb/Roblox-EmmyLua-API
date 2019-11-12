@@ -1,6 +1,6 @@
 --
---File generated in Nov/06/2019 at 16:25:23
---Roblox version: version-87aa94f4aa584f0e
+--File generated in Nov/12/2019 at 13:56:30
+--Roblox version: version-c1e64f13016a4ab9
 --API Dump version: 1
 --
 
@@ -12,8 +12,6 @@
 ---@field Name string
 ---@field Parent Instance
 ---@field RobloxLocked boolean
----@field archivable boolean
----@field className string
 ---@field ClearAllChildren fun(self:Instance):void
 ---@field Clone fun(self:Instance):Instance
 ---@field Destroy fun(self:Instance):void
@@ -28,7 +26,7 @@
 ---@field GetAttributes fun(self:Instance):table<string,any>
 ---@field GetChildren fun(self:Instance):Instance[]
 ---@field GetDebugId fun(self:Instance, scopeLength:number):string
----@field GetDescendants fun(self:Instance):any[]
+---@field GetDescendants fun(self:Instance):Instance[]|any[]
 ---@field GetFullName fun(self:Instance):string
 ---@field GetPropertyChangedSignal fun(self:Instance, property:string):RBXScriptSignal
 ---@field IsA fun(self:Instance, className:string):boolean
@@ -37,14 +35,6 @@
 ---@field Remove fun(self:Instance):void
 ---@field SetAttribute fun(self:Instance, attribute:string, value:table):void
 ---@field WaitForChild fun(self:Instance, childName:string, timeOut:number):Instance
----@field children fun(self:Instance):Instance[]
----@field clone fun(self:Instance):Instance
----@field destroy fun(self:Instance):void
----@field findFirstChild fun(self:Instance, name:string, recursive:boolean):Instance
----@field getChildren fun(self:Instance):Instance[]
----@field isA fun(self:Instance, className:string):boolean
----@field isDescendantOf fun(self:Instance, ancestor:Instance):boolean
----@field remove fun(self:Instance):void
 ---@field AncestryChanged RBXScriptSignal @function(child:Instance, parent:Instance)
 ---@field AttributeChanged RBXScriptSignal @function(attribute:string)
 ---@field Changed RBXScriptSignal @function(property:string)
@@ -52,7 +42,6 @@
 ---@field ChildRemoved RBXScriptSignal @function(child:Instance)
 ---@field DescendantAdded RBXScriptSignal @function(descendant:Instance)
 ---@field DescendantRemoving RBXScriptSignal @function(descendant:Instance)
----@field childAdded RBXScriptSignal @function(child:Instance)
 ---
 
 ---
@@ -104,7 +93,7 @@
 
 ---
 ---@class AnimationController : Instance
----@field GetPlayingAnimationTracks fun(self:AnimationController):any[]
+---@field GetPlayingAnimationTracks fun(self:AnimationController):Instance[]|any[]
 ---@field LoadAnimation fun(self:AnimationController, animation:Instance):Instance
 ---@field AnimationPlayed RBXScriptSignal @function(animationTrack:Instance)
 ---
@@ -133,7 +122,7 @@
 
 ---
 ---@class Animator : Instance
----@field GetPlayingAnimationTracks fun(self:Animator):any[]
+---@field GetPlayingAnimationTracks fun(self:Animator):Instance[]|any[]
 ---@field LoadAnimation fun(self:Animator, animation:Instance):Instance
 ---@field StepAnimations fun(self:Animator, deltaTime:number):void
 ---@field AnimationPlayed RBXScriptSignal @function(animationTrack:Instance)
@@ -144,7 +133,7 @@
 ---@field GetBundleDetailsSync fun(self:AssetService, bundleId:number):table<string,any>
 ---@field CreatePlaceAsync fun(self:AssetService, placeName:string, templatePlaceID:number, description:string):number
 ---@field CreatePlaceInPlayerInventoryAsync fun(self:AssetService, player:Instance, placeName:string, templatePlaceID:number, description:string):number
----@field GetAssetIdsForPackage fun(self:AssetService, packageAssetId:number):any[]
+---@field GetAssetIdsForPackage fun(self:AssetService, packageAssetId:number):Instance[]|any[]
 ---@field GetAssetThumbnailAsync fun(self:AssetService, assetId:number, thumbnailSize:Vector2, assetType:number):vararg
 ---@field GetBundleDetailsAsync fun(self:AssetService, bundleId:number):table<string,any>
 ---@field GetCreatorAssetID fun(self:AssetService, creationID:number):number
@@ -312,14 +301,11 @@
 ---@field AngularVelocity Vector3
 ---@field MaxTorque Vector3
 ---@field P number
----@field angularvelocity Vector3
----@field maxTorque Vector3
 ---
 
 ---
 ---@class BodyForce : BodyMover
 ---@field Force Vector3
----@field force Vector3
 ---
 
 ---
@@ -328,8 +314,6 @@
 ---@field D number
 ---@field MaxTorque Vector3
 ---@field P number
----@field cframe CFrame
----@field maxTorque Vector3
 ---
 
 ---
@@ -338,10 +322,7 @@
 ---@field MaxForce Vector3
 ---@field P number
 ---@field Position Vector3
----@field maxForce Vector3
----@field position Vector3
 ---@field GetLastForce fun(self:BodyPosition):Vector3
----@field lastForce fun(self:BodyPosition):Vector3
 ---@field ReachedTarget RBXScriptSignal @function()
 ---
 
@@ -349,8 +330,6 @@
 ---@class BodyThrust : BodyMover
 ---@field Force Vector3
 ---@field Location Vector3
----@field force Vector3
----@field location Vector3
 ---
 
 ---
@@ -358,10 +337,7 @@
 ---@field MaxForce Vector3
 ---@field P number
 ---@field Velocity Vector3
----@field maxForce Vector3
----@field velocity Vector3
 ---@field GetLastForce fun(self:BodyVelocity):Vector3
----@field lastForce fun(self:BodyVelocity):Vector3
 ---
 
 ---
@@ -379,7 +355,6 @@
 ---@field TurnP number
 ---@field Abort fun(self:RocketPropulsion):void
 ---@field Fire fun(self:RocketPropulsion):void
----@field fire fun(self:RocketPropulsion):void
 ---@field ReachedTarget RBXScriptSignal @function()
 ---
 
@@ -425,10 +400,9 @@
 ---@field HeadScale number
 ---@field NearPlaneZ number
 ---@field ViewportSize Vector2
----@field focus CFrame
 ---@field GetLargestCutoffDistance fun(self:Camera, ignoreList:Instance[]):number
 ---@field GetPanSpeed fun(self:Camera):number
----@field GetPartsObscuringTarget fun(self:Camera, castPoints:any[], ignoreList:Instance[]):Instance[]
+---@field GetPartsObscuringTarget fun(self:Camera, castPoints:Instance[]|any[], ignoreList:Instance[]):Instance[]
 ---@field GetRenderCFrame fun(self:Camera):CFrame
 ---@field GetRoll fun(self:Camera):number
 ---@field GetTiltSpeed fun(self:Camera):number
@@ -539,7 +513,6 @@
 ---@field MouseHoverEnter RBXScriptSignal @function(playerWhoHovered:Instance)
 ---@field MouseHoverLeave RBXScriptSignal @function(playerWhoHovered:Instance)
 ---@field RightMouseClick RBXScriptSignal @function(playerWhoClicked:Instance)
----@field mouseClick RBXScriptSignal @function(playerWhoClicked:Instance)
 ---
 
 ---
@@ -553,7 +526,7 @@
 ---@field GetInstanceAddedSignal fun(self:CollectionService, tag:string):RBXScriptSignal
 ---@field GetInstanceRemovedSignal fun(self:CollectionService, tag:string):RBXScriptSignal
 ---@field GetTagged fun(self:CollectionService, tag:string):Instance[]
----@field GetTags fun(self:CollectionService, instance:Instance):any[]
+---@field GetTags fun(self:CollectionService, instance:Instance):Instance[]|any[]
 ---@field HasTag fun(self:CollectionService, instance:Instance, tag:string):boolean
 ---@field RemoveTag fun(self:CollectionService, instance:Instance, tag:string):void
 ---@field ItemAdded RBXScriptSignal @function(instance:Instance)
@@ -727,11 +700,11 @@
 ---@field BaseUrl string
 ---@field RequestQueueSize number
 ---@field CalculateNumTrianglesInMeshSync fun(self:ContentProvider, meshId:string):number
----@field GetFailedRequests fun(self:ContentProvider):any[]
+---@field GetFailedRequests fun(self:ContentProvider):Instance[]|any[]
 ---@field Preload fun(self:ContentProvider, contentId:Content):void
 ---@field SetBaseUrl fun(self:ContentProvider, url:string):void
 ---@field CalculateNumTrianglesInMesh fun(self:ContentProvider, meshId:string):number
----@field PreloadAsync fun(self:ContentProvider, contentIdList:any[], callbackFunction:fun):void
+---@field PreloadAsync fun(self:ContentProvider, contentIdList:Instance[]|any[], callbackFunction:fun):void
 ---
 
 ---
@@ -771,8 +744,6 @@
 ---@field BindButton fun(self:Controller, button:Enum.Button, caption:string):void
 ---@field GetButton fun(self:Controller, button:Enum.Button):boolean
 ---@field UnbindButton fun(self:Controller, button:Enum.Button):void
----@field bindButton fun(self:Controller, button:Enum.Button, caption:string):void
----@field getButton fun(self:Controller, button:Enum.Button):boolean
 ---@field ButtonChanged RBXScriptSignal @function(button:Enum.Button)
 ---
 
@@ -880,7 +851,6 @@
 ---@field MaxItems number
 ---@field AddItem fun(self:Debris, item:Instance, lifetime:number):void
 ---@field SetLegacyMaxItems fun(self:Debris, enabled:boolean):void
----@field addItem fun(self:Debris, item:Instance, lifetime:number):void
 ---
 
 ---
@@ -1042,7 +1012,6 @@
 ---@field Heat number
 ---@field SecondaryColor Color3
 ---@field Size number
----@field size number
 ---
 
 ---
@@ -1072,8 +1041,8 @@
 
 ---
 ---@class FriendService : Instance
----@field GetPlatformFriends fun(self:FriendService):any[]
----@field FriendsUpdated RBXScriptSignal @function(friendData:any[])
+---@field GetPlatformFriends fun(self:FriendService):Instance[]|any[]
+---@field FriendsUpdated RBXScriptSignal @function(friendData:Instance[]|any[])
 ---
 
 ---
@@ -1142,7 +1111,7 @@
 ---@field GetAlliesAsync fun(self:GroupService, groupId:number):Instance
 ---@field GetEnemiesAsync fun(self:GroupService, groupId:number):Instance
 ---@field GetGroupInfoAsync fun(self:GroupService, groupId:number):table
----@field GetGroupsAsync fun(self:GroupService, userId:number):any[]
+---@field GetGroupsAsync fun(self:GroupService, userId:number):Instance[]|any[]
 ---
 
 ---
@@ -1201,12 +1170,12 @@
 ---@field MouseWheelForward RBXScriptSignal @function(x:number, y:number)
 ---@field SelectionGained RBXScriptSignal @function()
 ---@field SelectionLost RBXScriptSignal @function()
----@field TouchLongPress RBXScriptSignal @function(touchPositions:any[], state:Enum.UserInputState)
----@field TouchPan RBXScriptSignal @function(touchPositions:any[], totalTranslation:Vector2, velocity:Vector2, state:Enum.UserInputState)
----@field TouchPinch RBXScriptSignal @function(touchPositions:any[], scale:number, velocity:number, state:Enum.UserInputState)
----@field TouchRotate RBXScriptSignal @function(touchPositions:any[], rotation:number, velocity:number, state:Enum.UserInputState)
+---@field TouchLongPress RBXScriptSignal @function(touchPositions:Instance[]|any[], state:Enum.UserInputState)
+---@field TouchPan RBXScriptSignal @function(touchPositions:Instance[]|any[], totalTranslation:Vector2, velocity:Vector2, state:Enum.UserInputState)
+---@field TouchPinch RBXScriptSignal @function(touchPositions:Instance[]|any[], scale:number, velocity:number, state:Enum.UserInputState)
+---@field TouchRotate RBXScriptSignal @function(touchPositions:Instance[]|any[], rotation:number, velocity:number, state:Enum.UserInputState)
 ---@field TouchSwipe RBXScriptSignal @function(swipeDirection:Enum.SwipeDirection, numberOfTouches:number)
----@field TouchTap RBXScriptSignal @function(touchPositions:any[])
+---@field TouchTap RBXScriptSignal @function(touchPositions:Instance[]|any[])
 ---
 
 ---
@@ -1763,7 +1732,6 @@
 ---@field WalkSpeed number
 ---@field WalkToPart BasePart
 ---@field WalkToPoint Vector3
----@field maxHealth number
 ---@field AddAccessory fun(self:Humanoid, accessory:Instance):void
 ---@field AddCustomStatus fun(self:Humanoid, status:string):boolean
 ---@field AddStatus fun(self:Humanoid, status:Enum.Status):boolean
@@ -1771,14 +1739,14 @@
 ---@field CacheDefaults fun(self:Humanoid):void
 ---@field ChangeState fun(self:Humanoid, state:Enum.HumanoidStateType):void
 ---@field EquipTool fun(self:Humanoid, tool:Instance):void
----@field GetAccessories fun(self:Humanoid):any[]
+---@field GetAccessories fun(self:Humanoid):Instance[]|any[]
 ---@field GetAppliedDescription fun(self:Humanoid):Instance
 ---@field GetBodyPartR15 fun(self:Humanoid, part:Instance):Enum.BodyPartR15
 ---@field GetLimb fun(self:Humanoid, part:Instance):Enum.Limb
----@field GetPlayingAnimationTracks fun(self:Humanoid):any[]
+---@field GetPlayingAnimationTracks fun(self:Humanoid):Instance[]|any[]
 ---@field GetState fun(self:Humanoid):Enum.HumanoidStateType
 ---@field GetStateEnabled fun(self:Humanoid, state:Enum.HumanoidStateType):boolean
----@field GetStatuses fun(self:Humanoid):any[]
+---@field GetStatuses fun(self:Humanoid):Instance[]|any[]
 ---@field HasCustomStatus fun(self:Humanoid, status:string):boolean
 ---@field HasStatus fun(self:Humanoid, status:Enum.Status):boolean
 ---@field LoadAnimation fun(self:Humanoid, animation:Instance):Instance
@@ -1792,8 +1760,6 @@
 ---@field SetStateEnabled fun(self:Humanoid, state:Enum.HumanoidStateType, enabled:boolean):void
 ---@field TakeDamage fun(self:Humanoid, amount:number):void
 ---@field UnequipTools fun(self:Humanoid):void
----@field loadAnimation fun(self:Humanoid, animation:Instance):Instance
----@field takeDamage fun(self:Humanoid, amount:number):void
 ---@field ApplyDescription fun(self:Humanoid, humanoidDescription:Instance):void
 ---@field ApplyDescriptionClientServer fun(self:Humanoid, humanoidDescription:Instance):void
 ---@field PlayEmote fun(self:Humanoid, emoteName:string):boolean
@@ -1864,12 +1830,12 @@
 ---@field WidthScale number
 ---@field AddEmote fun(self:HumanoidDescription, name:string, assetId:number):void
 ---@field GetEmotes fun(self:HumanoidDescription):table<string,any>
----@field GetEquippedEmotes fun(self:HumanoidDescription):any[]
+---@field GetEquippedEmotes fun(self:HumanoidDescription):Instance[]|any[]
 ---@field RemoveEmote fun(self:HumanoidDescription, name:string):void
 ---@field SetEmotes fun(self:HumanoidDescription, emotes:table<string,any>):void
----@field SetEquippedEmotes fun(self:HumanoidDescription, equippedEmotes:any[]):void
+---@field SetEquippedEmotes fun(self:HumanoidDescription, equippedEmotes:Instance[]|any[]):void
 ---@field EmotesChanged RBXScriptSignal @function(newEmotes:table<string,any>)
----@field EquippedEmotesChanged RBXScriptSignal @function(newEquippedEmotes:any[])
+---@field EquippedEmotesChanged RBXScriptSignal @function(newEquippedEmotes:Instance[]|any[])
 ---
 
 ---
@@ -1891,17 +1857,16 @@
 ---@field Insert fun(self:InsertService, instance:Instance):void
 ---@field LoadLocalAsset fun(self:InsertService, assetPath:string):Instance
 ---@field LoadPackageAsset fun(self:InsertService, url:Content):Instance[]
----@field GetBaseCategories fun(self:InsertService):any[]
----@field GetBaseSets fun(self:InsertService):any[]
----@field GetCollection fun(self:InsertService, categoryId:number):any[]
----@field GetFreeDecals fun(self:InsertService, searchText:string, pageNum:number):any[]
----@field GetFreeModels fun(self:InsertService, searchText:string, pageNum:number):any[]
+---@field GetBaseCategories fun(self:InsertService):Instance[]|any[]
+---@field GetBaseSets fun(self:InsertService):Instance[]|any[]
+---@field GetCollection fun(self:InsertService, categoryId:number):Instance[]|any[]
+---@field GetFreeDecals fun(self:InsertService, searchText:string, pageNum:number):Instance[]|any[]
+---@field GetFreeModels fun(self:InsertService, searchText:string, pageNum:number):Instance[]|any[]
 ---@field GetLatestAssetVersionAsync fun(self:InsertService, assetId:number):number
----@field GetUserCategories fun(self:InsertService, userId:number):any[]
----@field GetUserSets fun(self:InsertService, userId:number):any[]
+---@field GetUserCategories fun(self:InsertService, userId:number):Instance[]|any[]
+---@field GetUserSets fun(self:InsertService, userId:number):Instance[]|any[]
 ---@field LoadAsset fun(self:InsertService, assetId:number):Instance
 ---@field LoadAssetVersion fun(self:InsertService, assetVersionId:number):Instance
----@field loadAsset fun(self:InsertService, assetId:number):Instance
 ---
 
 ---
@@ -1912,7 +1877,6 @@
 ---@field Enabled boolean
 ---@field Part0 BasePart
 ---@field Part1 BasePart
----@field part1 BasePart
 ---
 
 ---
@@ -2085,8 +2049,6 @@
 ---@field GetMoonPhase fun(self:Lighting):number
 ---@field GetSunDirection fun(self:Lighting):Vector3
 ---@field SetMinutesAfterMidnight fun(self:Lighting, minutes:number):void
----@field getMinutesAfterMidnight fun(self:Lighting):number
----@field setMinutesAfterMidnight fun(self:Lighting, minutes:number):void
 ---@field LightingChanged RBXScriptSignal @function(skyboxChanged:boolean)
 ---
 
@@ -2118,7 +2080,7 @@
 ---@field RobloxLocaleId string
 ---@field SystemLocaleId string
 ---@field GetCorescriptLocalizations fun(self:LocalizationService):Instance[]
----@field GetTableEntries fun(self:LocalizationService, instance:Instance):any[]
+---@field GetTableEntries fun(self:LocalizationService, instance:Instance):Instance[]|any[]
 ---@field GetTranslatorForPlayer fun(self:LocalizationService, player:Instance):Instance
 ---@field SetRobloxLocaleId fun(self:LocalizationService, locale:string):void
 ---@field StartTextScraper fun(self:LocalizationService):void
@@ -2139,7 +2101,7 @@
 ---@field Root Instance
 ---@field SourceLocaleId string
 ---@field GetContents fun(self:LocalizationTable):string
----@field GetEntries fun(self:LocalizationTable):any[]
+---@field GetEntries fun(self:LocalizationTable):Instance[]|any[]
 ---@field GetString fun(self:LocalizationTable, targetLocaleId:string, key:string):string
 ---@field GetTranslator fun(self:LocalizationTable, localeId:string):Instance
 ---@field RemoveEntry fun(self:LocalizationTable, key:string, source:string, context:string):void
@@ -2160,8 +2122,8 @@
 ---
 ---@class LogService : Instance
 ---@field ExecuteScript fun(self:LogService, source:string):void
----@field GetHttpResultHistory fun(self:LogService):any[]
----@field GetLogHistory fun(self:LogService):any[]
+---@field GetHttpResultHistory fun(self:LogService):Instance[]|any[]
+---@field GetLogHistory fun(self:LogService):Instance[]|any[]
 ---@field RequestHttpResultApproved fun(self:LogService):void
 ---@field RequestServerHttpResult fun(self:LogService):void
 ---@field RequestServerOutput fun(self:LogService):void
@@ -2218,6 +2180,7 @@
 
 ---
 ---@class ModuleScript : LuaSourceContainer
+---@field CoreScriptModified boolean
 ---@field LinkedSource Content
 ---@field Source ProtectedString
 ---
@@ -2319,8 +2282,6 @@
 ---@field ViewSizeY number
 ---@field X number
 ---@field Y number
----@field hit CFrame
----@field target BasePart
 ---@field Button1Down RBXScriptSignal @function()
 ---@field Button1Up RBXScriptSignal @function()
 ---@field Button2Down RBXScriptSignal @function()
@@ -2331,7 +2292,6 @@
 ---@field Move RBXScriptSignal @function()
 ---@field WheelBackward RBXScriptSignal @function()
 ---@field WheelForward RBXScriptSignal @function()
----@field keyDown RBXScriptSignal @function(key:string)
 ---
 
 ---
@@ -2453,7 +2413,7 @@
 ---@field CancelAllNotification fun(self:NotificationService, userId:number):void
 ---@field CancelNotification fun(self:NotificationService, userId:number, alertId:number):void
 ---@field ScheduleNotification fun(self:NotificationService, userId:number, alertId:number, alertMsg:string, minutesToFire:number):void
----@field GetScheduledNotifications fun(self:NotificationService, userId:number):any[]
+---@field GetScheduledNotifications fun(self:NotificationService, userId:number):Instance[]|any[]
 ---@field RobloxConnectionChanged RBXScriptSignal @function(connectionName:string, connectionState:Enum.ConnectionState, sequenceNumber:string, namespaceSequenceNumbers:string)
 ---@field RobloxEventReceived RBXScriptSignal @function(eventData:table)
 ---
@@ -2516,7 +2476,6 @@
 ---@field TopSurfaceInput Enum.InputType
 ---@field Transparency number
 ---@field Velocity Vector3
----@field brickColor BrickColor
 ---@field BreakJoints fun(self:BasePart):void
 ---@field CanCollideWith fun(self:BasePart, part:Instance):boolean
 ---@field CanSetNetworkOwnership fun(self:BasePart):vararg
@@ -2533,10 +2492,6 @@
 ---@field Resize fun(self:BasePart, normalId:Enum.NormalId, deltaAmount:number):boolean
 ---@field SetNetworkOwner fun(self:BasePart, playerInstance:Instance):void
 ---@field SetNetworkOwnershipAuto fun(self:BasePart):void
----@field breakJoints fun(self:BasePart):void
----@field getMass fun(self:BasePart):number
----@field makeJoints fun(self:BasePart):void
----@field resize fun(self:BasePart, normalId:Enum.NormalId, deltaAmount:number):boolean
 ---@field SubtractAsync fun(self:BasePart, parts:Instance[], collisionfidelity:Enum.CollisionFidelity, renderFidelity:Enum.RenderFidelity):Instance
 ---@field UnionAsync fun(self:BasePart, parts:Instance[], collisionfidelity:Enum.CollisionFidelity, renderFidelity:Enum.RenderFidelity):Instance
 ---@field LocalSimulationTouched RBXScriptSignal @function(part:Instance)
@@ -2544,7 +2499,6 @@
 ---@field StoppedTouching RBXScriptSignal @function(otherPart:Instance)
 ---@field TouchEnded RBXScriptSignal @function(otherPart:Instance)
 ---@field Touched RBXScriptSignal @function(otherPart:Instance)
----@field touched RBXScriptSignal @function(otherPart:Instance)
 ---
 
 ---
@@ -2554,7 +2508,6 @@
 ---
 ---@class FormFactorPart : BasePart
 ---@field FormFactor Enum.FormFactor
----@field formFactor Enum.FormFactor
 ---
 
 ---
@@ -2590,8 +2543,6 @@
 ---@field Equipped RBXScriptSignal @function(humanoid:Instance, skateboardController:Instance)
 ---@field MoveStateChanged RBXScriptSignal @function(newState:Enum.MoveState, oldState:Enum.MoveState)
 ---@field Unequipped RBXScriptSignal @function(humanoid:Instance)
----@field equipped RBXScriptSignal @function(humanoid:Instance, skateboardController:Instance)
----@field unequipped RBXScriptSignal @function(humanoid:Instance)
 ---
 
 ---
@@ -2609,6 +2560,7 @@
 
 ---
 ---@class Terrain : BasePart
+---@field Decoration boolean
 ---@field IsSmooth boolean
 ---@field MaterialColors BinaryString
 ---@field MaxExtents Region3int16
@@ -2643,7 +2595,7 @@
 ---@field WorldToCell fun(self:Terrain, position:Vector3):Vector3
 ---@field WorldToCellPreferEmpty fun(self:Terrain, position:Vector3):Vector3
 ---@field WorldToCellPreferSolid fun(self:Terrain, position:Vector3):Vector3
----@field WriteVoxels fun(self:Terrain, region:Region3, resolution:number, materials:any[], occupancy:any[]):void
+---@field WriteVoxels fun(self:Terrain, region:Region3, resolution:number, materials:Instance[]|any[], occupancy:Instance[]|any[]):void
 ---@field TerrainProgressUpdate RBXScriptSignal @function(progressRatio:number)
 ---
 
@@ -2711,10 +2663,6 @@
 ---@field SetIdentityOrientation fun(self:Model):void
 ---@field SetPrimaryPartCFrame fun(self:Model, cframe:CFrame):void
 ---@field TranslateBy fun(self:Model, delta:Vector3):void
----@field breakJoints fun(self:Model):void
----@field makeJoints fun(self:Model):void
----@field move fun(self:Model, location:Vector3):void
----@field moveTo fun(self:Model, location:Vector3):void
 ---
 
 ---
@@ -2722,7 +2670,19 @@
 ---
 
 ---
----@class Workspace : Model
+---@class WorldRoot : Model
+---@field FindPartOnRay fun(self:WorldRoot, ray:Ray, ignoreDescendantsInstance:Instance, terrainCellsAreCubes:boolean, ignoreWater:boolean):vararg
+---@field FindPartOnRayWithIgnoreList fun(self:WorldRoot, ray:Ray, ignoreDescendantsTable:Instance[], terrainCellsAreCubes:boolean, ignoreWater:boolean):vararg
+---@field FindPartOnRayWithWhitelist fun(self:WorldRoot, ray:Ray, whitelistDescendantsTable:Instance[], ignoreWater:boolean):vararg
+---@field FindPartsInRegion3 fun(self:WorldRoot, region:Region3, ignoreDescendantsInstance:Instance, maxParts:number):Instance[]
+---@field FindPartsInRegion3WithIgnoreList fun(self:WorldRoot, region:Region3, ignoreDescendantsTable:Instance[], maxParts:number):Instance[]
+---@field FindPartsInRegion3WithWhiteList fun(self:WorldRoot, region:Region3, whitelistDescendantsTable:Instance[], maxParts:number):Instance[]
+---@field IsRegion3Empty fun(self:WorldRoot, region:Region3, ignoreDescendentsInstance:Instance):boolean
+---@field IsRegion3EmptyWithIgnoreList fun(self:WorldRoot, region:Region3, ignoreDescendentsTable:Instance[]):boolean
+---
+
+---
+---@class Workspace : WorldRoot
 ---@field AllowThirdPartySales boolean
 ---@field CurrentCamera Camera
 ---@field DistributedGameTime number
@@ -2738,25 +2698,19 @@
 ---@field BreakJoints fun(self:Workspace, objects:Instance[]):void
 ---@field CalculateJumpPower fun(self:Workspace, gravity:number, jumpHeight:number):number
 ---@field ExperimentalSolverIsEnabled fun(self:Workspace):boolean
----@field FindPartOnRay fun(self:Workspace, ray:Ray, ignoreDescendantsInstance:Instance, terrainCellsAreCubes:boolean, ignoreWater:boolean):vararg
----@field FindPartOnRayWithIgnoreList fun(self:Workspace, ray:Ray, ignoreDescendantsTable:Instance[], terrainCellsAreCubes:boolean, ignoreWater:boolean):vararg
----@field FindPartOnRayWithWhitelist fun(self:Workspace, ray:Ray, whitelistDescendantsTable:Instance[], ignoreWater:boolean):vararg
----@field FindPartsInRegion3 fun(self:Workspace, region:Region3, ignoreDescendantsInstance:Instance, maxParts:number):Instance[]
----@field FindPartsInRegion3WithIgnoreList fun(self:Workspace, region:Region3, ignoreDescendantsTable:Instance[], maxParts:number):Instance[]
----@field FindPartsInRegion3WithWhiteList fun(self:Workspace, region:Region3, whitelistDescendantsTable:Instance[], maxParts:number):Instance[]
 ---@field GetNumAwakeParts fun(self:Workspace):number
 ---@field GetPhysicsThrottling fun(self:Workspace):number
 ---@field GetRealPhysicsFPS fun(self:Workspace):number
----@field IsRegion3Empty fun(self:Workspace, region:Region3, ignoreDescendentsInstance:Instance):boolean
----@field IsRegion3EmptyWithIgnoreList fun(self:Workspace, region:Region3, ignoreDescendentsTable:Instance[]):boolean
 ---@field JoinToOutsiders fun(self:Workspace, objects:Instance[], jointType:Enum.JointCreationMode):void
 ---@field MakeJoints fun(self:Workspace, objects:Instance[]):void
 ---@field PGSIsEnabled fun(self:Workspace):boolean
 ---@field SetPhysicsThrottleEnabled fun(self:Workspace, value:boolean):void
 ---@field UnjoinFromOutsiders fun(self:Workspace, objects:Instance[]):void
 ---@field ZoomToExtents fun(self:Workspace):void
----@field findPartOnRay fun(self:Workspace, ray:Ray, ignoreDescendantsInstance:Instance, terrainCellsAreCubes:boolean, ignoreWater:boolean):vararg
----@field findPartsInRegion3 fun(self:Workspace, region:Region3, ignoreDescendantsInstance:Instance, maxParts:number):Instance[]
+---
+
+---
+---@class WorldModel : WorldRoot
 ---
 
 ---
@@ -2774,7 +2728,7 @@
 ---
 ---@class Pages : Instance
 ---@field IsFinished boolean
----@field GetCurrentPage fun(self:Pages):any[]
+---@field GetCurrentPage fun(self:Pages):Instance[]|any[]
 ---@field AdvanceToNextPageAsync fun(self:Pages):void
 ---
 
@@ -2831,8 +2785,8 @@
 ---
 ---@class Path : Instance
 ---@field Status Enum.PathStatus
----@field GetPointCoordinates fun(self:Path):any[]
----@field GetWaypoints fun(self:Path):any[]
+---@field GetPointCoordinates fun(self:Path):Instance[]|any[]
+---@field GetWaypoints fun(self:Path):Instance[]|any[]
 ---@field CheckOcclusionAsync fun(self:Path, start:number):number
 ---@field ComputeAsync fun(self:Path, start:Vector3, finish:Vector3):void
 ---@field Blocked RBXScriptSignal @function(blockedWaypointIdx:number)
@@ -2859,7 +2813,7 @@
 ---@field CreateCollisionGroup fun(self:PhysicsService, name:string):number
 ---@field GetCollisionGroupId fun(self:PhysicsService, name:string):number
 ---@field GetCollisionGroupName fun(self:PhysicsService, name:number):string
----@field GetCollisionGroups fun(self:PhysicsService):any[]
+---@field GetCollisionGroups fun(self:PhysicsService):Instance[]|any[]
 ---@field GetMaxCollisionGroups fun(self:PhysicsService):number
 ---@field IkSolve fun(self:PhysicsService, part:Instance, target:CFrame, translateStiffness:number, rotateStiffness:number):void
 ---@field LocalIkSolve fun(self:PhysicsService, part:Instance, target:CFrame, translateStiffness:number, rotateStiffness:number):void
@@ -2936,8 +2890,7 @@
 ---@field TeleportedIn boolean
 ---@field UserId number
 ---@field VRDevice string
----@field userId number
----@field AddToBlockList fun(self:Player, userIds:any[]):void
+---@field AddToBlockList fun(self:Player, userIds:Instance[]|any[]):void
 ---@field ClearCharacterAppearance fun(self:Player):void
 ---@field DistanceFromCharacter fun(self:Player, point:Vector3):number
 ---@field GetFriendStatus fun(self:Player, player:Instance):Enum.FriendStatus
@@ -2968,15 +2921,7 @@
 ---@field SetSuperSafeChat fun(self:Player, value:boolean):void
 ---@field SetUnder13 fun(self:Player, value:boolean):void
 ---@field UpdatePlayerBlocked fun(self:Player, userId:number, blocked:boolean):void
----@field loadBoolean fun(self:Player, key:string):boolean
----@field loadInstance fun(self:Player, key:string):Instance
----@field loadNumber fun(self:Player, key:string):number
----@field loadString fun(self:Player, key:string):string
----@field saveBoolean fun(self:Player, key:string, value:boolean):void
----@field saveInstance fun(self:Player, key:string, value:Instance):void
----@field saveNumber fun(self:Player, key:string, value:number):void
----@field saveString fun(self:Player, key:string, value:string):void
----@field GetFriendsOnline fun(self:Player, maxFriends:number):any[]
+---@field GetFriendsOnline fun(self:Player, maxFriends:number):Instance[]|any[]
 ---@field GetRankInGroup fun(self:Player, groupId:number):number
 ---@field GetRoleInGroup fun(self:Player, groupId:number):string
 ---@field IsBestFriendsWith fun(self:Player, userId:number):boolean
@@ -2986,8 +2931,6 @@
 ---@field LoadCharacterBlocking fun(self:Player):void
 ---@field LoadCharacterWithHumanoidDescription fun(self:Player, humanoidDescription:Instance):void
 ---@field WaitForDataReady fun(self:Player):boolean
----@field isFriendsWith fun(self:Player, userId:number):boolean
----@field waitForDataReady fun(self:Player):boolean
 ---@field CharacterAdded RBXScriptSignal @function(character:Instance)
 ---@field CharacterAppearanceLoaded RBXScriptSignal @function(character:Instance)
 ---@field CharacterRemoving RBXScriptSignal @function(character:Instance)
@@ -3004,10 +2947,10 @@
 ---@field ClearComputerMovementModes fun(self:PlayerScripts):void
 ---@field ClearTouchCameraMovementModes fun(self:PlayerScripts):void
 ---@field ClearTouchMovementModes fun(self:PlayerScripts):void
----@field GetRegisteredComputerCameraMovementModes fun(self:PlayerScripts):any[]
----@field GetRegisteredComputerMovementModes fun(self:PlayerScripts):any[]
----@field GetRegisteredTouchCameraMovementModes fun(self:PlayerScripts):any[]
----@field GetRegisteredTouchMovementModes fun(self:PlayerScripts):any[]
+---@field GetRegisteredComputerCameraMovementModes fun(self:PlayerScripts):Instance[]|any[]
+---@field GetRegisteredComputerMovementModes fun(self:PlayerScripts):Instance[]|any[]
+---@field GetRegisteredTouchCameraMovementModes fun(self:PlayerScripts):Instance[]|any[]
+---@field GetRegisteredTouchMovementModes fun(self:PlayerScripts):Instance[]|any[]
 ---@field RegisterComputerCameraMovementMode fun(self:PlayerScripts, cameraMovementMode:Enum.ComputerCameraMovementMode):void
 ---@field RegisterComputerMovementMode fun(self:PlayerScripts, movementMode:Enum.ComputerMovementMode):void
 ---@field RegisterTouchCameraMovementMode fun(self:PlayerScripts, cameraMovementMode:Enum.TouchCameraMovementMode):void
@@ -3030,8 +2973,6 @@
 ---@field PreferredPlayers number
 ---@field PreferredPlayersInternal number
 ---@field RespawnTime number
----@field localPlayer Instance
----@field numPlayers number
 ---@field Chat fun(self:Players, message:string):void
 ---@field CreateLocalPlayer fun(self:Players):Instance
 ---@field GetPlayerByUserId fun(self:Players, userId:number):Instance
@@ -3042,10 +2983,6 @@
 ---@field SetLocalPlayerInfo fun(self:Players, userId:number, userName:string, membershipType:Enum.MembershipType, isUnder13:boolean):void
 ---@field TeamChat fun(self:Players, message:string):void
 ---@field WhisperChat fun(self:Players, message:string, player:Instance):void
----@field getPlayerFromCharacter fun(self:Players, character:Instance):Instance
----@field getPlayers fun(self:Players):Instance[]
----@field playerFromCharacter fun(self:Players, character:Instance):Instance
----@field players fun(self:Players):Instance[]
 ---@field CreateHumanoidModelFromDescription fun(self:Players, description:Instance, rigType:Enum.HumanoidRigType):Instance
 ---@field CreateHumanoidModelFromUserId fun(self:Players, userId:number):Instance
 ---@field GetCharacterAppearanceAsync fun(self:Players, userId:number):Instance
@@ -3285,7 +3222,6 @@
 ---@field UIMaximum number
 ---@field UIMinimum number
 ---@field UINumTicks number
----@field summary string
 ---
 
 ---
@@ -3406,7 +3342,6 @@
 ---@field SetRobloxGuiFocused fun(self:RunService, focus:boolean):void
 ---@field Stop fun(self:RunService):void
 ---@field UnbindFromRenderStep fun(self:RunService, name:string):void
----@field setThrottleFramerateEnabled fun(self:RunService, enable:boolean):void
 ---@field Heartbeat RBXScriptSignal @function(step:number)
 ---@field RenderStepped RBXScriptSignal @function(step:number)
 ---@field Stepped RBXScriptSignal @function(time:number, step:number)
@@ -3420,7 +3355,7 @@
 ---@class ScriptContext : Instance
 ---@field ScriptsDisabled boolean
 ---@field AddCoreScriptLocal fun(self:ScriptContext, name:string, parent:Instance):void
----@field GetCoverageStats fun(self:ScriptContext):any[]
+---@field GetCoverageStats fun(self:ScriptContext):Instance[]|any[]
 ---@field SetTimeout fun(self:ScriptContext, seconds:number):void
 ---@field Error RBXScriptSignal @function(message:string, stackTrace:string, script:Instance)
 ---
@@ -3435,7 +3370,7 @@
 ---@field GetBreakpoints fun(self:ScriptDebugger):Instance[]
 ---@field GetGlobals fun(self:ScriptDebugger):table
 ---@field GetLocals fun(self:ScriptDebugger, stackFrame:number):table
----@field GetStack fun(self:ScriptDebugger):any[]
+---@field GetStack fun(self:ScriptDebugger):Instance[]|any[]
 ---@field GetUpvalues fun(self:ScriptDebugger, stackFrame:number):table
 ---@field GetWatchValue fun(self:ScriptDebugger, watch:Instance):table
 ---@field GetWatches fun(self:ScriptDebugger):Instance[]
@@ -3479,8 +3414,6 @@
 ---@class ServiceProvider : Instance
 ---@field FindService fun(self:ServiceProvider, className:string):Instance
 ---@field GetService fun(self:ServiceProvider, className:string):Instance
----@field getService fun(self:ServiceProvider, className:string):Instance
----@field service fun(self:ServiceProvider, className:string):Instance
 ---@field Close RBXScriptSignal @function()
 ---@field CloseLate RBXScriptSignal @function()
 ---@field ServiceAdded RBXScriptSignal @function(service:Instance)
@@ -3503,8 +3436,6 @@
 ---@field VIPServerId string
 ---@field VIPServerOwnerId number
 ---@field Workspace Workspace
----@field lighting Instance
----@field workspace Workspace
 ---@field BindToClose fun(self:DataModel, function:fun):void
 ---@field DefineFastFlag fun(self:DataModel, name:string, defaultValue:boolean):boolean
 ---@field DefineFastInt fun(self:DataModel, name:string, defaultValue:number):number
@@ -3514,11 +3445,11 @@
 ---@field GetFastString fun(self:DataModel, name:string):string
 ---@field GetJobIntervalPeakFraction fun(self:DataModel, jobname:string, greaterThan:number):number
 ---@field GetJobTimePeakFraction fun(self:DataModel, jobname:string, greaterThan:number):number
----@field GetJobsExtendedStats fun(self:DataModel):any[]
----@field GetJobsInfo fun(self:DataModel):any[]
+---@field GetJobsExtendedStats fun(self:DataModel):Instance[]|any[]
+---@field GetJobsInfo fun(self:DataModel):Instance[]|any[]
 ---@field GetMessage fun(self:DataModel):string
 ---@field GetObjects fun(self:DataModel, url:Content):Instance[]
----@field GetObjectsList fun(self:DataModel, urls:any[]):any[]
+---@field GetObjectsList fun(self:DataModel, urls:Instance[]|any[]):Instance[]|any[]
 ---@field GetRemoteBuildMode fun(self:DataModel):boolean
 ---@field IsGearTypeAllowed fun(self:DataModel, gearType:Enum.GearType):boolean
 ---@field IsLoaded fun(self:DataModel):boolean
@@ -3589,10 +3520,10 @@
 
 ---
 ---@class SocialService : Instance
----@field InvokeGameInvitePromptClosed fun(self:SocialService, player:Instance, recipientIds:any[]):void
+---@field InvokeGameInvitePromptClosed fun(self:SocialService, player:Instance, recipientIds:Instance[]|any[]):void
 ---@field PromptGameInvite fun(self:SocialService, player:Instance):void
 ---@field CanSendGameInviteAsync fun(self:SocialService, player:Instance):boolean
----@field GameInvitePromptClosed RBXScriptSignal @function(player:Instance, recipientIds:any[])
+---@field GameInvitePromptClosed RBXScriptSignal @function(player:Instance, recipientIds:Instance[]|any[])
 ---@field PromptInviteRequested RBXScriptSignal @function(player:Instance)
 ---
 
@@ -3616,14 +3547,10 @@
 ---@field TimeLength number
 ---@field TimePosition number
 ---@field Volume number
----@field isPlaying boolean
 ---@field Pause fun(self:Sound):void
 ---@field Play fun(self:Sound):void
 ---@field Resume fun(self:Sound):void
 ---@field Stop fun(self:Sound):void
----@field pause fun(self:Sound):void
----@field play fun(self:Sound):void
----@field stop fun(self:Sound):void
 ---@field DidLoop RBXScriptSignal @function(soundId:string, numOfTimesLooped:number)
 ---@field Ended RBXScriptSignal @function(soundId:string)
 ---@field Loaded RBXScriptSignal @function(soundId:string)
@@ -3880,10 +3807,10 @@
 ---@field ShowPublishToRoblox fun(self:StudioService):void
 ---@field UninstallPlugin fun(self:StudioService, assetId:number):void
 ---@field UpdatePluginManagement fun(self:StudioService):void
----@field PromptImportFile fun(self:StudioService, fileTypeFilter:any[]):Instance
----@field PromptImportFiles fun(self:StudioService, fileTypeFilter:any[]):Instance[]
----@field PromptImportLocalAsset fun(self:StudioService, prompt:string, fileTypeFilter:any[]):Instance
----@field PromptImportLocalAssets fun(self:StudioService, prompt:string, fileTypeFilter:any[]):Instance[]
+---@field PromptImportFile fun(self:StudioService, fileTypeFilter:Instance[]|any[]):Instance
+---@field PromptImportFiles fun(self:StudioService, fileTypeFilter:Instance[]|any[]):Instance[]
+---@field PromptImportLocalAsset fun(self:StudioService, prompt:string, fileTypeFilter:Instance[]|any[]):Instance
+---@field PromptImportLocalAssets fun(self:StudioService, prompt:string, fileTypeFilter:Instance[]|any[]):Instance[]
 ---@field TryInstallPlugin fun(self:StudioService, assetId:number, assetVersionId:number):void
 ---@field GamePublishFinished RBXScriptSignal @function(success:boolean)
 ---@field OnConvertToPackageResult RBXScriptSignal @function(isSuccessful:boolean, errorMessage:string)
@@ -3976,7 +3903,6 @@
 ---@field Message fun(self:TestService, text:string, source:Instance, line:number):void
 ---@field Require fun(self:TestService, condition:boolean, description:string, source:Instance, line:number):void
 ---@field Warn fun(self:TestService, condition:boolean, description:string, source:Instance, line:number):void
----@field isFeatureEnabled fun(self:TestService, name:string):boolean
 ---@field Run fun(self:TestService):void
 ---@field ServerCollectConditionalResult RBXScriptSignal @function(condition:boolean, text:string, script:Instance, line:number)
 ---@field ServerCollectResult RBXScriptSignal @function(text:string, script:Instance, line:number)
@@ -4072,10 +3998,10 @@
 ---
 ---@class UGCValidationService : Instance
 ---@field GetMeshTriCountSync fun(self:UGCValidationService, meshId:string):number
----@field GetMeshVertsSync fun(self:UGCValidationService, meshId:string):any[]
+---@field GetMeshVertsSync fun(self:UGCValidationService, meshId:string):Instance[]|any[]
 ---@field GetTextureSizeSync fun(self:UGCValidationService, textureId:string):Vector2
 ---@field GetMeshTriCount fun(self:UGCValidationService, meshId:string):number
----@field GetMeshVerts fun(self:UGCValidationService, meshId:string):any[]
+---@field GetMeshVerts fun(self:UGCValidationService, meshId:string):Instance[]|any[]
 ---@field GetTextureSize fun(self:UGCValidationService, textureId:string):Vector2
 ---
 
@@ -4267,23 +4193,23 @@
 ---@field UserHeadCFrame CFrame
 ---@field VREnabled boolean
 ---@field GamepadSupports fun(self:UserInputService, gamepadNum:Enum.UserInputType, gamepadKeyCode:Enum.KeyCode):boolean
----@field GetConnectedGamepads fun(self:UserInputService):any[]
+---@field GetConnectedGamepads fun(self:UserInputService):Instance[]|any[]
 ---@field GetDeviceAcceleration fun(self:UserInputService):Instance
 ---@field GetDeviceGravity fun(self:UserInputService):Instance
 ---@field GetDeviceRotation fun(self:UserInputService):vararg
 ---@field GetDeviceType fun(self:UserInputService):Enum.DeviceType
 ---@field GetFocusedTextBox fun(self:UserInputService):Instance
 ---@field GetGamepadConnected fun(self:UserInputService, gamepadNum:Enum.UserInputType):boolean
----@field GetGamepadState fun(self:UserInputService, gamepadNum:Enum.UserInputType):any[]
----@field GetKeysPressed fun(self:UserInputService):any[]
+---@field GetGamepadState fun(self:UserInputService, gamepadNum:Enum.UserInputType):Instance[]|any[]
+---@field GetKeysPressed fun(self:UserInputService):Instance[]|any[]
 ---@field GetLastInputType fun(self:UserInputService):Enum.UserInputType
----@field GetMouseButtonsPressed fun(self:UserInputService):any[]
+---@field GetMouseButtonsPressed fun(self:UserInputService):Instance[]|any[]
 ---@field GetMouseDelta fun(self:UserInputService):Vector2
 ---@field GetMouseLocation fun(self:UserInputService):Vector2
----@field GetNavigationGamepads fun(self:UserInputService):any[]
+---@field GetNavigationGamepads fun(self:UserInputService):Instance[]|any[]
 ---@field GetPlatform fun(self:UserInputService):Enum.Platform
 ---@field GetStringForKeyCode fun(self:UserInputService, keyCode:Enum.KeyCode):string
----@field GetSupportedGamepadKeyCodes fun(self:UserInputService, gamepadNum:Enum.UserInputType):any[]
+---@field GetSupportedGamepadKeyCodes fun(self:UserInputService, gamepadNum:Enum.UserInputType):Instance[]|any[]
 ---@field GetUserCFrame fun(self:UserInputService, type:Enum.UserCFrame):CFrame
 ---@field IsGamepadButtonDown fun(self:UserInputService, gamepadNum:Enum.UserInputType, gamepadKeyCode:Enum.KeyCode):boolean
 ---@field IsKeyDown fun(self:UserInputService, keyCode:Enum.KeyCode):boolean
@@ -4307,14 +4233,14 @@
 ---@field TextBoxFocusReleased RBXScriptSignal @function(textboxReleased:Instance)
 ---@field TextBoxFocused RBXScriptSignal @function(textboxFocused:Instance)
 ---@field TouchEnded RBXScriptSignal @function(touch:Instance, gameProcessedEvent:boolean)
----@field TouchLongPress RBXScriptSignal @function(touchPositions:any[], state:Enum.UserInputState, gameProcessedEvent:boolean)
+---@field TouchLongPress RBXScriptSignal @function(touchPositions:Instance[]|any[], state:Enum.UserInputState, gameProcessedEvent:boolean)
 ---@field TouchMoved RBXScriptSignal @function(touch:Instance, gameProcessedEvent:boolean)
----@field TouchPan RBXScriptSignal @function(touchPositions:any[], totalTranslation:Vector2, velocity:Vector2, state:Enum.UserInputState, gameProcessedEvent:boolean)
----@field TouchPinch RBXScriptSignal @function(touchPositions:any[], scale:number, velocity:number, state:Enum.UserInputState, gameProcessedEvent:boolean)
----@field TouchRotate RBXScriptSignal @function(touchPositions:any[], rotation:number, velocity:number, state:Enum.UserInputState, gameProcessedEvent:boolean)
+---@field TouchPan RBXScriptSignal @function(touchPositions:Instance[]|any[], totalTranslation:Vector2, velocity:Vector2, state:Enum.UserInputState, gameProcessedEvent:boolean)
+---@field TouchPinch RBXScriptSignal @function(touchPositions:Instance[]|any[], scale:number, velocity:number, state:Enum.UserInputState, gameProcessedEvent:boolean)
+---@field TouchRotate RBXScriptSignal @function(touchPositions:Instance[]|any[], rotation:number, velocity:number, state:Enum.UserInputState, gameProcessedEvent:boolean)
 ---@field TouchStarted RBXScriptSignal @function(touch:Instance, gameProcessedEvent:boolean)
 ---@field TouchSwipe RBXScriptSignal @function(swipeDirection:Enum.SwipeDirection, numberOfTouches:number, gameProcessedEvent:boolean)
----@field TouchTap RBXScriptSignal @function(touchPositions:any[], gameProcessedEvent:boolean)
+---@field TouchTap RBXScriptSignal @function(touchPositions:Instance[]|any[], gameProcessedEvent:boolean)
 ---@field TouchTapInWorld RBXScriptSignal @function(position:Vector2, processedByUI:boolean)
 ---@field UserCFrameChanged RBXScriptSignal @function(type:Enum.UserCFrame, value:CFrame)
 ---@field WindowFocusReleased RBXScriptSignal @function()
@@ -4351,28 +4277,24 @@
 ---@class BoolValue : ValueBase
 ---@field Value boolean
 ---@field Changed RBXScriptSignal @function(value:boolean)
----@field changed RBXScriptSignal @function(value:boolean)
 ---
 
 ---
 ---@class BrickColorValue : ValueBase
 ---@field Value BrickColor
 ---@field Changed RBXScriptSignal @function(value:BrickColor)
----@field changed RBXScriptSignal @function(value:BrickColor)
 ---
 
 ---
 ---@class CFrameValue : ValueBase
 ---@field Value CFrame
 ---@field Changed RBXScriptSignal @function(value:CFrame)
----@field changed RBXScriptSignal @function(value:CFrame)
 ---
 
 ---
 ---@class Color3Value : ValueBase
 ---@field Value Color3
 ---@field Changed RBXScriptSignal @function(value:Color3)
----@field changed RBXScriptSignal @function(value:Color3)
 ---
 
 ---
@@ -4382,7 +4304,6 @@
 ---@field MinValue number
 ---@field Value number
 ---@field Changed RBXScriptSignal @function(value:number)
----@field changed RBXScriptSignal @function(value:number)
 ---
 
 ---
@@ -4392,49 +4313,42 @@
 ---@field MinValue number
 ---@field Value number
 ---@field Changed RBXScriptSignal @function(value:number)
----@field changed RBXScriptSignal @function(value:number)
 ---
 
 ---
 ---@class IntValue : ValueBase
 ---@field Value number
 ---@field Changed RBXScriptSignal @function(value:number)
----@field changed RBXScriptSignal @function(value:number)
 ---
 
 ---
 ---@class NumberValue : ValueBase
 ---@field Value number
 ---@field Changed RBXScriptSignal @function(value:number)
----@field changed RBXScriptSignal @function(value:number)
 ---
 
 ---
 ---@class ObjectValue : ValueBase
 ---@field Value Instance
 ---@field Changed RBXScriptSignal @function(value:Instance)
----@field changed RBXScriptSignal @function(value:Instance)
 ---
 
 ---
 ---@class RayValue : ValueBase
 ---@field Value Ray
 ---@field Changed RBXScriptSignal @function(value:Ray)
----@field changed RBXScriptSignal @function(value:Ray)
 ---
 
 ---
 ---@class StringValue : ValueBase
 ---@field Value string
 ---@field Changed RBXScriptSignal @function(value:string)
----@field changed RBXScriptSignal @function(value:string)
 ---
 
 ---
 ---@class Vector3Value : ValueBase
 ---@field Value Vector3
 ---@field Changed RBXScriptSignal @function(value:Vector3)
----@field changed RBXScriptSignal @function(value:Vector3)
 ---
 
 ---
@@ -4461,7 +4375,6 @@
 ---@field StartPlaying fun(self:VirtualInputManager, fileName:string):void
 ---@field StartRecording fun(self:VirtualInputManager):void
 ---@field StopRecording fun(self:VirtualInputManager):void
----@field sendRobloxEvent fun(self:VirtualInputManager, namespace:string, detail:string, detailType:string):void
 ---@field PlaybackCompleted RBXScriptSignal @function(additionalLuaState:string)
 ---@field RecordingCompleted RBXScriptSignal @function(result:string)
 ---
