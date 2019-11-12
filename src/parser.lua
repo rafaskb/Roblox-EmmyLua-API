@@ -26,7 +26,7 @@ local function readType(baseData)
         end
 
         if name == "Array" then
-            return "any[]"
+            return "Instance[]|any[]"
         end
 
         if name ~= "Tuple" then
