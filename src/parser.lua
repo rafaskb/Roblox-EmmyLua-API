@@ -111,33 +111,38 @@ function parser:parseClass(baseData)
 
     -- Write fields
     for _, memberData in pairs(baseData.Members) do
-        local name = memberData.Name
-        local memberType = memberData.MemberType
+        local name = memberData.Name ---@type string
+        local memberType = memberData.MemberType ---@type string
 
-        -- Parse property
-        if "Property" == memberType then
-            local valueType = readType(memberData.ValueType)
-            utils:write("---@field %s %s", name, valueType)
-        end
+        -- Make sure field doesn't start with lower case letters
+        local isStartingWithLowerCase = string.match(name, "^%l.*$") and true or false
+        if not isStartingWithLowerCase then
 
-        -- Parse function
-        if "Function" == memberType then
-            local parameters = readParameters(memberData.Parameters, class)
-            local returnType = readType(memberData.ReturnType)
-            utils:write("---@field %s fun(%s):%s", name, parameters, returnType)
-        end
+            -- Parse property
+            if "Property" == memberType then
+                local valueType = readType(memberData.ValueType)
+                utils:write("---@field %s %s", name, valueType)
+            end
 
-        -- Parse event
-        if "Event" == memberType then
-            local parameters = readParameters(memberData.Parameters)
-            utils:write("---@field %s RBXScriptSignal @function(%s)", name, parameters)
-        end
+            -- Parse function
+            if "Function" == memberType then
+                local parameters = readParameters(memberData.Parameters, class)
+                local returnType = readType(memberData.ReturnType)
+                utils:write("---@field %s fun(%s):%s", name, parameters, returnType)
+            end
 
-        -- Parse callback
-        if "Callback" == memberType then
-            local parameters = readParameters(memberData.Parameters)
-            local returnType = readType(memberData.ReturnType)
-            utils:write("---@field %s fun(%s):%s @Callback", name, parameters, returnType)
+            -- Parse event
+            if "Event" == memberType then
+                local parameters = readParameters(memberData.Parameters)
+                utils:write("---@field %s RBXScriptSignal @function(%s)", name, parameters)
+            end
+
+            -- Parse callback
+            if "Callback" == memberType then
+                local parameters = readParameters(memberData.Parameters)
+                local returnType = readType(memberData.ReturnType)
+                utils:write("---@field %s fun(%s):%s @Callback", name, parameters, returnType)
+            end
         end
     end
 
