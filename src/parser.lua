@@ -48,7 +48,7 @@ local function readType(baseData)
     -- Translate poorly named types
     do
         if name == "Objects" then
-            return "Instance[]"
+            return "Instance[]|any[]"
         end
 
         if name == "Variant" then
