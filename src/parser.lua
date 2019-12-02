@@ -19,51 +19,6 @@ local function readType(baseData)
         return "Enum." .. name
     end
 
-    -- Parse group types
-    if category == "Group" then
-        if name == "Dictionary" then
-            return "table<string,any>"
-        end
-
-        if name == "Array" then
-            return "Instance[]|any[]"
-        end
-
-        if name ~= "Tuple" then
-            return "table"
-        end
-    end
-
-    -- Parse primitive types
-    if category == "Primitive" then
-        if name == "bool" then
-            return "boolean"
-        end
-
-        if name == "int" or name == "double" or name == "float" or name == "int64" then
-            return "number"
-        end
-    end
-
-    -- Translate poorly named types
-    do
-        if name == "Objects" then
-            return "Instance[]|any[]"
-        end
-
-        if name == "Variant" then
-            return "any"
-        end
-
-        if name == "Tuple" then
-            return "vararg"
-        end
-
-        if name == "Function" then
-            return "fun"
-        end
-    end
-
     return name
 end
 
@@ -107,7 +62,11 @@ function parser:parseClass(baseData)
     local class = baseData.Name
     local super = baseData.Superclass
     utils:write("---")
-    utils:write("---@class %s : %s", class, super)
+    if class == "Instance" then
+        utils:write("---@class %s", class)
+    else
+        utils:write("---@class %s : %s", class, super)
+    end
 
     -- Write fields
     for _, memberData in pairs(baseData.Members) do

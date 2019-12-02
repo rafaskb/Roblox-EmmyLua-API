@@ -27,9 +27,9 @@
 
 ---
 ---@class RobloxUtf8
----@field char fun(codepoints:vararg):string
+---@field char fun(vararg string):string
 ---@field codes fun(str:string):function,string,number
----@field codepoint fun(str:string, i:number, j:number):vararg
+---@field codepoint fun(str:string, i:number, j:number):Tuple
 ---@field len fun(str:string, i:number, j:number):number
 ---@field offset fun(str:string, n:number, i:number):number
 ---@field graphmes fun(str:string, i:number, j:number):function
@@ -146,7 +146,7 @@
 ---@field PointToObjectSpace fun(self:CFrame, v3:Vector3):Vector3 Returns a Vector3 transformed from World to Object space. Equivalent to [CFrame:inverse() * v3]
 ---@field VectorToWorldSpace fun(self:CFrame, v3:Vector3):Vector3 Returns a Vector3 rotated from Object to World space. Equivalent to [(CFrame - CFrame.p) *v3]
 ---@field VectorToObjectSpace fun(self:CFrame, v3:Vector3):Vector3 Returns a Vector3 rotated from World to Object space. Equivalent to [(CFrame:inverse() - CFrame:inverse().p) * v3]
----@field GetComponents fun(self:CFrame):vararg Returns the values: x, y, z, R00, R01, R02, R10, R11, R12, R20, R21, R22, where R00-R22 represent the 3x3 rotation matrix of the CFrame, and xyz represent the position of the CFrame.
+---@field GetComponents fun(self:CFrame):Tuple Returns the values: x, y, z, R00, R01, R02, R10, R11, R12, R20, R21, R22, where R00-R22 represent the 3x3 rotation matrix of the CFrame, and xyz represent the position of the CFrame.
 ---@field ToEulerAnglesXYZ fun(self:CFrame):number,number,number Returns approximate angles that could be used to generate CFrame, if angles were applied in Z, Y, X order
 ---@field ToEulerAnglesYXZ fun(self:CFrame):number,number,number Returns approximate angles that could be used to generate CFrame, if angles were applied in Z, X, Y order
 ---@field ToOrientation fun(self:CFrame):number,number,number Returns approximate angles that could be used to generate CFrame, if angles were applied in Z, X, Y order (Equivalent to toEulerAnglesYXZ)
@@ -184,7 +184,7 @@
 
 ---
 ---@class Axes Axes is a datatype used for the ArcHandles class to control what rotation axes are currently enabled.
----@field new fun(axes:vararg):Axes Creates a new Axes using list of axes and/or faces. NormalIds (faces) are converted to the corresponding axes.
+---@field new fun(axes:Tuple):Axes Creates a new Axes using list of axes and/or faces. NormalIds (faces) are converted to the corresponding axes.
 ---@field X boolean Whether the X axis is enabled
 ---@field Y boolean Whether the Y axis is enabled
 ---@field Z boolean Whether the Z axis is enabled
@@ -198,7 +198,7 @@
 
 ---
 ---@class Faces
----@field new fun(normalIds:vararg):Faces Creates a new Faces using list of faces
+---@field new fun(normalIds:Tuple):Faces Creates a new Faces using list of faces
 ---@field Top boolean Whether the top face is included
 ---@field Bottom boolean Whether the bottom face is included
 ---@field Left boolean Whether the left face is included
@@ -337,7 +337,6 @@
 
 ---
 ---@class RbxLibrary
----@deprecated
 ---
 
 ---
