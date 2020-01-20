@@ -1,6 +1,6 @@
 --
---File generated in Dec/02/2019 at 13:02:00
---Roblox version: version-fe87620137f64fe0
+--File generated in Jan/20/2020 at 15:01:25
+--Roblox version: version-5eaac4e2f7e3409b
 --API Dump version: 1
 --
 
@@ -1346,6 +1346,24 @@
 ---
 
 ---
+---@class VideoFrame : GuiObject
+---@field IsLoaded bool
+---@field Looped bool
+---@field Playing bool
+---@field TimeLength double
+---@field TimePosition double
+---@field Video Content
+---@field Volume float
+---@field Pause fun(self:VideoFrame):void
+---@field Play fun(self:VideoFrame):void
+---@field DidLoop RBXScriptSignal @function(video:string)
+---@field Ended RBXScriptSignal @function(video:string)
+---@field Loaded RBXScriptSignal @function(video:string)
+---@field Paused RBXScriptSignal @function(video:string)
+---@field Played RBXScriptSignal @function(video:string)
+---
+
+---
 ---@class ViewportFrame : GuiObject
 ---@field Ambient Color3
 ---@field CurrentCamera Camera
@@ -1670,11 +1688,11 @@
 ---
 ---@class HttpRbxApiService : Instance
 ---@field GetDocumentationUrl fun(self:HttpRbxApiService, partialUrl:string):string
----@field GetAsync fun(self:HttpRbxApiService, apiUrlPath:string, priority:Enum.ThrottlingPriority, httpRequestType:Enum.HttpRequestType, doNotAllowDiabolicalMode:bool):string
----@field GetAsyncFullUrl fun(self:HttpRbxApiService, apiUrl:string, priority:Enum.ThrottlingPriority, httpRequestType:Enum.HttpRequestType, doNotAllowDiabolicalMode:bool):string
----@field PostAsync fun(self:HttpRbxApiService, apiUrlPath:string, data:string, priority:Enum.ThrottlingPriority, content_type:Enum.HttpContentType, httpRequestType:Enum.HttpRequestType, doNotAllowDiabolicalMode:bool):string
----@field PostAsyncFullUrl fun(self:HttpRbxApiService, apiUrl:string, data:string, priority:Enum.ThrottlingPriority, content_type:Enum.HttpContentType, httpRequestType:Enum.HttpRequestType, doNotAllowDiabolicalMode:bool):string
----@field RequestAsync fun(self:HttpRbxApiService, requestOptions:Dictionary, priority:Enum.ThrottlingPriority, content_type:Enum.HttpContentType, httpRequestType:Enum.HttpRequestType, doNotAllowDiabolicalMode:bool):string
+---@field GetAsync fun(self:HttpRbxApiService, apiUrlPath:string, priority:Enum.ThrottlingPriority, httpRequestType:Enum.HttpRequestType):string
+---@field GetAsyncFullUrl fun(self:HttpRbxApiService, apiUrl:string, priority:Enum.ThrottlingPriority, httpRequestType:Enum.HttpRequestType):string
+---@field PostAsync fun(self:HttpRbxApiService, apiUrlPath:string, data:string, priority:Enum.ThrottlingPriority, content_type:Enum.HttpContentType, httpRequestType:Enum.HttpRequestType):string
+---@field PostAsyncFullUrl fun(self:HttpRbxApiService, apiUrl:string, data:string, priority:Enum.ThrottlingPriority, content_type:Enum.HttpContentType, httpRequestType:Enum.HttpRequestType):string
+---@field RequestAsync fun(self:HttpRbxApiService, requestOptions:Dictionary, priority:Enum.ThrottlingPriority, content_type:Enum.HttpContentType, httpRequestType:Enum.HttpRequestType):string
 ---
 
 ---
@@ -2369,6 +2387,8 @@
 ---@field DataSendRate float
 ---@field ExtraMemoryUsed int
 ---@field FreeMemoryMBytes float
+---@field HttpProxyEnabled bool
+---@field HttpProxyURL string
 ---@field IncommingReplicationLag double
 ---@field IsQueueErrorComputed bool
 ---@field NetworkOwnerRate float
@@ -2386,8 +2406,6 @@
 ---@field PrintSplitMessage bool
 ---@field PrintStreamInstanceQuota bool
 ---@field PrintTouches bool
----@field ProxyEnabled bool
----@field ProxyURL string
 ---@field ReceiveRate double
 ---@field RenderStreamedRegions bool
 ---@field ShowActiveAnimationAsset bool
@@ -2408,7 +2426,6 @@
 ---@class NotificationService : Instance
 ---@field IsLuaChatEnabled bool
 ---@field IsLuaGameDetailsEnabled bool
----@field IsLuaHomeWithAvatarEnabled bool
 ---@field SelectedTheme string
 ---@field ActionEnabled fun(self:NotificationService, actionType:Enum.AppShellActionType):void
 ---@field ActionTaken fun(self:NotificationService, actionType:Enum.AppShellActionType):void
@@ -2804,10 +2821,6 @@
 ---
 
 ---
----@class PhysicsPacketCache : Instance
----
-
----
 ---@class PhysicsService : Instance
 ---@field CollisionGroupContainsPart fun(self:PhysicsService, name:string, part:Instance):bool
 ---@field CollisionGroupSetCollidable fun(self:PhysicsService, name1:string, name2:string, collidable:bool):void
@@ -2839,6 +2852,7 @@
 ---@field AreOwnersShown bool
 ---@field ArePartCoordsShown bool
 ---@field AreRegionsShown bool
+---@field AreTerrainReplicationRegionsShown bool
 ---@field AreUnalignedPartsShown bool
 ---@field AreWorldCoordsShown bool
 ---@field DisableCSGv2 bool
@@ -2941,6 +2955,14 @@
 ---@field Idled RBXScriptSignal @function(time:double)
 ---@field OnTeleport RBXScriptSignal @function(teleportState:Enum.TeleportState, placeId:int64, spawnName:string)
 ---@field SimulationRadiusChanged RBXScriptSignal @function(radius:float)
+---
+
+---
+---@class PlayerEmulatorService : Instance
+---@field PlayerEmulationEnabled bool
+---@field StudioEmulatedCountryRegionCode string
+---@field GetEmulatedPolicyInfo fun(self:PlayerEmulatorService):Dictionary
+---@field SetEmulatedPolicyInfo fun(self:PlayerEmulatorService, emulatedPolicyInfo:Dictionary):void
 ---
 
 ---
@@ -3466,8 +3488,8 @@
 ---@field SetUniverseId fun(self:DataModel, universeId:int64):void
 ---@field Shutdown fun(self:DataModel):void
 ---@field GetObjectsAsync fun(self:DataModel, url:Content):Objects
----@field HttpGetAsync fun(self:DataModel, url:string, httpRequestType:Enum.HttpRequestType, doNotAllowDiabolicalMode:bool):string
----@field HttpPostAsync fun(self:DataModel, url:string, data:string, contentType:string, httpRequestType:Enum.HttpRequestType, doNotAllowDiabolicalMode:bool):string
+---@field HttpGetAsync fun(self:DataModel, url:string, httpRequestType:Enum.HttpRequestType):string
+---@field HttpPostAsync fun(self:DataModel, url:string, data:string, contentType:string, httpRequestType:Enum.HttpRequestType):string
 ---@field InsertObjectsAndJoinIfLegacyAsync fun(self:DataModel, url:Content):Objects
 ---@field SavePlace fun(self:DataModel, saveFilter:Enum.SaveFilter):bool
 ---@field AllowedGearTypeChanged RBXScriptSignal @function()
@@ -4746,6 +4768,7 @@
 ---@field Follow Enum.ComputerCameraMovementMode @2
 ---@field Classic Enum.ComputerCameraMovementMode @1
 ---@field Orbital Enum.ComputerCameraMovementMode @3
+---@field CameraToggle Enum.ComputerCameraMovementMode @4
 ---
 
 ---
@@ -4894,6 +4917,7 @@
 ---@field Classic Enum.DevComputerCameraMovementMode @1
 ---@field Follow Enum.DevComputerCameraMovementMode @2
 ---@field Orbital Enum.DevComputerCameraMovementMode @3
+---@field CameraToggle Enum.DevComputerCameraMovementMode @4
 ---
 
 ---
