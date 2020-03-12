@@ -149,7 +149,7 @@ end
 ---
 ---Behaves identically to Lua’s print function, except the output is styled as a warning, with yellow text and a timestamp.
 ---This function accepts any number of arguments, and will attempt to convert them into strings which will then be joined together with spaces between them.
----@param params vararg|string
+---@vararg string
 function warn (params)
 end
 
@@ -448,13 +448,13 @@ string.split = nil
 
 ---
 ---Iterates over the provided table, passing the key and value of each iteration over to the provided function.
----@type fun(t:any[], f:fun(key:any, value:any):void
+---@type fun(t:any[], f:fun(key:any, value:any)):void
 ---
 table.foreach = nil
 
 ---
 ---This is similar to table.foreach() except that index-value pairs are passed, not key-value pairs.
----@type fun(t:any[], f:fun(index:number, element:any):void
+---@type fun(t:any[], f:fun(index:number, element:any)):void
 ---
 table.foreachi = nil
 
@@ -463,6 +463,43 @@ table.foreachi = nil
 ---@type fun(t:any[]):number
 ---
 table.getn = nil
+
+---
+---Returns a new table with all arguments stored into keys 1, 2, etc. and with a field "n" with the total number of arguments.
+---Note that the resulting table may not be a sequence.
+---@type fun(t:any[], ...):any
+---
+table.pack = nil
+
+---
+---Returns the elements from the given list. This is the opposite operation of table.pack.
+---@type fun(list:any[], i:number, j:number):any
+---
+table.unpack = nil
+
+---
+---Moves elements from table a1 to table a2, performing the equivalent to the following multiple assignment: a2[t], ... = a1[f], ..., a1[e].
+---
+---The default for a2 is a1. The destination range can overlap with the source range. The number of elements to be moved must fit in a Lua integer.
+---
+---@type fun(a1:any[], f:number, e:number, t:number, a2:any[]):any[]
+---
+table.move = nil
+
+---
+---Creates a table with the array portion allocated to the given number of elements, optionally filled with the given value.
+---@type fun(count:number, value:any):any[]
+---
+table.create = nil
+
+---
+---Within the given array-like table haystack, find the first occurrence of value needle, starting from index init or the beginning if not provided. If the value is not found, nil is returned.
+---
+---A linear search algorithm is performed.
+---
+---@type fun(haystack:any[], needle:any, init:number):any
+---
+table.find = nil
 
 ---
 ---The utf8 library provides basic support for UTF-8 encoding.

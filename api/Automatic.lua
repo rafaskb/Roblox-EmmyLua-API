@@ -1,6 +1,6 @@
 --
---File generated in Jan/20/2020 at 15:01:25
---Roblox version: version-5eaac4e2f7e3409b
+--File generated in Mar/12/2020 at 11:56:49
+--Roblox version: version-ad82bf79e0fe4153
 --API Dump version: 1
 --
 
@@ -572,12 +572,14 @@
 ---@class AngularVelocity : Constraint
 ---@field AngularVelocity Vector3
 ---@field MaxTorque float
+---@field ReactionTorqueEnabled bool
 ---@field RelativeTo Enum.ActuatorRelativeTo
 ---
 
 ---
 ---@class BallSocketConstraint : Constraint
 ---@field LimitsEnabled bool
+---@field MaxFrictionTorque float
 ---@field Radius float
 ---@field Restitution float
 ---@field TwistLimitsEnabled bool
@@ -943,6 +945,14 @@
 ---@field MouseDown fun(self:Dragger, mousePart:Instance, pointOnMousePart:Vector3, parts:Objects):void
 ---@field MouseMove fun(self:Dragger, mouseRay:Ray):void
 ---@field MouseUp fun(self:Dragger):void
+---
+
+---
+---@class EventIngestService : Instance
+---@field SendEventDeferred fun(self:EventIngestService, target:string, eventContext:string, eventName:string, additionalArgs:Dictionary):void
+---@field SendEventImmediately fun(self:EventIngestService, target:string, eventContext:string, eventName:string, additionalArgs:Dictionary):void
+---@field SetRBXEvent fun(self:EventIngestService, target:string, eventContext:string, eventName:string, additionalArgs:Dictionary):void
+---@field SetRBXEventStream fun(self:EventIngestService, target:string, eventContext:string, eventName:string, additionalArgs:Dictionary):void
 ---
 
 ---
@@ -1354,6 +1364,7 @@
 ---@field TimePosition double
 ---@field Video Content
 ---@field Volume float
+---@field GetInfo fun(self:VideoFrame):Dictionary
 ---@field Pause fun(self:VideoFrame):void
 ---@field Play fun(self:VideoFrame):void
 ---@field DidLoop RBXScriptSignal @function(video:string)
@@ -1616,6 +1627,7 @@
 ---@field ClearError fun(self:GuiService):void
 ---@field CloseInspectMenu fun(self:GuiService):void
 ---@field CloseStatsBasedOnInputString fun(self:GuiService, input:string):bool
+---@field ForceTenFootInterface fun(self:GuiService, isForced:bool):void
 ---@field GetBrickCount fun(self:GuiService):int
 ---@field GetClosestDialogToPosition fun(self:GuiService, position:Vector3):Instance
 ---@field GetEmotesMenuOpen fun(self:GuiService):bool
@@ -1656,7 +1668,6 @@
 ---@field ErrorMessageChanged RBXScriptSignal @function(newErrorMessage:string)
 ---@field InspectMenuEnabledChangedSignal RBXScriptSignal @function(enabled:bool)
 ---@field InspectPlayerFromHumanoidDescriptionRequest RBXScriptSignal @function(humanoidDescription:Instance, name:string)
----@field InspectPlayerFromUserIdRequest RBXScriptSignal @function(userId:int64)
 ---@field InspectPlayerFromUserIdWithCtxRequest RBXScriptSignal @function(userId:int64, ctx:string)
 ---@field KeyPressed RBXScriptSignal @function(key:string, modifiers:string)
 ---@field MenuClosed RBXScriptSignal @function()
@@ -1693,6 +1704,7 @@
 ---@field PostAsync fun(self:HttpRbxApiService, apiUrlPath:string, data:string, priority:Enum.ThrottlingPriority, content_type:Enum.HttpContentType, httpRequestType:Enum.HttpRequestType):string
 ---@field PostAsyncFullUrl fun(self:HttpRbxApiService, apiUrl:string, data:string, priority:Enum.ThrottlingPriority, content_type:Enum.HttpContentType, httpRequestType:Enum.HttpRequestType):string
 ---@field RequestAsync fun(self:HttpRbxApiService, requestOptions:Dictionary, priority:Enum.ThrottlingPriority, content_type:Enum.HttpContentType, httpRequestType:Enum.HttpRequestType):string
+---@field RequestLimitedAsync fun(self:HttpRbxApiService, requestOptions:Dictionary, priority:Enum.ThrottlingPriority, content_type:Enum.HttpContentType, httpRequestType:Enum.HttpRequestType):string
 ---
 
 ---
@@ -1890,6 +1902,17 @@
 ---
 
 ---
+---@class InternalSyncItem : Instance
+---@field Enabled bool
+---@field Path string
+---@field Target Instance
+---
+
+---
+---@class InternalSyncService : Instance
+---
+
+---
 ---@class JointInstance : Instance
 ---@field Active bool
 ---@field C0 CFrame
@@ -2013,6 +2036,10 @@
 ---@field RegisterKeyframeSequence fun(self:KeyframeSequenceProvider, keyframeSequence:Instance):Content
 ---@field GetAnimations fun(self:KeyframeSequenceProvider, userId:int64):Instance
 ---@field GetKeyframeSequenceAsync fun(self:KeyframeSequenceProvider, assetId:Content):Instance
+---
+
+---
+---@class LanguageService : Instance
 ---
 
 ---
@@ -2166,10 +2193,6 @@
 ---@class LuaSettings : Instance
 ---@field AreScriptStartsReported bool
 ---@field DefaultWaitTime double
----@field GcFrequency int
----@field GcLimit int
----@field GcPause int
----@field GcStepMul int
 ---@field WaitingThreadsBudget float
 ---
 
@@ -2215,6 +2238,7 @@
 ---@field PromptBundlePurchase fun(self:MarketplaceService, player:Instance, bundleId:int64):void
 ---@field PromptGamePassPurchase fun(self:MarketplaceService, player:Instance, gamePassId:int64):void
 ---@field PromptNativePurchase fun(self:MarketplaceService, player:Instance, productId:string):void
+---@field PromptPremiumPurchase fun(self:MarketplaceService, player:Instance):void
 ---@field PromptProductPurchase fun(self:MarketplaceService, player:Instance, productId:int64, equipIfPurchased:bool, currencyType:Enum.CurrencyType):void
 ---@field PromptPurchase fun(self:MarketplaceService, player:Instance, assetId:int64, equipIfPurchased:bool, currencyType:Enum.CurrencyType):void
 ---@field PromptSubscriptionCancellation fun(self:MarketplaceService, player:Instance, subscriptionId:int64):void
@@ -2224,8 +2248,10 @@
 ---@field ReportRobuxUpsellStarted fun(self:MarketplaceService):void
 ---@field SignalAssetTypePurchased fun(self:MarketplaceService, player:Instance, assetType:Enum.AssetType):void
 ---@field SignalClientPurchaseSuccess fun(self:MarketplaceService, ticket:string, playerId:int64, productId:int64):void
+---@field SignalMockPurchasePremium fun(self:MarketplaceService):void
 ---@field SignalPromptBundlePurchaseFinished fun(self:MarketplaceService, player:Instance, bundleId:int64, success:bool):void
 ---@field SignalPromptGamePassPurchaseFinished fun(self:MarketplaceService, player:Instance, gamePassId:int64, success:bool):void
+---@field SignalPromptPremiumPurchaseFinished fun(self:MarketplaceService, didTryPurchasing:bool):void
 ---@field SignalPromptProductPurchaseFinished fun(self:MarketplaceService, userId:int64, productId:int64, success:bool):void
 ---@field SignalPromptPurchaseFinished fun(self:MarketplaceService, player:Instance, assetId:int64, success:bool):void
 ---@field SignalPromptSubscriptionCancellationFinished fun(self:MarketplaceService, player:Instance, subscriptionId:int64, wasCanceled:bool):void
@@ -2245,6 +2271,8 @@
 ---@field PromptBundlePurchaseRequested RBXScriptSignal @function(player:Instance, bundleId:int64)
 ---@field PromptGamePassPurchaseFinished RBXScriptSignal @function(player:Instance, gamePassId:int64, wasPurchased:bool)
 ---@field PromptGamePassPurchaseRequested RBXScriptSignal @function(player:Instance, gamePassId:int64)
+---@field PromptPremiumPurchaseFinished RBXScriptSignal @function()
+---@field PromptPremiumPurchaseRequested RBXScriptSignal @function(player:Instance)
 ---@field PromptProductPurchaseFinished RBXScriptSignal @function(userId:int64, productId:int64, isPurchased:bool)
 ---@field PromptProductPurchaseRequested RBXScriptSignal @function(player:Instance, productId:int64, equipIfPurchased:bool, currencyType:Enum.CurrencyType)
 ---@field PromptPurchaseFinished RBXScriptSignal @function(player:Instance, assetId:int64, isPurchased:bool)
@@ -2355,7 +2383,6 @@
 ---
 ---@class NetworkServer : NetworkPeer
 ---@field Port int
----@field GetClientCount fun(self:NetworkServer):int
 ---
 
 ---
@@ -2379,9 +2406,6 @@
 
 ---
 ---@class NetworkSettings : Instance
----@field ArePhysicsRejectionsReported bool
----@field ClientPhysicsSendRate float
----@field DataGCRate float
 ---@field DataMtuAdjust int
 ---@field DataSendPriority Enum.PacketPriority
 ---@field DataSendRate float
@@ -2390,19 +2414,13 @@
 ---@field HttpProxyEnabled bool
 ---@field HttpProxyURL string
 ---@field IncommingReplicationLag double
----@field IsQueueErrorComputed bool
----@field NetworkOwnerRate float
 ---@field PhysicsMtuAdjust int
 ---@field PhysicsSendPriority Enum.PacketPriority
----@field PhysicsSendRate float
 ---@field PreferredClientPort int
----@field PrintBits bool
----@field PrintEvents bool
 ---@field PrintFilters bool
 ---@field PrintInstances bool
 ---@field PrintJoinSizeBreakdown bool
 ---@field PrintPhysicsErrors bool
----@field PrintProperties bool
 ---@field PrintSplitMessage bool
 ---@field PrintStreamInstanceQuota bool
 ---@field PrintTouches bool
@@ -2412,7 +2430,6 @@
 ---@field TouchSendRate float
 ---@field TrackDataTypes bool
 ---@field TrackPhysicsDetails bool
----@field UsePhysicsPacketCache bool
 ---
 
 ---
@@ -2600,6 +2617,7 @@
 ---@field FillBlock fun(self:Terrain, cframe:CFrame, size:Vector3, material:Enum.Material):void
 ---@field FillCylinder fun(self:Terrain, cframe:CFrame, height:float, radius:float, material:Enum.Material):void
 ---@field FillRegion fun(self:Terrain, region:Region3, resolution:float, material:Enum.Material):void
+---@field FillWedge fun(self:Terrain, cframe:CFrame, size:Vector3, material:Enum.Material):void
 ---@field GetCell fun(self:Terrain, x:int, y:int, z:int):Tuple
 ---@field GetMaterialColor fun(self:Terrain, material:Enum.Material):Color3
 ---@field GetWaterCell fun(self:Terrain, x:int, y:int, z:int):Tuple
@@ -2696,8 +2714,10 @@
 ---@field FindPartsInRegion3 fun(self:WorldRoot, region:Region3, ignoreDescendantsInstance:Instance, maxParts:int):Objects
 ---@field FindPartsInRegion3WithIgnoreList fun(self:WorldRoot, region:Region3, ignoreDescendantsTable:Objects, maxParts:int):Objects
 ---@field FindPartsInRegion3WithWhiteList fun(self:WorldRoot, region:Region3, whitelistDescendantsTable:Objects, maxParts:int):Objects
+---@field IkMoveTo fun(self:WorldRoot, part:Instance, target:CFrame, translateStiffness:float, rotateStiffness:float, collisionsMode:Enum.CollisionsMode):void
 ---@field IsRegion3Empty fun(self:WorldRoot, region:Region3, ignoreDescendentsInstance:Instance):bool
 ---@field IsRegion3EmptyWithIgnoreList fun(self:WorldRoot, region:Region3, ignoreDescendentsTable:Objects):bool
+---@field Raycast fun(self:WorldRoot, origin:Vector3, direction:Vector3, raycastParams:RaycastParams):RaycastResult
 ---
 
 ---
@@ -2818,6 +2838,12 @@
 ---@field ComputeRawPathAsync fun(self:PathfindingService, start:Vector3, finish:Vector3, maxDistance:float):Instance
 ---@field ComputeSmoothPathAsync fun(self:PathfindingService, start:Vector3, finish:Vector3, maxDistance:float):Instance
 ---@field FindPathAsync fun(self:PathfindingService, start:Vector3, finish:Vector3):Instance
+---
+
+---
+---@class PermissionsService : Instance
+---@field GetPermissions fun(self:PermissionsService, assetId:string):Array
+---@field SetPermissions fun(self:PermissionsService, assetId:string, permissions:Array):void
 ---
 
 ---
@@ -3023,6 +3049,7 @@
 ---@field PlayerChatted RBXScriptSignal @function(chatType:Enum.PlayerChatType, player:Instance, message:string, targetPlayer:Instance)
 ---@field PlayerConnecting RBXScriptSignal @function(player:Instance)
 ---@field PlayerDisconnecting RBXScriptSignal @function(player:Instance)
+---@field PlayerMembershipChanged RBXScriptSignal @function(player:Instance)
 ---@field PlayerRejoining RBXScriptSignal @function(player:Instance)
 ---@field PlayerRemoving RBXScriptSignal @function(player:Instance)
 ---
@@ -3086,6 +3113,10 @@
 ---@field StatusTip string
 ---@field Text string
 ---@field Triggered RBXScriptSignal @function()
+---
+
+---
+---@class PluginDebugService : Instance
 ---
 
 ---
@@ -3382,6 +3413,7 @@
 ---@field GetCoverageStats fun(self:ScriptContext):Array
 ---@field SetTimeout fun(self:ScriptContext, seconds:double):void
 ---@field Error RBXScriptSignal @function(message:string, stackTrace:string, script:Instance)
+---@field ErrorDetailed RBXScriptSignal @function(message:string, stackTrace:string, script:Instance, details:string)
 ---
 
 ---
@@ -3518,6 +3550,18 @@
 ---@class UserSettings : GenericSettings
 ---@field IsUserFeatureEnabled fun(self:UserSettings, name:string):bool
 ---@field Reset fun(self:UserSettings):void
+---
+
+---
+---@class SessionService : Instance
+---@field GetCreatedTimestampUtcMs fun(self:SessionService, sid:string):int64
+---@field GetMetadata fun(self:SessionService, sid:string, key:string):Variant
+---@field GetRootSID fun(self:SessionService):string
+---@field RemoveMetadata fun(self:SessionService, sid:string, key:string):void
+---@field RemoveSession fun(self:SessionService, sid:string):void
+---@field ReplaceSession fun(self:SessionService, sid:string, tag:string):void
+---@field SetMetadata fun(self:SessionService, sid:string, key:string, value:Variant):void
+---@field SetSession fun(self:SessionService, parentSid:string, childSid:string, tag:string):void
 ---
 
 ---
@@ -3803,6 +3847,7 @@
 
 ---
 ---@class StudioData : Instance
+---@field EnableScriptCollabByDefaultOnLoad bool
 ---@field EnableScriptCollabOnLoad bool
 ---@field SrcPlaceId int64
 ---@field SrcUniverseId int64
@@ -3811,9 +3856,11 @@
 ---
 ---@class StudioService : Instance
 ---@field ActiveScript Instance
+---@field DraggerSolveConstraints bool
 ---@field GridSize float
 ---@field InstalledPluginData string
 ---@field RotateIncrement float
+---@field ShowConstraintDetails bool
 ---@field StudioLocaleId string
 ---@field UseLocalSpace bool
 ---@field ConvertToPackageUpload fun(self:StudioService, uploadUrl:string):void
@@ -3823,14 +3870,17 @@
 ---@field GetResourceByCategory fun(self:StudioService, category:string):Dictionary
 ---@field GetStartupPluginId fun(self:StudioService):string
 ---@field GetUserId fun(self:StudioService):int64
+---@field GizmoRaycast fun(self:StudioService, origin:Vector3, direction:Vector3, raycastParams:RaycastParams):RaycastResult
 ---@field IsPluginInstalled fun(self:StudioService, assetId:int64):bool
 ---@field IsPluginUpToDate fun(self:StudioService, assetId:int64, currentAssetVersion:int64):bool
+---@field LaunchBulkImport fun(self:StudioService, assetTypeToImport:int):void
 ---@field OpenInBrowser_DONOTUSE fun(self:StudioService, url:string):void
 ---@field OpenPluginInsertPage fun(self:StudioService, assetId:int64):void
 ---@field PublishAs fun(self:StudioService, universeId:int64, placeId:int64):void
 ---@field SerializeInstances fun(self:StudioService, instances:Objects):string
 ---@field SetPluginEnabled fun(self:StudioService, assetId:int64, state:bool):void
 ---@field SetUniverseDisplayName fun(self:StudioService, newName:string):void
+---@field ShowBulkImportView fun(self:StudioService):void
 ---@field ShowPublishToRoblox fun(self:StudioService):void
 ---@field UninstallPlugin fun(self:StudioService, assetId:int64):void
 ---@field UpdatePluginManagement fun(self:StudioService):void
@@ -3839,6 +3889,7 @@
 ---@field PromptImportLocalAsset fun(self:StudioService, prompt:string, fileTypeFilter:Array):Instance
 ---@field PromptImportLocalAssets fun(self:StudioService, prompt:string, fileTypeFilter:Array):Objects
 ---@field TryInstallPlugin fun(self:StudioService, assetId:int64, assetVersionId:int64):void
+---@field BulkImportFinished RBXScriptSignal @function(state:int)
 ---@field GamePublishFinished RBXScriptSignal @function(success:bool)
 ---@field OnConvertToPackageResult RBXScriptSignal @function(isSuccessful:bool, errorMessage:string)
 ---@field OnOpenConvertToPackagePlugin RBXScriptSignal @function(instances:Objects, name:string)
@@ -3854,6 +3905,15 @@
 ---@class StudioTheme : Instance
 ---@field GetColor fun(self:StudioTheme, styleguideitem:Enum.StudioStyleGuideColor, modifier:Enum.StudioStyleGuideModifier):Color3
 ---@field GetPath fun(self:StudioTheme, assetid:string, modifier:Enum.StudioStyleGuideModifier):string
+---
+
+---
+---@class SurfaceAppearance : Instance
+---@field AlphaMode Enum.AlphaMode
+---@field ColorMap Content
+---@field MetalnessMap Content
+---@field NormalMap Content
+---@field RoughnessMap Content
 ---
 
 ---
@@ -4474,6 +4534,12 @@
 ---
 
 ---
+---@class Enum.AlphaMode:EnumItem
+---@field Overlay Enum.AlphaMode @0
+---@field Transparency Enum.AlphaMode @1
+---
+
+---
 ---@class Enum.AnimationPriority:EnumItem
 ---@field Idle Enum.AnimationPriority @0
 ---@field Movement Enum.AnimationPriority @1
@@ -4763,6 +4829,13 @@
 ---
 
 ---
+---@class Enum.CollisionsMode:EnumItem
+---@field NoCollisions Enum.CollisionsMode @0
+---@field OtherMechanismsAnchored Enum.CollisionsMode @1
+---@field IncludeContactedMechanisms Enum.CollisionsMode @2
+---
+
+---
 ---@class Enum.ComputerCameraMovementMode:EnumItem
 ---@field Default Enum.ComputerCameraMovementMode @0
 ---@field Follow Enum.ComputerCameraMovementMode @2
@@ -4900,12 +4973,6 @@
 ---
 
 ---
----@class Enum.DateTimeKind:EnumItem
----@field Utc Enum.DateTimeKind @0
----@field Local Enum.DateTimeKind @1
----
-
----
 ---@class Enum.DevCameraOcclusionMode:EnumItem
 ---@field Zoom Enum.DevCameraOcclusionMode @0
 ---@field Invisicam Enum.DevCameraOcclusionMode @1
@@ -5012,6 +5079,7 @@
 ---@field OK Enum.DraftStatusCode @0
 ---@field DraftOutdated Enum.DraftStatusCode @1
 ---@field ScriptRemoved Enum.DraftStatusCode @2
+---@field DraftCommitted Enum.DraftStatusCode @3
 ---
 
 ---
@@ -5985,6 +6053,12 @@
 ---
 
 ---
+---@class Enum.RaycastFilterType:EnumItem
+---@field Blacklist Enum.RaycastFilterType @0
+---@field Whitelist Enum.RaycastFilterType @1
+---
+
+---
 ---@class Enum.RenderFidelity:EnumItem
 ---@field Automatic Enum.RenderFidelity @0
 ---@field Precise Enum.RenderFidelity @1
@@ -6304,9 +6378,6 @@
 ---@field DialogButtonBorder Enum.StudioStyleGuideColor @86
 ---@field DialogMainButton Enum.StudioStyleGuideColor @87
 ---@field DialogMainButtonText Enum.StudioStyleGuideColor @88
----@field Merge3HighlightOriginal Enum.StudioStyleGuideColor @89
----@field Merge3HighlightMine Enum.StudioStyleGuideColor @90
----@field Merge3HighlightTheirs Enum.StudioStyleGuideColor @91
 ---
 
 ---
@@ -6674,6 +6745,7 @@
 ---@field ActuatorRelativeTo Enum.ActuatorRelativeTo
 ---@field ActuatorType Enum.ActuatorType
 ---@field AlignType Enum.AlignType
+---@field AlphaMode Enum.AlphaMode
 ---@field AnimationPriority Enum.AnimationPriority
 ---@field AppShellActionType Enum.AppShellActionType
 ---@field AspectType Enum.AspectType
@@ -6702,6 +6774,7 @@
 ---@field ChatPrivacyMode Enum.ChatPrivacyMode
 ---@field ChatStyle Enum.ChatStyle
 ---@field CollisionFidelity Enum.CollisionFidelity
+---@field CollisionsMode Enum.CollisionsMode
 ---@field ComputerCameraMovementMode Enum.ComputerCameraMovementMode
 ---@field ComputerMovementMode Enum.ComputerMovementMode
 ---@field ConnectionError Enum.ConnectionError
@@ -6714,7 +6787,6 @@
 ---@field CurrencyType Enum.CurrencyType
 ---@field CustomCameraMode Enum.CustomCameraMode
 ---@field DataStoreRequestType Enum.DataStoreRequestType
----@field DateTimeKind Enum.DateTimeKind
 ---@field DevCameraOcclusionMode Enum.DevCameraOcclusionMode
 ---@field DevComputerCameraMovementMode Enum.DevComputerCameraMovementMode
 ---@field DevComputerMovementMode Enum.DevComputerMovementMode
@@ -6801,6 +6873,7 @@
 ---@field ProductPurchaseDecision Enum.ProductPurchaseDecision
 ---@field QualityLevel Enum.QualityLevel
 ---@field R15CollisionType Enum.R15CollisionType
+---@field RaycastFilterType Enum.RaycastFilterType
 ---@field RenderFidelity Enum.RenderFidelity
 ---@field RenderPriority Enum.RenderPriority
 ---@field RenderingTestComparisonMethod Enum.RenderingTestComparisonMethod
