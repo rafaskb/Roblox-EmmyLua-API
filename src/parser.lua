@@ -19,6 +19,17 @@ local function readType(baseData)
         return "Enum." .. name
     end
 
+    -- Parse primitive types
+    if category == "Primitive" then
+        if name == "bool" then
+            return "boolean"
+        end
+
+        if name == "int" or name == "double" or name == "float" or name == "int64" then
+            return "number"
+        end
+    end
+
     return name
 end
 

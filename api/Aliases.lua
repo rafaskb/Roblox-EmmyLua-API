@@ -1,9 +1,3 @@
----@alias int number
----@alias int64 number
----@alias double number
----@alias float number
----@alias bool boolean
-
 ---@alias Tuple any
 ---@alias Objects Instance[]|any[]
 ---@alias Variant table<any,any>
