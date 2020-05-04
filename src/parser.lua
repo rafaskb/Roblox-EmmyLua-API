@@ -37,26 +37,39 @@ end
 ---Reads parameters from a data table and returns them in a formatted string.
 ---@param baseData table<string, string>
 ---@param selfType string
----@return string
+---@return string[]
 ---
 local function readParameters(baseData, selfType)
     -- Table
-    local parametersTable = {}
+    local essentialParameters = {}
+    local optionalParameters = {}
 
     -- Self parameter
     if selfType then
-        table.insert(parametersTable, "self:" .. selfType)
+        table.insert(essentialParameters, "self:" .. selfType)
     end
 
     -- Data parameters
     for _, paramData in pairs(baseData) do
         local paramName = paramData.Name
         local paramType = readType(paramData.Type)
-        table.insert(parametersTable, paramName .. ":" .. paramType)
+        local isOptional = paramData.Default ~= nil
+        local targetTable = isOptional and optionalParameters or essentialParameters ---@type table
+        table.insert(targetTable, paramName .. ":" .. paramType)
     end
 
-    -- Return formatted string
-    return table.concat(parametersTable, ", ")
+    -- Return formatted strings for all parameter alternatives
+    local results = {}
+    table.insert(results, table.concat(essentialParameters, ", "))
+    for i = 1, #optionalParameters do
+        local baseStr = results[1]
+        local optionalStr = table.concat(optionalParameters, ", ", 1, i)
+        local finalStr = (#baseStr > 0) and (baseStr .. ", " .. optionalStr) or (optionalStr)
+        table.insert(results, finalStr)
+    end
+
+    -- Return formatted strings
+    return results
 end
 
 ---
@@ -96,22 +109,28 @@ function parser:parseClass(baseData)
 
             -- Parse function
             if "Function" == memberType then
-                local parameters = readParameters(memberData.Parameters, class)
+                local parametersArray = readParameters(memberData.Parameters, class)
                 local returnType = readType(memberData.ReturnType)
-                utils:write("---@field %s fun(%s):%s", name, parameters, returnType)
+                for _, parameters in pairs(parametersArray) do
+                    utils:write("---@field %s fun(%s):%s", name, parameters, returnType)
+                end
             end
 
             -- Parse event
             if "Event" == memberType then
-                local parameters = readParameters(memberData.Parameters)
-                utils:write("---@field %s RBXScriptSignal @function(%s)", name, parameters)
+                local parametersArray = readParameters(memberData.Parameters)
+                for _, parameters in pairs(parametersArray) do
+                    utils:write("---@field %s RBXScriptSignal @function(%s)", name, parameters)
+                end
             end
 
             -- Parse callback
             if "Callback" == memberType then
-                local parameters = readParameters(memberData.Parameters)
+                local parametersArray = readParameters(memberData.Parameters)
                 local returnType = readType(memberData.ReturnType)
-                utils:write("---@field %s fun(%s):%s @Callback", name, parameters, returnType)
+                for _, parameters in pairs(parametersArray) do
+                    utils:write("---@field %s fun(%s):%s @Callback", name, parameters, returnType)
+                end
             end
         end
     end
