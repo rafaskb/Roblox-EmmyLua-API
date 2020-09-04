@@ -1,6 +1,6 @@
 --
---File generated in Jul/28/2020 at 15:26:02
---Roblox version: version-2778eb4b0a06473b
+--File generated in Sep/04/2020 at 16:08:51
+--Roblox version: version-874f3d2703774bb0
 --API Dump version: 1
 --
 
@@ -2530,7 +2530,6 @@
 ---@class NetworkClient : NetworkPeer
 ---@field ConnectionAccepted RBXScriptSignal @function(peer:string, replicator:Instance)
 ---@field ConnectionFailed RBXScriptSignal @function(peer:string, code:number, reason:string)
----@field ConnectionRejected RBXScriptSignal @function(peer:string)
 ---
 
 ---
@@ -2840,6 +2839,7 @@
 
 ---
 ---@class Model : PVInstance
+---@field LevelOfDetail Enum.ModelLevelOfDetail
 ---@field PrimaryPart BasePart
 ---@field BreakJoints fun(self:Model):void
 ---@field GetBoundingBox fun(self:Model):Tuple
@@ -2903,12 +2903,10 @@
 ---@field FilteringEnabled boolean
 ---@field Gravity number
 ---@field PhysicsSimulationRate Enum.PhysicsSimulationRate
----@field SkinnedMeshEnabled Enum.SkinnedMeshAllowType
 ---@field StreamingEnabled boolean
 ---@field StreamingMinRadius number
 ---@field StreamingPauseMode Enum.StreamingPauseMode
 ---@field StreamingTargetRadius number
----@field TemporaryLegacyPhysicsSolverOverride boolean
 ---@field Terrain Instance
 ---@field BreakJoints fun(self:Workspace, objects:Objects):void
 ---@field CalculateJumpDistance fun(self:Workspace, gravity:number, jumpPower:number, walkSpeed:number):number
@@ -3641,7 +3639,7 @@
 ---@field GetCoverageStats fun(self:ScriptContext):Array
 ---@field SetTimeout fun(self:ScriptContext, seconds:number):void
 ---@field Error RBXScriptSignal @function(message:string, stackTrace:string, script:Instance)
----@field ErrorDetailed RBXScriptSignal @function(message:string, stackTrace:string, script:Instance, details:string)
+---@field ErrorDetailed RBXScriptSignal @function(message:string, stackTrace:string, script:Instance, details:string, securityLevel:number)
 ---
 
 ---
@@ -4147,6 +4145,7 @@
 ---@field OnConvertToPackageResult RBXScriptSignal @function(isSuccessful:boolean, errorMessage:string)
 ---@field OnImportFromRoblox RBXScriptSignal @function()
 ---@field OnOpenConvertToPackagePlugin RBXScriptSignal @function(instances:Objects, name:string)
+---@field OnOpenGameSettings RBXScriptSignal @function(pageIdentifier:string)
 ---@field OnOpenManagePackagePlugin RBXScriptSignal @function(userId:number, assetId:number)
 ---@field OnPluginInstalledFromToolbox RBXScriptSignal @function()
 ---@field OnPluginInstalledFromWeb RBXScriptSignal @function(pluginId:string)
@@ -4185,6 +4184,7 @@
 ---@class Team : Instance
 ---@field AutoAssignable boolean
 ---@field AutoColorCharacters boolean
+---@field ChildOrder number
 ---@field Score number
 ---@field TeamColor BrickColor
 ---@field GetPlayers fun(self:Team):Objects
@@ -4443,12 +4443,6 @@
 ---@field CellSize UDim2
 ---@field FillDirectionMaxCells number
 ---@field StartCorner Enum.StartCorner
----
-
----
----@class UIInlineLayout : UIGridStyleLayout
----@field InlineAlignment Enum.InlineAlignment
----@field InlinePadding UDim2
 ---
 
 ---
@@ -5756,13 +5750,6 @@
 ---
 
 ---
----@class Enum.InlineAlignment:EnumItem
----@field Bottom Enum.InlineAlignment @0
----@field Center Enum.InlineAlignment @1
----@field Top Enum.InlineAlignment @2
----
-
----
 ---@class Enum.InputType:EnumItem
 ---@field NoInput Enum.InputType @0
 ---@field Constant Enum.InputType @12
@@ -6176,6 +6163,13 @@
 ---
 
 ---
+---@class Enum.ModelLevelOfDetail:EnumItem
+---@field Automatic Enum.ModelLevelOfDetail @0
+---@field StreamingMesh Enum.ModelLevelOfDetail @1
+---@field Disabled Enum.ModelLevelOfDetail @2
+---
+
+---
 ---@class Enum.ModifierKey:EnumItem
 ---@field Alt Enum.ModifierKey @2
 ---@field Ctrl Enum.ModifierKey @1
@@ -6566,13 +6560,6 @@
 ---
 
 ---
----@class Enum.SkinnedMeshAllowType:EnumItem
----@field Default Enum.SkinnedMeshAllowType @0
----@field Disabled Enum.SkinnedMeshAllowType @2
----@field Enabled Enum.SkinnedMeshAllowType @1
----
-
----
 ---@class Enum.SortOrder:EnumItem
 ---@field LayoutOrder Enum.SortOrder @2
 ---@field Name Enum.SortOrder @0
@@ -6815,7 +6802,8 @@
 ---@field TeleportToSpawnByName Enum.TeleportMethod @0
 ---@field TeleportToPlaceInstance Enum.TeleportMethod @1
 ---@field TeleportToPrivateServer Enum.TeleportMethod @2
----@field TeleportToPartyAsync Enum.TeleportMethod @3
+---@field TeleportPartyAsync Enum.TeleportMethod @3
+---@field TeleportUnknown Enum.TeleportMethod @4
 ---
 
 ---
@@ -7208,7 +7196,6 @@
 ---@field InOut Enum.InOut
 ---@field InfoType Enum.InfoType
 ---@field InitialDockState Enum.InitialDockState
----@field InlineAlignment Enum.InlineAlignment
 ---@field InputType Enum.InputType
 ---@field JointCreationMode Enum.JointCreationMode
 ---@field KeyCode Enum.KeyCode
@@ -7225,6 +7212,7 @@
 ---@field MeshPartDetailLevel Enum.MeshPartDetailLevel
 ---@field MeshType Enum.MeshType
 ---@field MessageType Enum.MessageType
+---@field ModelLevelOfDetail Enum.ModelLevelOfDetail
 ---@field ModifierKey Enum.ModifierKey
 ---@field MouseBehavior Enum.MouseBehavior
 ---@field MoveState Enum.MoveState
@@ -7267,7 +7255,6 @@
 ---@field ScrollingDirection Enum.ScrollingDirection
 ---@field ServerAudioBehavior Enum.ServerAudioBehavior
 ---@field SizeConstraint Enum.SizeConstraint
----@field SkinnedMeshAllowType Enum.SkinnedMeshAllowType
 ---@field SortOrder Enum.SortOrder
 ---@field SoundType Enum.SoundType
 ---@field SpecialKey Enum.SpecialKey
