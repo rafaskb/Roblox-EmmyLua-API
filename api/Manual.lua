@@ -109,6 +109,23 @@
 ---
 
 ---
+---@class DateTime A DateTime represents a moment in time using a Unix timestamp. It can be used to easily format dates and times in specific locales.
+---
+---@field new fun():DateTime Creates a new DateTime representing the current moment in time.
+---@field fromUnixTimestamp fun(unixTimestamp:number):DateTime Creates a new DateTime object from the given Unix timestamp, or the number of seconds since January 1st, 1970 at 00:00 (UTC).
+---@field fromUnixTimestampMillis fun(unixTimestampMillis:number):DateTime Create a new DateTime object from the given Unix timestamp, or the number of milliseconds since January 1st, 1970 at 00:00 (UTC).
+---@field fromUniversalTime fun(year:number, month:number, day:number, hour:number, minute:number, second:number, millisecond:number):DateTime Creates a new DateTime using the given units from a UTC time. The values accepted are similar to those found in the time value table returned by ToUniversalTime.
+---@field fromLocalTime fun(year:number, month:number, day:number, hour:number, minute:number, second:number, millisecond:number):DateTime Creates a new DateTime using the given units from a local time. The values accepted are similar to those found in the time value table returned by ToLocalTime.
+---@field fromIsoDate fun():DateTime Creates a DateTime from an ISO 8601 date-time string in UTC time, such as those returned by ToIsoDate. If the string parsing fails, the function returns nil.
+---
+---@field ToUniversalTime fun(self:DateTime):table<string,number> @Converts the value of this DateTime object to Universal Coordinated Time (UTC). The returned table contains the following keys: Year, Month, Day, Hour, Minute, Second, Millisecond. For more details, see the table in the DateTime description. The values within this table could be passed to fromUniversalTime to produce the original DateTime object.
+---@field ToLocalTime fun(self:DateTime):table<string,number> @Converts the value of this DateTime object to local time. The returned table contains the following keys: Year, Month, Day, Hour, Minute, Second, Millisecond. For more details, see the table in the DateTime description. The values within this table could be passed to fromLocalTime to produce the original DateTime object.
+---@field ToIsoDate fun(self:DateTime):string @Formats a date as a ISO 8601 date-time string. The value returned by this function could be passed to fromIsoDate to produce the original DateTime object. An example ISO 8601 date-time string would be 2020-01-02T10:30:45Z, which represents January 2nd 2020 at 10:30 AM, 45 seconds.
+---@field FormatUniversalTime fun(self:DateTime, format:string, locale:string):string @Generates a string from the DateTime value interpreted as Universal Coordinated Time (UTC) and a format string. The format string should contain tokens, which will replace to certain date/time values described by the DateTime object. For details on all the available tokens, see DateTime Format Strings.
+---@field FormatLocalTime fun(self:DateTime, format:string, locale:string):string @Generates a string from the DateTime value interpreted as local time and a format string. The format string should contain tokens, which will replace to certain date/time values described by the DateTime object. For details on all the available tokens, see DateTime Format Strings.
+---
+
+---
 ---@class DockWidgetPluginGuiInfo DockWidgetPluginGuiInfo is a datatype used to describe details for a DockWidgetPluginGui. This datatype is used when constructing a PluginGui via the plugin’s CreateDockWidgetPluginGui() method.
 ---@field new fun(initDockState:Enum.InitialDockState, initEnabled:boolean, overrideEnabledRestore:boolean, floatXSize:number, floatYSize:number, minWidth:number, minHeight:number):DockWidgetPluginGuiInfo The main constructor function for the DockWidgetPluginGuiInfo.
 ---@field InitialEnabled boolean The initial enabled state of a PluginGui created using this DockWidgetPluginGuiInfo. If a PluginGui with the same ‘‘pluginGuiId’’ has previously been created in an earlier session of Roblox Studio, then it will reload that saved enabled state (unless InitialEnabledShouldOverrideRestore is true).
@@ -200,6 +217,25 @@
 ---@field Direction Vector3 The direction vector of the ray
 ---@field ClosestPoint fun(self:Ray, point:Vector3):Vector3 Returns a Vector3 projected onto the ray so that it is within the Ray’s line of sight.
 ---@field Distance fun(self:Ray, point:Vector3):number Returns the distance between the Ray’s origin and Ray:ClosestPoint(point)
+---
+
+---
+---@class RaycastParams Stores parameters for WorldRoot:Raycast() operations. The FilterDescendantsInstances property stores an array of objects to use as either a whitelist or blacklist based on the FilterType enum. If desired, the IgnoreWater property can be used to ignore Terrain water and the CollisionGroup property can specify a collision group for the raycasting operation.
+---
+---@field new fun():RaycastParams Creates a blank RaycastParams object. Unlike other datatype constructors, this constructor does not have any parameters, so you should set its properties appropriately.
+---
+---@field FilterDescendantsInstances Instance[] @An array of objects whose descendants will be used in filtering raycasting candidates.
+---@field FilterType Enum.RaycastFilterType @Determines how the FilterDescendantsInstances list will be used, depending on the RaycastFilterType provided.
+---@field IgnoreWater boolean @Determines whether the water material is considered when raycasting against Terrain.
+---@field CollisionGroup string @Specifies a collision group for the raycasting operation. Parts in collision groups that are set to not collide with this group will be ignored. If this property is omitted, the raycast will assume the Default collision group.
+---
+
+---
+---@class RaycastResult RaycastResult stores the result of a successful raycasting operation performed by WorldRoot:Raycast(). It contains the properties listed below.
+---
+---@field Position Vector3 @The world space point at which the intersection occurred, usually a point directly on the surface of the instance.
+---@field Material Enum.Material @The Material at the intersection point. For normal parts this is the BasePart.Material; for Terrain this can vary depending on terrain data.
+---@field Normal Vector3 @The normal vector of the intersected face.
 ---
 
 ---
