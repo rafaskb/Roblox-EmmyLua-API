@@ -1,6 +1,6 @@
 --
---File generated in Sep/04/2020 at 16:08:51
---Roblox version: version-874f3d2703774bb0
+--File generated in Dec/14/2020 at 09:37:36
+--Roblox version: version-03afb53edcef4231
 --API Dump version: 1
 --
 
@@ -12,6 +12,7 @@
 ---@field Name string
 ---@field Parent Instance
 ---@field RobloxLocked boolean
+---@field SourceAssetId number
 ---@field ClearAllChildren fun(self:Instance):void
 ---@field Clone fun(self:Instance):Instance
 ---@field Destroy fun(self:Instance):void
@@ -23,6 +24,7 @@
 ---@field FindFirstChildOfClass fun(self:Instance, className:string):Instance
 ---@field FindFirstChildWhichIsA fun(self:Instance, className:string):Instance
 ---@field FindFirstChildWhichIsA fun(self:Instance, className:string, recursive:boolean):Instance
+---@field GetActor fun(self:Instance):Instance
 ---@field GetAttribute fun(self:Instance, attribute:string):Variant
 ---@field GetAttributeChangedSignal fun(self:Instance, attribute:string):RBXScriptSignal
 ---@field GetAttributes fun(self:Instance):Dictionary
@@ -91,7 +93,11 @@
 ---
 ---@class AnalyticsService : Instance
 ---@field ApiKey string
+---@field FireCustomEvent fun(self:AnalyticsService, player:Instance, eventCategory:string, customData:Variant):void
 ---@field FireEvent fun(self:AnalyticsService, category:string, value:Variant):void
+---@field FireInGameEconomyEvent fun(self:AnalyticsService, player:Instance, itemName:string, economyAction:Enum.AnalyticsEconomyAction, itemCategory:string, amount:number, currency:string, location:Variant, customData:Variant):void
+---@field FireLogEvent fun(self:AnalyticsService, player:Instance, logLevel:Enum.AnalyticsLogLevel, message:string, debugInfo:Variant, customData:Variant):void
+---@field FirePlayerProgressionEvent fun(self:AnalyticsService, player:Instance, category:string, progressionStatus:Enum.AnalyticsProgressionStatus, location:Variant, statistics:Variant, customData:Variant):void
 ---
 
 ---
@@ -145,10 +151,26 @@
 ---
 
 ---
+---@class AppUpdateService : Instance
+---@field CheckForUpdate fun(self:AppUpdateService):void
+---@field CheckForUpdate fun(self:AppUpdateService, handler:Function):void
+---@field PerformManagedUpdate fun(self:AppUpdateService):boolean
+---
+
+---
+---@class AssetCounterService : Instance
+---
+
+---
+---@class AssetDeliveryProxy : Instance
+---
+
+---
 ---@class AssetManagerService : Instance
 ---@field GetMeshId fun(self:AssetManagerService, aliasName:string):number
 ---@field GetTextureId fun(self:AssetManagerService, aliasName:string):number
 ---@field HasUnpublishedChangesForLinkedSource fun(self:AssetManagerService, aliasName:string):boolean
+---@field InsertAudio fun(self:AssetManagerService, assetId:number, assetName:string):void
 ---@field InsertImage fun(self:AssetManagerService, assetId:number):void
 ---@field InsertLinkedSourceAsLocalScript fun(self:AssetManagerService, aliasName:string):void
 ---@field InsertLinkedSourceAsModuleScript fun(self:AssetManagerService, aliasName:string):void
@@ -226,6 +248,46 @@
 ---
 
 ---
+---@class AvatarEditorService : Instance
+---@field PerformCreateOutfit fun(self:AvatarEditorService, name:string):void
+---@field PerformCreateOutfitWithDescription fun(self:AvatarEditorService, humanoidDescription:Instance, name:string):void
+---@field PerformSaveAvatar fun(self:AvatarEditorService):void
+---@field PerformSaveAvatarNew fun(self:AvatarEditorService, addedAssets:Array, removedAssets:Array):void
+---@field PerformSaveAvatarWithDescription fun(self:AvatarEditorService, humanoidDescription:Instance, addedAssets:Array, removedAssets:Array):void
+---@field PerformSetFavorite fun(self:AvatarEditorService):void
+---@field PromptAllowInventoryReadAccess fun(self:AvatarEditorService):void
+---@field PromptCreateOutfit fun(self:AvatarEditorService, outfit:Instance, rigType:Enum.HumanoidRigType):void
+---@field PromptSaveAvatar fun(self:AvatarEditorService, humanoidDescription:Instance, rigType:Enum.HumanoidRigType):void
+---@field PromptSetFavorite fun(self:AvatarEditorService, itemId:number, itemType:Enum.AvatarItemType, shouldFavorite:boolean):void
+---@field SetAllowInventoryReadAccess fun(self:AvatarEditorService, inventoryReadAccessGranted:boolean):void
+---@field SignalCreateOutfitFailed fun(self:AvatarEditorService):void
+---@field SignalCreateOutfitPermissionDenied fun(self:AvatarEditorService):void
+---@field SignalSaveAvatarFailed fun(self:AvatarEditorService):void
+---@field SignalSaveAvatarPermissionDenied fun(self:AvatarEditorService):void
+---@field SignalSetFavoriteFailed fun(self:AvatarEditorService):void
+---@field SignalSetFavoritePermissionDenied fun(self:AvatarEditorService):void
+---@field CheckApplyDefaultClothing fun(self:AvatarEditorService, humanoidDescription:Instance):Instance
+---@field ConformToAvatarRules fun(self:AvatarEditorService, humanoidDescription:Instance):Instance
+---@field GetAvatarRules fun(self:AvatarEditorService):Dictionary
+---@field GetFavorite fun(self:AvatarEditorService, itemId:number, itemType:Enum.AvatarItemType):boolean
+---@field GetInventory fun(self:AvatarEditorService, assetTypes:Array):Instance
+---@field GetItemDetails fun(self:AvatarEditorService, itemId:number, itemType:Enum.AvatarItemType):Dictionary
+---@field GetOutfits fun(self:AvatarEditorService):Instance
+---@field GetRecommendedAssets fun(self:AvatarEditorService, assetType:Enum.AvatarAssetType):Array
+---@field GetRecommendedAssets fun(self:AvatarEditorService, assetType:Enum.AvatarAssetType, contextAssetId:number):Array
+---@field GetRecommendedBundles fun(self:AvatarEditorService, bundleId:number):Array
+---@field SearchCatalog fun(self:AvatarEditorService, searchParameters:CatalogSearchParams):Instance
+---@field OpenAllowInventoryReadAccess RBXScriptSignal @function()
+---@field OpenPromptCreateOufit RBXScriptSignal @function(humanoidDescription:Instance, rigType:Enum.HumanoidRigType)
+---@field OpenPromptSaveAvatar RBXScriptSignal @function(humanoidDescription:Instance, rigType:Enum.HumanoidRigType)
+---@field OpenPromptSetFavorite RBXScriptSignal @function(itemId:number, itemType:Enum.AvatarItemType, shouldFavorite:boolean)
+---@field PromptAllowInventoryReadAccessCompleted RBXScriptSignal @function(result:Enum.AvatarPromptResult)
+---@field PromptCreateOutfitCompleted RBXScriptSignal @function(result:Enum.AvatarPromptResult)
+---@field PromptSaveAvatarCompleted RBXScriptSignal @function(result:Enum.AvatarPromptResult)
+---@field PromptSetFavoriteCompleted RBXScriptSignal @function(result:Enum.AvatarPromptResult)
+---
+
+---
 ---@class Backpack : Instance
 ---
 
@@ -284,6 +346,7 @@
 ---
 ---@class BasePlayerGui : Instance
 ---@field GetGuiObjectsAtPosition fun(self:BasePlayerGui, x:number, y:number):Objects
+---@field GetGuiObjectsInCircle fun(self:BasePlayerGui, position:Vector2, radius:number):Objects
 ---
 
 ---
@@ -318,6 +381,36 @@
 ---@field SetCoreGuiEnabled fun(self:StarterGui, coreGuiType:Enum.CoreGuiType, enabled:boolean):void
 ---@field GetCore fun(self:StarterGui, parameterName:string):Variant
 ---@field CoreGuiChangedSignal RBXScriptSignal @function(coreGuiType:Enum.CoreGuiType, enabled:boolean)
+---
+
+---
+---@class BaseWrap : Instance
+---@field CageMeshId Content
+---@field CageOrigin CFrame
+---@field CageOriginWorld CFrame
+---@field ImportOrigin CFrame
+---@field ImportOriginWorld CFrame
+---
+
+---
+---@class WrapLayer : BaseWrap
+---@field BindOffset CFrame
+---@field Color Color3
+---@field DebugMode Enum.WrapLayerDebugMode
+---@field Enabled boolean
+---@field Order number
+---@field Puffiness number
+---@field ReferenceMeshId Content
+---@field ReferenceOrigin CFrame
+---@field ReferenceOriginWorld CFrame
+---@field ShrinkFactor number
+---
+
+---
+---@class WrapTarget : BaseWrap
+---@field Color Color3
+---@field DebugMode Enum.WrapTargetDebugMode
+---@field Stiffness number
 ---
 
 ---
@@ -443,6 +536,7 @@
 ---@class BulkImportService : Instance
 ---@field LaunchBulkImport fun(self:BulkImportService, assetTypeToImport:number):void
 ---@field ShowBulkImportView fun(self:BulkImportService):void
+---@field AssetImported RBXScriptSignal @function(assetType:Enum.AssetType, name:string, id:number)
 ---@field BulkImportFinished RBXScriptSignal @function(state:number)
 ---@field BulkImportStarted RBXScriptSignal @function()
 ---
@@ -466,10 +560,13 @@
 ---@field CameraSubject Instance
 ---@field CameraType Enum.CameraType
 ---@field CoordinateFrame CFrame
+---@field DiagonalFieldOfView number
 ---@field FieldOfView number
+---@field FieldOfViewMode Enum.FieldOfViewMode
 ---@field Focus CFrame
 ---@field HeadLocked boolean
 ---@field HeadScale number
+---@field MaxAxisFieldOfView number
 ---@field NearPlaneZ number
 ---@field ViewportSize Vector2
 ---@field GetLargestCutoffDistance fun(self:Camera, ignoreList:Objects):number
@@ -574,11 +671,13 @@
 ---@field GetShouldUseLuaChat fun(self:Chat):boolean
 ---@field InvokeChatCallback fun(self:Chat, callbackType:Enum.ChatCallbackType, callbackArguments:Tuple):Tuple
 ---@field RegisterChatCallback fun(self:Chat, callbackType:Enum.ChatCallbackType, callbackFunction:Function):void
+---@field SetBubbleChatSettings fun(self:Chat, settings:Variant):void
 ---@field CanUserChatAsync fun(self:Chat, userId:number):boolean
 ---@field CanUsersChatAsync fun(self:Chat, userIdFrom:number, userIdTo:number):boolean
 ---@field FilterStringAsync fun(self:Chat, stringToFilter:string, playerFrom:Instance, playerTo:Instance):string
 ---@field FilterStringForBroadcast fun(self:Chat, stringToFilter:string, playerFrom:Instance):string
 ---@field FilterStringForPlayerAsync fun(self:Chat, stringToFilter:string, playerToFilterFor:Instance):string
+---@field BubbleChatSettingsChanged RBXScriptSignal @function(settings:Variant)
 ---@field Chatted RBXScriptSignal @function(part:Instance, message:string, color:Enum.ChatColor)
 ---
 
@@ -590,6 +689,12 @@
 ---@field MouseHoverEnter RBXScriptSignal @function(playerWhoHovered:Instance)
 ---@field MouseHoverLeave RBXScriptSignal @function(playerWhoHovered:Instance)
 ---@field RightMouseClick RBXScriptSignal @function(playerWhoClicked:Instance)
+---
+
+---
+---@class Clouds : Instance
+---@field Cover number
+---@field Density number
 ---
 
 ---
@@ -780,11 +885,19 @@
 ---@field RequestQueueSize number
 ---@field CalculateNumTrianglesInMeshSync fun(self:ContentProvider, meshId:string):number
 ---@field GetFailedRequests fun(self:ContentProvider):Array
+---@field ListEncryptedAssets fun(self:ContentProvider):Array
 ---@field Preload fun(self:ContentProvider, contentId:Content):void
+---@field RegisterDefaultEncryptionKey fun(self:ContentProvider, encryptionKey:string):void
+---@field RegisterDefaultSessionKey fun(self:ContentProvider, sessionKey:string):void
+---@field RegisterEncryptedAsset fun(self:ContentProvider, assetId:Content, encryptionKey:string):void
+---@field RegisterSessionEncryptedAsset fun(self:ContentProvider, contentId:Content, sessionKey:string):void
 ---@field SetBaseUrl fun(self:ContentProvider, url:string):void
+---@field UnregisterDefaultEncryptionKey fun(self:ContentProvider):void
+---@field UnregisterEncryptedAsset fun(self:ContentProvider, assetId:Content):void
 ---@field CalculateNumTrianglesInMesh fun(self:ContentProvider, meshId:string):number
 ---@field PreloadAsync fun(self:ContentProvider, contentIdList:Array):void
 ---@field PreloadAsync fun(self:ContentProvider, contentIdList:Array, callbackFunction:Function):void
+---@field AssetFetchFailed RBXScriptSignal @function(assetId:Content)
 ---
 
 ---
@@ -858,7 +971,7 @@
 
 ---
 ---@class CoreScriptSyncService : Instance
----@field GetScriptFilePath fun(self:CoreScriptSyncService, script:Instance):string
+---@field GetScriptFilePath fun(self:CoreScriptSyncService, script:Instance):Variant
 ---
 
 ---
@@ -928,6 +1041,7 @@
 ---@field GetOrderedDataStore fun(self:DataStoreService, name:string):Instance
 ---@field GetOrderedDataStore fun(self:DataStoreService, name:string, scope:string):Instance
 ---@field GetRequestBudgetForRequestType fun(self:DataStoreService, requestType:Enum.DataStoreRequestType):number
+---@field GetDataFromEmptyScopeDataStoreAsyncTemporary fun(self:DataStoreService, name:string, key:string):Variant
 ---
 
 ---
@@ -1161,25 +1275,17 @@
 ---
 ---@class GameSettings : Instance
 ---@field AdditionalCoreIncludeDirs string
----@field BubbleChatLifetime number
----@field BubbleChatMaxBubbles number
----@field ChatHistory number
----@field ChatScrollLength number
----@field CollisionSoundEnabled boolean
----@field CollisionSoundVolume number
----@field HardwareMouse boolean
----@field MaxCollisionSounds number
 ---@field OverrideStarterScript string
----@field ReportAbuseChatHistory number
----@field SoftwareSound boolean
 ---@field VideoCaptureEnabled boolean
----@field VideoQuality Enum.VideoQualitySettings
 ---@field VideoRecording boolean
 ---@field VideoRecordingChangeRequest RBXScriptSignal @function(recording:boolean)
 ---
 
 ---
 ---@class GamepadService : Instance
+---@field GamepadCursorEnabled boolean
+---@field GetGamepadCursorPosition fun(self:GamepadService):Vector2
+---@field SetGamepadCursorPosition fun(self:GamepadService, position:Vector2):void
 ---
 
 ---
@@ -1189,11 +1295,12 @@
 ---
 ---@class GlobalDataStore : Instance
 ---@field OnUpdate fun(self:GlobalDataStore, key:string, callback:Function):RBXScriptConnection
----@field GetAsync fun(self:GlobalDataStore, key:string):Variant
+---@field GetAsync fun(self:GlobalDataStore, key:string):Tuple
 ---@field IncrementAsync fun(self:GlobalDataStore, key:string):Variant
 ---@field IncrementAsync fun(self:GlobalDataStore, key:string, delta:number):Variant
----@field RemoveAsync fun(self:GlobalDataStore, key:string):Variant
----@field SetAsync fun(self:GlobalDataStore, key:string, value:Variant):void
+---@field RemoveAsync fun(self:GlobalDataStore, key:string):Tuple
+---@field SetAsync fun(self:GlobalDataStore, key:string, value:Variant, userids:Variant):Variant
+---@field SetAsync fun(self:GlobalDataStore, key:string, value:Variant, userids:Variant, options:Instance):Variant
 ---@field UpdateAsync fun(self:GlobalDataStore, key:string, transformFunction:Function):Tuple
 ---
 
@@ -1224,14 +1331,19 @@
 ---@field AbsoluteRotation number
 ---@field AbsoluteSize Vector2
 ---@field AutoLocalize boolean
+---@field ClippedRect Rect
+---@field IsNotOccluded boolean
 ---@field Localize boolean
+---@field RawRect2D Rect
 ---@field RootLocalizationTable LocalizationTable
+---@field TotalGroupScale number
 ---
 
 ---
 ---@class GuiObject : GuiBase2d
 ---@field Active boolean
 ---@field AnchorPoint Vector2
+---@field AutomaticSize Enum.AutomaticSize
 ---@field BackgroundColor BrickColor
 ---@field BackgroundColor3 Color3
 ---@field BackgroundTransparency number
@@ -1399,12 +1511,16 @@
 
 ---
 ---@class ScrollingFrame : GuiObject
+---@field AbsoluteCanvasSize Vector2
 ---@field AbsoluteWindowSize Vector2
+---@field AutomaticCanvasSize Enum.AutomaticSize
 ---@field BottomImage Content
 ---@field CanvasPosition Vector2
 ---@field CanvasSize UDim2
 ---@field ElasticBehavior Enum.ElasticBehavior
+---@field HorizontalBarRect Rect
 ---@field HorizontalScrollBarInset Enum.ScrollBarInset
+---@field MaxCanvasPosition Vector2
 ---@field MidImage Content
 ---@field ScrollBarImageColor3 Color3
 ---@field ScrollBarImageTransparency number
@@ -1412,6 +1528,7 @@
 ---@field ScrollingDirection Enum.ScrollingDirection
 ---@field ScrollingEnabled boolean
 ---@field TopImage Content
+---@field VerticalBarRect Rect
 ---@field VerticalScrollBarInset Enum.ScrollBarInset
 ---@field VerticalScrollBarPosition Enum.VerticalScrollBarPosition
 ---@field ClearInertialScrolling fun(self:ScrollingFrame):void
@@ -1498,6 +1615,7 @@
 ---@field Enabled boolean
 ---@field ResetOnSpawn boolean
 ---@field ZIndexBehavior Enum.ZIndexBehavior
+---@field GetLayoutNodeTree fun(self:LayerCollector):Dictionary
 ---
 
 ---
@@ -1610,6 +1728,7 @@
 
 ---
 ---@class HandleAdornment : PVAdornment
+---@field AdornCullingMode Enum.AdornCullingMode
 ---@field AlwaysOnTop boolean
 ---@field CFrame CFrame
 ---@field SizeRelativeOffset Vector3
@@ -1813,6 +1932,17 @@
 ---
 
 ---
+---@class HeightmapImporterService : Instance
+---@field CancelImportHeightmap fun(self:HeightmapImporterService):void
+---@field GetGreyscale fun(self:HeightmapImporterService, heightmapAssetId:Content):Tuple
+---@field IsValidColormap fun(self:HeightmapImporterService, colormapAssetId:Content):Tuple
+---@field IsValidHeightmap fun(self:HeightmapImporterService, heightmapAssetId:Content):Tuple
+---@field SetImportHeightmapPaused fun(self:HeightmapImporterService, paused:boolean):void
+---@field ImportHeightmap fun(self:HeightmapImporterService, region:Region3, heightmapAssetId:Content, colormapAssetId:Content, defaultMaterial:Enum.Material):void
+---@field ProgressUpdate RBXScriptSignal @function(progressRatio:number)
+---
+
+---
 ---@class Hopper : Instance
 ---
 
@@ -1910,6 +2040,7 @@
 ---@field AddCustomStatus fun(self:Humanoid, status:string):boolean
 ---@field AddStatus fun(self:Humanoid):boolean
 ---@field AddStatus fun(self:Humanoid, status:Enum.Status):boolean
+---@field ApplyDescriptionBlocking fun(self:Humanoid, humanoidDescription:Instance):void
 ---@field BuildRigFromAttachments fun(self:Humanoid):void
 ---@field CacheDefaults fun(self:Humanoid):void
 ---@field ChangeState fun(self:Humanoid):void
@@ -1941,8 +2072,10 @@
 ---@field TakeDamage fun(self:Humanoid, amount:number):void
 ---@field UnequipTools fun(self:Humanoid):void
 ---@field ApplyDescription fun(self:Humanoid, humanoidDescription:Instance):void
+---@field ApplyDescription fun(self:Humanoid, humanoidDescription:Instance, assetTypeVerification:Enum.AssetTypeVerification):void
 ---@field ApplyDescriptionClientServer fun(self:Humanoid, humanoidDescription:Instance):void
 ---@field PlayEmote fun(self:Humanoid, emoteName:string):boolean
+---@field PlayEmoteAndGetAnimTrackById fun(self:Humanoid, emoteId:number):Tuple
 ---@field PlayEmoteById fun(self:Humanoid, emoteName:string, emoteId:number):boolean
 ---@field AnimationPlayed RBXScriptSignal @function(animationTrack:Instance)
 ---@field Climbing RBXScriptSignal @function(speed:number)
@@ -2019,6 +2152,14 @@
 ---
 
 ---
+---@class ILegacyStudioBridge : Instance
+---
+
+---
+---@class LegacyStudioBridge : ILegacyStudioBridge
+---
+
+---
 ---@class InputObject : Instance
 ---@field Delta Vector3
 ---@field KeyCode Enum.KeyCode
@@ -2037,6 +2178,7 @@
 ---@field Insert fun(self:InsertService, instance:Instance):void
 ---@field LoadLocalAsset fun(self:InsertService, assetPath:string):Instance
 ---@field LoadPackageAsset fun(self:InsertService, url:Content):Objects
+---@field CreateMeshPartAsync fun(self:InsertService, meshId:Content, collisionFidelity:Enum.CollisionFidelity, renderFidelity:Enum.RenderFidelity):Instance
 ---@field GetBaseCategories fun(self:InsertService):Array
 ---@field GetBaseSets fun(self:InsertService):Array
 ---@field GetCollection fun(self:InsertService, categoryId:number):Array
@@ -2047,6 +2189,7 @@
 ---@field GetUserSets fun(self:InsertService, userId:number):Array
 ---@field LoadAsset fun(self:InsertService, assetId:number):Instance
 ---@field LoadAssetVersion fun(self:InsertService, assetVersionId:number):Instance
+---@field LoadPackageAssetAsync fun(self:InsertService, url:Content):Objects
 ---
 
 ---
@@ -2334,9 +2477,6 @@
 
 ---
 ---@class LuaSettings : Instance
----@field AreScriptStartsReported boolean
----@field DefaultWaitTime number
----@field WaitingThreadsBudget number
 ---
 
 ---
@@ -2534,6 +2674,7 @@
 
 ---
 ---@class NetworkServer : NetworkPeer
+---@field EncryptStringForPlayerId fun(self:NetworkServer, toEncrypt:string, playerId:number):string
 ---
 
 ---
@@ -2559,12 +2700,10 @@
 ---@field FreeMemoryMBytes number
 ---@field HttpProxyEnabled boolean
 ---@field HttpProxyURL string
----@field IncommingReplicationLag number
----@field PrintFilters boolean
+---@field IncomingReplicationLag number
 ---@field PrintJoinSizeBreakdown boolean
 ---@field PrintPhysicsErrors boolean
 ---@field PrintStreamInstanceQuota boolean
----@field PrintTouches boolean
 ---@field RenderStreamedRegions boolean
 ---@field ShowActiveAnimationAsset boolean
 ---@field TrackDataTypes boolean
@@ -2602,6 +2741,11 @@
 ---
 ---@class BasePart : PVInstance
 ---@field Anchored boolean
+---@field AssemblyAngularVelocity Vector3
+---@field AssemblyCenterOfMass Vector3
+---@field AssemblyLinearVelocity Vector3
+---@field AssemblyMass number
+---@field AssemblyRootPart BasePart
 ---@field BackParamA number
 ---@field BackParamB number
 ---@field BackSurface Enum.SurfaceType
@@ -2654,6 +2798,9 @@
 ---@field TopSurfaceInput Enum.InputType
 ---@field Transparency number
 ---@field Velocity Vector3
+---@field ApplyAngularImpulse fun(self:BasePart, impulse:Vector3):void
+---@field ApplyImpulse fun(self:BasePart, impulse:Vector3):void
+---@field ApplyImpulseAtPosition fun(self:BasePart, impulse:Vector3, position:Vector3):void
 ---@field BreakJoints fun(self:BasePart):void
 ---@field CanCollideWith fun(self:BasePart, part:Instance):boolean
 ---@field CanSetNetworkOwnership fun(self:BasePart):Tuple
@@ -2755,6 +2902,7 @@
 ---@field WaterWaveSpeed number
 ---@field AutowedgeCell fun(self:Terrain, x:number, y:number, z:number):boolean
 ---@field AutowedgeCells fun(self:Terrain, region:Region3int16):void
+---@field CancelImportHeightmap fun(self:Terrain):void
 ---@field CellCenterToWorld fun(self:Terrain, x:number, y:number, z:number):Vector3
 ---@field CellCornerToWorld fun(self:Terrain, x:number, y:number, z:number):Vector3
 ---@field Clear fun(self:Terrain):void
@@ -2775,12 +2923,14 @@
 ---@field ReplaceMaterial fun(self:Terrain, region:Region3, resolution:number, sourceMaterial:Enum.Material, targetMaterial:Enum.Material):void
 ---@field SetCell fun(self:Terrain, x:number, y:number, z:number, material:Enum.CellMaterial, block:Enum.CellBlock, orientation:Enum.CellOrientation):void
 ---@field SetCells fun(self:Terrain, region:Region3int16, material:Enum.CellMaterial, block:Enum.CellBlock, orientation:Enum.CellOrientation):void
+---@field SetImportHeightmapPaused fun(self:Terrain, paused:boolean):void
 ---@field SetMaterialColor fun(self:Terrain, material:Enum.Material, value:Color3):void
 ---@field SetWaterCell fun(self:Terrain, x:number, y:number, z:number, force:Enum.WaterForce, direction:Enum.WaterDirection):void
 ---@field WorldToCell fun(self:Terrain, position:Vector3):Vector3
 ---@field WorldToCellPreferEmpty fun(self:Terrain, position:Vector3):Vector3
 ---@field WorldToCellPreferSolid fun(self:Terrain, position:Vector3):Vector3
 ---@field WriteVoxels fun(self:Terrain, region:Region3, resolution:number, materials:Array, occupancy:Array):void
+---@field ImportHeightmap fun(self:Terrain, region:Region3, heightmapAssetId:Content, colormapAssetId:Content, defaultMaterial:Enum.Material):void
 ---@field TerrainProgressUpdate RBXScriptSignal @function(progressRatio:number)
 ---
 
@@ -2791,13 +2941,16 @@
 
 ---
 ---@class MeshPart : TriangleMeshPart
+---@field DoubleSided boolean
 ---@field HasJointOffset boolean
 ---@field HasSkinnedMesh boolean
 ---@field JointOffset Vector3
 ---@field MeshID Content
 ---@field MeshId Content
+---@field MeshSize Vector3
 ---@field RenderFidelity Enum.RenderFidelity
 ---@field TextureID Content
+---@field ApplyMesh fun(self:MeshPart, meshPart:Instance):void
 ---
 
 ---
@@ -2856,6 +3009,10 @@
 ---
 
 ---
+---@class Actor : Model
+---
+
+---
 ---@class Status : Model
 ---
 
@@ -2902,6 +3059,8 @@
 ---@field FallenPartsDestroyHeight number
 ---@field FilteringEnabled boolean
 ---@field Gravity number
+---@field InterpolationThrottling Enum.InterpolationThrottlingMode
+---@field MeshPartHeads Enum.MeshPartHeads
 ---@field PhysicsSimulationRate Enum.PhysicsSimulationRate
 ---@field StreamingEnabled boolean
 ---@field StreamingMinRadius number
@@ -2919,6 +3078,7 @@
 ---@field JoinToOutsiders fun(self:Workspace, objects:Objects, jointType:Enum.JointCreationMode):void
 ---@field MakeJoints fun(self:Workspace, objects:Objects):void
 ---@field PGSIsEnabled fun(self:Workspace):boolean
+---@field SetMeshPartHeads fun(self:Workspace, value:Enum.MeshPartHeads):void
 ---@field SetPhysicsThrottleEnabled fun(self:Workspace, value:boolean):void
 ---@field UnjoinFromOutsiders fun(self:Workspace, objects:Objects):void
 ---@field ZoomToExtents fun(self:Workspace):void
@@ -2948,6 +3108,10 @@
 ---
 
 ---
+---@class CatalogPages : Pages
+---
+
+---
 ---@class DataStorePages : Pages
 ---
 
@@ -2961,6 +3125,10 @@
 
 ---
 ---@class EmotesPages : InventoryPages
+---
+
+---
+---@class OutfitPages : Pages
 ---
 
 ---
@@ -3063,6 +3231,8 @@
 ---@field AreUnalignedPartsShown boolean
 ---@field AreWorldCoordsShown boolean
 ---@field DisableCSGv2 boolean
+---@field ForceCSGv2 boolean
+---@field IsInterpolationThrottleShown boolean
 ---@field IsReceiveAgeShown boolean
 ---@field IsTreeShown boolean
 ---@field PhysicsEnvironmentalThrottle Enum.EnviromentalPhysicsThrottle
@@ -3172,7 +3342,11 @@
 
 ---
 ---@class PlayerEmulatorService : Instance
+---@field EmulatedCountryCode string
+---@field EmulatedGameLocale string
 ---@field PlayerEmulationEnabled boolean
+---@field PlayerEmulationEnabled_deprecated boolean
+---@field SerializedEmulatedPolicyInfo string
 ---@field StudioEmulatedCountryRegionCode string
 ---@field GetEmulatedPolicyInfo fun(self:PlayerEmulatorService):Dictionary
 ---@field SetEmulatedPolicyInfo fun(self:PlayerEmulatorService, emulatedPolicyInfo:Dictionary):void
@@ -3203,7 +3377,7 @@
 ---@field BubbleChat boolean
 ---@field CharacterAutoLoads boolean
 ---@field ClassicChat boolean
----@field LocalPlayer Instance
+---@field LocalPlayer Player
 ---@field MaxPlayers number
 ---@field MaxPlayersInternal number
 ---@field NumPlayers number
@@ -3222,6 +3396,7 @@
 ---@field TeamChat fun(self:Players, message:string):void
 ---@field WhisperChat fun(self:Players, message:string, player:Instance):void
 ---@field CreateHumanoidModelFromDescription fun(self:Players, description:Instance, rigType:Enum.HumanoidRigType):Instance
+---@field CreateHumanoidModelFromDescription fun(self:Players, description:Instance, rigType:Enum.HumanoidRigType, assetTypeVerification:Enum.AssetTypeVerification):Instance
 ---@field CreateHumanoidModelFromUserId fun(self:Players, userId:number):Instance
 ---@field GetCharacterAppearanceAsync fun(self:Players, userId:number):Instance
 ---@field GetCharacterAppearanceInfoAsync fun(self:Players, userId:number):Dictionary
@@ -3276,6 +3451,7 @@
 ---@field OpenWikiPage fun(self:Plugin, url:string):void
 ---@field PauseSound fun(self:Plugin, soundChannel:Instance):void
 ---@field PlaySound fun(self:Plugin, soundChannel:Instance):void
+---@field PlaySound fun(self:Plugin, soundChannel:Instance, normalizedTimePosition:number):void
 ---@field ResumeSound fun(self:Plugin, soundChannel:Instance):void
 ---@field SaveSelectedToRoblox fun(self:Plugin):void
 ---@field SelectRibbonTool fun(self:Plugin, tool:Enum.RibbonTool, position:UDim2):void
@@ -3384,16 +3560,27 @@
 
 ---
 ---@class PolicyService : Instance
+---@field IsLuobuServer Enum.TriStateBoolean
+---@field LuobuWhitelisted Enum.TriStateBoolean
 ---@field GetPolicyInfoForPlayerAsync fun(self:PolicyService, player:Instance):Dictionary
 ---
 
 ---
----@class Pose : Instance
----@field CFrame CFrame
+---@class PoseBase : Instance
 ---@field EasingDirection Enum.PoseEasingDirection
 ---@field EasingStyle Enum.PoseEasingStyle
----@field MaskWeight number
 ---@field Weight number
+---
+
+---
+---@class NumberPose : PoseBase
+---@field Value number
+---
+
+---
+---@class Pose : PoseBase
+---@field CFrame CFrame
+---@field MaskWeight number
 ---@field AddSubPose fun(self:Pose, pose:Instance):void
 ---@field GetSubPoses fun(self:Pose):Objects
 ---@field RemoveSubPose fun(self:Pose, pose:Instance):void
@@ -3436,6 +3623,44 @@
 ---@class SunRaysEffect : PostEffect
 ---@field Intensity number
 ---@field Spread number
+---
+
+---
+---@class ProximityPrompt : Instance
+---@field ActionText string
+---@field AutoLocalize boolean
+---@field ClickablePrompt boolean
+---@field Enabled boolean
+---@field Exclusivity Enum.ProximityPromptExclusivity
+---@field GamepadKeyCode Enum.KeyCode
+---@field HoldDuration number
+---@field KeyboardKeyCode Enum.KeyCode
+---@field MaxActivationDistance number
+---@field ObjectText string
+---@field RequiresLineOfSight boolean
+---@field RootLocalizationTable LocalizationTable
+---@field Style Enum.ProximityPromptStyle
+---@field UIOffset Vector2
+---@field InputHoldBegin fun(self:ProximityPrompt):void
+---@field InputHoldEnd fun(self:ProximityPrompt):void
+---@field PromptButtonHoldBegan RBXScriptSignal @function(playerWhoTriggered:Instance)
+---@field PromptButtonHoldEnded RBXScriptSignal @function(playerWhoTriggered:Instance)
+---@field PromptHidden RBXScriptSignal @function()
+---@field PromptShown RBXScriptSignal @function(inputType:Enum.ProximityPromptInputType)
+---@field TriggerEnded RBXScriptSignal @function(playerWhoTriggered:Instance)
+---@field Triggered RBXScriptSignal @function(playerWhoTriggered:Instance)
+---
+
+---
+---@class ProximityPromptService : Instance
+---@field Enabled boolean
+---@field MaxPromptsVisible number
+---@field PromptButtonHoldBegan RBXScriptSignal @function(prompt:Instance, playerWhoTriggered:Instance)
+---@field PromptButtonHoldEnded RBXScriptSignal @function(prompt:Instance, playerWhoTriggered:Instance)
+---@field PromptHidden RBXScriptSignal @function(prompt:Instance)
+---@field PromptShown RBXScriptSignal @function(prompt:Instance, inputType:Enum.ProximityPromptInputType)
+---@field PromptTriggerEnded RBXScriptSignal @function(prompt:Instance, playerWhoTriggered:Instance)
+---@field PromptTriggered RBXScriptSignal @function(prompt:Instance, playerWhoTriggered:Instance)
 ---
 
 ---
@@ -3660,7 +3885,7 @@
 ---@field GetWatchValue fun(self:ScriptDebugger, watch:Instance):Variant
 ---@field GetWatches fun(self:ScriptDebugger):Objects
 ---@field SetBreakpoint fun(self:ScriptDebugger, line:number, isContextDependentBreakpoint:boolean):Instance
----@field SetGlobal fun(self:ScriptDebugger, name:string, value:Variant):void
+---@field SetGlobal fun(self:ScriptDebugger, name:string, value:Variant, stackFrame:number):void
 ---@field SetLocal fun(self:ScriptDebugger, name:string, value:Variant):void
 ---@field SetLocal fun(self:ScriptDebugger, name:string, value:Variant, stackFrame:number):void
 ---@field SetUpvalue fun(self:ScriptDebugger, name:string, value:Variant):void
@@ -3680,7 +3905,9 @@
 ---
 ---@class Selection : Instance
 ---@field ActiveInstance Instance
+---@field Add fun(self:Selection, instancesToAdd:Objects):void
 ---@field Get fun(self:Selection):Objects
+---@field Remove fun(self:Selection, instancesToRemove:Objects):void
 ---@field Set fun(self:Selection, selection:Objects):void
 ---@field SelectionChanged RBXScriptSignal @function()
 ---
@@ -3728,9 +3955,6 @@
 ---@field GetFastFlag fun(self:DataModel, name:string):boolean
 ---@field GetFastInt fun(self:DataModel, name:string):number
 ---@field GetFastString fun(self:DataModel, name:string):string
----@field GetJobIntervalPeakFraction fun(self:DataModel, jobname:string, greaterThan:number):number
----@field GetJobTimePeakFraction fun(self:DataModel, jobname:string, greaterThan:number):number
----@field GetJobsExtendedStats fun(self:DataModel):Array
 ---@field GetJobsInfo fun(self:DataModel):Array
 ---@field GetMessage fun(self:DataModel):string
 ---@field GetObjects fun(self:DataModel, url:Content):Objects
@@ -3849,6 +4073,8 @@
 ---@field PlaybackLoudness number
 ---@field PlaybackSpeed number
 ---@field Playing boolean
+---@field RollOffMaxDistance number
+---@field RollOffMinDistance number
 ---@field RollOffMode Enum.RollOffMode
 ---@field SoundGroup SoundGroup
 ---@field SoundId Content
@@ -4086,7 +4312,6 @@
 ---@class StudioData : Instance
 ---@field EnableScriptCollabByDefaultOnLoad boolean
 ---@field EnableScriptCollabOnLoad boolean
----@field EnableScriptCollabVersionHistoryOnLoad boolean
 ---@field SrcPlaceId number
 ---@field SrcUniverseId number
 ---
@@ -4109,9 +4334,11 @@
 ---@field BaseURLHasChineseHost fun(self:StudioService):boolean
 ---@field ConvertToPackageUpload fun(self:StudioService, uploadUrl:string):void
 ---@field CopyToClipboard fun(self:StudioService, stringToCopy:string):void
+---@field DEPRECATED_ShowPlaceVersionHistoryDialog fun(self:StudioService):void
 ---@field EmitPlacePublishedSignal fun(self:StudioService):void
 ---@field GetClassIcon fun(self:StudioService, className:string):Dictionary
 ---@field GetResourceByCategory fun(self:StudioService, category:string):Dictionary
+---@field GetStartupAssetId fun(self:StudioService):string
 ---@field GetStartupPluginId fun(self:StudioService):string
 ---@field GetTermsOfUseUrl fun(self:StudioService):string
 ---@field GetUserId fun(self:StudioService):number
@@ -4121,13 +4348,12 @@
 ---@field IsPluginInstalled fun(self:StudioService, assetId:number):boolean
 ---@field IsPluginUpToDate fun(self:StudioService, assetId:number, currentAssetVersion:number):boolean
 ---@field OpenInBrowser_DONOTUSE fun(self:StudioService, url:string):void
----@field OpenPluginInsertPage fun(self:StudioService, assetId:number):void
 ---@field PublishAs fun(self:StudioService, universeId:number, placeId:number, groupId:number):void
 ---@field SerializeInstances fun(self:StudioService, instances:Objects):string
 ---@field SetDocumentDisplayName fun(self:StudioService, newName:string):void
 ---@field SetPluginEnabled fun(self:StudioService, assetId:number, state:boolean):void
 ---@field SetUniverseDisplayName fun(self:StudioService, newName:string):void
----@field ShowPlaceVersionHistoryDialog fun(self:StudioService):void
+---@field ShowPlaceVersionHistoryDialog fun(self:StudioService, placeId:number):void
 ---@field ShowPublishToRoblox fun(self:StudioService):void
 ---@field UninstallPlugin fun(self:StudioService, assetId:number):void
 ---@field UpdatePluginManagement fun(self:StudioService):void
@@ -4141,6 +4367,7 @@
 ---@field PromptImportLocalAssets fun(self:StudioService, prompt:string, fileTypeFilter:Array):Objects
 ---@field TryInstallPlugin fun(self:StudioService, assetId:number, assetVersionId:number):void
 ---@field DEPRECATED_OnPublishPlaceToRoblox RBXScriptSignal @function()
+---@field GameNameUpdated RBXScriptSignal @function(name:string)
 ---@field GamePublishFinished RBXScriptSignal @function(success:boolean, gameId:number)
 ---@field OnConvertToPackageResult RBXScriptSignal @function(isSuccessful:boolean, errorMessage:string)
 ---@field OnImportFromRoblox RBXScriptSignal @function()
@@ -4152,6 +4379,7 @@
 ---@field OnPublishAsPlugin RBXScriptSignal @function(instances:Objects)
 ---@field OnPublishPlaceToRoblox RBXScriptSignal @function(isOverwritePublish:boolean)
 ---@field OnSaveToRoblox RBXScriptSignal @function(instances:Objects)
+---@field PromptTransformPluginCheckEnable RBXScriptSignal @function()
 ---
 
 ---
@@ -4199,6 +4427,21 @@
 ---
 
 ---
+---@class TeleportAsyncResult : Instance
+---@field PrivateServerId string
+---@field ReservedServerAccessCode string
+---
+
+---
+---@class TeleportOptions : Instance
+---@field ReservedServerAccessCode string
+---@field ServerInstanceId string
+---@field ShouldReserveServer boolean
+---@field GetTeleportData fun(self:TeleportOptions):Variant
+---@field SetTeleportData fun(self:TeleportOptions, teleportData:Variant):void
+---
+
+---
 ---@class TeleportService : Instance
 ---@field CustomizedTeleportUI boolean
 ---@field GetArrivingTeleportGui fun(self:TeleportService):Instance
@@ -4222,6 +4465,8 @@
 ---@field TeleportToSpawnByName fun(self:TeleportService, placeId:number, spawnName:string, teleportData:Variant, player:Instance, customLoadingScreen:Instance):void
 ---@field GetPlayerPlaceInstanceAsync fun(self:TeleportService, userId:number):Tuple
 ---@field ReserveServer fun(self:TeleportService, placeId:number):Tuple
+---@field TeleportAsync fun(self:TeleportService, placeId:number, players:Objects):Instance
+---@field TeleportAsync fun(self:TeleportService, placeId:number, players:Objects, teleportOptions:Instance):Instance
 ---@field TeleportPartyAsync fun(self:TeleportService, placeId:number, players:Objects, teleportData:Variant):string
 ---@field TeleportPartyAsync fun(self:TeleportService, placeId:number, players:Objects, teleportData:Variant, customLoadingScreen:Instance):string
 ---@field LocalPlayerArrivedFromTeleport RBXScriptSignal @function(loadingGui:Instance, dataTable:Variant)
@@ -4286,6 +4531,7 @@
 ---
 ---@class TextService : Instance
 ---@field GetTextSize fun(self:TextService, string:string, fontSize:number, font:Enum.Font, frameSize:Vector2):Vector2
+---@field SetResolutionScale fun(self:TextService, scale:number):void
 ---@field FilterStringAsync fun(self:TextService, stringToFilter:string, fromUserId:number):Instance
 ---@field FilterStringAsync fun(self:TextService, stringToFilter:string, fromUserId:number, textContext:Enum.TextFilterContext):Instance
 ---
@@ -4313,6 +4559,12 @@
 
 ---
 ---@class TouchTransmitter : Instance
+---
+
+---
+---@class TracerService : Instance
+---@field FinishSpan fun(self:TracerService, spanId:string):void
+---@field StartSpan fun(self:TracerService, name:string, parentId:string):string
 ---
 
 ---
@@ -4369,6 +4621,7 @@
 ---@field GetMeshTriCountSync fun(self:UGCValidationService, meshId:string):number
 ---@field GetMeshVertsSync fun(self:UGCValidationService, meshId:string):Array
 ---@field GetTextureSizeSync fun(self:UGCValidationService, textureId:string):Vector2
+---@field SetMeshIdBlocking fun(self:UGCValidationService, meshPart:Instance, meshId:string):void
 ---@field GetMeshTriCount fun(self:UGCValidationService, meshId:string):number
 ---@field GetMeshVerts fun(self:UGCValidationService, meshId:string):Array
 ---@field GetTextureSize fun(self:UGCValidationService, textureId:string):Vector2
@@ -4493,6 +4746,13 @@
 ---
 
 ---
+---@class UnvalidatedAssetService : Instance
+---@field AppendTempAssetId fun(self:UnvalidatedAssetService, userId:number, id:number, lookAt:Vector3, camPos:Vector3, usage:string):void
+---@field AppendVantagePoint fun(self:UnvalidatedAssetService, userId:number, id:number, lookAt:Vector3, camPos:Vector3):boolean
+---@field UpgradeTempAssetId fun(self:UnvalidatedAssetService, userId:number, tempId:number, assetId:number):boolean
+---
+
+---
 ---@class UserGameSettings : Instance
 ---@field AllTutorialsDisabled boolean
 ---@field CameraMode Enum.CustomCameraMode
@@ -4503,6 +4763,7 @@
 ---@field ControlMode Enum.ControlMode
 ---@field Fullscreen boolean
 ---@field GamepadCameraSensitivity number
+---@field GraphicsQualityLevel number
 ---@field HasEverUsedVR boolean
 ---@field IsUsingCameraYInverted boolean
 ---@field IsUsingGamepadCameraSensitivity boolean
@@ -4749,11 +5010,11 @@
 ---@field SendAccelerometerEvent fun(self:VirtualInputManager, x:number, y:number, z:number):void
 ---@field SendGravityEvent fun(self:VirtualInputManager, x:number, y:number, z:number):void
 ---@field SendGyroscopeEvent fun(self:VirtualInputManager, quatX:number, quatY:number, quatZ:number, quatW:number):void
----@field SendKeyEvent fun(self:VirtualInputManager, isPressed:boolean, keyCode:Enum.KeyCode, isRepeatedKey:boolean, pluginGui:Instance):void
----@field SendMouseButtonEvent fun(self:VirtualInputManager, x:number, y:number, mouseButton:number, isDown:boolean, pluginGui:Instance, repeatCount:number):void
----@field SendMouseMoveEvent fun(self:VirtualInputManager, x:number, y:number, pluginGui:Instance):void
----@field SendMouseWheelEvent fun(self:VirtualInputManager, x:number, y:number, isForwardScroll:boolean, pluginGui:Instance):void
----@field SendTextInputCharacterEvent fun(self:VirtualInputManager, str:string, pluginGui:Instance):void
+---@field SendKeyEvent fun(self:VirtualInputManager, isPressed:boolean, keyCode:Enum.KeyCode, isRepeatedKey:boolean, layerCollector:Instance):void
+---@field SendMouseButtonEvent fun(self:VirtualInputManager, x:number, y:number, mouseButton:number, isDown:boolean, layerCollector:Instance, repeatCount:number):void
+---@field SendMouseMoveEvent fun(self:VirtualInputManager, x:number, y:number, layerCollector:Instance):void
+---@field SendMouseWheelEvent fun(self:VirtualInputManager, x:number, y:number, isForwardScroll:boolean, layerCollector:Instance):void
+---@field SendTextInputCharacterEvent fun(self:VirtualInputManager, str:string, layerCollector:Instance):void
 ---@field SendTouchEvent fun(self:VirtualInputManager, touchId:number, state:number, x:number, y:number):void
 ---@field StartPlaying fun(self:VirtualInputManager, fileName:string):void
 ---@field StartRecording fun(self:VirtualInputManager):void
@@ -4833,6 +5094,12 @@
 ---
 
 ---
+---@class Enum.AdornCullingMode:EnumItem
+---@field Automatic Enum.AdornCullingMode @0
+---@field Never Enum.AdornCullingMode @1
+---
+
+---
 ---@class Enum.AlignType:EnumItem
 ---@field Parallel Enum.AlignType @0
 ---@field Perpendicular Enum.AlignType @1
@@ -4842,6 +5109,32 @@
 ---@class Enum.AlphaMode:EnumItem
 ---@field Overlay Enum.AlphaMode @0
 ---@field Transparency Enum.AlphaMode @1
+---
+
+---
+---@class Enum.AnalyticsEconomyAction:EnumItem
+---@field Default Enum.AnalyticsEconomyAction @0
+---@field Acquire Enum.AnalyticsEconomyAction @1
+---@field Spend Enum.AnalyticsEconomyAction @2
+---
+
+---
+---@class Enum.AnalyticsLogLevel:EnumItem
+---@field Trace Enum.AnalyticsLogLevel @0
+---@field Debug Enum.AnalyticsLogLevel @1
+---@field Infomation Enum.AnalyticsLogLevel @2
+---@field Warning Enum.AnalyticsLogLevel @3
+---@field Error Enum.AnalyticsLogLevel @4
+---@field Fatal Enum.AnalyticsLogLevel @5
+---
+
+---
+---@class Enum.AnalyticsProgressionStatus:EnumItem
+---@field Default Enum.AnalyticsProgressionStatus @0
+---@field Begin Enum.AnalyticsProgressionStatus @1
+---@field Complete Enum.AnalyticsProgressionStatus @2
+---@field Abandon Enum.AnalyticsProgressionStatus @3
+---@field Fail Enum.AnalyticsProgressionStatus @4
 ---
 
 ---
@@ -4865,6 +5158,15 @@
 ---@field GamePageLoaded Enum.AppShellActionType @8
 ---@field HomePageLoaded Enum.AppShellActionType @9
 ---@field AvatarEditorPageLoaded Enum.AppShellActionType @10
+---
+
+---
+---@class Enum.AppUpdateStatus:EnumItem
+---@field Unknown Enum.AppUpdateStatus @0
+---@field NotSupported Enum.AppUpdateStatus @1
+---@field Failed Enum.AppUpdateStatus @2
+---@field NotAvailable Enum.AppUpdateStatus @3
+---@field Available Enum.AppUpdateStatus @4
 ---
 
 ---
@@ -4929,10 +5231,56 @@
 ---
 
 ---
+---@class Enum.AssetTypeVerification:EnumItem
+---@field Default Enum.AssetTypeVerification @1
+---@field ClientOnly Enum.AssetTypeVerification @2
+---@field Always Enum.AssetTypeVerification @3
+---
+
+---
 ---@class Enum.AutoIndentRule:EnumItem
 ---@field Off Enum.AutoIndentRule @0
 ---@field Absolute Enum.AutoIndentRule @1
 ---@field Relative Enum.AutoIndentRule @2
+---
+
+---
+---@class Enum.AutomaticSize:EnumItem
+---@field None Enum.AutomaticSize @0
+---@field X Enum.AutomaticSize @1
+---@field Y Enum.AutomaticSize @2
+---@field XY Enum.AutomaticSize @3
+---
+
+---
+---@class Enum.AvatarAssetType:EnumItem
+---@field TShirt Enum.AvatarAssetType @2
+---@field Hat Enum.AvatarAssetType @8
+---@field HairAccessory Enum.AvatarAssetType @41
+---@field FaceAccessory Enum.AvatarAssetType @42
+---@field NeckAccessory Enum.AvatarAssetType @43
+---@field ShoulderAccessory Enum.AvatarAssetType @44
+---@field FrontAccessory Enum.AvatarAssetType @45
+---@field BackAccessory Enum.AvatarAssetType @46
+---@field WaistAccessory Enum.AvatarAssetType @47
+---@field Shirt Enum.AvatarAssetType @11
+---@field Pants Enum.AvatarAssetType @12
+---@field Gear Enum.AvatarAssetType @19
+---@field Head Enum.AvatarAssetType @17
+---@field Face Enum.AvatarAssetType @18
+---@field Torso Enum.AvatarAssetType @27
+---@field RightArm Enum.AvatarAssetType @28
+---@field LeftArm Enum.AvatarAssetType @29
+---@field LeftLeg Enum.AvatarAssetType @30
+---@field RightLeg Enum.AvatarAssetType @31
+---@field ClimbAnimation Enum.AvatarAssetType @48
+---@field FallAnimation Enum.AvatarAssetType @50
+---@field IdleAnimation Enum.AvatarAssetType @51
+---@field JumpAnimation Enum.AvatarAssetType @52
+---@field RunAnimation Enum.AvatarAssetType @53
+---@field SwimAnimation Enum.AvatarAssetType @54
+---@field WalkAnimation Enum.AvatarAssetType @55
+---@field EmoteAnimation Enum.AvatarAssetType @61
 ---
 
 ---
@@ -4944,9 +5292,22 @@
 ---
 
 ---
+---@class Enum.AvatarItemType:EnumItem
+---@field Asset Enum.AvatarItemType @1
+---@field Bundle Enum.AvatarItemType @2
+---
+
+---
 ---@class Enum.AvatarJointPositionType:EnumItem
 ---@field Fixed Enum.AvatarJointPositionType @0
 ---@field ArtistIntent Enum.AvatarJointPositionType @1
+---
+
+---
+---@class Enum.AvatarPromptResult:EnumItem
+---@field Success Enum.AvatarPromptResult @1
+---@field PermissionDenied Enum.AvatarPromptResult @2
+---@field Failed Enum.AvatarPromptResult @3
 ---
 
 ---
@@ -5018,6 +5379,12 @@
 ---
 
 ---
+---@class Enum.BundleType:EnumItem
+---@field BodyParts Enum.BundleType @1
+---@field Animations Enum.BundleType @2
+---
+
+---
 ---@class Enum.Button:EnumItem
 ---@field Jump Enum.Button @32
 ---@field Dismount Enum.Button @8
@@ -5055,6 +5422,24 @@
 ---@field Custom Enum.CameraType @5
 ---@field Scriptable Enum.CameraType @6
 ---@field Orbital Enum.CameraType @7
+---
+
+---
+---@class Enum.CatalogCategoryFilter:EnumItem
+---@field None Enum.CatalogCategoryFilter @1
+---@field Featured Enum.CatalogCategoryFilter @2
+---@field Collectibles Enum.CatalogCategoryFilter @3
+---@field CommunityCreations Enum.CatalogCategoryFilter @4
+---@field Premium Enum.CatalogCategoryFilter @5
+---
+
+---
+---@class Enum.CatalogSortType:EnumItem
+---@field Relevance Enum.CatalogSortType @1
+---@field PriceHighToLow Enum.CatalogSortType @2
+---@field PriceLowToHigh Enum.CatalogSortType @3
+---@field RecentlyUpdated Enum.CatalogSortType @4
+---@field MostFavorited Enum.CatalogSortType @5
 ---
 
 ---
@@ -5442,6 +5827,13 @@
 ---
 
 ---
+---@class Enum.FieldOfViewMode:EnumItem
+---@field Vertical Enum.FieldOfViewMode @0
+---@field Diagonal Enum.FieldOfViewMode @1
+---@field MaxAxis Enum.FieldOfViewMode @2
+---
+
+---
 ---@class Enum.FillDirection:EnumItem
 ---@field Horizontal Enum.FillDirection @0
 ---@field Vertical Enum.FillDirection @1
@@ -5476,6 +5868,31 @@
 ---@field GothamSemibold Enum.Font @18
 ---@field GothamBold Enum.Font @19
 ---@field GothamBlack Enum.Font @20
+---@field AmaticSC Enum.Font @21
+---@field Bangers Enum.Font @22
+---@field Creepster Enum.Font @23
+---@field DenkOne Enum.Font @24
+---@field Fondamento Enum.Font @25
+---@field FredokaOne Enum.Font @26
+---@field GrenzeGotisch Enum.Font @27
+---@field IndieFlower Enum.Font @28
+---@field JosefinSans Enum.Font @29
+---@field Jura Enum.Font @30
+---@field Kalam Enum.Font @31
+---@field LuckiestGuy Enum.Font @32
+---@field Merriweather Enum.Font @33
+---@field Michroma Enum.Font @34
+---@field Nunito Enum.Font @35
+---@field Oswald Enum.Font @36
+---@field PatrickHand Enum.Font @37
+---@field PermanentMarker Enum.Font @38
+---@field Roboto Enum.Font @39
+---@field RobotoCondensed Enum.Font @40
+---@field RobotoMono Enum.Font @41
+---@field Sarpanch Enum.Font @42
+---@field SpecialElite Enum.Font @43
+---@field TitilliumWeb Enum.Font @44
+---@field Ubuntu Enum.Font @45
 ---
 
 ---
@@ -5666,8 +6083,8 @@
 ---@field Players Enum.HttpRequestType @7
 ---@field Chat Enum.HttpRequestType @15
 ---@field Avatar Enum.HttpRequestType @16
----@field Analytics Enum.HttpRequestType @22
----@field Localization Enum.HttpRequestType @24
+---@field Analytics Enum.HttpRequestType @23
+---@field Localization Enum.HttpRequestType @25
 ---
 
 ---
@@ -5754,6 +6171,13 @@
 ---@field NoInput Enum.InputType @0
 ---@field Constant Enum.InputType @12
 ---@field Sin Enum.InputType @13
+---
+
+---
+---@class Enum.InterpolationThrottlingMode:EnumItem
+---@field Default Enum.InterpolationThrottlingMode @0
+---@field Disabled Enum.InterpolationThrottlingMode @1
+---@field Enabled Enum.InterpolationThrottlingMode @2
 ---
 
 ---
@@ -6139,6 +6563,13 @@
 ---
 
 ---
+---@class Enum.MeshPartHeads:EnumItem
+---@field Default Enum.MeshPartHeads @0
+---@field Disabled Enum.MeshPartHeads @1
+---@field Enabled Enum.MeshPartHeads @2
+---
+
+---
 ---@class Enum.MeshType:EnumItem
 ---@field Head Enum.MeshType @0
 ---@field Torso Enum.MeshType @1
@@ -6356,6 +6787,26 @@
 ---@class Enum.ProductPurchaseDecision:EnumItem
 ---@field NotProcessedYet Enum.ProductPurchaseDecision @0
 ---@field PurchaseGranted Enum.ProductPurchaseDecision @1
+---
+
+---
+---@class Enum.ProximityPromptExclusivity:EnumItem
+---@field OnePerButton Enum.ProximityPromptExclusivity @0
+---@field OneGlobally Enum.ProximityPromptExclusivity @1
+---@field AlwaysShow Enum.ProximityPromptExclusivity @2
+---
+
+---
+---@class Enum.ProximityPromptInputType:EnumItem
+---@field Keyboard Enum.ProximityPromptInputType @0
+---@field Gamepad Enum.ProximityPromptInputType @1
+---@field Touch Enum.ProximityPromptInputType @2
+---
+
+---
+---@class Enum.ProximityPromptStyle:EnumItem
+---@field Default Enum.ProximityPromptStyle @0
+---@field Custom Enum.ProximityPromptStyle @1
 ---
 
 ---
@@ -6627,6 +7078,48 @@
 ---
 
 ---
+---@class Enum.StudioScriptEditorColorCategories:EnumItem
+---@field Default Enum.StudioScriptEditorColorCategories @0
+---@field Operator Enum.StudioScriptEditorColorCategories @1
+---@field Number Enum.StudioScriptEditorColorCategories @2
+---@field String Enum.StudioScriptEditorColorCategories @3
+---@field Comment Enum.StudioScriptEditorColorCategories @4
+---@field Keyword Enum.StudioScriptEditorColorCategories @5
+---@field Builtin Enum.StudioScriptEditorColorCategories @6
+---@field Method Enum.StudioScriptEditorColorCategories @7
+---@field Property Enum.StudioScriptEditorColorCategories @8
+---@field Nil Enum.StudioScriptEditorColorCategories @9
+---@field Bool Enum.StudioScriptEditorColorCategories @10
+---@field Function Enum.StudioScriptEditorColorCategories @11
+---@field Local Enum.StudioScriptEditorColorCategories @12
+---@field Self Enum.StudioScriptEditorColorCategories @13
+---@field LuauKeyword Enum.StudioScriptEditorColorCategories @14
+---@field FunctionName Enum.StudioScriptEditorColorCategories @15
+---@field TODO Enum.StudioScriptEditorColorCategories @16
+---@field Background Enum.StudioScriptEditorColorCategories @17
+---@field SelectionText Enum.StudioScriptEditorColorCategories @18
+---@field SelectionBackground Enum.StudioScriptEditorColorCategories @19
+---@field FindSelectionBackground Enum.StudioScriptEditorColorCategories @20
+---@field MatchingWordBackground Enum.StudioScriptEditorColorCategories @21
+---@field Warning Enum.StudioScriptEditorColorCategories @22
+---@field Error Enum.StudioScriptEditorColorCategories @23
+---@field Whitespace Enum.StudioScriptEditorColorCategories @24
+---@field ActiveLine Enum.StudioScriptEditorColorCategories @25
+---@field DebuggerCurrentLine Enum.StudioScriptEditorColorCategories @26
+---@field DebuggerErrorLine Enum.StudioScriptEditorColorCategories @27
+---@field Ruler Enum.StudioScriptEditorColorCategories @28
+---@field Bracket Enum.StudioScriptEditorColorCategories @29
+---
+
+---
+---@class Enum.StudioScriptEditorColorPresets:EnumItem
+---@field RobloxDefault Enum.StudioScriptEditorColorPresets @0
+---@field Extra1 Enum.StudioScriptEditorColorPresets @1
+---@field Extra2 Enum.StudioScriptEditorColorPresets @2
+---@field Custom Enum.StudioScriptEditorColorPresets @3
+---
+
+---
 ---@class Enum.StudioStyleGuideColor:EnumItem
 ---@field MainBackground Enum.StudioStyleGuideColor @0
 ---@field Titlebar Enum.StudioStyleGuideColor @1
@@ -6679,54 +7172,65 @@
 ---@field ScriptNumber Enum.StudioStyleGuideColor @48
 ---@field ScriptString Enum.StudioStyleGuideColor @49
 ---@field ScriptComment Enum.StudioStyleGuideColor @50
----@field ScriptPreprocessor Enum.StudioStyleGuideColor @51
----@field ScriptKeyword Enum.StudioStyleGuideColor @52
----@field ScriptBuiltInFunction Enum.StudioStyleGuideColor @53
----@field ScriptWarning Enum.StudioStyleGuideColor @54
----@field ScriptError Enum.StudioStyleGuideColor @55
----@field ScriptWhitespace Enum.StudioStyleGuideColor @56
----@field ScriptRuler Enum.StudioStyleGuideColor @57
----@field DebuggerCurrentLine Enum.StudioStyleGuideColor @58
----@field DebuggerErrorLine Enum.StudioStyleGuideColor @59
----@field ScriptEditorCurrentLine Enum.StudioStyleGuideColor @98
----@field DiffFilePathText Enum.StudioStyleGuideColor @60
----@field DiffTextHunkInfo Enum.StudioStyleGuideColor @61
----@field DiffTextNoChange Enum.StudioStyleGuideColor @62
----@field DiffTextAddition Enum.StudioStyleGuideColor @63
----@field DiffTextDeletion Enum.StudioStyleGuideColor @64
----@field DiffTextSeparatorBackground Enum.StudioStyleGuideColor @65
----@field DiffTextNoChangeBackground Enum.StudioStyleGuideColor @66
----@field DiffTextAdditionBackground Enum.StudioStyleGuideColor @67
----@field DiffTextDeletionBackground Enum.StudioStyleGuideColor @68
----@field DiffLineNum Enum.StudioStyleGuideColor @69
----@field DiffLineNumSeparatorBackground Enum.StudioStyleGuideColor @70
----@field DiffLineNumNoChangeBackground Enum.StudioStyleGuideColor @71
----@field DiffLineNumAdditionBackground Enum.StudioStyleGuideColor @72
----@field DiffLineNumDeletionBackground Enum.StudioStyleGuideColor @73
----@field DiffFilePathBackground Enum.StudioStyleGuideColor @74
----@field DiffFilePathBorder Enum.StudioStyleGuideColor @75
----@field ChatIncomingBgColor Enum.StudioStyleGuideColor @76
----@field ChatIncomingTextColor Enum.StudioStyleGuideColor @77
----@field ChatOutgoingBgColor Enum.StudioStyleGuideColor @78
----@field ChatOutgoingTextColor Enum.StudioStyleGuideColor @79
----@field ChatModeratedMessageColor Enum.StudioStyleGuideColor @80
----@field Separator Enum.StudioStyleGuideColor @81
----@field ButtonBorder Enum.StudioStyleGuideColor @82
----@field ButtonText Enum.StudioStyleGuideColor @83
----@field InputFieldBorder Enum.StudioStyleGuideColor @84
----@field CheckedFieldBackground Enum.StudioStyleGuideColor @85
----@field CheckedFieldBorder Enum.StudioStyleGuideColor @86
----@field CheckedFieldIndicator Enum.StudioStyleGuideColor @87
----@field HeaderSection Enum.StudioStyleGuideColor @88
----@field Midlight Enum.StudioStyleGuideColor @89
----@field StatusBar Enum.StudioStyleGuideColor @90
----@field DialogButton Enum.StudioStyleGuideColor @91
----@field DialogButtonText Enum.StudioStyleGuideColor @92
----@field DialogButtonBorder Enum.StudioStyleGuideColor @93
----@field DialogMainButton Enum.StudioStyleGuideColor @94
----@field DialogMainButtonText Enum.StudioStyleGuideColor @95
----@field InfoBarWarningBackground Enum.StudioStyleGuideColor @96
----@field InfoBarWarningText Enum.StudioStyleGuideColor @97
+---@field ScriptKeyword Enum.StudioStyleGuideColor @51
+---@field ScriptBuiltInFunction Enum.StudioStyleGuideColor @52
+---@field ScriptWarning Enum.StudioStyleGuideColor @53
+---@field ScriptError Enum.StudioStyleGuideColor @54
+---@field ScriptWhitespace Enum.StudioStyleGuideColor @55
+---@field ScriptRuler Enum.StudioStyleGuideColor @56
+---@field DebuggerCurrentLine Enum.StudioStyleGuideColor @57
+---@field DebuggerErrorLine Enum.StudioStyleGuideColor @58
+---@field ScriptEditorCurrentLine Enum.StudioStyleGuideColor @97
+---@field DiffFilePathText Enum.StudioStyleGuideColor @59
+---@field DiffTextHunkInfo Enum.StudioStyleGuideColor @60
+---@field DiffTextNoChange Enum.StudioStyleGuideColor @61
+---@field DiffTextAddition Enum.StudioStyleGuideColor @62
+---@field DiffTextDeletion Enum.StudioStyleGuideColor @63
+---@field DiffTextSeparatorBackground Enum.StudioStyleGuideColor @64
+---@field DiffTextNoChangeBackground Enum.StudioStyleGuideColor @65
+---@field DiffTextAdditionBackground Enum.StudioStyleGuideColor @66
+---@field DiffTextDeletionBackground Enum.StudioStyleGuideColor @67
+---@field DiffLineNum Enum.StudioStyleGuideColor @68
+---@field DiffLineNumSeparatorBackground Enum.StudioStyleGuideColor @69
+---@field DiffLineNumNoChangeBackground Enum.StudioStyleGuideColor @70
+---@field DiffLineNumAdditionBackground Enum.StudioStyleGuideColor @71
+---@field DiffLineNumDeletionBackground Enum.StudioStyleGuideColor @72
+---@field DiffFilePathBackground Enum.StudioStyleGuideColor @73
+---@field DiffFilePathBorder Enum.StudioStyleGuideColor @74
+---@field ChatIncomingBgColor Enum.StudioStyleGuideColor @75
+---@field ChatIncomingTextColor Enum.StudioStyleGuideColor @76
+---@field ChatOutgoingBgColor Enum.StudioStyleGuideColor @77
+---@field ChatOutgoingTextColor Enum.StudioStyleGuideColor @78
+---@field ChatModeratedMessageColor Enum.StudioStyleGuideColor @79
+---@field Separator Enum.StudioStyleGuideColor @80
+---@field ButtonBorder Enum.StudioStyleGuideColor @81
+---@field ButtonText Enum.StudioStyleGuideColor @82
+---@field InputFieldBorder Enum.StudioStyleGuideColor @83
+---@field CheckedFieldBackground Enum.StudioStyleGuideColor @84
+---@field CheckedFieldBorder Enum.StudioStyleGuideColor @85
+---@field CheckedFieldIndicator Enum.StudioStyleGuideColor @86
+---@field HeaderSection Enum.StudioStyleGuideColor @87
+---@field Midlight Enum.StudioStyleGuideColor @88
+---@field StatusBar Enum.StudioStyleGuideColor @89
+---@field DialogButton Enum.StudioStyleGuideColor @90
+---@field DialogButtonText Enum.StudioStyleGuideColor @91
+---@field DialogButtonBorder Enum.StudioStyleGuideColor @92
+---@field DialogMainButton Enum.StudioStyleGuideColor @93
+---@field DialogMainButtonText Enum.StudioStyleGuideColor @94
+---@field InfoBarWarningBackground Enum.StudioStyleGuideColor @95
+---@field InfoBarWarningText Enum.StudioStyleGuideColor @96
+---@field ScriptMethod Enum.StudioStyleGuideColor @98
+---@field ScriptProperty Enum.StudioStyleGuideColor @99
+---@field ScriptNil Enum.StudioStyleGuideColor @100
+---@field ScriptBool Enum.StudioStyleGuideColor @101
+---@field ScriptFunction Enum.StudioStyleGuideColor @102
+---@field ScriptLocal Enum.StudioStyleGuideColor @103
+---@field ScriptSelf Enum.StudioStyleGuideColor @104
+---@field ScriptLuauKeyword Enum.StudioStyleGuideColor @105
+---@field ScriptFunctionName Enum.StudioStyleGuideColor @106
+---@field ScriptTodo Enum.StudioStyleGuideColor @107
+---@field ScriptBracket Enum.StudioStyleGuideColor @108
+---@field AttributeCog Enum.StudioStyleGuideColor @109
 ---
 
 ---
@@ -6848,6 +7352,8 @@
 ---@field Email Enum.TextInputType @3
 ---@field Phone Enum.TextInputType @4
 ---@field Password Enum.TextInputType @5
+---@field PasswordShown Enum.TextInputType @6
+---@field Username Enum.TextInputType @7
 ---
 
 ---
@@ -6958,6 +7464,13 @@
 ---
 
 ---
+---@class Enum.TriStateBoolean:EnumItem
+---@field Unknown Enum.TriStateBoolean @0
+---@field True Enum.TriStateBoolean @1
+---@field False Enum.TriStateBoolean @2
+---
+
+---
 ---@class Enum.TweenStatus:EnumItem
 ---@field Canceled Enum.TweenStatus @0
 ---@field Completed Enum.TweenStatus @1
@@ -6973,13 +7486,6 @@
 ---@class Enum.UiMessageType:EnumItem
 ---@field UiMessageError Enum.UiMessageType @0
 ---@field UiMessageInfo Enum.UiMessageType @1
----
-
----
----@class Enum.UploadSetting:EnumItem
----@field Never Enum.UploadSetting @0
----@field Ask Enum.UploadSetting @1
----@field Always Enum.UploadSetting @2
 ---
 
 ---
@@ -7060,13 +7566,6 @@
 ---
 
 ---
----@class Enum.VideoQualitySettings:EnumItem
----@field LowResolution Enum.VideoQualitySettings @0
----@field MediumResolution Enum.VideoQualitySettings @1
----@field HighResolution Enum.VideoQualitySettings @2
----
-
----
 ---@class Enum.VirtualInputMode:EnumItem
 ---@field Recording Enum.VirtualInputMode @1
 ---@field Playing Enum.VirtualInputMode @2
@@ -7093,6 +7592,21 @@
 ---
 
 ---
+---@class Enum.WrapLayerDebugMode:EnumItem
+---@field None Enum.WrapLayerDebugMode @0
+---@field BoundCage Enum.WrapLayerDebugMode @1
+---@field LayerCage Enum.WrapLayerDebugMode @2
+---@field BoundCageAndLinks Enum.WrapLayerDebugMode @3
+---@field Reference Enum.WrapLayerDebugMode @4
+---
+
+---
+---@class Enum.WrapTargetDebugMode:EnumItem
+---@field None Enum.WrapTargetDebugMode @0
+---@field TargetCage Enum.WrapTargetDebugMode @1
+---
+
+---
 ---@class Enum.ZIndexBehavior:EnumItem
 ---@field Global Enum.ZIndexBehavior @0
 ---@field Sibling Enum.ZIndexBehavior @1
@@ -7104,16 +7618,26 @@
 ---@field ActionType Enum.ActionType
 ---@field ActuatorRelativeTo Enum.ActuatorRelativeTo
 ---@field ActuatorType Enum.ActuatorType
+---@field AdornCullingMode Enum.AdornCullingMode
 ---@field AlignType Enum.AlignType
 ---@field AlphaMode Enum.AlphaMode
+---@field AnalyticsEconomyAction Enum.AnalyticsEconomyAction
+---@field AnalyticsLogLevel Enum.AnalyticsLogLevel
+---@field AnalyticsProgressionStatus Enum.AnalyticsProgressionStatus
 ---@field AnimationPriority Enum.AnimationPriority
 ---@field AppShellActionType Enum.AppShellActionType
+---@field AppUpdateStatus Enum.AppUpdateStatus
 ---@field AspectType Enum.AspectType
 ---@field AssetFetchStatus Enum.AssetFetchStatus
 ---@field AssetType Enum.AssetType
+---@field AssetTypeVerification Enum.AssetTypeVerification
 ---@field AutoIndentRule Enum.AutoIndentRule
+---@field AutomaticSize Enum.AutomaticSize
+---@field AvatarAssetType Enum.AvatarAssetType
 ---@field AvatarContextMenuOption Enum.AvatarContextMenuOption
+---@field AvatarItemType Enum.AvatarItemType
 ---@field AvatarJointPositionType Enum.AvatarJointPositionType
+---@field AvatarPromptResult Enum.AvatarPromptResult
 ---@field Axis Enum.Axis
 ---@field BinType Enum.BinType
 ---@field BodyPart Enum.BodyPart
@@ -7121,11 +7645,14 @@
 ---@field BorderMode Enum.BorderMode
 ---@field BreakReason Enum.BreakReason
 ---@field BulkMoveMode Enum.BulkMoveMode
+---@field BundleType Enum.BundleType
 ---@field Button Enum.Button
 ---@field ButtonStyle Enum.ButtonStyle
 ---@field CameraMode Enum.CameraMode
 ---@field CameraPanMode Enum.CameraPanMode
 ---@field CameraType Enum.CameraType
+---@field CatalogCategoryFilter Enum.CatalogCategoryFilter
+---@field CatalogSortType Enum.CatalogSortType
 ---@field CellBlock Enum.CellBlock
 ---@field CellMaterial Enum.CellMaterial
 ---@field CellOrientation Enum.CellOrientation
@@ -7165,6 +7692,7 @@
 ---@field ElasticBehavior Enum.ElasticBehavior
 ---@field EnviromentalPhysicsThrottle Enum.EnviromentalPhysicsThrottle
 ---@field ExplosionType Enum.ExplosionType
+---@field FieldOfViewMode Enum.FieldOfViewMode
 ---@field FillDirection Enum.FillDirection
 ---@field FilterResult Enum.FilterResult
 ---@field Font Enum.Font
@@ -7197,6 +7725,7 @@
 ---@field InfoType Enum.InfoType
 ---@field InitialDockState Enum.InitialDockState
 ---@field InputType Enum.InputType
+---@field InterpolationThrottlingMode Enum.InterpolationThrottlingMode
 ---@field JointCreationMode Enum.JointCreationMode
 ---@field KeyCode Enum.KeyCode
 ---@field KeywordFilterType Enum.KeywordFilterType
@@ -7210,6 +7739,7 @@
 ---@field Material Enum.Material
 ---@field MembershipType Enum.MembershipType
 ---@field MeshPartDetailLevel Enum.MeshPartDetailLevel
+---@field MeshPartHeads Enum.MeshPartHeads
 ---@field MeshType Enum.MeshType
 ---@field MessageType Enum.MessageType
 ---@field ModelLevelOfDetail Enum.ModelLevelOfDetail
@@ -7235,6 +7765,9 @@
 ---@field PoseEasingStyle Enum.PoseEasingStyle
 ---@field PrivilegeType Enum.PrivilegeType
 ---@field ProductPurchaseDecision Enum.ProductPurchaseDecision
+---@field ProximityPromptExclusivity Enum.ProximityPromptExclusivity
+---@field ProximityPromptInputType Enum.ProximityPromptInputType
+---@field ProximityPromptStyle Enum.ProximityPromptStyle
 ---@field QualityLevel Enum.QualityLevel
 ---@field R15CollisionType Enum.R15CollisionType
 ---@field RaycastFilterType Enum.RaycastFilterType
@@ -7262,6 +7795,8 @@
 ---@field Status Enum.Status
 ---@field StreamingPauseMode Enum.StreamingPauseMode
 ---@field StudioDataModelType Enum.StudioDataModelType
+---@field StudioScriptEditorColorCategories Enum.StudioScriptEditorColorCategories
+---@field StudioScriptEditorColorPresets Enum.StudioScriptEditorColorPresets
 ---@field StudioStyleGuideColor Enum.StudioStyleGuideColor
 ---@field StudioStyleGuideModifier Enum.StudioStyleGuideModifier
 ---@field Style Enum.Style
@@ -7290,10 +7825,10 @@
 ---@field TopBottom Enum.TopBottom
 ---@field TouchCameraMovementMode Enum.TouchCameraMovementMode
 ---@field TouchMovementMode Enum.TouchMovementMode
+---@field TriStateBoolean Enum.TriStateBoolean
 ---@field TweenStatus Enum.TweenStatus
 ---@field UITheme Enum.UITheme
 ---@field UiMessageType Enum.UiMessageType
----@field UploadSetting Enum.UploadSetting
 ---@field UserCFrame Enum.UserCFrame
 ---@field UserInputState Enum.UserInputState
 ---@field UserInputType Enum.UserInputType
@@ -7302,10 +7837,11 @@
 ---@field VerticalAlignment Enum.VerticalAlignment
 ---@field VerticalScrollBarPosition Enum.VerticalScrollBarPosition
 ---@field VibrationMotor Enum.VibrationMotor
----@field VideoQualitySettings Enum.VideoQualitySettings
 ---@field VirtualInputMode Enum.VirtualInputMode
 ---@field WaterDirection Enum.WaterDirection
 ---@field WaterForce Enum.WaterForce
+---@field WrapLayerDebugMode Enum.WrapLayerDebugMode
+---@field WrapTargetDebugMode Enum.WrapTargetDebugMode
 ---@field ZIndexBehavior Enum.ZIndexBehavior
 ---
 
