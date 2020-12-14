@@ -1,117 +1,44 @@
+-- DATA TYPES
+-- https://developer.roblox.com/en-us/api-reference/data-types
+
 ---
----@class RBXScriptSignal
----@field Connect fun(self:RBXScriptSignal, func:function):RBXScriptConnection Establishes a function to be called whenever the event is raised.
----@field Wait fun(self:RBXScriptSignal):any Yields the current thread until this signal is fired. Returns what was fired to the signal.
+---@class Axes Axes is a datatype used for the ArcHandles class to control what rotation axes are currently enabled.
+---@field new fun(axes:Tuple):Axes Creates a new Axes using list of axes and/or faces. NormalIds (faces) are converted to the corresponding axes.
+---@field X boolean Whether the X axis is enabled
+---@field Y boolean Whether the Y axis is enabled
+---@field Z boolean Whether the Z axis is enabled
+---@field Top boolean Whether the top face is included
+---@field Bottom boolean Whether the bottom face is included
+---@field Left boolean Whether the left face is included
+---@field Right boolean Whether the right face is included
+---@field Back boolean Whether the back face is included
+---@field Front boolean Whether the front face is included
 ---
 
 ---
----@class EnumItem
----@field Name string The name of this EnumItem.
----@field Value number The integral value assigned to this enum.
----@field EnumType EnumItem A reference to the parent Enum of this EnumItem.
+---@class BrickColor BrickColor is a datatype that provides a predefined list of colors, although any color imaginable is supported through a part’s BasePart.Color property. To view a full list of available brick colors, see the BrickColor Codes reference.
 ---
-
+---@field new fun(val:number):BrickColor Constructs a BrickColor from its numerical index.
+---@field new fun(r:number, g:number, b:number):BrickColor Constructs the closest BrickColor that can be matched to the specified RGB components.
+---@field new fun(val:string):BrickColor Constructs a BrickColor from its name.
+---@field new fun(color:Color3):BrickColor Constructs the closest BrickColor that can be matched to the specified Color3.
+---@field palette fun(paletteValue:number):BrickColor Constructs a BrickColor from its palette index.
+---@field random fun():BrickColor Returns a random BrickColor.
+---@field White fun():BrickColor Returns the BrickColor White
+---@field Gray fun():BrickColor Returns the BrickColor Medium stone grey
+---@field DarkGray fun():BrickColor Returns the BrickColor Dark stone grey
+---@field Black fun():BrickColor Returns the BrickColor Black
+---@field Red fun():BrickColor Returns the BrickColor Bright Red
+---@field Yellow fun():BrickColor Returns the BrickColor Bright Yellow
+---@field Green fun():BrickColor Returns the BrickColor Dark Green
+---@field Blue fun():BrickColor Returns the BrickColor Bright Blue
 ---
----@class RobloxDebug
----@field traceback fun():string
----@field profilebegin fun(label:string):void
----@field profileend fun():void
----
-
----
----@class RobloxOs
----@field time fun():number
----@field difftime fun(t2:number, t2:number):number
----@field date fun(formatString:string, time:number):table<string, any>
----
-
----
----@class RobloxUtf8
----@field char fun(vararg string):string
----@field codes fun(str:string):function,string,number
----@field codepoint fun(str:string, i:number, j:number):Tuple
----@field len fun(str:string, i:number, j:number):number
----@field offset fun(str:string, n:number, i:number):number
----@field graphmes fun(str:string, i:number, j:number):function
----@field nfcnormalize fun(str:string):string
----@field nfdnormalize fun(str:string):string
----@field charpattern string @"[%z-\x7F\xC2-\xF4][\x80-\xBF]"
----
-
----
----@class Color3
----@field new fun():Color3 Creates a Color3 whose values are (0,0,0) [black]
----@field new fun(r:number,g:number,b:number):Color3 Returns a Color3 with the given red, green, and blue values. The numbers can range from 0 to 1.
----@field fromRGB fun(r:number,g:number,b:number):Color3 Creates a Color3 with the given red, green, and blue. The numbers can range from 0 to 255.
----@field fromHSV fun(h:number,s:number,v:number):Color3 Creates a Color3 with the given hue, saturation, and value. The numbers can range from 0 to 1.
----@field r number The red value of the color
----@field g number The green value of the color
----@field b number The blue value of the color
----@field lerp fun(self:Color3, color:Color3, alpha:number):Color3 Returns a Color3 interpolated between two Color3 objects. Alpha is a number from 0 to 1.
----@field toHSV fun(color:Color3):number,number,number Returns the hue, saturation, and value of a Color3.
----
-
----
----@class Vector2
----@field new fun(x:number, y:number):Vector2 Creates a new Vector2 using ordinates x and y
----@field X number The x-coordinate
----@field Y number The y-coordinate
----@field Magnitude number The length of the vector
----@field Unit Vector2 A normalized copy of the vector
----@field Lerp fun(self:Vector2, v:Vector2, alpha:number):Vector2 Returns a Vector2 linearly interpolated between this Vector2 and v by the fraction alpha
----@field Dot fun(self:Vector2, v:Vector2):number Returns a scalar dot product of the two vectors
----@field Cross fun(self:Vector2, other:Vector2):Vector2 Returns the cross product of the two vectors
----
-
----
----@class Vector3
----@field new fun(x:number, y:number, z:number):Vector3 Creates a new Vector3 using ordinates x and y
----@field FromNormalId fun(normal:Enum.NormalId):Vector3 Constructs a new Vector3 in a particular direction.
----@field FromAxis fun(axis:Enum.Axis):Vector3 Constructs a new Vector3 for a particular axis.
----@field X number The x-coordinate
----@field Y number The y-coordinate
----@field Z number The z-coordinate
----@field Magnitude number The length of the vector
----@field Unit Vector3 A normalized copy of the vector
----@field Lerp fun(self:Vector3, v:Vector3, alpha:number):Vector3 Returns a Vector3 linearly interpolated between this Vector3 and v by the fraction alpha
----@field Dot fun(self:Vector3, v:Vector3):number Returns a scalar dot product of the two vectors
----@field Cross fun(self:Vector3, other:Vector3):Vector3 Returns the cross product of the two vectors
----@field IsClose fun(self:Vector3, other:Vector3, epsilon:number):boolean Returns true if the other Vector3 falls within the epsilon radius of this Vector3.
----
-
----
----@class Vector2int16
----@field new fun(x:number, y:number):Vector2int16 Creates a new Vector2int16 using ordinates x and y. Similar to Vector2, but uses integral coordinates
----@field X number The x-coordinate
----@field Y number The y-coordinate
----
-
----
----@class Vector3int16
----@field new fun(x:number, y:number, z:number):Vector3int16 Creates a new Vector3int16 using coordinate x, y, z.
----@field X number The x-coordinate
----@field Y number The y-coordinate
----@field Z number The z-coordinate
----
-
----
----@class UDim
----@field new fun(Scale:number, Offset:number):UDim Creates a new UDim from components
----@field Scale number The scale component of the UDim. The value this represents is scaled relative to the axis that this UDim is representing in a UDim2.
----@field Offset number The pixel unit component of the UDim.
----
-
----
----@class UDim2
----@field new fun(xScale:number, xOffset:number, yScale:number, yOffset:number):UDim2
----@field new fun(x:UDim, y:UDim):UDim2
----@field FromNormalId fun(normal:Enum.NormalId):UDim2 Constructs a new UDim2 in a particular direction.
----@field FromAxis fun(axis:Enum.Axis):UDim2 Constructs a new UDim2 for a particular axis.
----@field X UDim The x dimension scale and offset
----@field Y UDim The y dimension scale and offset
----@field Width UDim The x dimension scale and offset
----@field Height UDim The x dimension scale and offset
----@field Lerp fun(self:UDim2, goal:UDim2, alpha:number):UDim2 Returns a UDim2 interpolated between this UDim2 and the provided goal. The alpha should be a number between 0 and 1.
+---@field Number number The unique number that identifies the BrickColor
+---@field r number The red component (between 0 and 1)
+---@field g number The green component (between 0 and 1)
+---@field b number The blue component (between 0 and 1)
+---@field Name string The name associated with the BrickColor
+---@field Color Color3 The Color3 associated with the BrickColor
 ---
 
 ---
@@ -154,46 +81,49 @@
 ---
 
 ---
----@class TweenInfo
----@field new fun(time:number, easingStyle:Enum.EasingStyle, easingDirection:Enum.EasingDirection, repeatCount:number, reverses:boolean, delayTime:number):TweenInfo Creates a new Tweeninfo.
----@field EasingDirection Enum.EasingDirection The direction in which the EasingStyle executes.
----@field Time number The amount of time the tween takes in seconds.
----@field DelayTime number The amount of time that elapses before tween starts in seconds.
----@field RepeatCount number The number of times the tween repeats after tweening once.
----@field EasingStyle Enum.EasingStyle The style in which the tween executes.
----@field Reverses boolean Whether or not the tween does the reverse tween once the inital tween completes.
+---@class Color3
+---@field new fun():Color3 Creates a Color3 whose values are (0,0,0) [black]
+---@field new fun(r:number,g:number,b:number):Color3 Returns a Color3 with the given red, green, and blue values. The numbers can range from 0 to 1.
+---@field fromRGB fun(r:number,g:number,b:number):Color3 Creates a Color3 with the given red, green, and blue. The numbers can range from 0 to 255.
+---@field fromHSV fun(h:number,s:number,v:number):Color3 Creates a Color3 with the given hue, saturation, and value. The numbers can range from 0 to 1.
+---@field r number The red value of the color
+---@field g number The green value of the color
+---@field b number The blue value of the color
+---@field lerp fun(self:Color3, color:Color3, alpha:number):Color3 Returns a Color3 interpolated between two Color3 objects. Alpha is a number from 0 to 1.
+---@field toHSV fun(color:Color3):number,number,number Returns the hue, saturation, and value of a Color3.
 ---
 
 ---
----@class Ray
----@field new fun(Origin:Vector3, Direction:Vector3):Ray Creates a new Ray with given Origin and Direction.
----@field Unit Ray The Ray with a normalized direction
----@field Origin Vector3 The position of the origin
----@field Direction Vector3 The direction vector of the ray
----@field ClosestPoint fun(self:Ray, point:Vector3):Vector3 Returns a Vector3 projected onto the ray so that it is within the Ray’s line of sight.
----@field Distance fun(self:Ray, point:Vector3):number Returns the distance between the Ray’s origin and Ray:ClosestPoint(point)
+---@class ColorSequence
+---@field new fun(c:Color3):ColorSequence Creates a sequence of two keypoints with c for each value
+---@field new fun(c0:Color3, c1:Color3) Creates a sequence of two keypoints with c0 and c1 as the value
+---@field new fun(keypoints:ColorSequenceKeypoint[]):ColorSequence Creates a sequence of ColorSequenceKeypoints.
+---@field Keypoints ColorSequenceKeypoint[] An array containing ColorSequenceKeypoint values for the ColorSequence.
 ---
 
 ---
----@class Region3
----@field new fun(min:Vector3, max:Vector3):Region3 Creates a new Region3 out of two Vector3 values.
----@field CFrame CFrame The center location and rotation of the Region3
----@field Size Vector3 The 3D size of the Region3
----@field ExpandToGrid fun(self:Ray, Region:number):Region3 Expands the Region3 so that it is aligned with a voxel grid based on the provided resolution and returns the expanded Region3.
+---@class ColorSequenceKeypoint
+---@field new fun(time:number, color:Color3) Creates a keypoint with a specified time and color.
+---@field Time number The relative time at which the keypoint is located.
+---@field Value number The Color3 value at the keypoint.
 ---
 
 ---
----@class Axes Axes is a datatype used for the ArcHandles class to control what rotation axes are currently enabled.
----@field new fun(axes:Tuple):Axes Creates a new Axes using list of axes and/or faces. NormalIds (faces) are converted to the corresponding axes.
----@field X boolean Whether the X axis is enabled
----@field Y boolean Whether the Y axis is enabled
----@field Z boolean Whether the Z axis is enabled
----@field Top boolean Whether the top face is included
----@field Bottom boolean Whether the bottom face is included
----@field Left boolean Whether the left face is included
----@field Right boolean Whether the right face is included
----@field Back boolean Whether the back face is included
----@field Front boolean Whether the front face is included
+---@class DockWidgetPluginGuiInfo DockWidgetPluginGuiInfo is a datatype used to describe details for a DockWidgetPluginGui. This datatype is used when constructing a PluginGui via the plugin’s CreateDockWidgetPluginGui() method.
+---@field new fun(initDockState:Enum.InitialDockState, initEnabled:boolean, overrideEnabledRestore:boolean, floatXSize:number, floatYSize:number, minWidth:number, minHeight:number):DockWidgetPluginGuiInfo The main constructor function for the DockWidgetPluginGuiInfo.
+---@field InitialEnabled boolean The initial enabled state of a PluginGui created using this DockWidgetPluginGuiInfo. If a PluginGui with the same ‘‘pluginGuiId’’ has previously been created in an earlier session of Roblox Studio, then it will reload that saved enabled state (unless InitialEnabledShouldOverrideRestore is true).
+---@field InitialEnabledShouldOverrideRestore boolean If true, the value of InitialEnabled will override the previously saved enabled state of a PluginGui being created with this DockWidgetPluginGuiInfo. The previously saved enabled state is loaded based on the pluginGuiId argument of Plugin:CreateDockWidgetPluginGui.
+---@field FloatingXSize number The initial pixel width of a PluginGui created using this DockWidgetPluginGuiInfo, when the InitialDockState is set to Float.
+---@field FloatingYSize number The initial pixel height of a PluginGui created using this DockWidgetPluginGuiInfo, when the InitialDockState is set to Float.
+---@field MinWidth number The minimum width of a PluginGui created using this DockWidgetPluginGuiInfo, in pixels.
+---@field MinHeight number The minimum height of a PluginGui created using this DockWidgetPluginGuiInfo, in pixels.
+---
+
+---
+---@class EnumItem
+---@field Name string The name of this EnumItem.
+---@field Value number The integral value assigned to this enum.
+---@field EnumType EnumItem A reference to the parent Enum of this EnumItem.
 ---
 
 ---
@@ -234,58 +164,6 @@
 ---
 
 ---
----@class ColorSequence
----@field new fun(c:Color3):ColorSequence Creates a sequence of two keypoints with c for each value
----@field new fun(c0:Color3, c1:Color3) Creates a sequence of two keypoints with c0 and c1 as the value
----@field new fun(keypoints:ColorSequenceKeypoint[]):ColorSequence Creates a sequence of ColorSequenceKeypoints.
----@field Keypoints ColorSequenceKeypoint[] An array containing ColorSequenceKeypoint values for the ColorSequence.
----
-
----
----@class ColorSequenceKeypoint
----@field new fun(time:number, color:Color3) Creates a keypoint with a specified time and color.
----@field Time number The relative time at which the keypoint is located.
----@field Value number The Color3 value at the keypoint.
----
-
----
----@class BrickColor BrickColor is a datatype that provides a predefined list of colors, although any color imaginable is supported through a part’s BasePart.Color property. To view a full list of available brick colors, see the BrickColor Codes reference.
----
----@field new fun(val:number):BrickColor Constructs a BrickColor from its numerical index.
----@field new fun(r:number, g:number, b:number):BrickColor Constructs the closest BrickColor that can be matched to the specified RGB components.
----@field new fun(val:string):BrickColor Constructs a BrickColor from its name.
----@field new fun(color:Color3):BrickColor Constructs the closest BrickColor that can be matched to the specified Color3.
----@field palette fun(paletteValue:number):BrickColor Constructs a BrickColor from its palette index.
----@field random fun():BrickColor Returns a random BrickColor.
----@field White fun():BrickColor Returns the BrickColor White
----@field Gray fun():BrickColor Returns the BrickColor Medium stone grey
----@field DarkGray fun():BrickColor Returns the BrickColor Dark stone grey
----@field Black fun():BrickColor Returns the BrickColor Black
----@field Red fun():BrickColor Returns the BrickColor Bright Red
----@field Yellow fun():BrickColor Returns the BrickColor Bright Yellow
----@field Green fun():BrickColor Returns the BrickColor Dark Green
----@field Blue fun():BrickColor Returns the BrickColor Bright Blue
----
----@field Number number The unique number that identifies the BrickColor
----@field r number The red component (between 0 and 1)
----@field g number The green component (between 0 and 1)
----@field b number The blue component (between 0 and 1)
----@field Name string The name associated with the BrickColor
----@field Color Color3 The Color3 associated with the BrickColor
----
-
----
----@class DockWidgetPluginGuiInfo DockWidgetPluginGuiInfo is a datatype used to describe details for a DockWidgetPluginGui. This datatype is used when constructing a PluginGui via the plugin’s CreateDockWidgetPluginGui() method.
----@field new fun(initDockState:Enum.InitialDockState, initEnabled:boolean, overrideEnabledRestore:boolean, floatXSize:number, floatYSize:number, minWidth:number, minHeight:number):DockWidgetPluginGuiInfo The main constructor function for the DockWidgetPluginGuiInfo.
----@field InitialEnabled boolean The initial enabled state of a PluginGui created using this DockWidgetPluginGuiInfo. If a PluginGui with the same ‘‘pluginGuiId’’ has previously been created in an earlier session of Roblox Studio, then it will reload that saved enabled state (unless InitialEnabledShouldOverrideRestore is true).
----@field InitialEnabledShouldOverrideRestore boolean If true, the value of InitialEnabled will override the previously saved enabled state of a PluginGui being created with this DockWidgetPluginGuiInfo. The previously saved enabled state is loaded based on the pluginGuiId argument of Plugin:CreateDockWidgetPluginGui.
----@field FloatingXSize number The initial pixel width of a PluginGui created using this DockWidgetPluginGuiInfo, when the InitialDockState is set to Float.
----@field FloatingYSize number The initial pixel height of a PluginGui created using this DockWidgetPluginGuiInfo, when the InitialDockState is set to Float.
----@field MinWidth number The minimum width of a PluginGui created using this DockWidgetPluginGuiInfo, in pixels.
----@field MinHeight number The minimum height of a PluginGui created using this DockWidgetPluginGuiInfo, in pixels.
----
-
----
 ---@class PathWaypoint A datatype constructed by a PathWaypointAction action and Vector3 position which is used by the PathService to create points along a generated path.
 ---@field new fun(position:Vector3, action:Enum.PathWaypointAction):PathWaypoint Creates a new PathWaypoint object
 ---@field Action Enum.PathWaypointAction The action to be performed at this waypoint.
@@ -315,9 +193,25 @@
 ---
 
 ---
+---@class Ray
+---@field new fun(Origin:Vector3, Direction:Vector3):Ray Creates a new Ray with given Origin and Direction.
+---@field Unit Ray The Ray with a normalized direction
+---@field Origin Vector3 The position of the origin
+---@field Direction Vector3 The direction vector of the ray
+---@field ClosestPoint fun(self:Ray, point:Vector3):Vector3 Returns a Vector3 projected onto the ray so that it is within the Ray’s line of sight.
+---@field Distance fun(self:Ray, point:Vector3):number Returns the distance between the Ray’s origin and Ray:ClosestPoint(point)
+---
+
+---
 ---@class RBXScriptConnection RBXScriptConnection, also known as a Connection, is a special object returned by the Connect method of an Event (RBXScriptSignal). This is used primarily to disconnect a listener from an Event.
 ---@field Connected boolean Describes whether or not the connection is still alive. This will become false if connection:Disconnect() is called.
 ---@field Disconnect fun(self:RBXScriptConnection):void Disconnects the connection from the event.
+---
+
+---
+---@class RBXScriptSignal
+---@field Connect fun(self:RBXScriptSignal, func:function):RBXScriptConnection Establishes a function to be called whenever the event is raised.
+---@field Wait fun(self:RBXScriptSignal):any Yields the current thread until this signal is fired. Returns what was fired to the signal.
 ---
 
 ---
@@ -331,8 +225,121 @@
 ---
 
 ---
+---@class Region3
+---@field new fun(min:Vector3, max:Vector3):Region3 Creates a new Region3 out of two Vector3 values.
+---@field CFrame CFrame The center location and rotation of the Region3
+---@field Size Vector3 The 3D size of the Region3
+---@field ExpandToGrid fun(self:Ray, Region:number):Region3 Expands the Region3 so that it is aligned with a voxel grid based on the provided resolution and returns the expanded Region3.
+---
+
+---
 ---@class Region3int16
 ---@field new fun(min:Vector3int16, max:Vector3int16):Region3int16 Creates a new Region3int16 out of two Vector3int16 structs
+---
+
+---
+---@class TweenInfo
+---@field new fun(time:number, easingStyle:Enum.EasingStyle, easingDirection:Enum.EasingDirection, repeatCount:number, reverses:boolean, delayTime:number):TweenInfo Creates a new Tweeninfo.
+---@field EasingDirection Enum.EasingDirection The direction in which the EasingStyle executes.
+---@field Time number The amount of time the tween takes in seconds.
+---@field DelayTime number The amount of time that elapses before tween starts in seconds.
+---@field RepeatCount number The number of times the tween repeats after tweening once.
+---@field EasingStyle Enum.EasingStyle The style in which the tween executes.
+---@field Reverses boolean Whether or not the tween does the reverse tween once the inital tween completes.
+---
+
+---
+---@class UDim
+---@field new fun(Scale:number, Offset:number):UDim Creates a new UDim from components
+---@field Scale number The scale component of the UDim. The value this represents is scaled relative to the axis that this UDim is representing in a UDim2.
+---@field Offset number The pixel unit component of the UDim.
+---
+
+---
+---@class UDim2
+---@field new fun(xScale:number, xOffset:number, yScale:number, yOffset:number):UDim2
+---@field new fun(x:UDim, y:UDim):UDim2
+---@field FromNormalId fun(normal:Enum.NormalId):UDim2 Constructs a new UDim2 in a particular direction.
+---@field FromAxis fun(axis:Enum.Axis):UDim2 Constructs a new UDim2 for a particular axis.
+---@field X UDim The x dimension scale and offset
+---@field Y UDim The y dimension scale and offset
+---@field Width UDim The x dimension scale and offset
+---@field Height UDim The x dimension scale and offset
+---@field Lerp fun(self:UDim2, goal:UDim2, alpha:number):UDim2 Returns a UDim2 interpolated between this UDim2 and the provided goal. The alpha should be a number between 0 and 1.
+---
+
+---
+---@class Vector2
+---@field new fun(x:number, y:number):Vector2 Creates a new Vector2 using ordinates x and y
+---@field X number The x-coordinate
+---@field Y number The y-coordinate
+---@field Magnitude number The length of the vector
+---@field Unit Vector2 A normalized copy of the vector
+---@field Lerp fun(self:Vector2, v:Vector2, alpha:number):Vector2 Returns a Vector2 linearly interpolated between this Vector2 and v by the fraction alpha
+---@field Dot fun(self:Vector2, v:Vector2):number Returns a scalar dot product of the two vectors
+---@field Cross fun(self:Vector2, other:Vector2):Vector2 Returns the cross product of the two vectors
+---
+
+---
+---@class Vector2int16
+---@field new fun(x:number, y:number):Vector2int16 Creates a new Vector2int16 using ordinates x and y. Similar to Vector2, but uses integral coordinates
+---@field X number The x-coordinate
+---@field Y number The y-coordinate
+---
+
+---
+---@class Vector3
+---@field new fun(x:number, y:number, z:number):Vector3 Creates a new Vector3 using ordinates x and y
+---@field FromNormalId fun(normal:Enum.NormalId):Vector3 Constructs a new Vector3 in a particular direction.
+---@field FromAxis fun(axis:Enum.Axis):Vector3 Constructs a new Vector3 for a particular axis.
+---@field X number The x-coordinate
+---@field Y number The y-coordinate
+---@field Z number The z-coordinate
+---@field Magnitude number The length of the vector
+---@field Unit Vector3 A normalized copy of the vector
+---@field Lerp fun(self:Vector3, v:Vector3, alpha:number):Vector3 Returns a Vector3 linearly interpolated between this Vector3 and v by the fraction alpha
+---@field Dot fun(self:Vector3, v:Vector3):number Returns a scalar dot product of the two vectors
+---@field Cross fun(self:Vector3, other:Vector3):Vector3 Returns the cross product of the two vectors
+---@field IsClose fun(self:Vector3, other:Vector3, epsilon:number):boolean Returns true if the other Vector3 falls within the epsilon radius of this Vector3.
+---
+
+---
+---@class Vector3int16
+---@field new fun(x:number, y:number, z:number):Vector3int16 Creates a new Vector3int16 using coordinate x, y, z.
+---@field X number The x-coordinate
+---@field Y number The y-coordinate
+---@field Z number The z-coordinate
+---
+
+
+
+-- OTHERS
+
+---
+---@class RobloxDebug
+---@field traceback fun():string
+---@field profilebegin fun(label:string):void
+---@field profileend fun():void
+---
+
+---
+---@class RobloxOs
+---@field time fun():number
+---@field difftime fun(t2:number, t2:number):number
+---@field date fun(formatString:string, time:number):table<string, any>
+---
+
+---
+---@class RobloxUtf8
+---@field char fun(vararg string):string
+---@field codes fun(str:string):function,string,number
+---@field codepoint fun(str:string, i:number, j:number):Tuple
+---@field len fun(str:string, i:number, j:number):number
+---@field offset fun(str:string, n:number, i:number):number
+---@field graphmes fun(str:string, i:number, j:number):function
+---@field nfcnormalize fun(str:string):string
+---@field nfdnormalize fun(str:string):string
+---@field charpattern string @"[%z-\x7F\xC2-\xF4][\x80-\xBF]"
 ---
 
 ---
