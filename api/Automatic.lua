@@ -1,6 +1,6 @@
 --
---File generated in Dec/14/2020 at 09:37:36
---Roblox version: version-03afb53edcef4231
+--File generated in Feb/01/2021 at 12:54:45
+--Roblox version: version-c993d5e9c7224b14
 --API Dump version: 1
 --
 
@@ -176,6 +176,7 @@
 ---@field InsertLinkedSourceAsModuleScript fun(self:AssetManagerService, aliasName:string):void
 ---@field InsertLinkedSourceAsScript fun(self:AssetManagerService, aliasName:string):void
 ---@field InsertMesh fun(self:AssetManagerService, aliasName:string, insertWithLocation:boolean):void
+---@field InsertMeshesWithLocation fun(self:AssetManagerService, aliasNames:Array):void
 ---@field InsertPackage fun(self:AssetManagerService, packageId:number):void
 ---@field OpenLinkedSource fun(self:AssetManagerService, aliasName:string):void
 ---@field OpenPlace fun(self:AssetManagerService, placeId:number):void
@@ -269,6 +270,7 @@
 ---@field CheckApplyDefaultClothing fun(self:AvatarEditorService, humanoidDescription:Instance):Instance
 ---@field ConformToAvatarRules fun(self:AvatarEditorService, humanoidDescription:Instance):Instance
 ---@field GetAvatarRules fun(self:AvatarEditorService):Dictionary
+---@field GetBatchItemDetails fun(self:AvatarEditorService, itemIds:Array, itemType:Enum.AvatarItemType):Array
 ---@field GetFavorite fun(self:AvatarEditorService, itemId:number, itemType:Enum.AvatarItemType):boolean
 ---@field GetInventory fun(self:AvatarEditorService, assetTypes:Array):Instance
 ---@field GetItemDetails fun(self:AvatarEditorService, itemId:number, itemType:Enum.AvatarItemType):Dictionary
@@ -873,6 +875,14 @@
 ---
 
 ---
+---@class UniversalConstraint : Constraint
+---@field LimitsEnabled boolean
+---@field MaxAngle number
+---@field Radius number
+---@field Restitution number
+---
+
+---
 ---@class VectorForce : Constraint
 ---@field ApplyAtCenterOfMass boolean
 ---@field Force Vector3
@@ -1032,16 +1042,47 @@
 ---
 
 ---
+---@class DataStoreInfo : Instance
+---@field CreatedTime number
+---@field DataStoreName string
+---@field UpdatedTime number
+---
+
+---
+---@class DataStoreKeyInfo : Instance
+---@field KeyName string
+---
+
+---
+---@class DataStoreKeyVersionInfo : Instance
+---@field CreatedTime number
+---@field UpdatedTime number
+---@field Version string
+---@field GetMetadata fun(self:DataStoreKeyVersionInfo):Dictionary
+---@field GetUserIds fun(self:DataStoreKeyVersionInfo):Array
+---
+
+---
 ---@class DataStoreService : Instance
 ---@field AutomaticRetry boolean
 ---@field LegacyNamingScheme boolean
 ---@field GetDataStore fun(self:DataStoreService, name:string):Instance
 ---@field GetDataStore fun(self:DataStoreService, name:string, scope:string):Instance
+---@field GetDataStore fun(self:DataStoreService, name:string, scope:string, options:Instance):Instance
 ---@field GetGlobalDataStore fun(self:DataStoreService):Instance
 ---@field GetOrderedDataStore fun(self:DataStoreService, name:string):Instance
 ---@field GetOrderedDataStore fun(self:DataStoreService, name:string, scope:string):Instance
 ---@field GetRequestBudgetForRequestType fun(self:DataStoreService, requestType:Enum.DataStoreRequestType):number
 ---@field GetDataFromEmptyScopeDataStoreAsyncTemporary fun(self:DataStoreService, name:string, key:string):Variant
+---@field ListDataStoresAsync fun(self:DataStoreService):Instance
+---@field ListDataStoresAsync fun(self:DataStoreService, prefix:string):Instance
+---@field ListDataStoresAsync fun(self:DataStoreService, prefix:string, pageSize:number):Instance
+---
+
+---
+---@class DataStoreSetOptions : Instance
+---@field GetMetadata fun(self:DataStoreSetOptions):Dictionary
+---@field SetMetadata fun(self:DataStoreSetOptions, attributes:Dictionary):void
 ---
 
 ---
@@ -1298,10 +1339,27 @@
 ---@field GetAsync fun(self:GlobalDataStore, key:string):Tuple
 ---@field IncrementAsync fun(self:GlobalDataStore, key:string):Variant
 ---@field IncrementAsync fun(self:GlobalDataStore, key:string, delta:number):Variant
+---@field IncrementAsync fun(self:GlobalDataStore, key:string, delta:number, userIds:Array):Variant
+---@field IncrementAsync fun(self:GlobalDataStore, key:string, delta:number, userIds:Array, options:Instance):Variant
 ---@field RemoveAsync fun(self:GlobalDataStore, key:string):Tuple
----@field SetAsync fun(self:GlobalDataStore, key:string, value:Variant, userids:Variant):Variant
----@field SetAsync fun(self:GlobalDataStore, key:string, value:Variant, userids:Variant, options:Instance):Variant
+---@field SetAsync fun(self:GlobalDataStore, key:string, value:Variant):Variant
+---@field SetAsync fun(self:GlobalDataStore, key:string, value:Variant, userIds:Array):Variant
+---@field SetAsync fun(self:GlobalDataStore, key:string, value:Variant, userIds:Array, options:Instance):Variant
 ---@field UpdateAsync fun(self:GlobalDataStore, key:string, transformFunction:Function):Tuple
+---
+
+---
+---@class DataStore : GlobalDataStore
+---@field GetVersionAsync fun(self:DataStore, key:string, version:string):Tuple
+---@field ListKeysAsync fun(self:DataStore):Instance
+---@field ListKeysAsync fun(self:DataStore, prefix:string):Instance
+---@field ListKeysAsync fun(self:DataStore, prefix:string, pageSize:number):Instance
+---@field ListVersionsAsync fun(self:DataStore, key:string):Instance
+---@field ListVersionsAsync fun(self:DataStore, key:string, sortDirection:Enum.SortDirection):Instance
+---@field ListVersionsAsync fun(self:DataStore, key:string, sortDirection:Enum.SortDirection, minDate:number):Instance
+---@field ListVersionsAsync fun(self:DataStore, key:string, sortDirection:Enum.SortDirection, minDate:number, maxDate:number):Instance
+---@field ListVersionsAsync fun(self:DataStore, key:string, sortDirection:Enum.SortDirection, minDate:number, maxDate:number, pageSize:number):Instance
+---@field RemoveVersionAsync fun(self:DataStore, key:string, version:string):void
 ---
 
 ---
@@ -1934,10 +1992,10 @@
 ---
 ---@class HeightmapImporterService : Instance
 ---@field CancelImportHeightmap fun(self:HeightmapImporterService):void
----@field GetGreyscale fun(self:HeightmapImporterService, heightmapAssetId:Content):Tuple
 ---@field IsValidColormap fun(self:HeightmapImporterService, colormapAssetId:Content):Tuple
 ---@field IsValidHeightmap fun(self:HeightmapImporterService, heightmapAssetId:Content):Tuple
 ---@field SetImportHeightmapPaused fun(self:HeightmapImporterService, paused:boolean):void
+---@field GetHeightmapPreviewAsync fun(self:HeightmapImporterService, heightmapAssetId:Content):Tuple
 ---@field ImportHeightmap fun(self:HeightmapImporterService, region:Region3, heightmapAssetId:Content, colormapAssetId:Content, defaultMaterial:Enum.Material):void
 ---@field ProgressUpdate RBXScriptSignal @function(progressRatio:number)
 ---
@@ -2076,7 +2134,6 @@
 ---@field ApplyDescriptionClientServer fun(self:Humanoid, humanoidDescription:Instance):void
 ---@field PlayEmote fun(self:Humanoid, emoteName:string):boolean
 ---@field PlayEmoteAndGetAnimTrackById fun(self:Humanoid, emoteId:number):Tuple
----@field PlayEmoteById fun(self:Humanoid, emoteName:string, emoteId:number):boolean
 ---@field AnimationPlayed RBXScriptSignal @function(animationTrack:Instance)
 ---@field Climbing RBXScriptSignal @function(speed:number)
 ---@field CustomStatusAdded RBXScriptSignal @function(status:string)
@@ -2157,6 +2214,19 @@
 
 ---
 ---@class LegacyStudioBridge : ILegacyStudioBridge
+---
+
+---
+---@class IXPService : Instance
+---@field ClearUserLayers fun(self:IXPService):void
+---@field GetBrowserTrackerLayerLoadingStatus fun(self:IXPService):Enum.IXPLoadingStatus
+---@field GetBrowserTrackerLayerVariables fun(self:IXPService, layerName:string):Dictionary
+---@field GetUserLayerLoadingStatus fun(self:IXPService):Enum.IXPLoadingStatus
+---@field GetUserLayerVariables fun(self:IXPService, layerName:string):Dictionary
+---@field InitializeUserLayers fun(self:IXPService, userId:number):void
+---@field RegisterUserLayers fun(self:IXPService, userLayers:Variant):void
+---@field OnBrowserTrackerLayerLoadingStatusChanged RBXScriptSignal @function(status:Enum.IXPLoadingStatus)
+---@field OnUserLayerLoadingStatusChanged RBXScriptSignal @function(status:Enum.IXPLoadingStatus)
 ---
 
 ---
@@ -2727,11 +2797,19 @@
 ---@field CancelAllNotification fun(self:NotificationService, userId:number):void
 ---@field CancelNotification fun(self:NotificationService, userId:number, alertId:number):void
 ---@field ScheduleNotification fun(self:NotificationService, userId:number, alertId:number, alertMsg:string, minutesToFire:number):void
+---@field SwitchedToAppShellFeature fun(self:NotificationService, appShellFeature:Enum.AppShellFeature):void
 ---@field GetScheduledNotifications fun(self:NotificationService, userId:number):Array
 ---@field Roblox17sConnectionChanged RBXScriptSignal @function(connectionName:string, connectionState:Enum.ConnectionState, namespaceSequenceNumbers:string)
 ---@field Roblox17sEventReceived RBXScriptSignal @function(eventData:Map)
 ---@field RobloxConnectionChanged RBXScriptSignal @function(connectionName:string, connectionState:Enum.ConnectionState, sequenceNumber:string, namespaceSequenceNumbers:string)
 ---@field RobloxEventReceived RBXScriptSignal @function(eventData:Map)
+---
+
+---
+---@class ObjectVersionInfo : Instance
+---@field CreatedTime number
+---@field IsDeleted boolean
+---@field Version string
 ---
 
 ---
@@ -2757,6 +2835,7 @@
 ---@field BrickColor BrickColor
 ---@field CFrame CFrame
 ---@field CanCollide boolean
+---@field CanTouch boolean
 ---@field CastShadow boolean
 ---@field CenterOfMass Vector3
 ---@field CollisionGroupId number
@@ -2917,7 +2996,6 @@
 ---@field GetCell fun(self:Terrain, x:number, y:number, z:number):Tuple
 ---@field GetMaterialColor fun(self:Terrain, material:Enum.Material):Color3
 ---@field GetWaterCell fun(self:Terrain, x:number, y:number, z:number):Tuple
----@field ImportHeightMap fun(self:Terrain, heightMapBinary:string, colorMapBinary:string, region:Region3):void
 ---@field PasteRegion fun(self:Terrain, region:Instance, corner:Vector3int16, pasteEmptyCells:boolean):void
 ---@field ReadVoxels fun(self:Terrain, region:Region3, resolution:number):Tuple
 ---@field ReplaceMaterial fun(self:Terrain, region:Region3, resolution:number, sourceMaterial:Enum.Material, targetMaterial:Enum.Material):void
@@ -3067,6 +3145,7 @@
 ---@field StreamingPauseMode Enum.StreamingPauseMode
 ---@field StreamingTargetRadius number
 ---@field Terrain Instance
+---@field TouchesUseCollisionGroups boolean
 ---@field BreakJoints fun(self:Workspace, objects:Objects):void
 ---@field CalculateJumpDistance fun(self:Workspace, gravity:number, jumpPower:number, walkSpeed:number):number
 ---@field CalculateJumpHeight fun(self:Workspace, gravity:number, jumpPower:number):number
@@ -3112,7 +3191,19 @@
 ---
 
 ---
+---@class DataStoreEnumerationPages : Pages
+---
+
+---
+---@class DataStoreKeyPages : Pages
+---
+
+---
 ---@class DataStorePages : Pages
+---
+
+---
+---@class DataStoreVersionPages : Pages
 ---
 
 ---
@@ -3150,6 +3241,7 @@
 ---@field LightEmission number
 ---@field LightInfluence number
 ---@field LockedToPart boolean
+---@field Orientation Enum.ParticleOrientation
 ---@field Rate number
 ---@field RotSpeed NumberRange
 ---@field Rotation NumberRange
@@ -3449,10 +3541,10 @@
 ---@field OpenScript fun(self:Plugin, script:Instance):void
 ---@field OpenScript fun(self:Plugin, script:Instance, lineNumber:number):void
 ---@field OpenWikiPage fun(self:Plugin, url:string):void
----@field PauseSound fun(self:Plugin, soundChannel:Instance):void
----@field PlaySound fun(self:Plugin, soundChannel:Instance):void
----@field PlaySound fun(self:Plugin, soundChannel:Instance, normalizedTimePosition:number):void
----@field ResumeSound fun(self:Plugin, soundChannel:Instance):void
+---@field PauseSound fun(self:Plugin, sound:Instance):void
+---@field PlaySound fun(self:Plugin, sound:Instance):void
+---@field PlaySound fun(self:Plugin, sound:Instance, normalizedTimePosition:number):void
+---@field ResumeSound fun(self:Plugin, sound:Instance):void
 ---@field SaveSelectedToRoblox fun(self:Plugin):void
 ---@field SelectRibbonTool fun(self:Plugin, tool:Enum.RibbonTool, position:UDim2):void
 ---@field Separate fun(self:Plugin, objects:Objects):Objects
@@ -5122,7 +5214,7 @@
 ---@class Enum.AnalyticsLogLevel:EnumItem
 ---@field Trace Enum.AnalyticsLogLevel @0
 ---@field Debug Enum.AnalyticsLogLevel @1
----@field Infomation Enum.AnalyticsLogLevel @2
+---@field Information Enum.AnalyticsLogLevel @2
 ---@field Warning Enum.AnalyticsLogLevel @3
 ---@field Error Enum.AnalyticsLogLevel @4
 ---@field Fatal Enum.AnalyticsLogLevel @5
@@ -5158,6 +5250,17 @@
 ---@field GamePageLoaded Enum.AppShellActionType @8
 ---@field HomePageLoaded Enum.AppShellActionType @9
 ---@field AvatarEditorPageLoaded Enum.AppShellActionType @10
+---
+
+---
+---@class Enum.AppShellFeature:EnumItem
+---@field None Enum.AppShellFeature @0
+---@field Chat Enum.AppShellFeature @1
+---@field AvatarEditor Enum.AppShellFeature @2
+---@field GamePage Enum.AppShellFeature @3
+---@field HomePage Enum.AppShellFeature @4
+---@field More Enum.AppShellFeature @5
+---@field Landing Enum.AppShellFeature @6
 ---
 
 ---
@@ -6142,6 +6245,18 @@
 ---
 
 ---
+---@class Enum.IXPLoadingStatus:EnumItem
+---@field None Enum.IXPLoadingStatus @0
+---@field Pending Enum.IXPLoadingStatus @1
+---@field Initialized Enum.IXPLoadingStatus @2
+---@field ShutOff Enum.IXPLoadingStatus @3
+---@field ErrorTimedOut Enum.IXPLoadingStatus @7
+---@field ErrorConnection Enum.IXPLoadingStatus @5
+---@field ErrorJsonParse Enum.IXPLoadingStatus @6
+---@field ErrorInvalidUser Enum.IXPLoadingStatus @4
+---
+
+---
 ---@class Enum.InOut:EnumItem
 ---@field Edge Enum.InOut @0
 ---@field Inset Enum.InOut @1
@@ -6677,6 +6792,14 @@
 ---
 
 ---
+---@class Enum.ParticleOrientation:EnumItem
+---@field FacingCamera Enum.ParticleOrientation @0
+---@field FacingCameraWorldUp Enum.ParticleOrientation @1
+---@field VelocityParallel Enum.ParticleOrientation @2
+---@field VelocityPerpendicular Enum.ParticleOrientation @3
+---
+
+---
 ---@class Enum.PathStatus:EnumItem
 ---@field Success Enum.PathStatus @0
 ---@field ClosestNoPath Enum.PathStatus @1
@@ -7008,6 +7131,12 @@
 ---@field RelativeXY Enum.SizeConstraint @0
 ---@field RelativeXX Enum.SizeConstraint @1
 ---@field RelativeYY Enum.SizeConstraint @2
+---
+
+---
+---@class Enum.SortDirection:EnumItem
+---@field Ascending Enum.SortDirection @0
+---@field Descending Enum.SortDirection @1
 ---
 
 ---
@@ -7626,6 +7755,7 @@
 ---@field AnalyticsProgressionStatus Enum.AnalyticsProgressionStatus
 ---@field AnimationPriority Enum.AnimationPriority
 ---@field AppShellActionType Enum.AppShellActionType
+---@field AppShellFeature Enum.AppShellFeature
 ---@field AppUpdateStatus Enum.AppUpdateStatus
 ---@field AspectType Enum.AspectType
 ---@field AssetFetchStatus Enum.AssetFetchStatus
@@ -7721,6 +7851,7 @@
 ---@field HumanoidRigType Enum.HumanoidRigType
 ---@field HumanoidStateType Enum.HumanoidStateType
 ---@field IKCollisionsMode Enum.IKCollisionsMode
+---@field IXPLoadingStatus Enum.IXPLoadingStatus
 ---@field InOut Enum.InOut
 ---@field InfoType Enum.InfoType
 ---@field InitialDockState Enum.InitialDockState
@@ -7753,6 +7884,7 @@
 ---@field OverrideMouseIconBehavior Enum.OverrideMouseIconBehavior
 ---@field PacketPriority Enum.PacketPriority
 ---@field PartType Enum.PartType
+---@field ParticleOrientation Enum.ParticleOrientation
 ---@field PathStatus Enum.PathStatus
 ---@field PathWaypointAction Enum.PathWaypointAction
 ---@field PermissionLevelShown Enum.PermissionLevelShown
@@ -7788,6 +7920,7 @@
 ---@field ScrollingDirection Enum.ScrollingDirection
 ---@field ServerAudioBehavior Enum.ServerAudioBehavior
 ---@field SizeConstraint Enum.SizeConstraint
+---@field SortDirection Enum.SortDirection
 ---@field SortOrder Enum.SortOrder
 ---@field SoundType Enum.SoundType
 ---@field SpecialKey Enum.SpecialKey
