@@ -506,3 +506,9 @@ table.find = nil
 ---@type RobloxUtf8
 ---
 utf8 = nil
+
+---
+---This library is a back-ported feature from Lua 5.2 which provides functions to perform bitwise operations.
+---@type RobloxBit32
+---
+bit32 = nil
