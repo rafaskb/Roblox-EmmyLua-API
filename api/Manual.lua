@@ -233,6 +233,7 @@
 ---
 ---@class RaycastResult RaycastResult stores the result of a successful raycasting operation performed by WorldRoot:Raycast(). It contains the properties listed below.
 ---
+---@field Instance Instance @The BasePart or Terrain cell that the ray intersected.
 ---@field Position Vector3 @The world space point at which the intersection occurred, usually a point directly on the surface of the instance.
 ---@field Material Enum.Material @The Material at the intersection point. For normal parts this is the BasePart.Material; for Terrain this can vary depending on terrain data.
 ---@field Normal Vector3 @The normal vector of the intersected face.

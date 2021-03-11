@@ -327,6 +327,12 @@ Random = nil
 Ray = nil
 
 ---
+---Stores parameters for WorldRoot:Raycast() operations.
+---@type RaycastParams
+---
+RaycastParams = nil
+
+---
 ---RBXScriptConnection, also known as a Connection, is a special object returned by the Connect method of an Event (RBXScriptSignal).
 ---@type RBXScriptConnection
 ---
