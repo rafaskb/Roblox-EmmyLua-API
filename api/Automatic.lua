@@ -1,6 +1,6 @@
 --
---File generated in Feb/01/2021 at 12:54:45
---Roblox version: version-c993d5e9c7224b14
+--File generated in Mar/11/2021 at 09:25:01
+--Roblox version: version-cbab144c78a844dd
 --API Dump version: 1
 --
 
@@ -154,6 +154,7 @@
 ---@class AppUpdateService : Instance
 ---@field CheckForUpdate fun(self:AppUpdateService):void
 ---@field CheckForUpdate fun(self:AppUpdateService, handler:Function):void
+---@field DisableDUAR fun(self:AppUpdateService):void
 ---@field PerformManagedUpdate fun(self:AppUpdateService):boolean
 ---
 
@@ -557,6 +558,13 @@
 ---
 
 ---
+---@class CalloutService : Instance
+---@field AttachCallout fun(self:CalloutService, definitionId:string, locationId:string, target:Instance):void
+---@field DefineCallout fun(self:CalloutService, definitionId:string, title:string, description:string, learnMoreURL:string):void
+---@field DetachCalloutsByDefinitionId fun(self:CalloutService, definitionId:string):void
+---
+
+---
 ---@class Camera : Instance
 ---@field CFrame CFrame
 ---@field CameraSubject Instance
@@ -802,6 +810,9 @@
 ---@class RodConstraint : Constraint
 ---@field CurrentDistance number
 ---@field Length number
+---@field LimitAngle0 number
+---@field LimitAngle1 number
+---@field LimitsEnabled boolean
 ---@field Thickness number
 ---
 
@@ -1039,6 +1050,12 @@
 ---@field CurrentDataModelTypeChanged RBXScriptSignal @function()
 ---@field DataModelCreated RBXScriptSignal @function(gameStateType:Enum.StudioDataModelType)
 ---@field DataModelWillBeDestroyed RBXScriptSignal @function(gameStateType:Enum.StudioDataModelType)
+---
+
+---
+---@class DataStoreIncrementOptions : Instance
+---@field GetMetadata fun(self:DataStoreIncrementOptions):Dictionary
+---@field SetMetadata fun(self:DataStoreIncrementOptions, attributes:Dictionary):void
 ---
 
 ---
@@ -1334,6 +1351,12 @@
 ---
 
 ---
+---@class GetDataStoreOptions : Instance
+---@field AllScopes boolean
+---@field SetExperimentalFeatures fun(self:GetDataStoreOptions, experimentalFeatures:Dictionary):void
+---
+
+---
 ---@class GlobalDataStore : Instance
 ---@field OnUpdate fun(self:GlobalDataStore, key:string, callback:Function):RBXScriptConnection
 ---@field GetAsync fun(self:GlobalDataStore, key:string):Tuple
@@ -1505,6 +1528,7 @@
 ---@field FontSize Enum.FontSize
 ---@field LineHeight number
 ---@field LocalizedText string
+---@field MaxVisibleGraphemes number
 ---@field RichText boolean
 ---@field Text string
 ---@field TextBounds Vector2
@@ -1548,6 +1572,7 @@
 ---@field FontSize Enum.FontSize
 ---@field LineHeight number
 ---@field LocalizedText string
+---@field MaxVisibleGraphemes number
 ---@field RichText boolean
 ---@field Text string
 ---@field TextBounds Vector2
@@ -1603,6 +1628,7 @@
 ---@field FontSize Enum.FontSize
 ---@field LineHeight number
 ---@field ManualFocusRelease boolean
+---@field MaxVisibleGraphemes number
 ---@field MultiLine boolean
 ---@field OverlayNativeInput boolean
 ---@field PlaceholderColor3 Color3
@@ -1997,7 +2023,8 @@
 ---@field SetImportHeightmapPaused fun(self:HeightmapImporterService, paused:boolean):void
 ---@field GetHeightmapPreviewAsync fun(self:HeightmapImporterService, heightmapAssetId:Content):Tuple
 ---@field ImportHeightmap fun(self:HeightmapImporterService, region:Region3, heightmapAssetId:Content, colormapAssetId:Content, defaultMaterial:Enum.Material):void
----@field ProgressUpdate RBXScriptSignal @function(progressRatio:number)
+---@field ColormapHasUnknownPixels RBXScriptSignal @function()
+---@field ProgressUpdate RBXScriptSignal @function(progressRatio:number, operation:string)
 ---
 
 ---
@@ -2227,6 +2254,10 @@
 ---@field RegisterUserLayers fun(self:IXPService, userLayers:Variant):void
 ---@field OnBrowserTrackerLayerLoadingStatusChanged RBXScriptSignal @function(status:Enum.IXPLoadingStatus)
 ---@field OnUserLayerLoadingStatusChanged RBXScriptSignal @function(status:Enum.IXPLoadingStatus)
+---
+
+---
+---@class IncrementalPatchBuilder : Instance
 ---
 
 ---
@@ -2552,7 +2583,6 @@
 ---
 ---@class LuaSourceContainer : Instance
 ---@field CurrentEditor Instance
----@field IsDifferentFromFileSystem boolean
 ---
 
 ---
@@ -2774,6 +2804,7 @@
 ---@field PrintJoinSizeBreakdown boolean
 ---@field PrintPhysicsErrors boolean
 ---@field PrintStreamInstanceQuota boolean
+---@field RandomizeJoinInstanceOrder boolean
 ---@field RenderStreamedRegions boolean
 ---@field ShowActiveAnimationAsset boolean
 ---@field TrackDataTypes boolean
@@ -2892,6 +2923,7 @@
 ---@field GetRenderCFrame fun(self:BasePart):CFrame
 ---@field GetRootPart fun(self:BasePart):Instance
 ---@field GetTouchingParts fun(self:BasePart):Objects
+---@field GetVelocityAtPosition fun(self:BasePart, position:Vector3):Vector3
 ---@field IsGrounded fun(self:BasePart):boolean
 ---@field MakeJoints fun(self:BasePart):void
 ---@field Resize fun(self:BasePart, normalId:Enum.NormalId, deltaAmount:number):boolean
@@ -2972,6 +3004,7 @@
 ---@class Terrain : BasePart
 ---@field Decoration boolean
 ---@field IsSmooth boolean
+---@field LastUsedModificationMethod Enum.TerrainAcquisitionMethod
 ---@field MaterialColors BinaryString
 ---@field MaxExtents Region3int16
 ---@field WaterColor Color3
@@ -3138,8 +3171,9 @@
 ---@field FilteringEnabled boolean
 ---@field Gravity number
 ---@field InterpolationThrottling Enum.InterpolationThrottlingMode
----@field MeshPartHeads Enum.MeshPartHeads
+---@field MeshPartHeadsAndAccessories Enum.MeshPartHeadsAndAccessories
 ---@field PhysicsSimulationRate Enum.PhysicsSimulationRate
+---@field PhysicsSteppingMethod Enum.PhysicsSteppingMethod
 ---@field StreamingEnabled boolean
 ---@field StreamingMinRadius number
 ---@field StreamingPauseMode Enum.StreamingPauseMode
@@ -3157,7 +3191,7 @@
 ---@field JoinToOutsiders fun(self:Workspace, objects:Objects, jointType:Enum.JointCreationMode):void
 ---@field MakeJoints fun(self:Workspace, objects:Objects):void
 ---@field PGSIsEnabled fun(self:Workspace):boolean
----@field SetMeshPartHeads fun(self:Workspace, value:Enum.MeshPartHeads):void
+---@field SetMeshPartHeadsAndAccessories fun(self:Workspace, value:Enum.MeshPartHeadsAndAccessories):void
 ---@field SetPhysicsThrottleEnabled fun(self:Workspace, value:boolean):void
 ---@field UnjoinFromOutsiders fun(self:Workspace, objects:Objects):void
 ---@field ZoomToExtents fun(self:Workspace):void
@@ -3249,6 +3283,7 @@
 ---@field Speed NumberRange
 ---@field SpreadAngle Vector2
 ---@field Texture Content
+---@field TimeScale number
 ---@field Transparency NumberSequence
 ---@field VelocityInheritance number
 ---@field VelocitySpread number
@@ -3320,6 +3355,7 @@
 ---@field ArePartCoordsShown boolean
 ---@field AreRegionsShown boolean
 ---@field AreTerrainReplicationRegionsShown boolean
+---@field AreTimestepsShown boolean
 ---@field AreUnalignedPartsShown boolean
 ---@field AreWorldCoordsShown boolean
 ---@field DisableCSGv2 boolean
@@ -3809,6 +3845,7 @@
 ---@field Deprecated boolean
 ---@field EditingDisabled boolean
 ---@field IsBackend boolean
+---@field PropertyOrder number
 ---@field ScriptContext string
 ---@field ServerOnly boolean
 ---@field UIMaximum number
@@ -3940,9 +3977,13 @@
 ---@field SetRobloxGuiFocused fun(self:RunService, focus:boolean):void
 ---@field Stop fun(self:RunService):void
 ---@field UnbindFromRenderStep fun(self:RunService, name:string):void
----@field Heartbeat RBXScriptSignal @function(step:number)
----@field RenderStepped RBXScriptSignal @function(step:number)
----@field Stepped RBXScriptSignal @function(time:number, step:number)
+---@field Heartbeat RBXScriptSignal @function(deltaTime:number)
+---@field PostSimulation RBXScriptSignal @function(deltaTime:number)
+---@field PreAnimation RBXScriptSignal @function(deltaTime:number)
+---@field PreRender RBXScriptSignal @function(deltaTime:number)
+---@field PreSimulation RBXScriptSignal @function(deltaTime:number)
+---@field RenderStepped RBXScriptSignal @function(deltaTime:number)
+---@field Stepped RBXScriptSignal @function(time:number, deltaTime:number)
 ---
 
 ---
@@ -4271,10 +4312,13 @@
 ---@field RolloffScale number
 ---@field BeginRecording fun(self:SoundService):boolean
 ---@field GetListener fun(self:SoundService):Tuple
+---@field GetOutputDevice fun(self:SoundService):Tuple
+---@field GetOutputDevices fun(self:SoundService):Tuple
 ---@field GetSoundMemoryData fun(self:SoundService):Dictionary
 ---@field PlayLocalSound fun(self:SoundService, sound:Instance):void
 ---@field PlayStockSound fun(self:SoundService, sound:Enum.SoundType):void
 ---@field SetListener fun(self:SoundService, listenerType:Enum.ListenerType, listener:Tuple):void
+---@field SetOutputDevice fun(self:SoundService, name:string, guid:string):void
 ---@field SetRecordingDevice fun(self:SoundService, deviceIndex:number):boolean
 ---@field EndRecording fun(self:SoundService):Dictionary
 ---@field GetRecordingDevices fun(self:SoundService):Dictionary
@@ -4426,7 +4470,6 @@
 ---@field BaseURLHasChineseHost fun(self:StudioService):boolean
 ---@field ConvertToPackageUpload fun(self:StudioService, uploadUrl:string):void
 ---@field CopyToClipboard fun(self:StudioService, stringToCopy:string):void
----@field DEPRECATED_ShowPlaceVersionHistoryDialog fun(self:StudioService):void
 ---@field EmitPlacePublishedSignal fun(self:StudioService):void
 ---@field GetClassIcon fun(self:StudioService, className:string):Dictionary
 ---@field GetResourceByCategory fun(self:StudioService, category:string):Dictionary
@@ -4714,6 +4757,7 @@
 ---@field GetMeshVertsSync fun(self:UGCValidationService, meshId:string):Array
 ---@field GetTextureSizeSync fun(self:UGCValidationService, textureId:string):Vector2
 ---@field SetMeshIdBlocking fun(self:UGCValidationService, meshPart:Instance, meshId:string):void
+---@field FetchAssetWithFormat fun(self:UGCValidationService, url:Content, assetFormat:string):Objects
 ---@field GetMeshTriCount fun(self:UGCValidationService, meshId:string):number
 ---@field GetMeshVerts fun(self:UGCValidationService, meshId:string):Array
 ---@field GetTextureSize fun(self:UGCValidationService, textureId:string):Vector2
@@ -4835,6 +4879,16 @@
 ---
 ---@class UIScale : UIComponent
 ---@field Scale number
+---
+
+---
+---@class UIStroke : UIComponent
+---@field ApplyStrokeMode Enum.ApplyStrokeMode
+---@field Color Color3
+---@field Enabled boolean
+---@field LineJoinMode Enum.LineJoinMode
+---@field Thickness number
+---@field Transparency number
 ---
 
 ---
@@ -5270,6 +5324,12 @@
 ---@field Failed Enum.AppUpdateStatus @2
 ---@field NotAvailable Enum.AppUpdateStatus @3
 ---@field Available Enum.AppUpdateStatus @4
+---
+
+---
+---@class Enum.ApplyStrokeMode:EnumItem
+---@field Contextual Enum.ApplyStrokeMode @0
+---@field Border Enum.ApplyStrokeMode @1
 ---
 
 ---
@@ -6572,14 +6632,6 @@
 ---
 
 ---
----@class Enum.LanguagePreference:EnumItem
----@field SystemDefault Enum.LanguagePreference @0
----@field English Enum.LanguagePreference @1
----@field SimplifiedChinese Enum.LanguagePreference @2
----@field Korean Enum.LanguagePreference @3
----
-
----
 ---@class Enum.LeftRight:EnumItem
 ---@field Left Enum.LeftRight @0
 ---@field Center Enum.LeftRight @1
@@ -6602,6 +6654,13 @@
 ---@field LeftLeg Enum.Limb @4
 ---@field RightLeg Enum.Limb @5
 ---@field Unknown Enum.Limb @6
+---
+
+---
+---@class Enum.LineJoinMode:EnumItem
+---@field Round Enum.LineJoinMode @0
+---@field Bevel Enum.LineJoinMode @1
+---@field Miter Enum.LineJoinMode @2
 ---
 
 ---
@@ -6678,10 +6737,10 @@
 ---
 
 ---
----@class Enum.MeshPartHeads:EnumItem
----@field Default Enum.MeshPartHeads @0
----@field Disabled Enum.MeshPartHeads @1
----@field Enabled Enum.MeshPartHeads @2
+---@class Enum.MeshPartHeadsAndAccessories:EnumItem
+---@field Default Enum.MeshPartHeadsAndAccessories @0
+---@field Disabled Enum.MeshPartHeadsAndAccessories @1
+---@field Enabled Enum.MeshPartHeadsAndAccessories @2
 ---
 
 ---
@@ -6829,6 +6888,13 @@
 ---@field Fixed240Hz Enum.PhysicsSimulationRate @0
 ---@field Fixed120Hz Enum.PhysicsSimulationRate @1
 ---@field Fixed60Hz Enum.PhysicsSimulationRate @2
+---
+
+---
+---@class Enum.PhysicsSteppingMethod:EnumItem
+---@field Default Enum.PhysicsSteppingMethod @0
+---@field Fixed Enum.PhysicsSteppingMethod @1
+---@field Adaptive Enum.PhysicsSteppingMethod @2
 ---
 
 ---
@@ -7468,6 +7534,22 @@
 ---
 
 ---
+---@class Enum.TerrainAcquisitionMethod:EnumItem
+---@field None Enum.TerrainAcquisitionMethod @0
+---@field Legacy Enum.TerrainAcquisitionMethod @1
+---@field Template Enum.TerrainAcquisitionMethod @2
+---@field Generate Enum.TerrainAcquisitionMethod @3
+---@field Import Enum.TerrainAcquisitionMethod @4
+---@field Convert Enum.TerrainAcquisitionMethod @5
+---@field EditAddTool Enum.TerrainAcquisitionMethod @6
+---@field EditSeaLevelTool Enum.TerrainAcquisitionMethod @7
+---@field EditReplaceTool Enum.TerrainAcquisitionMethod @8
+---@field RegionFillTool Enum.TerrainAcquisitionMethod @9
+---@field RegionPasteTool Enum.TerrainAcquisitionMethod @10
+---@field Other Enum.TerrainAcquisitionMethod @11
+---
+
+---
 ---@class Enum.TextFilterContext:EnumItem
 ---@field PublicChat Enum.TextFilterContext @1
 ---@field PrivateChat Enum.TextFilterContext @2
@@ -7757,6 +7839,7 @@
 ---@field AppShellActionType Enum.AppShellActionType
 ---@field AppShellFeature Enum.AppShellFeature
 ---@field AppUpdateStatus Enum.AppUpdateStatus
+---@field ApplyStrokeMode Enum.ApplyStrokeMode
 ---@field AspectType Enum.AspectType
 ---@field AssetFetchStatus Enum.AssetFetchStatus
 ---@field AssetType Enum.AssetType
@@ -7861,16 +7944,16 @@
 ---@field KeyCode Enum.KeyCode
 ---@field KeywordFilterType Enum.KeywordFilterType
 ---@field Language Enum.Language
----@field LanguagePreference Enum.LanguagePreference
 ---@field LeftRight Enum.LeftRight
 ---@field LevelOfDetailSetting Enum.LevelOfDetailSetting
 ---@field Limb Enum.Limb
+---@field LineJoinMode Enum.LineJoinMode
 ---@field ListDisplayMode Enum.ListDisplayMode
 ---@field ListenerType Enum.ListenerType
 ---@field Material Enum.Material
 ---@field MembershipType Enum.MembershipType
 ---@field MeshPartDetailLevel Enum.MeshPartDetailLevel
----@field MeshPartHeads Enum.MeshPartHeads
+---@field MeshPartHeadsAndAccessories Enum.MeshPartHeadsAndAccessories
 ---@field MeshType Enum.MeshType
 ---@field MessageType Enum.MessageType
 ---@field ModelLevelOfDetail Enum.ModelLevelOfDetail
@@ -7889,6 +7972,7 @@
 ---@field PathWaypointAction Enum.PathWaypointAction
 ---@field PermissionLevelShown Enum.PermissionLevelShown
 ---@field PhysicsSimulationRate Enum.PhysicsSimulationRate
+---@field PhysicsSteppingMethod Enum.PhysicsSteppingMethod
 ---@field Platform Enum.Platform
 ---@field PlaybackState Enum.PlaybackState
 ---@field PlayerActions Enum.PlayerActions
@@ -7943,6 +8027,7 @@
 ---@field TeleportResult Enum.TeleportResult
 ---@field TeleportState Enum.TeleportState
 ---@field TeleportType Enum.TeleportType
+---@field TerrainAcquisitionMethod Enum.TerrainAcquisitionMethod
 ---@field TextFilterContext Enum.TextFilterContext
 ---@field TextInputType Enum.TextInputType
 ---@field TextTruncate Enum.TextTruncate
