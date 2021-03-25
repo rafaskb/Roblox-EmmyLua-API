@@ -73,12 +73,33 @@ local function readParameters(baseData, selfType)
 end
 
 ---
+---Returns whether or not this data has the given tag.
+---@param baseData table<string, string>
+---@return boolean
+---
+local function hasTag(baseData, tag)
+    if baseData["Tags"] then
+        for _, baseTag in pairs(baseData["Tags"]) do
+            if baseTag == tag then
+                return true
+            end
+        end
+    end
+    return false
+end
+
+---
 ---Parses an entire class data table, including all its fields, functions, events, and callbacks.
 ---@param baseData table<string, string>
 ---
 function parser:parseClass(baseData)
     -- Ignore Studio class due to poor formatting
     if baseData.Name == "Studio" then
+        return
+    end
+
+    -- Ignore hidden and deprecated classes
+    if hasTag(baseData, "Hidden") or hasTag(baseData, "Deprecated") then
         return
     end
 
@@ -145,6 +166,11 @@ end
 ---@param baseData table<string, string>
 ---
 function parser:parseEnum(baseData)
+    -- Ignore hidden and deprecated enums
+    if hasTag(baseData, "Hidden") or hasTag(baseData, "Deprecated") then
+        return
+    end
+
     -- Write class
     local class = "Enum." .. baseData.Name
     utils:write("---")

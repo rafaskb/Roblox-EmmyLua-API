@@ -1,5 +1,5 @@
 --
---File generated in Mar/25/2021 at 09:44:33
+--File generated in Mar/25/2021 at 09:48:19
 --Roblox version: version-b00d0f512e43459a
 --API Dump version: 1
 --
@@ -74,10 +74,6 @@
 
 ---
 ---@class Accessory : Accoutrement
----
-
----
----@class Hat : Accoutrement
 ---
 
 ---
@@ -300,16 +296,6 @@
 ---
 
 ---
----@class HopperBin : BackpackItem
----@field Active boolean
----@field BinType Enum.BinType
----@field Disable fun(self:HopperBin):void
----@field ToggleSelect fun(self:HopperBin):void
----@field Deselected RBXScriptSignal @function()
----@field Selected RBXScriptSignal @function(mouse:Instance)
----
-
----
 ---@class Tool : BackpackItem
 ---@field CanBeDropped boolean
 ---@field Enabled boolean
@@ -327,11 +313,6 @@
 ---@field Deactivated RBXScriptSignal @function()
 ---@field Equipped RBXScriptSignal @function(mouse:Instance)
 ---@field Unequipped RBXScriptSignal @function()
----
-
----
----@class Flag : Tool
----@field TeamColor BrickColor
 ---
 
 ---
@@ -663,11 +644,6 @@
 ---@class ShirtGraphic : CharacterAppearance
 ---@field Color3 Color3
 ---@field Graphic Content
----
-
----
----@class Skin : CharacterAppearance
----@field SkinColor BrickColor
 ---
 
 ---
@@ -1012,23 +988,6 @@
 ---
 
 ---
----@class CustomEvent : Instance
----@field GetAttachedReceivers fun(self:CustomEvent):Objects
----@field SetValue fun(self:CustomEvent, newValue:number):void
----@field ReceiverConnected RBXScriptSignal @function(receiver:Instance)
----@field ReceiverDisconnected RBXScriptSignal @function(receiver:Instance)
----
-
----
----@class CustomEventReceiver : Instance
----@field Source Instance
----@field GetCurrentValue fun(self:CustomEventReceiver):number
----@field EventConnected RBXScriptSignal @function(event:Instance)
----@field EventDisconnected RBXScriptSignal @function(event:Instance)
----@field SourceValueChanged RBXScriptSignal @function(newValue:number)
----
-
----
 ---@class DataModelMesh : Instance
 ---@field Offset Vector3
 ---@field Scale Vector3
@@ -1036,15 +995,7 @@
 ---
 
 ---
----@class BevelMesh : DataModelMesh
----
-
----
 ---@class BlockMesh : BevelMesh
----
-
----
----@class CylinderMesh : BevelMesh
 ---
 
 ---
@@ -1269,14 +1220,6 @@
 ---
 
 ---
----@class Hole : Feature
----
-
----
----@class MotorFeature : Feature
----
-
----
 ---@class File : Instance
 ---@field FileName string
 ---@field FileSize number
@@ -1324,21 +1267,6 @@
 ---@class FriendService : Instance
 ---@field GetPlatformFriends fun(self:FriendService):Array
 ---@field FriendsUpdated RBXScriptSignal @function(friendData:Array)
----
-
----
----@class FunctionalTest : Instance
----@field Description string
----@field Error fun(self:FunctionalTest):void
----@field Error fun(self:FunctionalTest, message:string):void
----@field Failed fun(self:FunctionalTest):void
----@field Failed fun(self:FunctionalTest, message:string):void
----@field Pass fun(self:FunctionalTest):void
----@field Pass fun(self:FunctionalTest, message:string):void
----@field Passed fun(self:FunctionalTest):void
----@field Passed fun(self:FunctionalTest, message:string):void
----@field Warn fun(self:FunctionalTest):void
----@field Warn fun(self:FunctionalTest, message:string):void
 ---
 
 ---
@@ -1770,10 +1698,6 @@
 ---
 
 ---
----@class GuiMain : ScreenGui
----
-
----
 ---@class SurfaceGui : LayerCollector
 ---@field Active boolean
 ---@field Adornee Instance
@@ -1794,18 +1718,6 @@
 ---@field Color3 Color3
 ---@field Transparency number
 ---@field Visible boolean
----
-
----
----@class FloorWire : GuiBase3d
----@field CycleOffset number
----@field From BasePart
----@field StudsBetweenTextures number
----@field Texture Content
----@field TextureSize Vector2
----@field To BasePart
----@field Velocity number
----@field WireRadius number
 ---
 
 ---
@@ -1933,16 +1845,6 @@
 ---
 
 ---
----@class SelectionPartLasso : SelectionLasso
----@field Part BasePart
----
-
----
----@class SelectionPointLasso : SelectionLasso
----@field Point Vector3
----
-
----
 ---@class GuiService : Instance
 ---@field AutoSelectGuiEnabled boolean
 ---@field CoreEffectFolder Folder
@@ -2041,10 +1943,6 @@
 ---@field ImportHeightmap fun(self:HeightmapImporterService, region:Region3, heightmapAssetId:Content, colormapAssetId:Content, defaultMaterial:Enum.Material):void
 ---@field ColormapHasUnknownPixels RBXScriptSignal @function()
 ---@field ProgressUpdate RBXScriptSignal @function(progressRatio:number, operation:string)
----
-
----
----@class Hopper : Instance
 ---
 
 ---
@@ -2337,14 +2235,6 @@
 ---
 
 ---
----@class Glue : JointInstance
----@field F0 Vector3
----@field F1 Vector3
----@field F2 Vector3
----@field F3 Vector3
----
-
----
 ---@class ManualSurfaceJointInstance : JointInstance
 ---
 
@@ -2389,15 +2279,6 @@
 
 ---
 ---@class Weld : JointInstance
----
-
----
----@class JointsService : Instance
----@field ClearJoinAfterMoveJoints fun(self:JointsService):void
----@field CreateJoinAfterMoveJoints fun(self:JointsService):void
----@field SetJoinAfterMoveInstance fun(self:JointsService, joinInstance:Instance):void
----@field SetJoinAfterMoveTarget fun(self:JointsService, joinTarget:Instance):void
----@field ShowPermissibleJoints fun(self:JointsService):void
 ---
 
 ---
@@ -2713,15 +2594,6 @@
 ---
 
 ---
----@class Message : Instance
----@field Text string
----
-
----
----@class Hint : Message
----
-
----
 ---@class MessagingService : Instance
 ---@field PublishAsync fun(self:MessagingService, topic:string, message:Variant):void
 ---@field SubscribeAsync fun(self:MessagingService, topic:string, callback:Function):RBXScriptConnection
@@ -2981,12 +2853,6 @@
 ---
 
 ---
----@class FlagStand : Part
----@field TeamColor BrickColor
----@field FlagCaptured RBXScriptSignal @function(player:Instance)
----
-
----
 ---@class Platform : Part
 ---
 
@@ -2995,19 +2861,6 @@
 ---@field Disabled boolean
 ---@field Occupant Humanoid
 ---@field Sit fun(self:Seat, humanoid:Instance):void
----
-
----
----@class SkateboardPlatform : Part
----@field Controller SkateboardController
----@field ControllingHumanoid Humanoid
----@field Steer number
----@field StickyWheels boolean
----@field Throttle number
----@field ApplySpecificImpulse fun(self:SkateboardPlatform, impulseWorld:Vector3):void
----@field Equipped RBXScriptSignal @function(humanoid:Instance, skateboardController:Instance)
----@field MoveStateChanged RBXScriptSignal @function(newState:Enum.MoveState, oldState:Enum.MoveState)
----@field Unequipped RBXScriptSignal @function(humanoid:Instance)
 ---
 
 ---
@@ -3147,10 +3000,6 @@
 
 ---
 ---@class Actor : Model
----
-
----
----@class Status : Model
 ---
 
 ---
@@ -3715,15 +3564,6 @@
 ---@field Icon Content
 ---@field SetActive fun(self:PluginToolbarButton, active:boolean):void
 ---@field Click RBXScriptSignal @function()
----
-
----
----@class PointsService : Instance
----@field GetAwardablePoints fun(self:PointsService):number
----@field AwardPoints fun(self:PointsService, userId:number, amount:number):Tuple
----@field GetGamePointBalance fun(self:PointsService, userId:number):number
----@field GetPointBalance fun(self:PointsService, userId:number):number
----@field PointsAwarded RBXScriptSignal @function(userId:number, pointsAwarded:number, userBalanceInGame:number, userTotalBalance:number)
 ---
 
 ---
@@ -5129,24 +4969,6 @@
 ---
 
 ---
----@class DoubleConstrainedValue : ValueBase
----@field ConstrainedValue number
----@field MaxValue number
----@field MinValue number
----@field Value number
----@field Changed RBXScriptSignal @function(value:number)
----
-
----
----@class IntConstrainedValue : ValueBase
----@field ConstrainedValue number
----@field MaxValue number
----@field MinValue number
----@field Value number
----@field Changed RBXScriptSignal @function(value:number)
----
-
----
 ---@class IntValue : ValueBase
 ---@field Value number
 ---@field Changed RBXScriptSignal @function(value:number)
@@ -6176,43 +5998,6 @@
 ---
 
 ---
----@class Enum.GearGenreSetting:EnumItem
----@field AllGenres Enum.GearGenreSetting @0
----@field MatchingGenreOnly Enum.GearGenreSetting @1
----
-
----
----@class Enum.GearType:EnumItem
----@field MeleeWeapons Enum.GearType @0
----@field RangedWeapons Enum.GearType @1
----@field Explosives Enum.GearType @2
----@field PowerUps Enum.GearType @3
----@field NavigationEnhancers Enum.GearType @4
----@field MusicalInstruments Enum.GearType @5
----@field SocialItems Enum.GearType @6
----@field BuildingTools Enum.GearType @7
----@field Transport Enum.GearType @8
----
-
----
----@class Enum.Genre:EnumItem
----@field All Enum.Genre @0
----@field TownAndCity Enum.Genre @1
----@field Fantasy Enum.Genre @2
----@field SciFi Enum.Genre @3
----@field Ninja Enum.Genre @4
----@field Scary Enum.Genre @5
----@field Pirate Enum.Genre @6
----@field Adventure Enum.Genre @7
----@field Sports Enum.Genre @8
----@field Funny Enum.Genre @9
----@field WildWest Enum.Genre @10
----@field War Enum.Genre @11
----@field SkatePark Enum.Genre @12
----@field Tutorial Enum.Genre @13
----
-
----
 ---@class Enum.GraphicsMode:EnumItem
 ---@field Automatic Enum.GraphicsMode @1
 ---@field Direct3D9 Enum.GraphicsMode @3
@@ -7015,15 +6800,6 @@
 ---
 
 ---
----@class Enum.PrivilegeType:EnumItem
----@field Owner Enum.PrivilegeType @255
----@field Admin Enum.PrivilegeType @240
----@field Member Enum.PrivilegeType @128
----@field Visitor Enum.PrivilegeType @10
----@field Banned Enum.PrivilegeType @0
----
-
----
 ---@class Enum.ProductPurchaseDecision:EnumItem
 ---@field NotProcessedYet Enum.ProductPurchaseDecision @0
 ---@field PurchaseGranted Enum.ProductPurchaseDecision @1
@@ -7183,13 +6959,6 @@
 ---
 
 ---
----@class Enum.SaveFilter:EnumItem
----@field SaveAll Enum.SaveFilter @2
----@field SaveWorld Enum.SaveFilter @0
----@field SaveGame Enum.SaveFilter @1
----
-
----
 ---@class Enum.SavedQualitySetting:EnumItem
 ---@field Automatic Enum.SavedQualitySetting @0
 ---@field QualityLevel1 Enum.SavedQualitySetting @1
@@ -7298,12 +7067,6 @@
 ---@field TopRight Enum.StartCorner @1
 ---@field BottomLeft Enum.StartCorner @2
 ---@field BottomRight Enum.StartCorner @3
----
-
----
----@class Enum.Status:EnumItem
----@field Poison Enum.Status @0
----@field Confusion Enum.Status @1
 ---
 
 ---
