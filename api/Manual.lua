@@ -181,6 +181,10 @@
 ---
 
 ---
+---@class OverlapParams
+---
+
+---
 ---@class PathWaypoint A datatype constructed by a PathWaypointAction action and Vector3 position which is used by the PathService to create points along a generated path.
 ---@field new fun(position:Vector3, action:Enum.PathWaypointAction):PathWaypoint Creates a new PathWaypoint object
 ---@field Action Enum.PathWaypointAction The action to be performed at this waypoint.

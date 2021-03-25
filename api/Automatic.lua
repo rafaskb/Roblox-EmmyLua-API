@@ -1,6 +1,6 @@
 --
---File generated in Mar/11/2021 at 09:25:01
---Roblox version: version-cbab144c78a844dd
+--File generated in Mar/25/2021 at 09:44:33
+--Roblox version: version-b00d0f512e43459a
 --API Dump version: 1
 --
 
@@ -783,6 +783,7 @@
 ---
 ---@class HingeConstraint : Constraint
 ---@field ActuatorType Enum.ActuatorType
+---@field AngularResponsiveness number
 ---@field AngularSpeed number
 ---@field AngularVelocity number
 ---@field CurrentAngle number
@@ -829,6 +830,7 @@
 ---@field ActuatorType Enum.ActuatorType
 ---@field CurrentPosition number
 ---@field LimitsEnabled boolean
+---@field LinearResponsiveness number
 ---@field LowerLimit number
 ---@field MotorMaxAcceleration number
 ---@field MotorMaxForce number
@@ -845,6 +847,7 @@
 ---@class CylindricalConstraint : SlidingBallConstraint
 ---@field AngularActuatorType Enum.ActuatorType
 ---@field AngularLimitsEnabled boolean
+---@field AngularResponsiveness number
 ---@field AngularRestitution number
 ---@field AngularSpeed number
 ---@field AngularVelocity number
@@ -883,6 +886,19 @@
 ---@class Torque : Constraint
 ---@field RelativeTo Enum.ActuatorRelativeTo
 ---@field Torque Vector3
+---
+
+---
+---@class TorsionSpringConstraint : Constraint
+---@field Coils number
+---@field CurrentAngle number
+---@field Damping number
+---@field LimitEnabled boolean
+---@field MaxAngle number
+---@field MaxTorque number
+---@field Radius number
+---@field Restitution number
+---@field Stiffness number
 ---
 
 ---
@@ -2845,6 +2861,12 @@
 
 ---
 ---@class PVInstance : Instance
+---@field Origin Orientation Vector3
+---@field Origin Position Vector3
+---@field Pivot Offset Orientation Vector3
+---@field Pivot Offset Position Vector3
+---@field GetPivot fun(self:PVInstance):CFrame
+---@field PivotTo fun(self:PVInstance, targetCFrame:CFrame):void
 ---
 
 ---
@@ -2888,6 +2910,7 @@
 ---@field Massless boolean
 ---@field Material Enum.Material
 ---@field Orientation Vector3
+---@field PivotOffset CFrame
 ---@field Position Vector3
 ---@field ReceiveAge number
 ---@field Reflectance number
@@ -3105,6 +3128,9 @@
 ---@class Model : PVInstance
 ---@field LevelOfDetail Enum.ModelLevelOfDetail
 ---@field PrimaryPart BasePart
+---@field World Pivot Orientation Vector3
+---@field World Pivot Position Vector3
+---@field WorldPivot CFrame
 ---@field BreakJoints fun(self:Model):void
 ---@field GetBoundingBox fun(self:Model):Tuple
 ---@field GetExtentsSize fun(self:Model):Vector3
@@ -3149,6 +3175,12 @@
 ---@field FindPartsInRegion3WithIgnoreList fun(self:WorldRoot, region:Region3, ignoreDescendantsTable:Objects, maxParts:number):Objects
 ---@field FindPartsInRegion3WithWhiteList fun(self:WorldRoot, region:Region3, whitelistDescendantsTable:Objects):Objects
 ---@field FindPartsInRegion3WithWhiteList fun(self:WorldRoot, region:Region3, whitelistDescendantsTable:Objects, maxParts:number):Objects
+---@field GetPartBoundsInBox fun(self:WorldRoot, cframe:CFrame, size:Vector3):Objects
+---@field GetPartBoundsInBox fun(self:WorldRoot, cframe:CFrame, size:Vector3, overlapParams:OverlapParams):Objects
+---@field GetPartBoundsInRadius fun(self:WorldRoot, position:Vector3, radius:number):Objects
+---@field GetPartBoundsInRadius fun(self:WorldRoot, position:Vector3, radius:number, overlapParams:OverlapParams):Objects
+---@field GetPartsInPart fun(self:WorldRoot, part:Instance):Objects
+---@field GetPartsInPart fun(self:WorldRoot, part:Instance, overlapParams:OverlapParams):Objects
 ---@field IKMoveTo fun(self:WorldRoot, part:Instance, target:CFrame):void
 ---@field IKMoveTo fun(self:WorldRoot, part:Instance, target:CFrame, translateStiffness:number):void
 ---@field IKMoveTo fun(self:WorldRoot, part:Instance, target:CFrame, translateStiffness:number, rotateStiffness:number):void
@@ -3204,7 +3236,10 @@
 ---
 ---@class PackageLink : Instance
 ---@field AutoUpdate boolean
+---@field Creator string
+---@field PackageAssetName string
 ---@field PackageId Content
+---@field PermissionLevel Enum.PackagePermission
 ---@field Status string
 ---@field VersionNumber number
 ---
@@ -3660,6 +3695,11 @@
 ---@field AddSeparator fun(self:PluginMenu):void
 ---@field Clear fun(self:PluginMenu):void
 ---@field ShowAsync fun(self:PluginMenu):Instance
+---
+
+---
+---@class PluginPolicyService : Instance
+---@field GetPluginPolicy fun(self:PluginPolicyService, pluginName:string):Dictionary
 ---
 
 ---
@@ -4122,6 +4162,7 @@
 ---@field ItemChanged RBXScriptSignal @function(object:Instance, descriptor:string)
 ---@field Loaded RBXScriptSignal @function()
 ---@field ScreenshotReady RBXScriptSignal @function(path:string)
+---@field ScreenshotSavedToAlbum RBXScriptSignal @function(filename:string, success:boolean, message:string)
 ---@field OnClose fun():Tuple @Callback
 ---
 
@@ -4461,6 +4502,7 @@
 ---@field GridSize number
 ---@field HoverInstance Instance
 ---@field InstalledPluginData string
+---@field PivotSnapToGeometry boolean
 ---@field RotateIncrement number
 ---@field ShowActiveInstanceHighlight boolean
 ---@field ShowConstraintDetails boolean
@@ -4501,7 +4543,6 @@
 ---@field PromptImportLocalAssets fun(self:StudioService, prompt:string):Objects
 ---@field PromptImportLocalAssets fun(self:StudioService, prompt:string, fileTypeFilter:Array):Objects
 ---@field TryInstallPlugin fun(self:StudioService, assetId:number, assetVersionId:number):void
----@field DEPRECATED_OnPublishPlaceToRoblox RBXScriptSignal @function()
 ---@field GameNameUpdated RBXScriptSignal @function(name:string)
 ---@field GamePublishFinished RBXScriptSignal @function(success:boolean, gameId:number)
 ---@field OnConvertToPackageResult RBXScriptSignal @function(isSuccessful:boolean, errorMessage:string)
@@ -6836,6 +6877,16 @@
 ---
 
 ---
+---@class Enum.PackagePermission:EnumItem
+---@field None Enum.PackagePermission @0
+---@field NoAccess Enum.PackagePermission @1
+---@field Revoked Enum.PackagePermission @2
+---@field UseView Enum.PackagePermission @3
+---@field Edit Enum.PackagePermission @4
+---@field Own Enum.PackagePermission @5
+---
+
+---
 ---@class Enum.PacketPriority:EnumItem
 ---@field IMMEDIATE_PRIORITY Enum.PacketPriority @0
 ---@field HIGH_PRIORITY Enum.PacketPriority @1
@@ -7965,6 +8016,7 @@
 ---@field NormalId Enum.NormalId
 ---@field OutputLayoutMode Enum.OutputLayoutMode
 ---@field OverrideMouseIconBehavior Enum.OverrideMouseIconBehavior
+---@field PackagePermission Enum.PackagePermission
 ---@field PacketPriority Enum.PacketPriority
 ---@field PartType Enum.PartType
 ---@field ParticleOrientation Enum.ParticleOrientation
