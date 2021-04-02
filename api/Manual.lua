@@ -105,7 +105,7 @@
 ---@class ColorSequenceKeypoint
 ---@field new fun(time:number, color:Color3) Creates a keypoint with a specified time and color.
 ---@field Time number The relative time at which the keypoint is located.
----@field Value number The Color3 value at the keypoint.
+---@field Value Color3 The Color3 value at the keypoint.
 ---
 
 ---
