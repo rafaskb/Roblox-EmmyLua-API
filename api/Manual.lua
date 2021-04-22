@@ -90,7 +90,7 @@
 ---@field g number The green value of the color
 ---@field b number The blue value of the color
 ---@field lerp fun(self:Color3, color:Color3, alpha:number):Color3 Returns a Color3 interpolated between two Color3 objects. Alpha is a number from 0 to 1.
----@field toHSV fun(color:Color3):number,number,number Returns the hue, saturation, and value of a Color3.
+---@field ToHSV fun(color:Color3):number,number,number Returns the hue, saturation, and value of a Color3.
 ---
 
 ---
