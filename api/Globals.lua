@@ -518,3 +518,10 @@ utf8 = nil
 ---@type RobloxBit32
 ---
 bit32 = nil
+
+---
+---The task library offers alternatives to various global functions (wait, spawn and delay) that allow better coordination with the Task Scheduler.
+---@type RobloxTask
+---
+task = nil
+

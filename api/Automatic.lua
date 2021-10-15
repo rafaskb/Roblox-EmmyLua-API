@@ -1,6 +1,6 @@
 --
---File generated in Aug/16/2021 at 11:36:07
---Roblox version: version-c185c564e45c4f95
+--File generated in Oct/15/2021 at 11:41:27
+--Roblox version: version-493f5ea9226b45e1
 --API Dump version: 1
 --
 
@@ -104,10 +104,33 @@
 ---
 
 ---
+---@class AnimationClip : Instance
+---@field Loop boolean
+---@field Priority Enum.AnimationPriority
+---
+
+---
+---@class CurveAnimation : AnimationClip
+---
+
+---
+---@class KeyframeSequence : AnimationClip
+---@field AuthoredHipHeight number
+---@field AddKeyframe fun(self:KeyframeSequence, keyframe:Instance):void
+---@field GetKeyframes fun(self:KeyframeSequence):Objects
+---@field RemoveKeyframe fun(self:KeyframeSequence, keyframe:Instance):void
+---
+
+---
 ---@class AnimationController : Instance
 ---@field GetPlayingAnimationTracks fun(self:AnimationController):Array
 ---@field LoadAnimation fun(self:AnimationController, animation:Animation):AnimationTrack
 ---@field AnimationPlayed RBXScriptSignal @function(animationTrack:AnimationTrack)
+---
+
+---
+---@class AnimationRigData : Instance
+---@field LoadFromHumanoid fun(self:AnimationRigData, humanoid:Instance):boolean
 ---
 
 ---
@@ -153,6 +176,7 @@
 ---@field CheckForUpdate fun(self:AppUpdateService):void
 ---@field CheckForUpdate fun(self:AppUpdateService, handler:Function):void
 ---@field DisableDUAR fun(self:AppUpdateService):void
+---@field DisableDUARAndOpenSurvey fun(self:AppUpdateService, surveyUrl:string):void
 ---@field PerformManagedUpdate fun(self:AppUpdateService):boolean
 ---
 
@@ -165,34 +189,22 @@
 ---
 
 ---
----@class AssetImportItemSettings : Instance
----@field ShouldImport boolean
----
-
----
----@class AssetImportMeshSettings : AssetImportItemSettings
----
-
----
----@class AssetImportTextureSettings : AssetImportItemSettings
----
-
----
 ---@class AssetImportService : Instance
----@field GetInstanceMap fun(self:AssetImportService, fileName:string):Dictionary
----@field ImportMesh fun(self:AssetImportService, fileName:string):AssetImportSettings
----@field ImportMeshWithPrompt fun(self:AssetImportService):AssetImportSettings
----
-
----
----@class AssetImportSettings : Instance
----@field Hierarchy AssetImportItemSettings
+---@field GetCurrentImportMap fun(self:AssetImportService):Dictionary
+---@field ImportMesh fun(self:AssetImportService, fileName:string):Tuple
+---@field UpdateSettings fun(self:AssetImportService, settings:Instance):void
+---@field Upload fun(self:AssetImportService):void
+---@field ImportMeshWithPrompt fun(self:AssetImportService):Tuple
 ---
 
 ---
 ---@class AssetManagerService : Instance
 ---@field GetMeshId fun(self:AssetManagerService, aliasName:string):number
+---@field GetMeshIdFromAliasName fun(self:AssetManagerService, aliasName:string):number
+---@field GetMeshIdFromAssetId fun(self:AssetManagerService, assetId:number):number
 ---@field GetTextureId fun(self:AssetManagerService, aliasName:string):number
+---@field GetTextureIdFromAliasName fun(self:AssetManagerService, aliasName:string):number
+---@field GetTextureIdFromAssetId fun(self:AssetManagerService, assetId:number):number
 ---@field HasUnpublishedChangesForLinkedSource fun(self:AssetManagerService, aliasName:string):boolean
 ---@field InsertAudio fun(self:AssetManagerService, assetId:number, assetName:string):void
 ---@field InsertImage fun(self:AssetManagerService, assetId:number):void
@@ -201,6 +213,7 @@
 ---@field InsertLinkedSourceAsScript fun(self:AssetManagerService, aliasName:string):void
 ---@field InsertMesh fun(self:AssetManagerService, aliasName:string, insertWithLocation:boolean):void
 ---@field InsertMeshesWithLocation fun(self:AssetManagerService, aliasNames:Array):void
+---@field InsertModel fun(self:AssetManagerService, modelId:number):void
 ---@field InsertPackage fun(self:AssetManagerService, packageId:number):void
 ---@field OpenLinkedSource fun(self:AssetManagerService, aliasName:string):void
 ---@field OpenPlace fun(self:AssetManagerService, placeId:number):void
@@ -210,11 +223,14 @@
 ---@field UpdateAllPackages fun(self:AssetManagerService, packageId:number):void
 ---@field ViewPackageOnWebsite fun(self:AssetManagerService, packageId:number):void
 ---@field AddNewPlace fun(self:AssetManagerService):number
+---@field CreateAlias fun(self:AssetManagerService, assetType:number, assetId:number, aliasName:string):void
 ---@field DeleteAlias fun(self:AssetManagerService, aliasName:string):void
 ---@field PublishLinkedSource fun(self:AssetManagerService, assetId:number, aliasName:string):void
 ---@field RemovePlace fun(self:AssetManagerService, placeId:number):void
 ---@field RenameAlias fun(self:AssetManagerService, assetType:number, assetId:number, oldAliasName:string, newAliasName:string):void
+---@field RenameModel fun(self:AssetManagerService, modelId:number, newName:string):void
 ---@field RenamePlace fun(self:AssetManagerService, placeId:number, newName:string):void
+---@field AssetImportedSignal RBXScriptSignal @function(assetType:number, assetId:number, assetName:string)
 ---@field MayBeLinkedSourceModified RBXScriptSignal @function(aliasName:string)
 ---
 
@@ -276,22 +292,32 @@
 ---
 ---@class AvatarEditorService : Instance
 ---@field NoPromptCreateOutfit fun(self:AvatarEditorService, humanoidDescription:HumanoidDescription, rigType:Enum.HumanoidRigType, name:string):boolean
+---@field NoPromptDeleteOutfit fun(self:AvatarEditorService, outfitId:number):boolean
+---@field NoPromptRenameOutfit fun(self:AvatarEditorService, outfitId:number, name:string):boolean
 ---@field NoPromptSaveAvatar fun(self:AvatarEditorService, humanoidDescription:HumanoidDescription, rigType:Enum.HumanoidRigType, saveDict:Dictionary):boolean
 ---@field NoPromptSaveAvatar fun(self:AvatarEditorService, humanoidDescription:HumanoidDescription, rigType:Enum.HumanoidRigType, saveDict:Dictionary, gearAssetId:number):boolean
 ---@field NoPromptSetFavorite fun(self:AvatarEditorService, itemId:number, itemType:Enum.AvatarItemType, shouldFavorite:boolean):boolean
 ---@field PerformCreateOutfit fun(self:AvatarEditorService, name:string):void
 ---@field PerformCreateOutfitWithDescription fun(self:AvatarEditorService, humanoidDescription:HumanoidDescription, name:string):void
+---@field PerformDeleteOutfit fun(self:AvatarEditorService):void
+---@field PerformRenameOutfit fun(self:AvatarEditorService, name:string):void
 ---@field PerformSaveAvatar fun(self:AvatarEditorService):void
 ---@field PerformSaveAvatarNew fun(self:AvatarEditorService, addedAssets:Array, removedAssets:Array):void
 ---@field PerformSaveAvatarWithDescription fun(self:AvatarEditorService, humanoidDescription:HumanoidDescription, addedAssets:Array, removedAssets:Array):void
 ---@field PerformSetFavorite fun(self:AvatarEditorService):void
 ---@field PromptAllowInventoryReadAccess fun(self:AvatarEditorService):void
 ---@field PromptCreateOutfit fun(self:AvatarEditorService, outfit:HumanoidDescription, rigType:Enum.HumanoidRigType):void
+---@field PromptDeleteOutfit fun(self:AvatarEditorService, outfitId:number):void
+---@field PromptRenameOutfit fun(self:AvatarEditorService, outfitId:number):void
 ---@field PromptSaveAvatar fun(self:AvatarEditorService, humanoidDescription:HumanoidDescription, rigType:Enum.HumanoidRigType):void
 ---@field PromptSetFavorite fun(self:AvatarEditorService, itemId:number, itemType:Enum.AvatarItemType, shouldFavorite:boolean):void
 ---@field SetAllowInventoryReadAccess fun(self:AvatarEditorService, inventoryReadAccessGranted:boolean):void
 ---@field SignalCreateOutfitFailed fun(self:AvatarEditorService):void
 ---@field SignalCreateOutfitPermissionDenied fun(self:AvatarEditorService):void
+---@field SignalDeleteOutfitFailed fun(self:AvatarEditorService):void
+---@field SignalDeleteOutfitPermissionDenied fun(self:AvatarEditorService):void
+---@field SignalRenameOutfitFailed fun(self:AvatarEditorService):void
+---@field SignalRenameOutfitPermissionDenied fun(self:AvatarEditorService):void
 ---@field SignalSaveAvatarFailed fun(self:AvatarEditorService):void
 ---@field SignalSaveAvatarPermissionDenied fun(self:AvatarEditorService):void
 ---@field SignalSetFavoriteFailed fun(self:AvatarEditorService):void
@@ -311,10 +337,14 @@
 ---@field SearchCatalog fun(self:AvatarEditorService, searchParameters:CatalogSearchParams):CatalogPages
 ---@field OpenAllowInventoryReadAccess RBXScriptSignal @function()
 ---@field OpenPromptCreateOufit RBXScriptSignal @function(humanoidDescription:HumanoidDescription, rigType:Enum.HumanoidRigType)
+---@field OpenPromptDeleteOutfit RBXScriptSignal @function(outfitId:number)
+---@field OpenPromptRenameOutfit RBXScriptSignal @function(outfitId:number)
 ---@field OpenPromptSaveAvatar RBXScriptSignal @function(humanoidDescription:HumanoidDescription, rigType:Enum.HumanoidRigType)
 ---@field OpenPromptSetFavorite RBXScriptSignal @function(itemId:number, itemType:Enum.AvatarItemType, shouldFavorite:boolean)
 ---@field PromptAllowInventoryReadAccessCompleted RBXScriptSignal @function(result:Enum.AvatarPromptResult)
 ---@field PromptCreateOutfitCompleted RBXScriptSignal @function(result:Enum.AvatarPromptResult, failureType:Variant)
+---@field PromptDeleteOutfitCompleted RBXScriptSignal @function(result:Enum.AvatarPromptResult)
+---@field PromptRenameOutfitCompleted RBXScriptSignal @function(result:Enum.AvatarPromptResult)
 ---@field PromptSaveAvatarCompleted RBXScriptSignal @function(result:Enum.AvatarPromptResult, humanoidDescription:HumanoidDescription)
 ---@field PromptSetFavoriteCompleted RBXScriptSignal @function(result:Enum.AvatarPromptResult)
 ---
@@ -419,6 +449,7 @@
 ---@field ImportOriginWorld CFrame
 ---@field GetFaces fun(self:BaseWrap, cageType:Enum.CageType):Array
 ---@field GetVertices fun(self:BaseWrap, cageType:Enum.CageType):Array
+---@field IsHSRReady fun(self:BaseWrap):boolean
 ---@field ModifyVertices fun(self:BaseWrap, cageType:Enum.CageType, vertices:Array):void
 ---
 
@@ -447,6 +478,7 @@
 ---@class Beam : Instance
 ---@field Attachment0 Attachment
 ---@field Attachment1 Attachment
+---@field Brightness number
 ---@field Color ColorSequence
 ---@field CurveSize0 number
 ---@field CurveSize1 number
@@ -547,15 +579,13 @@
 
 ---
 ---@class Breakpoint : Instance
----@field Condition Expression
+---@field Condition string
 ---@field Enabled boolean
+---@field Id number
 ---@field Line number
----@field Script ScriptRef
----@field Valid boolean
----@field Remove fun(self:Breakpoint, status:Function):number
----@field SetCondition fun(self:Breakpoint, condition:Instance, status:Function):number
----@field SetEnabled fun(self:Breakpoint, enabled:boolean, status:Function):number
----@field SetLine fun(self:Breakpoint, line:number, status:Function):number
+---@field LogMessage string
+---@field Script string
+---@field Verified boolean
 ---
 
 ---
@@ -582,6 +612,10 @@
 ---@field AssetImported RBXScriptSignal @function(assetType:Enum.AssetType, name:string, id:number)
 ---@field BulkImportFinished RBXScriptSignal @function(state:number)
 ---@field BulkImportStarted RBXScriptSignal @function()
+---
+
+---
+---@class CSGCacheService : Instance
 ---
 
 ---
@@ -767,19 +801,21 @@
 ---@field AllowGUIAccessPoints boolean
 ---@field Checked boolean
 ---@field DefaultShortcut string
+---@field DisplayName string
 ---@field Enabled boolean
 ---@field Icon string
 ---@field Name string
 ---@field Permission Enum.CommandPermission
 ---@field StatusTip string
----@field Text string
+---@field EnableGuiAccess fun(self:CommandInstance, displayName:string, statusTip:string, defaultShortcut:string):void
 ---@field RegisterExecutionCallback fun(self:CommandInstance, callbackFunction:Function):void
 ---
 
 ---
 ---@class CommandService : Instance
 ---@field Execute fun(self:CommandService, name:string, params:Variant):Variant
----@field RegisterCommand fun(self:CommandService, pluginname:Plugin, description:string, :string):CommandInstance
+---@field RegisterCommand fun(self:CommandService, plugin:Plugin, name:string, context:string):CommandInstance
+---@field RegisterCommand fun(self:CommandService, plugin:Plugin, name:string, context:string, permission:Enum.CommandPermission):CommandInstance
 ---@field CommandExecuting RBXScriptSignal @function(name:string, params:Variant)
 ---
 
@@ -800,12 +836,16 @@
 ---
 ---@class AlignOrientation : Constraint
 ---@field AlignType Enum.AlignType
+---@field CFrame CFrame
 ---@field MaxAngularVelocity number
 ---@field MaxTorque number
+---@field Mode Enum.OrientationAlignmentMode
+---@field PrimaryAxis Vector3
 ---@field PrimaryAxisOnly boolean
 ---@field ReactionTorqueEnabled boolean
 ---@field Responsiveness number
 ---@field RigidityEnabled boolean
+---@field SecondaryAxis Vector3
 ---
 
 ---
@@ -813,6 +853,8 @@
 ---@field ApplyAtCenterOfMass boolean
 ---@field MaxForce number
 ---@field MaxVelocity number
+---@field Mode Enum.PositionAlignmentMode
+---@field Position Vector3
 ---@field ReactionForceEnabled boolean
 ---@field Responsiveness number
 ---@field RigidityEnabled boolean
@@ -866,7 +908,7 @@
 ---
 
 ---
----@class LinearVelocityConstraint : Constraint
+---@class LinearVelocity : Constraint
 ---@field LineDirection Vector3
 ---@field LineVelocity number
 ---@field MaxForce number
@@ -1213,29 +1255,50 @@
 
 ---
 ---@class DebuggerConnection : Instance
+---@field ErrorMessage string
+---@field HasError boolean
 ---@field Id number
 ---@field IsPaused boolean
----@field AddBreakpoint fun(self:DebuggerConnection, script:Instance, line:number, conditon:Instance, status:Function):number
----@field GetSource fun(self:DebuggerConnection, scriptRef:Instance, status:Function):number
----@field Pause fun(self:DebuggerConnection, status:Function):number
----@field Resume fun(self:DebuggerConnection, status:Function):number
----@field Terminate fun(self:DebuggerConnection, status:Function):number
----@field BreakpointAdded RBXScriptSignal @function(breakpoint:Instance)
----@field BreakpointChanged RBXScriptSignal @function(breakpoint:Instance)
----@field BreakpointRemoved RBXScriptSignal @function(breakpoint:Instance, reason:Enum.BreakpointRemoveReason)
----@field Paused RBXScriptSignal @function(pausedState:Instance, reason:Enum.DebuggerPauseReason)
----@field Resumed RBXScriptSignal @function(pausedState:Instance)
+---@field AddBreakpoint fun(self:DebuggerConnection, script:string, line:number, breakpoint:Breakpoint):void
+---@field Close fun(self:DebuggerConnection):void
+---@field EvaluateWatch fun(self:DebuggerConnection, expression:string, frame:StackFrame, callback:Function):number
+---@field GetFrameById fun(self:DebuggerConnection, id:number):StackFrame
+---@field GetSource fun(self:DebuggerConnection, scriptRef:string, status:Function):number
+---@field GetThreadById fun(self:DebuggerConnection, id:number):ThreadState
+---@field GetThreads fun(self:DebuggerConnection, callback:Function):number
+---@field GetVariableById fun(self:DebuggerConnection, id:number):DebuggerVariable
+---@field Pause fun(self:DebuggerConnection, thread:ThreadState, status:Function):number
+---@field Populate fun(self:DebuggerConnection, instance:Instance, callback:Function):number
+---@field RemoveBreakpoint fun(self:DebuggerConnection, breakpoint:Breakpoint):void
+---@field Resume fun(self:DebuggerConnection, thread:ThreadState, status:Function):number
+---@field SetVariable fun(self:DebuggerConnection, variable:DebuggerVariable, value:string, callback:Function):number
+---@field BreakpointAdded RBXScriptSignal @function(breakpoint:Breakpoint)
+---@field BreakpointChanged RBXScriptSignal @function(breakpoint:Breakpoint)
+---@field BreakpointRemoved RBXScriptSignal @function(breakpoint:Breakpoint, reason:Enum.BreakpointRemoveReason)
+---@field Paused RBXScriptSignal @function(pausedState:PausedState, reason:Enum.DebuggerPauseReason)
+---@field Resumed RBXScriptSignal @function(pausedState:PausedState)
 ---
 
 ---
 ---@class DebuggerConnectionManager : Instance
 ---@field Timeout number
----@field ConnectLocal fun(self:DebuggerConnectionManager, dataModel:Instance):number
+---@field ConnectLocal fun(self:DebuggerConnectionManager, dataModel:DataModel):number
 ---@field ConnectRemote fun(self:DebuggerConnectionManager, host:string, port:number):number
----@field FocusConnection fun(self:DebuggerConnectionManager, connection:Instance):void
----@field ConnectionEnded RBXScriptSignal @function(connection:Instance, reason:Enum.DebuggerEndReason)
----@field ConnectionStarted RBXScriptSignal @function(connection:Instance)
----@field FocusChanged RBXScriptSignal @function(connection:Instance)
+---@field FocusConnection fun(self:DebuggerConnectionManager, connection:DebuggerConnection):void
+---@field GetConnectionById fun(self:DebuggerConnectionManager, id:number):DebuggerConnection
+---@field ConnectionEnded RBXScriptSignal @function(connection:DebuggerConnection, reason:Enum.DebuggerEndReason)
+---@field ConnectionStarted RBXScriptSignal @function(connection:DebuggerConnection)
+---@field FocusChanged RBXScriptSignal @function(connection:DebuggerConnection)
+---
+
+---
+---@class DebuggerLuaResponse : Instance
+---@field IsError boolean
+---@field IsSuccess boolean
+---@field Message string
+---@field RequestId number
+---@field Status Enum.DebuggerStatus
+---@field GetArg fun(self:DebuggerLuaResponse):Variant
 ---
 
 ---
@@ -1250,6 +1313,18 @@
 ---@field StepOver fun(self:DebuggerManager):void
 ---@field DebuggerAdded RBXScriptSignal @function(debugger:Instance)
 ---@field DebuggerRemoved RBXScriptSignal @function(debugger:Instance)
+---
+
+---
+---@class DebuggerVariable : Instance
+---@field Name string
+---@field Populated boolean
+---@field Type string
+---@field Value string
+---@field VariableId number
+---@field VariablesCount number
+---@field GetVariableByIndex fun(self:DebuggerVariable, index:number):DebuggerVariable
+---@field GetVariableByName fun(self:DebuggerVariable, name:string):DebuggerVariable
 ---
 
 ---
@@ -1332,6 +1407,16 @@
 ---
 
 ---
+---@class EulerRotationCurve : Instance
+---@field RotationOrder Enum.RotationOrder
+---@field GetAnglesAtTime fun(self:EulerRotationCurve, time:number):Array
+---@field GetRotationAtTime fun(self:EulerRotationCurve, time:number):CFrame
+---@field X fun(self:EulerRotationCurve):FloatCurve
+---@field Y fun(self:EulerRotationCurve):FloatCurve
+---@field Z fun(self:EulerRotationCurve):FloatCurve
+---
+
+---
 ---@class EventIngestService : Instance
 ---@field SendEventDeferred fun(self:EventIngestService, target:string, eventContext:string, eventName:string, additionalArgs:Dictionary):void
 ---@field SendEventImmediately fun(self:EventIngestService, target:string, eventContext:string, eventName:string, additionalArgs:Dictionary):void
@@ -1348,12 +1433,6 @@
 ---@field Position Vector3
 ---@field Visible boolean
 ---@field Hit RBXScriptSignal @function(part:Instance, distance:number)
----
-
----
----@class Expression : Instance
----@field Expression string
----@field Evaluate fun(self:Expression, frame:Instance, status:Function):number
 ---
 
 ---
@@ -1444,11 +1523,8 @@
 
 ---
 ---@class File : Instance
----@field FileName string
----@field FileSize number
 ---@field Size number
 ---@field GetBinaryContents fun(self:File):string
----@field GetFileContentsBinary fun(self:File):string
 ---@field GetTemporaryId fun(self:File):Content
 ---
 
@@ -1463,6 +1539,19 @@
 
 ---
 ---@class FlagStandService : Instance
+---
+
+---
+---@class FloatCurve : Instance
+---@field Length number
+---@field GetKeyAtIndex fun(self:FloatCurve, index:number):FloatCurveKey
+---@field GetKeyIndicesAtTime fun(self:FloatCurve, time:number):Array
+---@field GetKeys fun(self:FloatCurve):Array
+---@field GetValueAtTime fun(self:FloatCurve, time:number):float?
+---@field InsertKey fun(self:FloatCurve, key:FloatCurveKey):Array
+---@field RemoveKeyAtIndex fun(self:FloatCurve, startingIndex:number):number
+---@field RemoveKeyAtIndex fun(self:FloatCurve, startingIndex:number, count:number):number
+---@field SetKeys fun(self:FloatCurve, keys:Array):number
 ---
 
 ---
@@ -1511,6 +1600,7 @@
 ---@field GamepadCursorEnabled boolean
 ---@field GetGamepadCursorPosition fun(self:GamepadService):Vector2
 ---@field SetGamepadCursorPosition fun(self:GamepadService, position:Vector2):void
+---@field GamepadThumbstick1Changed RBXScriptSignal @function(event:Vector2)
 ---
 
 ---
@@ -1648,6 +1738,12 @@
 ---
 
 ---
+---@class CanvasGroup : GuiObject
+---@field GroupColor Color3
+---@field Transparency number
+---
+
+---
 ---@class Frame : GuiObject
 ---@field Style Enum.FrameStyle
 ---
@@ -1669,6 +1765,7 @@
 
 ---
 ---@class ImageButton : GuiButton
+---@field ContentImageSize Vector2
 ---@field HoverImage Content
 ---@field Image Content
 ---@field ImageColor3 Color3
@@ -1682,6 +1779,7 @@
 ---@field SliceCenter Rect
 ---@field SliceScale number
 ---@field TileSize UDim2
+---@field SetEnableContentImageSizeChangedEvents fun(self:ImageButton, enabled:boolean):void
 ---
 
 ---
@@ -1716,6 +1814,7 @@
 
 ---
 ---@class ImageLabel : GuiLabel
+---@field ContentImageSize Vector2
 ---@field Image Content
 ---@field ImageColor3 Color3
 ---@field ImageRectOffset Vector2
@@ -1727,6 +1826,7 @@
 ---@field SliceCenter Rect
 ---@field SliceScale number
 ---@field TileSize UDim2
+---@field SetEnableContentImageSizeChangedEvents fun(self:ImageLabel, enabled:boolean):void
 ---
 
 ---
@@ -1905,6 +2005,7 @@
 ---
 ---@class DockWidgetPluginGui : PluginGui
 ---@field HostWidgetWasRestored boolean
+---@field RequestRaise fun(self:DockWidgetPluginGui):void
 ---
 
 ---
@@ -2078,6 +2179,7 @@
 ---@field MenuIsOpen boolean
 ---@field SelectedCoreObject GuiObject
 ---@field SelectedObject GuiObject
+---@field TouchControlsEnabled boolean
 ---@field AddCenterDialog fun(self:GuiService, dialog:Instance, centerDialogType:Enum.CenterDialogType, showFunction:Function, hideFunction:Function):void
 ---@field AddKey fun(self:GuiService, key:string):void
 ---@field AddSelectionParent fun(self:GuiService, selectionName:string, selectionParent:Instance):void
@@ -2167,6 +2269,16 @@
 ---@field ImportHeightmap fun(self:HeightmapImporterService, region:Region3, heightmapAssetId:Content, colormapAssetId:Content, defaultMaterial:Enum.Material):void
 ---@field ColormapHasUnknownPixels RBXScriptSignal @function()
 ---@field ProgressUpdate RBXScriptSignal @function(progressRatio:number, operation:string)
+---
+
+---
+---@class Highlight : Instance
+---@field DepthMode Enum.HighlightDepthMode
+---@field Enabled boolean
+---@field FillColor Color3
+---@field FillTransparency number
+---@field OutlineColor Color3
+---@field OutlineTransparency number
 ---
 
 ---
@@ -2270,6 +2382,7 @@
 ---@field ChangeState fun(self:Humanoid, state:Enum.HumanoidStateType):void
 ---@field EquipTool fun(self:Humanoid, tool:Instance):void
 ---@field GetAccessories fun(self:Humanoid):Array
+---@field GetAccessoryHandleScale fun(self:Humanoid, instance:Instance, partType:Enum.BodyPartR15):Vector3
 ---@field GetAppliedDescription fun(self:Humanoid):HumanoidDescription
 ---@field GetBodyPartR15 fun(self:Humanoid, part:Instance):Enum.BodyPartR15
 ---@field GetLimb fun(self:Humanoid, part:Instance):Enum.Limb
@@ -2403,21 +2516,32 @@
 ---@field Id string
 ---@field ImportName string
 ---@field ShouldImport boolean
+---@field GetStatuses fun(self:ImporterBaseSettings):Dictionary
 ---
 
 ---
 ---@class ImporterGroupSettings : ImporterBaseSettings
+---@field ImportAsModelAsset boolean
+---
+
+---
+---@class ImporterJointSettings : ImporterBaseSettings
 ---
 
 ---
 ---@class ImporterMeshSettings : ImporterBaseSettings
+---@field Dimensions Vector3
 ---@field DoubleSided boolean
+---@field IgnoreVertexColors boolean
+---@field PolygonCount number
 ---
 
 ---
 ---@class ImporterRootSettings : ImporterBaseSettings
 ---@field FileDimensions Vector3
----@field FlattenAll boolean
+---@field ImportAsModelAsset boolean
+---@field InvertNegativeFaces boolean
+---@field MergeMeshes boolean
 ---@field PolygonCount number
 ---@field ScaleUnit Enum.MeshScaleUnit
 ---@field WorldForward Enum.NormalId
@@ -2558,16 +2682,6 @@
 ---
 ---@class KeyframeMarker : Instance
 ---@field Value string
----
-
----
----@class KeyframeSequence : Instance
----@field AuthoredHipHeight number
----@field Loop boolean
----@field Priority Enum.AnimationPriority
----@field AddKeyframe fun(self:KeyframeSequence, keyframe:Instance):void
----@field GetKeyframes fun(self:KeyframeSequence):Objects
----@field RemoveKeyframe fun(self:KeyframeSequence, keyframe:Instance):void
 ---
 
 ---
@@ -2834,6 +2948,39 @@
 ---
 
 ---
+---@class MaterialService : Instance
+---@field Brick MaterialVariant
+---@field Cobblestone MaterialVariant
+---@field Concrete MaterialVariant
+---@field CorrodedMetal MaterialVariant
+---@field DiamondPlate MaterialVariant
+---@field Fabric MaterialVariant
+---@field Foil MaterialVariant
+---@field Granite MaterialVariant
+---@field Grass MaterialVariant
+---@field Ice MaterialVariant
+---@field Marble MaterialVariant
+---@field Metal MaterialVariant
+---@field Pebble MaterialVariant
+---@field Plastic MaterialVariant
+---@field Sand MaterialVariant
+---@field Slate MaterialVariant
+---@field SmoothPlastic MaterialVariant
+---@field Wood MaterialVariant
+---@field WoodPlanks MaterialVariant
+---
+
+---
+---@class MaterialVariant : Instance
+---@field BaseMaterial Enum.Material
+---@field ColorMap Content
+---@field MetalnessMap Content
+---@field NormalMap Content
+---@field RoughnessMap Content
+---@field StudsPerTile number
+---
+
+---
 ---@class MemStorageConnection : Instance
 ---@field Disconnect fun(self:MemStorageConnection):void
 ---
@@ -2879,6 +3026,26 @@
 ---@field RemoveAsync fun(self:MemoryStoreSortedMap, key:string):void
 ---@field SetAsync fun(self:MemoryStoreSortedMap, key:string, value:Variant, expiration:number):boolean
 ---@field UpdateAsync fun(self:MemoryStoreSortedMap, key:string, transformFunction:Function, expiration:number):Variant
+---
+
+---
+---@class MessageBusConnection : Instance
+---@field Disconnect fun(self:MessageBusConnection):void
+---
+
+---
+---@class MessageBusService : Instance
+---@field Call fun(self:MessageBusService, key:string, input:Variant):Variant
+---@field GetLast fun(self:MessageBusService, mid:string):Variant
+---@field GetMessageId fun(self:MessageBusService, domainName:string, messageName:string):string
+---@field GetProtocolMethodRequestMessageId fun(self:MessageBusService, protocolName:string, methodName:string):string
+---@field GetProtocolMethodResponseMessageId fun(self:MessageBusService, protocolName:string, methodName:string):string
+---@field Publish fun(self:MessageBusService, mid:string, params:Variant):void
+---@field PublishProtocolMethodRequest fun(self:MessageBusService, protocolName:string, methodName:string, message:Variant, customTelemetryData:Variant):void
+---@field PublishProtocolMethodResponse fun(self:MessageBusService, protocolName:string, methodName:string, message:Variant, responseCode:number, customTelemetryData:Variant):void
+---@field Subscribe fun(self:MessageBusService, mid:string, callback:Function, once:boolean, sticky:boolean):Instance
+---@field SubscribeToProtocolMethodRequest fun(self:MessageBusService, protocolName:string, methodName:string, callback:Function, once:boolean, sticky:boolean):Instance
+---@field SubscribeToProtocolMethodResponse fun(self:MessageBusService, protocolName:string, methodName:string, callback:Function, once:boolean, sticky:boolean):Instance
 ---
 
 ---
@@ -3089,7 +3256,7 @@
 ---@field ApplyImpulse fun(self:BasePart, impulse:Vector3):void
 ---@field ApplyImpulseAtPosition fun(self:BasePart, impulse:Vector3, position:Vector3):void
 ---@field BreakJoints fun(self:BasePart):void
----@field CanCollideWith fun(self:BasePart, part:Instance):boolean
+---@field CanCollideWith fun(self:BasePart, part:BasePart):boolean
 ---@field CanSetNetworkOwnership fun(self:BasePart):Tuple
 ---@field GetConnectedParts fun(self:BasePart):Objects
 ---@field GetConnectedParts fun(self:BasePart, recursive:boolean):Objects
@@ -3176,7 +3343,7 @@
 ---@field CellCornerToWorld fun(self:Terrain, x:number, y:number, z:number):Vector3
 ---@field Clear fun(self:Terrain):void
 ---@field ConvertToSmooth fun(self:Terrain):void
----@field CopyRegion fun(self:Terrain, region:Region3int16):Instance
+---@field CopyRegion fun(self:Terrain, region:Region3int16):TerrainRegion
 ---@field CountCells fun(self:Terrain):number
 ---@field FillBall fun(self:Terrain, center:Vector3, radius:number, material:Enum.Material):void
 ---@field FillBlock fun(self:Terrain, cframe:CFrame, size:Vector3, material:Enum.Material):void
@@ -3186,7 +3353,7 @@
 ---@field GetCell fun(self:Terrain, x:number, y:number, z:number):Tuple
 ---@field GetMaterialColor fun(self:Terrain, material:Enum.Material):Color3
 ---@field GetWaterCell fun(self:Terrain, x:number, y:number, z:number):Tuple
----@field PasteRegion fun(self:Terrain, region:Instance, corner:Vector3int16, pasteEmptyCells:boolean):void
+---@field PasteRegion fun(self:Terrain, region:TerrainRegion, corner:Vector3int16, pasteEmptyCells:boolean):void
 ---@field ReadVoxels fun(self:Terrain, region:Region3, resolution:number):Tuple
 ---@field ReplaceMaterial fun(self:Terrain, region:Region3, resolution:number, sourceMaterial:Enum.Material, targetMaterial:Enum.Material):void
 ---@field SetCell fun(self:Terrain, x:number, y:number, z:number, material:Enum.CellMaterial, block:Enum.CellBlock, orientation:Enum.CellOrientation):void
@@ -3306,8 +3473,8 @@
 ---@field GetPartBoundsInBox fun(self:WorldRoot, cframe:CFrame, size:Vector3, overlapParams:OverlapParams):Objects
 ---@field GetPartBoundsInRadius fun(self:WorldRoot, position:Vector3, radius:number):Objects
 ---@field GetPartBoundsInRadius fun(self:WorldRoot, position:Vector3, radius:number, overlapParams:OverlapParams):Objects
----@field GetPartsInPart fun(self:WorldRoot, part:Instance):Objects
----@field GetPartsInPart fun(self:WorldRoot, part:Instance, overlapParams:OverlapParams):Objects
+---@field GetPartsInPart fun(self:WorldRoot, part:BasePart):Objects
+---@field GetPartsInPart fun(self:WorldRoot, part:BasePart, overlapParams:OverlapParams):Objects
 ---@field IKMoveTo fun(self:WorldRoot, part:BasePart, target:CFrame):void
 ---@field IKMoveTo fun(self:WorldRoot, part:BasePart, target:CFrame, translateStiffness:number):void
 ---@field IKMoveTo fun(self:WorldRoot, part:BasePart, target:CFrame, translateStiffness:number, rotateStiffness:number):void
@@ -3336,7 +3503,9 @@
 ---@field MeshPartHeadsAndAccessories Enum.MeshPartHeadsAndAccessories
 ---@field PhysicsSimulationRate Enum.PhysicsSimulationRate
 ---@field PhysicsSteppingMethod Enum.PhysicsSteppingMethod
+---@field Retargeting Enum.AnimatorRetargetingMode
 ---@field SignalBehavior Enum.SignalBehavior
+---@field StreamOutBehavior Enum.StreamOutBehavior
 ---@field StreamingEnabled boolean
 ---@field StreamingMinRadius number
 ---@field StreamingPauseMode Enum.StreamingPauseMode
@@ -3434,6 +3603,7 @@
 ---
 ---@class ParticleEmitter : Instance
 ---@field Acceleration Vector3
+---@field Brightness number
 ---@field Color ColorSequence
 ---@field Drag number
 ---@field EmissionDirection Enum.NormalId
@@ -3446,9 +3616,14 @@
 ---@field Rate number
 ---@field RotSpeed NumberRange
 ---@field Rotation NumberRange
+---@field Shape Enum.ParticleEmitterShape
+---@field ShapeInOut Enum.ParticleEmitterShapeInOut
+---@field ShapePartial number
+---@field ShapeStyle Enum.ParticleEmitterShapeStyle
 ---@field Size NumberSequence
 ---@field Speed NumberRange
 ---@field SpreadAngle Vector2
+---@field Squash NumberSequence
 ---@field Texture Content
 ---@field TimeScale number
 ---@field Transparency NumberSequence
@@ -3468,11 +3643,20 @@
 ---@field CheckOcclusionAsync fun(self:Path, start:number):number
 ---@field ComputeAsync fun(self:Path, start:Vector3, finish:Vector3):void
 ---@field Blocked RBXScriptSignal @function(blockedWaypointIdx:number)
+---@field Unblocked RBXScriptSignal @function(unblockedWaypointIdx:number)
+---
+
+---
+---@class PathfindingLink : Instance
+---@field Attachment0 Attachment
+---@field Attachment1 Attachment
+---@field IsBidirectional boolean
 ---
 
 ---
 ---@class PathfindingModifier : Instance
 ---@field ModifierId string
+---@field PassThrough boolean
 ---
 
 ---
@@ -3487,22 +3671,19 @@
 
 ---
 ---@class PausedState : Instance
----@field IsValid boolean
+---@field AllThreadsPaused boolean
 ---@field Reason Enum.DebuggerPauseReason
----@field ThreadCount number
----@field GetThread fun(self:PausedState, index:number):Instance
+---@field ThreadId number
 ---
 
 ---
 ---@class PausedStateBreakpoint : PausedState
 ---@field Breakpoint Breakpoint
----@field BreakpointThread ThreadState
 ---
 
 ---
 ---@class PausedStateException : PausedState
 ---@field ExceptionText string
----@field ExceptionThread ThreadState
 ---
 
 ---
@@ -3516,7 +3697,7 @@
 
 ---
 ---@class PhysicsService : Instance
----@field CollisionGroupContainsPart fun(self:PhysicsService, name:string, part:Instance):boolean
+---@field CollisionGroupContainsPart fun(self:PhysicsService, name:string, part:BasePart):boolean
 ---@field CollisionGroupSetCollidable fun(self:PhysicsService, name1:string, name2:string, collidable:boolean):void
 ---@field CollisionGroupsAreCollidable fun(self:PhysicsService, name1:string, name2:string):boolean
 ---@field CreateCollisionGroup fun(self:PhysicsService, name:string):number
@@ -3528,7 +3709,7 @@
 ---@field LocalIkSolve fun(self:PhysicsService, part:BasePart, target:CFrame, translateStiffness:number, rotateStiffness:number):void
 ---@field RemoveCollisionGroup fun(self:PhysicsService, name:string):void
 ---@field RenameCollisionGroup fun(self:PhysicsService, from:string, to:string):void
----@field SetPartCollisionGroup fun(self:PhysicsService, part:Instance, name:string):void
+---@field SetPartCollisionGroup fun(self:PhysicsService, part:BasePart, name:string):void
 ---
 
 ---
@@ -3664,14 +3845,13 @@
 
 ---
 ---@class PlayerEmulatorService : Instance
----@field DEPRECATED_SerializedEmulatedPolicyInfo string
+---@field CustomPoliciesEnabled boolean
 ---@field EmulatedCountryCode string
 ---@field EmulatedGameLocale string
 ---@field PlayerEmulationEnabled boolean
----@field PlayerEmulationEnabled_deprecated boolean
 ---@field SerializedEmulatedPolicyInfo BinaryString
----@field StudioEmulatedCountryRegionCode string
 ---@field GetEmulatedPolicyInfo fun(self:PlayerEmulatorService):Dictionary
+---@field RegionCodeWillHaveAutomaticNonCustomPolicies fun(self:PlayerEmulatorService, regionCode:string):boolean
 ---@field SetEmulatedPolicyInfo fun(self:PlayerEmulatorService, emulatedPolicyInfo:Dictionary):void
 ---
 
@@ -3708,35 +3888,35 @@
 ---@field PreferredPlayersInternal number
 ---@field RespawnTime number
 ---@field Chat fun(self:Players, message:string):void
----@field CreateLocalPlayer fun(self:Players):Instance
+---@field CreateLocalPlayer fun(self:Players):Player
 ---@field GetPlayerByUserId fun(self:Players, userId:number):Player
 ---@field GetPlayerFromCharacter fun(self:Players, character:Model):Player
 ---@field GetPlayers fun(self:Players):Objects
----@field ReportAbuse fun(self:Players, player:Instance, reason:string, optionalMessage:string):void
+---@field ReportAbuse fun(self:Players, player:Player, reason:string, optionalMessage:string):void
 ---@field SetChatStyle fun(self:Players):void
 ---@field SetChatStyle fun(self:Players, style:Enum.ChatStyle):void
 ---@field SetLocalPlayerInfo fun(self:Players, userId:number, userName:string, displayName:string, membershipType:Enum.MembershipType, isUnder13:boolean):void
 ---@field TeamChat fun(self:Players, message:string):void
 ---@field WhisperChat fun(self:Players, message:string, player:Instance):void
----@field CreateHumanoidModelFromDescription fun(self:Players, description:Instance, rigType:Enum.HumanoidRigType):Instance
----@field CreateHumanoidModelFromDescription fun(self:Players, description:Instance, rigType:Enum.HumanoidRigType, assetTypeVerification:Enum.AssetTypeVerification):Instance
----@field CreateHumanoidModelFromUserId fun(self:Players, userId:number):Instance
----@field GetCharacterAppearanceAsync fun(self:Players, userId:number):Instance
+---@field CreateHumanoidModelFromDescription fun(self:Players, description:HumanoidDescription, rigType:Enum.HumanoidRigType):Model
+---@field CreateHumanoidModelFromDescription fun(self:Players, description:HumanoidDescription, rigType:Enum.HumanoidRigType, assetTypeVerification:Enum.AssetTypeVerification):Model
+---@field CreateHumanoidModelFromUserId fun(self:Players, userId:number):Model
+---@field GetCharacterAppearanceAsync fun(self:Players, userId:number):Model
 ---@field GetCharacterAppearanceInfoAsync fun(self:Players, userId:number):Dictionary
----@field GetFriendsAsync fun(self:Players, userId:number):Instance
----@field GetHumanoidDescriptionFromOutfitId fun(self:Players, outfitId:number):Instance
----@field GetHumanoidDescriptionFromUserId fun(self:Players, userId:number):Instance
+---@field GetFriendsAsync fun(self:Players, userId:number):FriendPages
+---@field GetHumanoidDescriptionFromOutfitId fun(self:Players, outfitId:number):HumanoidDescription
+---@field GetHumanoidDescriptionFromUserId fun(self:Players, userId:number):HumanoidDescription
 ---@field GetNameFromUserIdAsync fun(self:Players, userId:number):string
 ---@field GetUserIdFromNameAsync fun(self:Players, userName:string):number
 ---@field GetUserThumbnailAsync fun(self:Players, userId:number, thumbnailType:Enum.ThumbnailType, thumbnailSize:Enum.ThumbnailSize):Tuple
 ---@field FriendRequestEvent RBXScriptSignal @function(player:Player, player:Player, friendRequestEvent:Enum.FriendRequestEvent)
 ---@field GameAnnounce RBXScriptSignal @function(message:string)
 ---@field PlayerAdded RBXScriptSignal @function(player:Player)
----@field PlayerChatted RBXScriptSignal @function(chatType:Enum.PlayerChatType, player:Instance, message:string, targetPlayer:Instance)
----@field PlayerConnecting RBXScriptSignal @function(player:Instance)
----@field PlayerDisconnecting RBXScriptSignal @function(player:Instance)
----@field PlayerMembershipChanged RBXScriptSignal @function(player:Instance)
----@field PlayerRejoining RBXScriptSignal @function(player:Instance)
+---@field PlayerChatted RBXScriptSignal @function(chatType:Enum.PlayerChatType, player:Player, message:string, targetPlayer:Player)
+---@field PlayerConnecting RBXScriptSignal @function(player:Player)
+---@field PlayerDisconnecting RBXScriptSignal @function(player:Player)
+---@field PlayerMembershipChanged RBXScriptSignal @function(player:Player)
+---@field PlayerRejoining RBXScriptSignal @function(player:Player)
 ---@field PlayerRemoving RBXScriptSignal @function(player:Player)
 ---
 
@@ -3769,8 +3949,8 @@
 ---@field Negate fun(self:Plugin, objects:Objects):Objects
 ---@field OnInvoke fun(self:Plugin, key:string, callback:Function):Instance
 ---@field OnSetItem fun(self:Plugin, key:string, callback:Function):Instance
----@field OpenScript fun(self:Plugin, script:Instance):void
----@field OpenScript fun(self:Plugin, script:Instance, lineNumber:number):void
+---@field OpenScript fun(self:Plugin, script:LuaSourceContainer):void
+---@field OpenScript fun(self:Plugin, script:LuaSourceContainer, lineNumber:number):void
 ---@field OpenWikiPage fun(self:Plugin, url:string):void
 ---@field PauseSound fun(self:Plugin, sound:Instance):void
 ---@field PlaySound fun(self:Plugin, sound:Instance):void
@@ -3780,6 +3960,7 @@
 ---@field SelectRibbonTool fun(self:Plugin, tool:Enum.RibbonTool, position:UDim2):void
 ---@field Separate fun(self:Plugin, objects:Objects):Objects
 ---@field SetItem fun(self:Plugin, key:string, value:Variant):void
+---@field SetReady fun(self:Plugin):void
 ---@field SetSetting fun(self:Plugin, key:string, value:Variant):void
 ---@field StartDecalDrag fun(self:Plugin, decal:Instance):void
 ---@field StartDrag fun(self:Plugin, dragData:Dictionary):void
@@ -3795,6 +3976,7 @@
 ---@field PromptSaveSelection fun(self:Plugin):boolean
 ---@field PromptSaveSelection fun(self:Plugin, suggestedFileName:string):boolean
 ---@field Deactivation RBXScriptSignal @function()
+---@field Ready RBXScriptSignal @function()
 ---@field Unloading RBXScriptSignal @function()
 ---
 
@@ -3882,6 +4064,7 @@
 ---@field IsLuobuServer Enum.TriStateBoolean
 ---@field LuobuWhitelisted Enum.TriStateBoolean
 ---@field GetPolicyInfoForPlayerAsync fun(self:PolicyService, player:Instance):Dictionary
+---@field GetPolicyInfoForServerRobloxOnlyAsync fun(self:PolicyService):Dictionary
 ---
 
 ---
@@ -3942,6 +4125,10 @@
 ---@class SunRaysEffect : PostEffect
 ---@field Intensity number
 ---@field Spread number
+---
+
+---
+---@class ProcessInstancePhysicsService : Instance
 ---
 
 ---
@@ -4166,6 +4353,19 @@
 ---
 
 ---
+---@class RotationCurve : Instance
+---@field Length number
+---@field GetKeyAtIndex fun(self:RotationCurve, index:number):RotationCurveKey
+---@field GetKeyIndicesAtTime fun(self:RotationCurve, time:number):Array
+---@field GetKeys fun(self:RotationCurve):Array
+---@field GetValueAtTime fun(self:RotationCurve, time:number):CoordinateFrame?
+---@field InsertKey fun(self:RotationCurve, key:RotationCurveKey):Array
+---@field RemoveKeyAtIndex fun(self:RotationCurve, startingIndex:number):number
+---@field RemoveKeyAtIndex fun(self:RotationCurve, startingIndex:number, count:number):number
+---@field SetKeys fun(self:RotationCurve, keys:Array):number
+---
+
+---
 ---@class RunService : Instance
 ---@field ClientGitHash string
 ---@field BindToRenderStep fun(self:RunService, name:string, priority:number, function:Function):void
@@ -4239,18 +4439,6 @@
 ---
 
 ---
----@class ScriptRef : Instance
----
-
----
----@class ScriptRefId : ScriptRef
----
-
----
----@class ScriptRefPath : ScriptRef
----
-
----
 ---@class ScriptService : Instance
 ---
 
@@ -4259,9 +4447,11 @@
 ---@field ActiveInstance Instance
 ---@field SelectionThickness number
 ---@field Add fun(self:Selection, instancesToAdd:Objects):void
+---@field ClearTerrainSelectionHack fun(self:Selection):void
 ---@field Get fun(self:Selection):Objects
 ---@field Remove fun(self:Selection, instancesToRemove:Objects):void
 ---@field Set fun(self:Selection, selection:Objects):void
+---@field SetTerrainSelectionHack fun(self:Selection, center:Vector3, size:Vector3):void
 ---@field SelectionChanged RBXScriptSignal @function()
 ---
 
@@ -4415,6 +4605,7 @@
 
 ---
 ---@class Sound : Instance
+---@field ChannelCount number
 ---@field EmitterSize number
 ---@field IsLoaded boolean
 ---@field IsPaused boolean
@@ -4469,6 +4660,15 @@
 ---@field Release number
 ---@field SideChain Instance
 ---@field Threshold number
+---
+
+---
+---@class CustomDspSoundEffect : SoundEffect
+---
+
+---
+---@class ChannelSelectorSoundEffect : CustomDspSoundEffect
+---@field Channel number
 ---
 
 ---
@@ -4557,6 +4757,19 @@
 ---
 
 ---
+---@class StackFrame : Instance
+---@field FrameId number
+---@field FrameName string
+---@field FrameType Enum.DebuggerFrameType
+---@field Globals DebuggerVariable
+---@field Line number
+---@field Locals DebuggerVariable
+---@field Populated boolean
+---@field Script string
+---@field Upvalues DebuggerVariable
+---
+
+---
 ---@class StandalonePluginScripts : Instance
 ---
 
@@ -4605,7 +4818,7 @@
 ---@field GameSettingsScaleRangeWidth NumberRange
 ---@field HealthDisplayDistance number
 ---@field LoadCharacterAppearance boolean
----@field LoadCharacterLayeredClothing Enum.LoadCharacterLayeredClothing
+---@field LoadCharacterLayeredClothing  Enum.LoadCharacterLayeredClothing
 ---@field NameDisplayDistance number
 ---@field UserEmotesEnabled boolean
 ---@field ClearDefaults fun(self:StarterPlayer):void
@@ -4670,6 +4883,7 @@
 ---
 ---@class StudioData : Instance
 ---@field EnableScriptCollabByDefaultOnLoad boolean
+---@field EnableTeamCreateStreamingOnLoad boolean
 ---@field SrcPlaceId number
 ---@field SrcUniverseId number
 ---
@@ -4702,7 +4916,6 @@
 ---@field StudioLocaleId string
 ---@field UseLocalSpace boolean
 ---@field AnimationIdSelected fun(self:StudioService, id:number):void
----@field BaseURLHasChineseHost fun(self:StudioService):boolean
 ---@field ConvertToPackageUpload fun(self:StudioService, uploadUrl:string):void
 ---@field CopyToClipboard fun(self:StudioService, stringToCopy:string):void
 ---@field EmitPlacePublishedSignal fun(self:StudioService):void
@@ -4736,10 +4949,6 @@
 ---@field PromptImportFile fun(self:StudioService, fileTypeFilter:Array):Instance
 ---@field PromptImportFiles fun(self:StudioService):Objects
 ---@field PromptImportFiles fun(self:StudioService, fileTypeFilter:Array):Objects
----@field PromptImportLocalAsset fun(self:StudioService, prompt:string):Instance
----@field PromptImportLocalAsset fun(self:StudioService, prompt:string, fileTypeFilter:Array):Instance
----@field PromptImportLocalAssets fun(self:StudioService, prompt:string):Objects
----@field PromptImportLocalAssets fun(self:StudioService, prompt:string, fileTypeFilter:Array):Objects
 ---@field TryInstallPlugin fun(self:StudioService, assetId:number, assetVersionId:number):void
 ---@field FirstPublishOfCloudPlace RBXScriptSignal @function(universeId:number, placeId:number)
 ---@field GameNameUpdated RBXScriptSignal @function(name:string)
@@ -4791,8 +5000,8 @@
 ---@field Score number
 ---@field TeamColor BrickColor
 ---@field GetPlayers fun(self:Team):Objects
----@field PlayerAdded RBXScriptSignal @function(player:Instance)
----@field PlayerRemoved RBXScriptSignal @function(player:Instance)
+---@field PlayerAdded RBXScriptSignal @function(player:Player)
+---@field PlayerRemoved RBXScriptSignal @function(player:Player)
 ---
 
 ---
@@ -4849,6 +5058,10 @@
 ---
 
 ---
+---@class TemporaryCageMeshProvider : Instance
+---
+
+---
 ---@class TerrainRegion : Instance
 ---@field IsSmooth boolean
 ---@field SizeInCells Vector3
@@ -4898,6 +5111,14 @@
 ---
 
 ---
+---@class TextChannel : Instance
+---
+
+---
+---@class TextChatService : Instance
+---
+
+---
 ---@class TextFilterResult : Instance
 ---@field GetChatForUserAsync fun(self:TextFilterResult, toUserId:number):string
 ---@field GetNonChatStringForBroadcastAsync fun(self:TextFilterResult):string
@@ -4910,6 +5131,10 @@
 ---@field SetResolutionScale fun(self:TextService, scale:number):void
 ---@field FilterStringAsync fun(self:TextService, stringToFilter:string, fromUserId:number):Instance
 ---@field FilterStringAsync fun(self:TextService, stringToFilter:string, fromUserId:number, textContext:Enum.TextFilterContext):Instance
+---
+
+---
+---@class TextSource : Instance
 ---
 
 ---
@@ -4927,9 +5152,11 @@
 
 ---
 ---@class ThreadState : Instance
+---@field FrameCount number
+---@field Populated boolean
 ---@field ThreadId number
----@field GetCallstack fun(self:ThreadState):Objects
----@field RequestCallstack fun(self:ThreadState, status:Function):number
+---@field ThreadName string
+---@field GetFrame fun(self:ThreadState, index:number):Instance
 ---
 
 ---
@@ -4960,6 +5187,7 @@
 ---@class Trail : Instance
 ---@field Attachment0 Attachment
 ---@field Attachment1 Attachment
+---@field Brightness number
 ---@field Color ColorSequence
 ---@field Enabled boolean
 ---@field FaceCamera boolean
@@ -5001,7 +5229,7 @@
 
 ---
 ---@class TweenService : Instance
----@field Create fun(self:TweenService, instance:Instance, tweenInfo:TweenInfo, propertyTable:Dictionary):Instance
+---@field Create fun(self:TweenService, instance:Instance, tweenInfo:TweenInfo, propertyTable:Dictionary):Tween
 ---@field GetValue fun(self:TweenService, alpha:number, easingStyle:Enum.EasingStyle, easingDirection:Enum.EasingDirection):number
 ---
 
@@ -5379,6 +5607,14 @@
 ---
 
 ---
+---@class Vector3Curve : Instance
+---@field GetValueAtTime fun(self:Vector3Curve, time:number):Array
+---@field X fun(self:Vector3Curve):FloatCurve
+---@field Y fun(self:Vector3Curve):FloatCurve
+---@field Z fun(self:Vector3Curve):FloatCurve
+---
+
+---
 ---@class VersionControlService : Instance
 ---
 
@@ -5400,12 +5636,12 @@
 ---@field SendTextInputCharacterEvent fun(self:VirtualInputManager, str:string, layerCollector:Instance):void
 ---@field SendTouchEvent fun(self:VirtualInputManager, touchId:number, state:number, x:number, y:number):void
 ---@field SetInputTypesToIgnore fun(self:VirtualInputManager, inputTypesToIgnore:Variant):void
----@field SetViewportSize fun(self:VirtualInputManager, sizePx:Vector2):void
 ---@field StartPlaying fun(self:VirtualInputManager, fileName:string):void
 ---@field StartPlayingJSON fun(self:VirtualInputManager, string:string):void
 ---@field StartRecording fun(self:VirtualInputManager):void
 ---@field StopPlaying fun(self:VirtualInputManager):void
 ---@field StopRecording fun(self:VirtualInputManager):void
+---@field WaitForInputEventsProcessed fun(self:VirtualInputManager):void
 ---@field PlaybackCompleted RBXScriptSignal @function(additionalLuaState:string)
 ---@field RecordingCompleted RBXScriptSignal @function(result:string)
 ---
@@ -5439,30 +5675,38 @@
 ---
 
 ---
----@class VoiceChatService : Instance
+---@class VoiceChatInternal : Instance
 ---@field VoiceChatState Enum.VoiceChatState
----@field GetAndClearCallFailureMessage fun(self:VoiceChatService):string
----@field GetAudioProcessingSettings fun(self:VoiceChatService):Tuple
----@field GetGroupId fun(self:VoiceChatService):string
----@field GetMicDevices fun(self:VoiceChatService):Tuple
----@field GetParticipants fun(self:VoiceChatService):Array
----@field GetSpeakerDevices fun(self:VoiceChatService):Tuple
----@field GetVoiceChatApiVersion fun(self:VoiceChatService):number
----@field GetVoiceChatAvailable fun(self:VoiceChatService):number
----@field IsPublishPaused fun(self:VoiceChatService):boolean
----@field IsSubscribePaused fun(self:VoiceChatService, userId:number):boolean
----@field JoinByGroupId fun(self:VoiceChatService, groupId:string):boolean
----@field JoinByGroupId fun(self:VoiceChatService, groupId:string, isMicMuted:boolean):boolean
----@field JoinByGroupIdToken fun(self:VoiceChatService, groupId:string):boolean
----@field JoinByGroupIdToken fun(self:VoiceChatService, groupId:string, isMicMuted:boolean):boolean
----@field Leave fun(self:VoiceChatService):void
----@field PublishPause fun(self:VoiceChatService, paused:boolean):boolean
----@field SetMicDevice fun(self:VoiceChatService, micDeviceName:string, micDeviceGuid:string):void
----@field SetSpeakerDevice fun(self:VoiceChatService, speakerDeviceName:string, speakerDeviceGuid:string):void
----@field SubscribePause fun(self:VoiceChatService, userId:number, paused:boolean):boolean
+---@field GetAndClearCallFailureMessage fun(self:VoiceChatInternal):string
+---@field GetAudioProcessingSettings fun(self:VoiceChatInternal):Tuple
+---@field GetGroupId fun(self:VoiceChatInternal):string
+---@field GetMicDevices fun(self:VoiceChatInternal):Tuple
+---@field GetParticipants fun(self:VoiceChatInternal):Array
+---@field GetSpeakerDevices fun(self:VoiceChatInternal):Tuple
+---@field GetVoiceChatApiVersion fun(self:VoiceChatInternal):number
+---@field GetVoiceChatAvailable fun(self:VoiceChatInternal):number
+---@field IsContextVoiceEnabled fun(self:VoiceChatInternal):boolean
+---@field IsPublishPaused fun(self:VoiceChatInternal):boolean
+---@field IsSubscribePaused fun(self:VoiceChatInternal, userId:number):boolean
+---@field JoinByGroupId fun(self:VoiceChatInternal, groupId:string):boolean
+---@field JoinByGroupId fun(self:VoiceChatInternal, groupId:string, isMicMuted:boolean):boolean
+---@field JoinByGroupIdToken fun(self:VoiceChatInternal, groupId:string):boolean
+---@field JoinByGroupIdToken fun(self:VoiceChatInternal, groupId:string, isMicMuted:boolean):boolean
+---@field Leave fun(self:VoiceChatInternal):void
+---@field PublishPause fun(self:VoiceChatInternal, paused:boolean):boolean
+---@field SetMicDevice fun(self:VoiceChatInternal, micDeviceName:string, micDeviceGuid:string):void
+---@field SetSpeakerDevice fun(self:VoiceChatInternal, speakerDeviceName:string, speakerDeviceGuid:string):void
+---@field SubscribePause fun(self:VoiceChatInternal, userId:number, paused:boolean):boolean
+---@field SubscribePauseAll fun(self:VoiceChatInternal, paused:boolean):boolean
+---@field IsVoiceEnabledForUserIdAsync fun(self:VoiceChatInternal, userId:number):boolean
 ---@field ParticipantsStateChanged RBXScriptSignal @function(participantsLeft:Array, participantsJoined:Array, updatedStates:Array)
 ---@field PlayerMicActivitySignalChange RBXScriptSignal @function(activityInfo:Dictionary)
 ---@field StateChanged RBXScriptSignal @function(old:Enum.VoiceChatState, new:Enum.VoiceChatState)
+---
+
+---
+---@class VoiceChatService : Instance
+---@field IsVoiceEnabledForUserIdAsync fun(self:VoiceChatService, userId:number):boolean
 ---
 
 ---
@@ -5579,6 +5823,13 @@
 ---@field Movement Enum.AnimationPriority @1
 ---@field Action Enum.AnimationPriority @2
 ---@field Core Enum.AnimationPriority @1000
+---
+
+---
+---@class Enum.AnimatorRetargetingMode:EnumItem
+---@field Default Enum.AnimatorRetargetingMode @0
+---@field Disabled Enum.AnimatorRetargetingMode @1
+---@field Enabled Enum.AnimatorRetargetingMode @2
 ---
 
 ---
@@ -6526,7 +6777,6 @@
 ---
 ---@class Enum.GraphicsMode:EnumItem
 ---@field Automatic Enum.GraphicsMode @1
----@field Direct3D9 Enum.GraphicsMode @3
 ---@field Direct3D11 Enum.GraphicsMode @2
 ---@field OpenGL Enum.GraphicsMode @4
 ---@field Metal Enum.GraphicsMode @5
@@ -6538,6 +6788,12 @@
 ---@class Enum.HandlesStyle:EnumItem
 ---@field Resize Enum.HandlesStyle @0
 ---@field Movement Enum.HandlesStyle @1
+---
+
+---
+---@class Enum.HighlightDepthMode:EnumItem
+---@field AlwaysOnTop Enum.HighlightDepthMode @0
+---@field Default Enum.HighlightDepthMode @1
 ---
 
 ---
@@ -6980,6 +7236,13 @@
 ---
 
 ---
+---@class Enum.KeyInterpolationMode:EnumItem
+---@field Constant Enum.KeyInterpolationMode @0
+---@field Linear Enum.KeyInterpolationMode @1
+---@field Cubic Enum.KeyInterpolationMode @2
+---
+
+---
 ---@class Enum.KeywordFilterType:EnumItem
 ---@field Include Enum.KeywordFilterType @0
 ---@field Exclude Enum.KeywordFilterType @1
@@ -7206,6 +7469,12 @@
 ---
 
 ---
+---@class Enum.OrientationAlignmentMode:EnumItem
+---@field OneAttachment Enum.OrientationAlignmentMode @0
+---@field TwoAttachment Enum.OrientationAlignmentMode @1
+---
+
+---
 ---@class Enum.OutfitSource:EnumItem
 ---@field All Enum.OutfitSource @1
 ---@field Created Enum.OutfitSource @2
@@ -7248,6 +7517,27 @@
 ---@field Ball Enum.PartType @0
 ---@field Block Enum.PartType @1
 ---@field Cylinder Enum.PartType @2
+---
+
+---
+---@class Enum.ParticleEmitterShape:EnumItem
+---@field Box Enum.ParticleEmitterShape @0
+---@field Sphere Enum.ParticleEmitterShape @1
+---@field Cylinder Enum.ParticleEmitterShape @2
+---@field Disc Enum.ParticleEmitterShape @3
+---
+
+---
+---@class Enum.ParticleEmitterShapeInOut:EnumItem
+---@field Outward Enum.ParticleEmitterShapeInOut @0
+---@field Inward Enum.ParticleEmitterShapeInOut @1
+---@field InAndOut Enum.ParticleEmitterShapeInOut @2
+---
+
+---
+---@class Enum.ParticleEmitterShapeStyle:EnumItem
+---@field Volume Enum.ParticleEmitterShapeStyle @0
+---@field Surface Enum.ParticleEmitterShapeStyle @1
 ---
 
 ---
@@ -7361,6 +7651,12 @@
 ---@field Elastic Enum.PoseEasingStyle @2
 ---@field Cubic Enum.PoseEasingStyle @3
 ---@field Bounce Enum.PoseEasingStyle @4
+---
+
+---
+---@class Enum.PositionAlignmentMode:EnumItem
+---@field OneAttachment Enum.PositionAlignmentMode @0
+---@field TwoAttachment Enum.PositionAlignmentMode @1
 ---
 
 ---
@@ -7523,6 +7819,16 @@
 ---
 
 ---
+---@class Enum.RotationOrder:EnumItem
+---@field XYZ Enum.RotationOrder @0
+---@field XZY Enum.RotationOrder @1
+---@field YZX Enum.RotationOrder @2
+---@field YXZ Enum.RotationOrder @3
+---@field ZXY Enum.RotationOrder @4
+---@field ZYX Enum.RotationOrder @5
+---
+
+---
 ---@class Enum.RotationType:EnumItem
 ---@field MovementRelative Enum.RotationType @0
 ---@field CameraRelative Enum.RotationType @1
@@ -7654,6 +7960,13 @@
 ---
 
 ---
+---@class Enum.StreamOutBehavior:EnumItem
+---@field Default Enum.StreamOutBehavior @0
+---@field LowMemory Enum.StreamOutBehavior @1
+---@field Opportunistic Enum.StreamOutBehavior @2
+---
+
+---
 ---@class Enum.StreamingPauseMode:EnumItem
 ---@field Default Enum.StreamingPauseMode @0
 ---@field Disabled Enum.StreamingPauseMode @1
@@ -7670,11 +7983,11 @@
 ---
 ---@class Enum.StudioDataModelType:EnumItem
 ---@field Edit Enum.StudioDataModelType @0
----@field PlayClient Enum.StudioDataModelType @2
----@field PlayServer Enum.StudioDataModelType @3
----@field RobloxPlugin Enum.StudioDataModelType @4
----@field UserPlugin Enum.StudioDataModelType @5
----@field None Enum.StudioDataModelType @6
+---@field PlayClient Enum.StudioDataModelType @1
+---@field PlayServer Enum.StudioDataModelType @2
+---@field RobloxPlugin Enum.StudioDataModelType @3
+---@field UserPlugin Enum.StudioDataModelType @4
+---@field None Enum.StudioDataModelType @5
 ---
 
 ---
@@ -8290,6 +8603,7 @@
 ---@field AnalyticsLogLevel Enum.AnalyticsLogLevel
 ---@field AnalyticsProgressionStatus Enum.AnalyticsProgressionStatus
 ---@field AnimationPriority Enum.AnimationPriority
+---@field AnimatorRetargetingMode Enum.AnimatorRetargetingMode
 ---@field AppShellActionType Enum.AppShellActionType
 ---@field AppShellFeature Enum.AppShellFeature
 ---@field AppUpdateStatus Enum.AppUpdateStatus
@@ -8386,6 +8700,7 @@
 ---@field Genre Enum.Genre
 ---@field GraphicsMode Enum.GraphicsMode
 ---@field HandlesStyle Enum.HandlesStyle
+---@field HighlightDepthMode Enum.HighlightDepthMode
 ---@field HorizontalAlignment Enum.HorizontalAlignment
 ---@field HoverAnimateSpeed Enum.HoverAnimateSpeed
 ---@field HttpCachePolicy Enum.HttpCachePolicy
@@ -8407,6 +8722,7 @@
 ---@field InterpolationThrottlingMode Enum.InterpolationThrottlingMode
 ---@field JointCreationMode Enum.JointCreationMode
 ---@field KeyCode Enum.KeyCode
+---@field KeyInterpolationMode Enum.KeyInterpolationMode
 ---@field KeywordFilterType Enum.KeywordFilterType
 ---@field Language Enum.Language
 ---@field LeftRight Enum.LeftRight
@@ -8431,12 +8747,16 @@
 ---@field NetworkOwnership Enum.NetworkOwnership
 ---@field NewAnimationRuntimeSetting Enum.NewAnimationRuntimeSetting
 ---@field NormalId Enum.NormalId
+---@field OrientationAlignmentMode Enum.OrientationAlignmentMode
 ---@field OutfitSource Enum.OutfitSource
 ---@field OutputLayoutMode Enum.OutputLayoutMode
 ---@field OverrideMouseIconBehavior Enum.OverrideMouseIconBehavior
 ---@field PackagePermission Enum.PackagePermission
 ---@field PacketPriority Enum.PacketPriority
 ---@field PartType Enum.PartType
+---@field ParticleEmitterShape Enum.ParticleEmitterShape
+---@field ParticleEmitterShapeInOut Enum.ParticleEmitterShapeInOut
+---@field ParticleEmitterShapeStyle Enum.ParticleEmitterShapeStyle
 ---@field ParticleOrientation Enum.ParticleOrientation
 ---@field PathStatus Enum.PathStatus
 ---@field PathWaypointAction Enum.PathWaypointAction
@@ -8449,6 +8769,7 @@
 ---@field PlayerChatType Enum.PlayerChatType
 ---@field PoseEasingDirection Enum.PoseEasingDirection
 ---@field PoseEasingStyle Enum.PoseEasingStyle
+---@field PositionAlignmentMode Enum.PositionAlignmentMode
 ---@field PrivilegeType Enum.PrivilegeType
 ---@field ProductLocationRestriction Enum.ProductLocationRestriction
 ---@field ProductPurchaseDecision Enum.ProductPurchaseDecision
@@ -8466,6 +8787,7 @@
 ---@field ReverbType Enum.ReverbType
 ---@field RibbonTool Enum.RibbonTool
 ---@field RollOffMode Enum.RollOffMode
+---@field RotationOrder Enum.RotationOrder
 ---@field RotationType Enum.RotationType
 ---@field RuntimeUndoBehavior Enum.RuntimeUndoBehavior
 ---@field SaveFilter Enum.SaveFilter
@@ -8483,6 +8805,7 @@
 ---@field SpecialKey Enum.SpecialKey
 ---@field StartCorner Enum.StartCorner
 ---@field Status Enum.Status
+---@field StreamOutBehavior Enum.StreamOutBehavior
 ---@field StreamingPauseMode Enum.StreamingPauseMode
 ---@field StudioCloseMode Enum.StudioCloseMode
 ---@field StudioDataModelType Enum.StudioDataModelType

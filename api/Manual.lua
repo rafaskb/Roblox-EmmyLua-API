@@ -400,6 +400,15 @@
 ---
 
 ---
+---@class RobloxTask The task library offers alternatives to various global functions (wait, spawn and delay) that allow better coordination with the Task Scheduler.
+---
+---@field spawn fun(functionOrThread:function, vararg any):void Accepts a function or a thread (as returned by coroutine.create) and calls/resumes it immediately through the engine’s scheduler. Arguments after the first are sent to the function/thread. This function does not return any value, even if the provided function returns one immediately.
+---@field defer fun(functionOrThread:function, vararg any):void Accepts a function or a thread (as returned by coroutine.create) and defers it until the next resumption cycle, at which point it is resumed with the engine’s scheduler like with task.spawn. Arguments after the first are sent to the function/thread. This function does not return any value, even if the provided function returns one immediately.
+---@field delay fun(duration:number, functionOrThread:function, vararg any):void Accepts a function or a thread (as returned by coroutine.create) and schedules it to be called/resumed on the next Heartbeat after the given amount of time in seconds has elapsed. Arguments after the second are sent to the function/thread.
+---@field wait fun(duration:number):number Yields the current thread until the given duration (in seconds) has elapsed, then resumes the thread on the next Heartbeat step. The actual amount of time elapsed is returned. If no duration is given, it will default to zero (0). This means the thread resumes on the very next step, which is equivalent in behavior to RunService.Heartbeat:Wait()
+---
+
+---
 ---@class RbxLibrary
 ---
 
