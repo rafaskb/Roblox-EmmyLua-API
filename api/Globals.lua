@@ -440,6 +440,13 @@ math.noise = nil
 math.sign = nil
 
 ---
+---Returns the integer with the smallest difference between it and the given number. For example, the value 5.8 returns 6.
+---For values like 0.5 that are equidistant to two integers, the value with the greater difference between it and zero is chosen. In other words, the function rounds away from zero: 0.5 rounds to 1; -0.5 rounds to -1.
+---@type fun(x:number):number
+---
+math.round = nil
+
+---
 ---The os library currently serves the purpose of providing information about the system time, under the UTC format.
 --- It has been heavily sandboxed from the standard Lua os library, and does not allow you to perform any system altering operations.
 ---@type RobloxOs
